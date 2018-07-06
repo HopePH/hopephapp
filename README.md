@@ -11,3 +11,6 @@ iPhone 5 and above
 # Getting started
 We'll update here soon
 
+# Contributing
+We'll update here soon
+
