@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:AppViewBase
+    x:Class="Yol.Punla.Views.NotificationsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
+    xmlns:carouselView="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:flowListView="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <Grid
+        Padding="0"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <template:NavigationHamburgerBar Grid.Row="0" />
+
+        <!--  POSTS HERE  -->
+        <ListView
+            Grid.Row="1"
+            BackgroundColor="{StaticResource ColorGrayTwo}"
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="True"
+            HorizontalOptions="FillAndExpand"
+            IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsListRefreshing, Mode=TwoWay}"
+            IsVisible="{Binding IsInternetConnected}"
+            ItemsSource="{Binding Notifications}"
+            RefreshCommand="{Binding RefreshListCommand}"
+            SelectedItem="{Binding CurrentPostFeed}"
+            SeparatorVisibility="None"
+            VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="0" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="1" />
+                            </Grid.RowDefinitions>
+                            <Grid
+                                Grid.Row="0"
+                                Padding="20,10"
+                                BackgroundColor="White"
+                                RowSpacing="0"
+                                VerticalOptions="FillAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0" Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <ffImage:CachedImage
+                                        Grid.Column="0"
+                                        Aspect="AspectFit"
+                                        BackgroundColor="Transparent"
+                                        HeightRequest="35"
+                                        Source="{Binding PosterProfilePhoto}">
+                                        <ffImage:CachedImage.Transformations>
+                                            <ffImageTransformation:CircleTransformation />
+                                        </ffImage:CachedImage.Transformations>
+                                    </ffImage:CachedImage>
+                                    <StackLayout Grid.Column="1" Spacing="1">
+                                        <StackLayout.Padding>
+                                            <OnPlatform
+                                                x:TypeArguments="Thickness"
+                                                Android="5,8"
+                                                iOS="5,10" />
+                                        </StackLayout.Padding>
+                                        <customControl:MuseoLabel
+                                            FontSize="10"
+                                            Text="{Binding NotificationsHeaderText}"
+                                            TextColor="Black" />
+                                        <BoxView
+                                            BackgroundColor="Transparent"
+                                            HeightRequest="5"
+                                            HorizontalOptions="FillAndExpand" />
+                                        <customControl:MuseoLabel
+                                            FontAttributes="Bold"
+                                            Text="{Binding AliasName}"
+                                            TextColor="Black">
+                                            <customControl:MuseoLabel.FontSize>
+                                                <OnPlatform
+                                                    x:TypeArguments="x:Double"
+                                                    Android="10"
+                                                    iOS="13" />
+                                            </customControl:MuseoLabel.FontSize>
+                                        </customControl:MuseoLabel>
+                                        <customControl:MuseoLabel
+                                            FontSize="10"
+                                            Text="{Binding DatePosted, Converter={StaticResource ToElapsedTime}}"
+                                            TextColor="Black" />
+                                    </StackLayout>
+                                </Grid>
+
+                                <customControl:MuseoLabel
+                                    Grid.Row="1"
+                                    BackgroundColor="Transparent"
+                                    FontSize="12"
+                                    Text="{Binding ContentText}"
+                                    TextColor="Black" />
+                            </Grid>
+
+                            <BoxView
+                                Grid.Row="1"
+                                BackgroundColor="{StaticResource BoxGrayBorderColor}"
+                                HeightRequest="1" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <customControl:MuseoLabel
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            IsVisible="{Binding IsShowOfflineMessage}"
+            Text="You are in offline mode."
+            TextColor="Red" />
+
+        <!--  BUSY INDICATOR  -->
+        <ContentView
+            Grid.RowSpan="2"
+            IsVisible="{Binding IsBusy}"
+            Style="{StaticResource ContentViewForActivityIndicator}">
+            <StackLayout
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center">
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy, Mode=OneWay}"
+                    IsVisible="{Binding IsBusy}"
+                    Style="{StaticResource ActivityIndicatorMain}" />
+
+                <customControl:MuseoLabel
+                    HorizontalOptions="Center"
+                    Opacity="1"
+                    Style="{StaticResource LabelSmall}"
+                    Text="{Binding BusyComments}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </ContentView>
+    </Grid>
+</local:AppViewBase>

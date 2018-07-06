@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:AppViewBase
+    x:Class="Yol.Punla.Views.SignUpPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <AbsoluteLayout
+        x:Name="absoluteContainer"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
+        <Image
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            Aspect="AspectFill"
+            Source="{StaticResource SignUpBackgroundImage}" />
+
+        <ContentView
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="#40000000" />
+
+        <Grid
+            Padding="0"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="FillAndExpand"
+            RowSpacing="0"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnPlatform
+                            x:TypeArguments="GridLength"
+                            Android="0"
+                            iOS="22" />
+                    </RowDefinition.Height>
+                </RowDefinition>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <BoxView
+                Grid.Row="0"
+                BackgroundColor="#CC88B04B"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
+
+            <Grid
+                Grid.Row="1"
+                ColumnSpacing="0"
+                HorizontalOptions="FillAndExpand"
+                RowSpacing="0"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <BoxView
+                    Grid.Row="0"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+
+                <ContentView
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ViewKeyHashStringCommand}" NumberOfTapsRequired="2" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <template:HopeBrand
+                    Grid.Row="2"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End" />
+
+                <StackLayout
+                    Grid.Row="3"
+                    Margin="0,20"
+                    HorizontalOptions="Center"
+                    IsVisible="True"
+                    Orientation="Horizontal"
+                    Spacing="1">
+                    <ContentView>
+                        <ffImage:CachedImage
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            AutomationId="SignUpFFImage"
+                            HeightRequest="43"
+                            Source="fblogo.png"
+                            WidthRequest="200" />
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding FacebookSignUpCommand}" NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+                </StackLayout>
+
+                <ContentView
+                    Grid.Row="4"
+                    Margin="0,0,0,40"
+                    HorizontalOptions="Center">
+                    <customControl:MuseoLabel
+                        FontAttributes="Bold"
+                        Opacity="1"
+                        Text="{localization:Render SignUpWithUserName}"
+                        TextColor="White"
+                        VerticalOptions="Center">
+                        <customControl:MuseoLabel.FontSize>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="14"
+                                iOS="12" />
+                        </customControl:MuseoLabel.FontSize>
+                    </customControl:MuseoLabel>
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding VerifyEmailCommand}" NumberOfTapsRequired="1" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+            </Grid>
+        </Grid>
+
+        <ContentView
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            IsVisible="{Binding IsBusy}"
+            Style="{StaticResource ContentViewForActivityIndicator}">
+            <StackLayout
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center">
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy, Mode=OneWay}"
+                    IsVisible="{Binding IsBusy}"
+                    Style="{StaticResource ActivityIndicatorMain}" />
+
+                <customControl:MuseoLabel
+                    HorizontalOptions="Center"
+                    Opacity="1"
+                    Style="{StaticResource LabelSmall}"
+                    Text="{localization:Render RequestProcessingLoadingText}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </ContentView>
+    </AbsoluteLayout>
+</local:AppViewBase>

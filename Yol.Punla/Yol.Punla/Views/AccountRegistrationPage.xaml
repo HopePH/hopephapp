@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:AppViewBase
+    x:Class="Yol.Punla.Views.AccountRegistrationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:flowListView="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    x:Name="AccountRegistrationPage"
+    Title="Account Registration Page"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="White">
+
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+            <Grid
+                HorizontalOptions="FillAndExpand"
+                RowSpacing="0"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ContentView
+                    Grid.Row="0"
+                    Padding="20,0,20,20"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="{Binding HasPicture}"
+                    VerticalOptions="FillAndExpand">
+                    <ffImage:CachedImage
+                        Aspect="AspectFit"
+                        CacheDuration="7"
+                        Source="{Binding Picture}"
+                        VerticalOptions="End">
+                        <ffImage:CachedImage.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="180"
+                                iOS="130" />
+                        </ffImage:CachedImage.HeightRequest>
+                        <ffImage:CachedImage.WidthRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="180"
+                                iOS="130" />
+                        </ffImage:CachedImage.WidthRequest>
+                        <ffImage:CachedImage.Transformations>
+                            <ffImageTransformation:CircleTransformation />
+                        </ffImage:CachedImage.Transformations>
+                    </ffImage:CachedImage>
+                </ContentView>
+
+                <StackLayout
+                    Grid.Row="1"
+                    Padding="0"
+                    Spacing="0">
+                    <StackLayout.Padding>
+                        <OnPlatform
+                            x:TypeArguments="Thickness"
+                            Android="20,18,20,10"
+                            iOS="20,20,20,20" />
+                    </StackLayout.Padding>
+                    <StackLayout Padding="0" VerticalOptions="StartAndExpand">
+                        <StackLayout.Spacing>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="4"
+                                iOS="6" />
+                        </StackLayout.Spacing>
+                        <customControl:MuseoLabel Text="{localization:Render FullNameText}">
+                            <Label.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource LabelXSmallDark}"
+                                    iOS="{StaticResource LabelSmallDark}" />
+                            </Label.Style>
+                        </customControl:MuseoLabel>
+                        <customControl:CustomEntry
+                            BottomLineColor="Gray"
+                            IsEnabled="false"
+                            Text="{Binding FullName, Mode=TwoWay}">
+                            <Entry.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource EntrySmallDark}"
+                                    iOS="{StaticResource EntryDefaultDark}" />
+                            </Entry.Style>
+                        </customControl:CustomEntry>
+                    </StackLayout>
+                    <BoxView WidthRequest="18">
+                        <BoxView.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="0"
+                                iOS="18" />
+                        </BoxView.HeightRequest>
+                    </BoxView>
+                    <StackLayout Padding="0" VerticalOptions="StartAndExpand">
+                        <StackLayout.Spacing>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="3"
+                                iOS="6" />
+                        </StackLayout.Spacing>
+                        <customControl:MuseoLabel Text="{localization:Render EmailText}">
+                            <Label.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource LabelXSmallDark}"
+                                    iOS="{StaticResource LabelSmallDark}" />
+                            </Label.Style>
+                            <Label.Margin>
+                                <OnPlatform
+                                    x:TypeArguments="Thickness"
+                                    Android="0,7,0,0"
+                                    iOS="0" />
+                            </Label.Margin>
+                        </customControl:MuseoLabel>
+                        <customControl:CustomEntry
+                            BottomLineColor="Gray"
+                            IsEnabled="{Binding EmailEnabled}"
+                            Text="{Binding EmailAddress, Mode=TwoWay}">
+                            <Entry.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource EntrySmallDark}"
+                                    iOS="{StaticResource EntryDefaultDark}" />
+                            </Entry.Style>
+                        </customControl:CustomEntry>
+                    </StackLayout>
+                    <BoxView WidthRequest="18">
+                        <BoxView.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="3"
+                                iOS="18" />
+                        </BoxView.HeightRequest>
+                    </BoxView>
+                    <StackLayout
+                        Padding="0"
+                        Spacing="6"
+                        VerticalOptions="StartAndExpand">
+                        <StackLayout.Spacing>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="0"
+                                iOS="6" />
+                        </StackLayout.Spacing>
+                        <customControl:MuseoLabel Text="{localization:Render AliasText}">
+                            <customControl:MuseoLabel.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource LabelXSmallDark}"
+                                    iOS="{StaticResource LabelSmallDark}" />
+                            </customControl:MuseoLabel.Style>
+                            <customControl:MuseoLabel.Margin>
+                                <OnPlatform
+                                    x:TypeArguments="Thickness"
+                                    Android="0,7,0,0"
+                                    iOS="0" />
+                            </customControl:MuseoLabel.Margin>
+                        </customControl:MuseoLabel>
+                        <customControl:CustomEntry BottomLineColor="Gray" Text="{Binding AliasName, Mode=TwoWay}">
+                            <customControl:CustomEntry.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource EntrySmallDark}"
+                                    iOS="{StaticResource EntryDefaultDark}" />
+                            </customControl:CustomEntry.Style>
+                            <customControl:CustomEntry.Margin>
+                                <OnPlatform
+                                    x:TypeArguments="Thickness"
+                                    Android="0,-5,0,0"
+                                    iOS="0" />
+                            </customControl:CustomEntry.Margin>
+                        </customControl:CustomEntry>
+                    </StackLayout>
+                    <BoxView WidthRequest="18">
+                        <BoxView.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="3"
+                                iOS="18" />
+                        </BoxView.HeightRequest>
+                    </BoxView>
+                    <StackLayout Padding="0" VerticalOptions="StartAndExpand">
+                        <StackLayout.Spacing>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="0"
+                                iOS="6" />
+                        </StackLayout.Spacing>
+                        <customControl:MuseoLabel Text="{localization:Render MobilePhoneText}">
+                            <customControl:MuseoLabel.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource LabelXSmallDark}"
+                                    iOS="{StaticResource LabelSmallDark}" />
+                            </customControl:MuseoLabel.Style>
+                            <customControl:MuseoLabel.Margin>
+                                <OnPlatform
+                                    x:TypeArguments="Thickness"
+                                    Android="0,9,0,9"
+                                    iOS="0" />
+                            </customControl:MuseoLabel.Margin>
+                        </customControl:MuseoLabel>
+                        <customControl:CustomEntry
+                            BottomLineColor="Gray"
+                            Keyboard="Telephone"
+                            Text="{Binding MobilePhoneNo, Mode=TwoWay}">
+                            <customControl:CustomEntry.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource EntrySmallDark}"
+                                    iOS="{StaticResource EntryDefaultDark}" />
+                            </customControl:CustomEntry.Style>
+                            <customControl:CustomEntry.Margin>
+                                <OnPlatform
+                                    x:TypeArguments="Thickness"
+                                    Android="0,-15,0,0"
+                                    iOS="0" />
+                            </customControl:CustomEntry.Margin>
+                        </customControl:CustomEntry>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout
+                    Grid.Row="2"
+                    Padding="20,0,20,20"
+                    Spacing="12">
+                    <Button
+                        Command="{Binding RetakePhotoCommand}"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{StaticResource ButtonGreenSlim}"
+                        Text="{localization:Render ChangePhoto}" />
+                    <Button
+                        Command="{Binding SignupCommand}"
+                        FontAttributes="Bold"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{StaticResource ButtonGreenSlimDimmer}"
+                        Text="{localization:Render SaveAndContinue}" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+
+        <!--  AVATAR MODAL  -->
+        <ContentView
+            Padding="20,180,20,150"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            BackgroundColor="#BF000000"
+            IsVisible="{Binding IsAvatarModalVisible}">
+            <ContentView.Behaviors>
+                <behaviors:DeviceDependentViewBoxBehavior DynamicPadding="20,150" />
+            </ContentView.Behaviors>
+            <StackLayout
+                Padding="20"
+                BackgroundColor="{StaticResource ColorGrayTwo}"
+                Spacing="10">
+                <ContentView>
+                    <ContentView
+                        HeightRequest="40"
+                        HorizontalOptions="EndAndExpand"
+                        WidthRequest="100">
+                        <ContentView.Behaviors>
+                            <behaviors:DeviceDependentViewSizeBehavior DynamicHeightRequest="70" />
+                        </ContentView.Behaviors>
+                        <Label
+                            Margin="0,0,20,0"
+                            BackgroundColor="Transparent"
+                            FontFamily="FontAwesome"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="End"
+                            Text="{StaticResource fa-close}"
+                            TextColor="#B2B2B2"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center">
+                            <Label.FontSize>
+                                <OnPlatform
+                                    x:TypeArguments="x:Double"
+                                    Android="20"
+                                    iOS="18" />
+                            </Label.FontSize>
+                        </Label>
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding ShowOrHideAvatarSelectionCommand}"
+                                CommandParameter="false"
+                                NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+                </ContentView>
+                <customControl:MuseoLabel
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center"
+                    Text="{localization:Render AvatarChoiceText}">
+                    <customControl:MuseoLabel.FontSize>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="21"
+                            iOS="19" />
+                    </customControl:MuseoLabel.FontSize>
+                </customControl:MuseoLabel>
+                <flowListView:FlowListView
+                    BackgroundColor="{StaticResource ColorGrayTwo}"
+                    FlowColumnCount="3"
+                    FlowIsLoadingInfinite="False"
+                    FlowIsLoadingInfiniteEnabled="False"
+                    FlowItemTappedCommand="{Binding SetAvatarUrlCommand}"
+                    FlowItemsSource="{Binding PredefinedAvatars}"
+                    HasUnevenRows="true"
+                    HorizontalOptions="FillAndExpand">
+                    <flowListView:FlowListView.FlowColumnTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10,5,10,5" HorizontalOptions="Center">
+                                <ffImage:CachedImage
+                                    Aspect="AspectFit"
+                                    BackgroundColor="Transparent"
+                                    HeightRequest="75"
+                                    Source="{Binding SourceUrl}">
+                                    <ffImage:CachedImage.Transformations>
+                                        <ffImageTransformation:CircleTransformation />
+                                    </ffImage:CachedImage.Transformations>
+                                    <ffImage:CachedImage.Behaviors>
+                                        <behaviors:DeviceDependentViewSizeBehavior DynamicHeightRequest="55" />
+                                    </ffImage:CachedImage.Behaviors>
+                                </ffImage:CachedImage>
+                                <customControl:MuseoLabel
+                                    FontSize="Medium"
+                                    HorizontalTextAlignment="Center"
+                                    Text="{Binding Name}"
+                                    TextColor="Black">
+                                    <customControl:MuseoLabel.Behaviors>
+                                        <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="12" />
+                                    </customControl:MuseoLabel.Behaviors>
+                                </customControl:MuseoLabel>
+                            </StackLayout>
+                        </DataTemplate>
+                    </flowListView:FlowListView.FlowColumnTemplate>
+                </flowListView:FlowListView>
+            </StackLayout>
+        </ContentView>
+
+        <!--  Busy Indicator  -->
+        <ContentView
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            IsVisible="{Binding IsBusy}"
+            Style="{StaticResource ContentViewForActivityIndicator}">
+            <StackLayout
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center">
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy, Mode=OneWay}"
+                    IsVisible="{Binding IsBusy}"
+                    Style="{StaticResource ActivityIndicatorMain}" />
+
+                <customControl:MuseoLabel
+                    HorizontalOptions="Center"
+                    Opacity="1"
+                    Style="{StaticResource LabelSmall}"
+                    Text="Please wait..."
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </ContentView>
+    </AbsoluteLayout>
+</local:AppViewBase>

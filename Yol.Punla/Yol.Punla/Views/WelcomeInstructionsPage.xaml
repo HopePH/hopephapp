@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:AppViewBase
+    x:Class="Yol.Punla.Views.WelcomeInstructionsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
+    x:Name="InstructionPage"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#0c0c0c">
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView
+            Padding="20"
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="All"
+            BindingContext="{Binding InstructionContent}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+            <StackLayout
+                Padding="0,40,0,20"
+                HorizontalOptions="FillAndExpand"
+                Spacing="40"
+                VerticalOptions="FillAndExpand">
+                <customControl:MuseoLabel
+                    HorizontalOptions="Center"
+                    Style="{StaticResource LabelSmall}"
+                    Text="{Binding TextInstruction}" />
+                <ffImage:CachedImage
+                    Aspect="AspectFit"
+                    DownsampleToViewSize="false"
+                    HeightRequest="400"
+                    Source="{Binding ImageInstruction}"
+                    WidthRequest="800" />
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="10">
+                    <ContentView Padding="20,10">
+                        <Label
+                            FontFamily="FontAwesome"
+                            FontSize="Large"
+                            Text="{StaticResource fa-arrow-left}"
+                            TextColor="{Binding Path=BindingContext.IsNotFirstInstruction, Source={x:Reference InstructionPage}, Converter={StaticResource IsEnabledToColor}}" />
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.PrevCommand, Source={x:Reference InstructionPage}}" NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+                    <ContentView Padding="20,10">
+                        <Label
+                            FontFamily="FontAwesome"
+                            FontSize="Large"
+                            Text="{StaticResource fa-arrow-right}"
+                            TextColor="White" />
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.NextCommand, Source={x:Reference InstructionPage}}" NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
+</local:AppViewBase>

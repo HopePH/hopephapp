@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:AppViewBase
+    x:Class="Yol.Punla.Views.PostFeedAddEditPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla">
+    <Grid
+        Padding="0"
+        BackgroundColor="{StaticResource ColorWhite}"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="1" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <template:PostNavigationBar Grid.Row="0" Grid.ColumnSpan="2" />
+
+        <ffImage:CachedImage
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="20,10"
+            Aspect="AspectFit"
+            BackgroundColor="Transparent"
+            HeightRequest="50"
+            Source="{Binding CurrentContact.PhotoURL}"
+            VerticalOptions="Start"
+            WidthRequest="50">
+            <ffImage:CachedImage.Transformations>
+                <ffImageTransformation:CircleTransformation />
+            </ffImage:CachedImage.Transformations>
+        </ffImage:CachedImage>
+
+        <Editor
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="{Binding Content}">
+          <Editor.Effects>
+            <effects:EditorTransparentBottomlineEffect />
+          </Editor.Effects>
+        </Editor>
+
+        <BoxView
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            BackgroundColor="{StaticResource BoxGrayBorderColor}" />
+
+        <StackLayout
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Padding="20,10"
+            Orientation="Horizontal"
+            Spacing="20">
+            <Label
+                IsVisible="false"
+                Style="{StaticResource FontIcon}"
+                Text="{StaticResource fa-gear}" />
+            <Label
+                IsVisible="false"
+                Style="{StaticResource FontIcon}"
+                Text="{StaticResource fa-at}" />
+            <Label Style="{StaticResource FontIcon}" Text="{StaticResource fa-camera}" />
+            <Label
+                HorizontalOptions="StartAndExpand"
+                IsVisible="false"
+                Style="{StaticResource FontIcon}"
+                Text="{StaticResource fa-video-camera}" />
+            <Button
+                BorderRadius="2"
+                Command="{Binding SaveOrEditPostCommand}"
+                Style="{StaticResource ButtonGreenSlim}"
+                Text="{Binding ButtonText}">
+                <Button.WidthRequest>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="93"
+                        iOS="90" />
+                </Button.WidthRequest>
+                <Button.HeightRequest>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="45"
+                        iOS="45" />
+                </Button.HeightRequest>
+            </Button>
+        </StackLayout>
+
+        <!--  - BUSY INDICATOR  -->
+        <ContentView
+            Grid.RowSpan="4"
+            Grid.ColumnSpan="2"
+            IsVisible="{Binding IsBusy}"
+            Style="{StaticResource ContentViewForActivityIndicator}">
+            <StackLayout
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center">
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy, Mode=OneWay}"
+                    IsVisible="{Binding IsBusy}"
+                    Style="{StaticResource ActivityIndicatorMain}" />
+
+                <customControl:MuseoLabel
+                    HorizontalOptions="Center"
+                    Opacity="1"
+                    Style="{StaticResource LabelSmall}"
+                    Text="{localization:Render PostUploading}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </ContentView>
+    </Grid>
+</local:AppViewBase>

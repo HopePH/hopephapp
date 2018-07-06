@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:AppViewBase
+    x:Class="Yol.Punla.Views.PostFeedDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
+    x:Name="ThisPage"
+    Title="Post Details Page"
+    BackgroundColor="{StaticResource ColorWhite}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BoxGrayBorderColor">#CFD1D4</Color>
+            <Color x:Key="ScrollViewBackgroundColor">#CCCFD2</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid
+        x:Name="mainGrid"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <template:NavigationBar Grid.Row="0" />
+
+        <ScrollView
+            x:Name="ScrollViewElement"
+            Grid.Row="1"
+            Padding="0,0,0,50"
+            VerticalOptions="FillAndExpand">
+            <Grid x:Name="PostBody">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid
+                    Grid.Row="0"
+                    Padding="20,10"
+                    BackgroundColor="White"
+                    RowSpacing="6"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Padding="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ffImage:CachedImage
+                            Grid.Column="0"
+                            Aspect="AspectFit"
+                            BackgroundColor="Transparent"
+                            HeightRequest="35"
+                            Source="{Binding CurrentPostFeed.PosterProfilePhoto}">
+                            <ffImage:CachedImage.Transformations>
+                                <ffImageTransformation:CircleTransformation />
+                            </ffImage:CachedImage.Transformations>
+                        </ffImage:CachedImage>
+
+                        <StackLayout
+                            Grid.Column="1"
+                            Padding="5,8"
+                            Spacing="1">
+                            <customControl:MuseoLabel
+                                FontAttributes="Bold"
+                                Text="{Binding CurrentPostFeed.AliasName}"
+                                TextColor="Black">
+                                <customControl:MuseoLabel.FontSize>
+                                    <OnPlatform
+                                        x:TypeArguments="x:Double"
+                                        Android="15"
+                                        iOS="18" />
+                                </customControl:MuseoLabel.FontSize>
+                            </customControl:MuseoLabel>
+                            <customControl:MuseoLabel
+                                FontSize="11"
+                                Text="{Binding CurrentPostFeed.ContactGender}"
+                                TextColor="Black" />
+                            <customControl:MuseoLabel
+                                FontSize="12"
+                                Text="{Binding CurrentPostFeed.DatePosted, Converter={StaticResource ToElapsedTime}}"
+                                TextColor="Black" />
+                        </StackLayout>
+                    </Grid>
+
+                    <customControl:MuseoLabel
+                        Grid.Row="1"
+                        BackgroundColor="Transparent"
+                        FontSize="12"
+                        Text="{Binding CurrentPostFeed.ContentText}"
+                        TextColor="Black" />
+
+                    <Grid
+                        Grid.Row="2"
+                        Padding="0"
+                        BackgroundColor="Transparent"
+                        RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="46" />
+                        </Grid.RowDefinitions>
+
+                        <ffImage:CachedImage
+                            x:Name="PostImage"
+                            Grid.Row="0"
+                            Aspect="AspectFill"
+                            BackgroundColor="Black"
+                            IsVisible="{Binding HasPostedImage}"
+                            Source="{Binding CurrentPostFeed.ContentURL}">
+                            <ffImage:CachedImage.HeightRequest>
+                                <OnPlatform
+                                    x:TypeArguments="x:Double"
+                                    Android="202"
+                                    iOS="199" />
+                            </ffImage:CachedImage.HeightRequest>
+                        </ffImage:CachedImage>
+
+                        <ContentView
+                            Grid.Row="1"
+                            Padding="1"
+                            BackgroundColor="{StaticResource BoxGrayBorderColor}"
+                            VerticalOptions="FillAndExpand">
+                            <Grid BackgroundColor="White" VerticalOptions="FillAndExpand">
+                                <Grid.Padding>
+                                    <OnPlatform
+                                        x:TypeArguments="Thickness"
+                                        Android="5,5,10,10"
+                                        iOS="5,5,10,15" />
+                                </Grid.Padding>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <customControl:MuseoLabel
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    FontAttributes="Bold"
+                                    FontSize="12"
+                                    Text="{Binding CurrentPostFeed.Title}"
+                                    TextColor="Black">
+                                    <customControl:MuseoLabel.LineBreakMode>
+                                        <OnPlatform
+                                            x:TypeArguments="LineBreakMode"
+                                            Android="WordWrap"
+                                            iOS="TailTruncation" />
+                                    </customControl:MuseoLabel.LineBreakMode>
+                                </customControl:MuseoLabel>
+                                <customControl:MuseoLabel
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    FontAttributes="Italic"
+                                    FontSize="10"
+                                    Text="{Binding CurrentPostFeed.ReferenceUrl}" />
+                                <Label
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    FontFamily="FontAwesome"
+                                    FontSize="20"
+                                    Text="{StaticResource fa-bookmark-o}"
+                                    VerticalOptions="Start" />
+                            </Grid>
+                        </ContentView>
+                    </Grid>
+
+                    <StackLayout
+                        Grid.Row="3"
+                        Padding="0,5"
+                        Orientation="Horizontal">
+                        <customControl:MuseoLabel
+                            x:Name="MainPostLikeCounter"
+                            FontSize="10"
+                            HorizontalOptions="Start"
+                            Text="{Binding CurrentPostFeed.NoOfSupports, StringFormat='{0} Supports'}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            FontFamily="FontAwesome"
+                            FontSize="8"
+                            HorizontalOptions="Start"
+                            Text="{StaticResource fa-circle}"
+                            VerticalTextAlignment="Center" />
+                        <customControl:MuseoLabel
+                            x:Name="parentCommentCount"
+                            FontSize="10"
+                            HorizontalOptions="Start"
+                            Text="{Binding CurrentPostFeed.NoOfComments, StringFormat='{0} Comments', Mode=TwoWay}"
+                            VerticalTextAlignment="Center" />
+                    </StackLayout>
+
+                    <BoxView Grid.Row="4" BackgroundColor="#CFD1D4" />
+
+                    <Grid
+                        Grid.Row="5"
+                        Padding="20,5,20,0"
+                        BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackLayout
+                            Grid.Column="0"
+                            HorizontalOptions="CenterAndExpand"
+                            Orientation="Horizontal">
+                            <Label
+                                FontFamily="FontAwesome"
+                                FontSize="15"
+                                VerticalTextAlignment="Center">
+                                <Label.Behaviors>
+                                    <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                </Label.Behaviors>
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding CurrentPostFeed.IsSelfSupported}"
+                                        TargetType="Label"
+                                        Value="True">
+                                        <Setter Property="Text" Value="{StaticResource fa-heart}" />
+                                        <Setter Property="TextColor" Value="{StaticResource GreenColorDim}" />
+                                    </DataTrigger>
+                                    <DataTrigger
+                                        Binding="{Binding CurrentPostFeed.IsSelfSupported}"
+                                        TargetType="Label"
+                                        Value="False">
+                                        <Setter Property="Text" Value="{StaticResource fa-heart-o}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <customControl:MuseoLabel
+                                FontFamily="FontAwesome"
+                                FontSize="12"
+                                Text="{localization:Render SupportText}"
+                                VerticalTextAlignment="Center" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding SupportCommand}"
+                                    CommandParameter="{Binding CurrentPostFeed}"
+                                    NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+
+                        <StackLayout
+                            Grid.Column="1"
+                            HorizontalOptions="CenterAndExpand"
+                            Orientation="Horizontal">
+                            <Label
+                                FontFamily="FontAwesome"
+                                FontSize="15"
+                                Text="{StaticResource fa-comment-o}"
+                                VerticalTextAlignment="Center">
+                                <Label.Behaviors>
+                                    <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                </Label.Behaviors>
+                            </Label>
+                            <customControl:MuseoLabel
+                                FontFamily="FontAwesome"
+                                FontSize="12"
+                                Text="{localization:Render CommentText}"
+                                VerticalTextAlignment="Center" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer x:Name="stackCommentGesture" NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+
+                        <StackLayout
+                            Grid.Column="2"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="false"
+                            Orientation="Horizontal">
+                            <Label
+                                FontFamily="FontAwesome"
+                                FontSize="15"
+                                Text="{StaticResource fa-share-alt}"
+                                VerticalTextAlignment="Center" />
+                            <customControl:MuseoLabel
+                                FontFamily="FontAwesome"
+                                FontSize="12"
+                                Text="{localization:Render ShareText}"
+                                VerticalTextAlignment="Center" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding}" NumberOfTapsRequired="1" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+
+                <!--chito. I have removed this. This is for the next version.
+                <StackLayout Grid.Row="1" VerticalOptions="FillAndExpand">
+                    <BoxView BackgroundColor="{StaticResource BoxGrayBorderColor}" HeightRequest="1" />
+                    <customControl:MuseoLabel
+                        Margin="20,0,0,0"
+                        HorizontalOptions="Start"
+                        Text="{localization:Render SupportersText}"
+                        VerticalOptions="Start" />
+                </StackLayout>-->
+
+                <BoxView Grid.Row="1" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
+
+                <ContentView Grid.Row="2" BackgroundColor="Transparent" />
+
+                <!--  - COMMENT LISTS SECTION  -->
+                <StackLayout
+                    x:Name="stackRowElement"
+                    Grid.Row="3"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0,0,13,30" />
+                    </StackLayout.Padding>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <customControl:MuseoLabel
+                                Margin="10,0,0,0"
+                                FontAttributes="Bold"
+                                HorizontalOptions="StartAndExpand"
+                                Text="Comments">
+                                <customControl:MuseoLabel.FontSize>
+                                    <OnPlatform
+                                        x:TypeArguments="x:Double"
+                                        Android="15"
+                                        iOS="13" />
+                                </customControl:MuseoLabel.FontSize>
+                            </customControl:MuseoLabel>
+                            <StackLayout
+                                HorizontalOptions="End"
+                                IsVisible="false"
+                                Orientation="Horizontal"
+                                Spacing="10">
+                                <customControl:MuseoLabel
+                                    Margin="0,0,10,0"
+                                    FontSize="19"
+                                    HorizontalOptions="End"
+                                    Text="Sort by Top" />
+                                <Label
+                                    Margin="0,0,10,0"
+                                    Style="{StaticResource IconFont}"
+                                    Text="{StaticResource fa-sort}" />
+                            </StackLayout>
+                        </StackLayout>
+                        <BoxView BackgroundColor="{StaticResource BoxGrayBorderColor}" HeightRequest="1" />
+                    </StackLayout>
+                    <StackLayout x:Name="CommentItems" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+
+        <!--  -  POST BUTTON GROUP  -->
+        <Grid
+            Grid.Row="2"
+            BackgroundColor="White"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5" />
+                <RowDefinition Height="0.5" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <BoxView
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#33D3D3D3"
+                HorizontalOptions="FillAndExpand" />
+
+            <BoxView
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#66D3D3D3"
+                HorizontalOptions="FillAndExpand" />
+
+            <ffImage:CachedImage
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="20,10"
+                Aspect="AspectFit"
+                BackgroundColor="Transparent"
+                HeightRequest="50"
+                Source="{Binding CurrentContact.PhotoURL}"
+                WidthRequest="50">
+                <ffImage:CachedImage.Transformations>
+                    <ffImageTransformation:CircleTransformation />
+                </ffImage:CachedImage.Transformations>
+            </ffImage:CachedImage>
+
+            <customControl:MultilineEntry
+                x:Name="multiEntry"
+                Grid.Row="2"
+                Grid.Column="1"
+                BottomLineColor="{StaticResource BoxGrayBorderColor}"
+                IsEnabled="{Binding IsWritePostEnabled}"
+                Keyboard="Text"
+                MultiText="{Binding CommentText, Mode=TwoWay}"
+                MyText="{localization:Render CommentPlaceholderText}"
+                PlaceholderEnabled="True">
+                <customControl:MultilineEntry.Margin>
+                    <OnPlatform
+                        x:TypeArguments="Thickness"
+                        Android="0,0,20,0"
+                        iOS="0,10,20,10" />
+                </customControl:MultilineEntry.Margin>
+            </customControl:MultilineEntry>
+
+            <StackLayout
+                x:Name="hidingStack"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                Margin="20,0,0,10"
+                IsVisible="{Binding HasFocus, Source={x:Reference multiEntry}, Path=MultilineEntry.HasFocus}"
+                Orientation="Horizontal">
+                <ContentView Padding="0,10,10,10" HorizontalOptions="Start">
+                    <Label Style="{StaticResource IconFont}" Text="{StaticResource fa-camera}" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CameraCommand}" NumberOfTapsRequired="1" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+                <Button
+                    x:Name="btnPost"
+                    BackgroundColor="{StaticResource GreenColorDim}"
+                    TextColor="White"
+                    Command="{Binding WriteCommentCommand}"
+                    HorizontalOptions="Start"
+                    IsEnabled="{Binding IsWritePostEnabled}"
+                    Text="{localization:Render PostText}"
+                    WidthRequest="80" />
+            </StackLayout>
+        </Grid>
+
+        <!--  POST OPTIONS MODAL  -->
+        <ContentView
+            Grid.RowSpan="3"
+            BackgroundColor="{StaticResource PopUpBackgroundColor}"
+            IsVisible="{Binding IsShowPostOptions}">
+            <ContentView.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="40,160,40,300"
+                    iOS="30,160" />
+            </ContentView.Padding>
+            <Grid
+                Padding="20"
+                BackgroundColor="{StaticResource ColorWhite}"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowSpacing>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="15"
+                        iOS="10" />
+                </Grid.RowSpacing>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <ContentView Grid.Row="0">
+                    <Label
+                        BackgroundColor="Transparent"
+                        FontFamily="FontAwesome"
+                        HorizontalOptions="FillAndExpand"
+                        HorizontalTextAlignment="End"
+                        Text="{StaticResource fa-close}"
+                        TextColor="#B2B2B2"
+                        VerticalOptions="FillAndExpand"
+                        VerticalTextAlignment="Center">
+                        <Label.Margin>
+                            <OnPlatform
+                                x:TypeArguments="Thickness"
+                                Android="0,0,0,20"
+                                iOS="0,0,0,30" />
+                        </Label.Margin>
+                    </Label>
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ClosePostOptionsCommand}" NumberOfTapsRequired="1" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                    <customControl:MuseoLabel HorizontalOptions="StartAndExpand" Text="Edit Current Post" />
+                    <Label
+                        HorizontalOptions="End"
+                        Style="{StaticResource IconFont}"
+                        Text="{StaticResource fa-pencil}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            x:Name="editPostStackLayout"
+                            Command="{Binding EditCommentCommand}"
+                            NumberOfTapsRequired="1" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <BoxView Grid.Row="2" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
+
+                <StackLayout Grid.Row="3" Orientation="Horizontal">
+                    <customControl:MuseoLabel HorizontalOptions="StartAndExpand" Text="Delete Current Post" />
+                    <Label
+                        HorizontalOptions="End"
+                        Style="{StaticResource IconFont}"
+                        Text="{StaticResource fa-trash}" />
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            x:Name="deleteCommentOption"
+                            Command="{Binding DeleteCommentCommand}"
+                            NumberOfTapsRequired="1" />
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <customControl:MuseoLabel
+                    Grid.Row="4"
+                    HorizontalOptions="Center"
+                    Text="{Binding DeletingMessage}"
+                    TextColor="{StaticResource ColorRed}" />
+
+            </Grid>
+        </ContentView>
+    </Grid>
+</local:AppViewBase>

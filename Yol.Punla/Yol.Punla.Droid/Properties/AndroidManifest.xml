@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="50" android:versionName="1.50" package="com.haiyangrpdev.HopePH" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.BLUETOOTH" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.LOCATION_HARDWARE" />
+	<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<!-- Supports phone only, no tablets
+    https://developer.android.com/guide/topics/manifest/compatible-screens-element.html
+    https://developer.android.com/guide/practices/screens-distribution.html#FilteringHansetApps
+    https://mydevice.io/devices/#sortOthers
+    alfon.we dont support phone screens for both normal and small screen sizes of these densities because they are old phone already
+    120,160,240,280
+  -->
+	<compatible-screens>
+		<!-- all small size screens -->
+		<screen android:screenSize="small" android:screenDensity="320" />
+		<screen android:screenSize="small" android:screenDensity="360" />
+		<screen android:screenSize="small" android:screenDensity="420" />
+		<screen android:screenSize="small" android:screenDensity="480" />
+		<screen android:screenSize="small" android:screenDensity="560" />
+		<!-- all normal size screens -->
+		<screen android:screenSize="normal" android:screenDensity="240" />
+		<screen android:screenSize="normal" android:screenDensity="280" />
+		<screen android:screenSize="normal" android:screenDensity="320" />
+		<screen android:screenSize="normal" android:screenDensity="360" />
+		<screen android:screenSize="normal" android:screenDensity="420" />
+		<screen android:screenSize="normal" android:screenDensity="480" />
+		<screen android:screenSize="normal" android:screenDensity="560" />
+		<screen android:screenSize="normal" android:screenDensity="640" />
+		<!-- all large size screens -->
+		<screen android:screenSize="large" android:screenDensity="240" />
+		<screen android:screenSize="large" android:screenDensity="280" />
+		<screen android:screenSize="large" android:screenDensity="320" />
+		<screen android:screenSize="large" android:screenDensity="360" />
+		<screen android:screenSize="large" android:screenDensity="420" />
+		<screen android:screenSize="large" android:screenDensity="480" />
+		<screen android:screenSize="large" android:screenDensity="560" />
+		<screen android:screenSize="large" android:screenDensity="640" />
+	</compatible-screens>
+	<application android:label="HopePH" android:theme="@style/MyTheme" android:icon="@drawable/icon" android:largeHeap="true">
+		<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+		<activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:label="@string/app_name" />
+	</application>
+</manifest>

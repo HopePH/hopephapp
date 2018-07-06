@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication
+    x:Class="Yol.Punla.EntryPoint.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converter="clr-namespace:Yol.Punla.Converters;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!--  CONVERTER  -->
+            <converter:BooleanInvertConverter x:Key="BoolInvert" />
+            <converter:DateTextToElapsedTimeConverter x:Key="ToElapsedTime" />
+            <converter:BooleanToIsEnableColorConverter x:Key="IsEnabledToColor" />
+
+            <!--  FILE IMAGES  -->
+            <FileImageSource x:Key="SignUpBackgroundImage" File="bg3.png" />
+            <FileImageSource x:Key="LogoImage" File="hopelogo.png" />
+            <FileImageSource x:Key="FloatingAddButton" File="addicon.png" />
+
+            <!--  COLORS  -->
+            <Color x:Key="GreenColorDim">#88B04B</Color>
+            <Color x:Key="MainMenuBackgroundColor">#283441</Color>
+            <Color x:Key="ColorWhite">White</Color>
+            <Color x:Key="ColorGray">#A0A0A0</Color>
+            <Color x:Key="ColorGrayTwo">#ebe7e8</Color>
+            <Color x:Key="ColorGrayThree">#f4f4f4</Color>
+            <Color x:Key="ColorGrayFour">#e4e4e4</Color>
+            <Color x:Key="ErrorColor">Red</Color>
+            <Color x:Key="PageBackgroundGray">#F5F5F5</Color>
+            <Color x:Key="GreenColorDimmer">#586A3E</Color>
+            <Color x:Key="ColorRedCrisis">#dd0506</Color>
+            <Color x:Key="BoxGrayBorderColor">#CFD1D4</Color>
+            <Color x:Key="PopUpBackgroundColor">#BF000000</Color>
+            <Color x:Key="ColorRed">#f84330</Color>
+            <Color x:Key="ColorGreenLight">#b2c68b</Color>
+
+            <!--  Unit Values  -->
+            <x:Double x:Key="MainMenuHeaderFontsize">18</x:Double>
+            <x:Double x:Key="BaseFontSizeSmall">12</x:Double>
+            <x:Double x:Key="BaseFontSize">16</x:Double>
+            <x:Double x:Key="BaseButtonHeight">44</x:Double>
+            <x:Double x:Key="BaseButtonWidth">114</x:Double>
+            <x:Double x:Key="BaseButtonWidthTwo">154</x:Double>
+            <x:Double x:Key="BaseFontSizeLarge">18</x:Double>
+            <x:Double x:Key="PickerHeight">34</x:Double>
+
+
+            <!--  Label Sizes  -->
+            <Style x:Key="LabelSmall" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <OnPlatform.iOS>12</OnPlatform.iOS>
+                            <OnPlatform.Android>14</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="LabelSmallPlaceholder" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <OnPlatform.iOS>12</OnPlatform.iOS>
+                            <OnPlatform.Android>13</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontAttributes">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="FontAttributes">
+                            <OnPlatform.iOS>Bold</OnPlatform.iOS>
+                            <OnPlatform.Android>Bold</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="LabelXSmall" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <OnPlatform.iOS>San Francisco</OnPlatform.iOS>
+                            <OnPlatform.Android>Roboto</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <OnPlatform.iOS>7</OnPlatform.iOS>
+                            <OnPlatform.Android>14</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style
+                x:Key="LabelXSmallDark"
+                BasedOn="{StaticResource LabelXSmall}"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style
+                x:Key="LabelSmallDark"
+                BasedOn="{StaticResource LabelSmall}"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style x:Key="LabelDefault" TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <OnPlatform.iOS>17</OnPlatform.iOS>
+                            <OnPlatform.Android>21</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style
+                x:Key="LabelDefaultDark"
+                BasedOn="{StaticResource LabelDefault}"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style x:Key="IconFont" TargetType="Label">
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="21"
+                            iOS="19" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="TextColor" Value="{StaticResource GreenColorDim}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="FontAwesome" />
+            </Style>
+
+            <!--  - FONT AWESOME ICONS  -->
+            <x:String x:Key="fa-home">&#xf015;</x:String>
+            <x:String x:Key="fa-info-circle">&#xf05a;</x:String>
+            <x:String x:Key="fa-bug">&#xf188;</x:String>
+            <x:String x:Key="fa-pencil">&#xf040;</x:String>
+            <x:String x:Key="fa-warning">&#xf071;</x:String>
+            <x:String x:Key="fa-navicon">&#xf0c9;</x:String>
+            <x:String x:Key="fa-close">&#xf00d;</x:String>
+            <x:String x:Key="fa-angle-left">&#xf104;</x:String>
+            <x:String x:Key="fa-sort">&#xf0dc;</x:String>
+            <x:String x:Key="fa-filter">&#xf0b0;</x:String>
+            <x:String x:Key="fa-phone">&#xf095;</x:String>
+            <x:String x:Key="fa-hospital-o">&#xf0f8;</x:String>
+            <x:String x:Key="fa-map-marker">&#xf041;</x:String>
+            <x:String x:Key="fa-bookmark-o">&#xf097;</x:String>
+            <x:String x:Key="fa-circle">&#xf111;</x:String>
+            <x:String x:Key="fa-heart-o">&#xf08a;</x:String>
+            <x:String x:Key="fa-heart">&#xf004;</x:String>
+            <x:String x:Key="fa-comment-o">&#xf0e5;</x:String>
+            <x:String x:Key="fa-share-alt">&#xf1e0;</x:String>
+            <x:String x:Key="fa-ellipsis-v">&#xf142;</x:String>
+            <x:String x:Key="fa-video-camera">&#xf03d;</x:String>
+            <x:String x:Key="fa-camera">&#xf030;</x:String>
+            <x:String x:Key="fa-gear">&#xf013;</x:String>
+            <x:String x:Key="fa-at">&#xf1fa;</x:String>
+            <x:String x:Key="fa-keyboard">&#xf11c;</x:String>
+            <x:String x:Key="fa-trash">&#xf1f8;</x:String>
+            <x:String x:Key="fa-arrow-circle-down">&#xf0ab;</x:String>
+            <x:String x:Key="fa-arrow-circle-o-down">&#xf01a;</x:String>
+            <x:String x:Key="fa-settings">&#xf013;</x:String>
+            <x:String x:Key="fa-arrow-right">&#xf061;</x:String>
+            <x:String x:Key="fa-arrow-left">&#xf060;</x:String>
+            <x:String x:Key="fa-locked">&#xf023;</x:String>
+            <x:String x:Key="fa-bell">&#xf0f3;</x:String>
+
+            <Style x:Key="FontIcon" TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="FontAwesome" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
+
+            <!--  Entry Styles  -->
+            <Style x:Key="EntryDefault" TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <OnPlatform.iOS>17</OnPlatform.iOS>
+                            <OnPlatform.Android>21</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style
+                x:Key="EntryDefaultDark"
+                BasedOn="{StaticResource EntryDefault}"
+                TargetType="Entry">
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style x:Key="EntrySmall" TargetType="Entry">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <OnPlatform.iOS>12</OnPlatform.iOS>
+                            <OnPlatform.Android>16</OnPlatform.Android>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style
+                x:Key="EntrySmallDark"
+                BasedOn="{StaticResource EntrySmall}"
+                TargetType="Entry">
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+
+            <!--  Button Styles  -->
+            <Style x:Key="ButtonGreenSlim" TargetType="Button">
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="14"
+                            iOS="12" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderRadius" Value="20" />
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="BorderColor" Value="Transparent" />
+                <Setter Property="HeightRequest">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <OnPlatform.Android>44</OnPlatform.Android>
+                            <OnPlatform.iOS>38</OnPlatform.iOS>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenColorDim}" />
+                <Setter Property="TextColor" Value="{StaticResource ColorWhite}" />
+            </Style>
+            <Style x:Key="ButtonGreenSlimDimmer" TargetType="Button">
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="14"
+                            iOS="{StaticResource BaseFontSizeSmall}" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderRadius" Value="20" />
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="BorderColor" Value="Transparent" />
+                <Setter Property="HeightRequest" Value="{StaticResource BaseButtonHeight}">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <OnPlatform.Android>44</OnPlatform.Android>
+                            <OnPlatform.iOS>38</OnPlatform.iOS>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenColorDimmer}" />
+                <Setter Property="TextColor" Value="{StaticResource ColorWhite}" />
+            </Style>
+            <Style x:Key="SignUpEmail" TargetType="Button">
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="14"
+                            iOS="12" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderRadius" Value="5" />
+                <Setter Property="BorderWidth" Value="0" />
+                <Setter Property="BorderColor" Value="Transparent" />
+                <Setter Property="HeightRequest">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <OnPlatform.Android>51</OnPlatform.Android>
+                            <OnPlatform.iOS>45</OnPlatform.iOS>
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="WidthRequest" Value="204" />
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenColorDim}" />
+                <Setter Property="TextColor" Value="{StaticResource ColorWhite}" />
+            </Style>
+
+            <!--  Menu Styles  -->
+            <Style x:Key="MainMenuStyle" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenColorDim}" />
+            </Style>
+            <Style x:Key="MainMenuHeaderStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="{StaticResource GreenColorDim}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="{StaticResource MainMenuHeaderFontsize}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <!--  Busy Indicators  -->
+            <Style x:Key="ContentViewForActivityIndicator" TargetType="ContentView">
+                <Setter Property="BackgroundColor" Value="#BF000000" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="Padding" Value="20,0,20,0" />
+            </Style>
+            <Style x:Key="ActivityIndicatorMain" TargetType="ActivityIndicator">
+                <Setter Property="WidthRequest" Value="75" />
+                <Setter Property="HeightRequest" Value="75" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Opacity" Value="1" />
+                <Setter Property="Color" Value="White" />
+            </Style>
+
+            <!--  VALIDATIONS  -->
+            <Style x:Key="ValidationEntryErrorStyle" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="{StaticResource ErrorColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</prism:PrismApplication>

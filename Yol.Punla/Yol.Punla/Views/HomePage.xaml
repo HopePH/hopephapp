@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:AppViewBase
+    x:Class="Yol.Punla.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
+    Title="Home Page"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource ColorGrayTwo}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="SortTabBackground">#D6FFCC</Color>
+            <Color x:Key="FilterTabBackground">#DFF2DA</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowSpacing="0"
+        VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <template:Banner Grid.Row="0" />
+
+        <template:SortAndFilter Grid.Row="1" />
+
+        <ListView
+            x:Name="FacilitiesList"
+            Grid.Row="2"
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="false"
+            HorizontalOptions="FillAndExpand"
+            IsRefreshing="{Binding IsRefreshingList}"
+            ItemsSource="{Binding MentalFacilities}"
+            RefreshCommand="{Binding RefreshMentalCareCommand}"
+            SelectedItem="{Binding CurrentSelectedItem, Mode=TwoWay}"
+            SeparatorVisibility="None"
+            VerticalOptions="FillAndExpand"
+            IsPullToRefreshEnabled="true">
+            <ListView.RowHeight>
+                <OnPlatform
+                    x:TypeArguments="x:Int32"
+                    Android="160"
+                    iOS="152" />
+            </ListView.RowHeight>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ContentView BackgroundColor="{StaticResource ColorGrayTwo}">
+                            <ContentView.Padding>
+                                <OnPlatform
+                                    x:TypeArguments="Thickness"
+                                    Android="20,10,20,5"
+                                    iOS="20,10,20,1" />
+                            </ContentView.Padding>
+                            <Frame
+                                x:Name="FrameView"
+                                Margin="0"
+                                Padding="0"
+                                BackgroundColor="White"
+                                HasShadow="False"
+                                HorizontalOptions="Fill"
+                                IsClippedToBounds="True"
+                                VerticalOptions="Fill">
+                                <Frame.CornerRadius>
+                                    <OnPlatform x:TypeArguments="system:Single">
+                                        <On Platform="Android" Value="3" />
+                                        <On Platform="iOS" Value="5" />
+                                    </OnPlatform>
+                                </Frame.CornerRadius>
+                                <Grid Padding="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition>
+                                            <ColumnDefinition.Width>
+                                                <OnPlatform
+                                                    x:TypeArguments="GridLength"
+                                                    Android="150"
+                                                    iOS="125" />
+                                            </ColumnDefinition.Width>
+                                        </ColumnDefinition>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <ffImage:CachedImage
+                                        Grid.Column="0"
+                                        Aspect="AspectFit"
+                                        CacheDuration="{Binding CachedImagesDuration}"
+                                        DownsampleToViewSize="false"
+                                        HorizontalOptions="Start"
+                                        Source="{Binding PhotoUrl}"
+                                        VerticalOptions="Center" />
+
+                                    <Grid
+                                        Grid.Column="1"
+                                        Padding="10,10,20,10"
+                                        RowSpacing="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <customControl:MuseoLabel
+                                            Grid.Row="0"
+                                            Grid.ColumnSpan="2"
+                                            FontAttributes="Bold"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding GroupName}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center">
+                                            <customControl:MuseoLabel.FontSize>
+                                                <OnPlatform
+                                                    x:TypeArguments="x:Double"
+                                                    Android="14"
+                                                    iOS="12" />
+                                            </customControl:MuseoLabel.FontSize>
+                                        </customControl:MuseoLabel>
+
+                                        <BoxView
+                                            Grid.Row="1"
+                                            Grid.ColumnSpan="2"
+                                            HeightRequest="5" />
+
+                                        <customControl:MuseoLabel
+                                            Grid.Row="2"
+                                            Grid.ColumnSpan="2"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Description}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center">
+                                            <customControl:MuseoLabel.FontSize>
+                                                <OnPlatform
+                                                    x:TypeArguments="x:Double"
+                                                    Android="11"
+                                                    iOS="9" />
+                                            </customControl:MuseoLabel.FontSize>
+                                        </customControl:MuseoLabel>
+
+                                        <customControl:MuseoLabel
+                                            Grid.Row="3"
+                                            Grid.ColumnSpan="2"
+                                            FontSize="11"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Location}"
+                                            TextColor="Black"
+                                            VerticalOptions="Center">
+                                            <customControl:MuseoLabel.FontSize>
+                                                <OnPlatform
+                                                    x:TypeArguments="x:Double"
+                                                    Android="11"
+                                                    iOS="9" />
+                                            </customControl:MuseoLabel.FontSize>
+                                        </customControl:MuseoLabel>
+
+                                        <ContentView
+                                            Grid.Row="4"
+                                            Grid.Column="1"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand">
+                                            <Button
+                                                BackgroundColor="{StaticResource GreenColorDim}"
+                                                BindingContext="{Binding Source={x:Reference FacilitiesList}, Path=BindingContext}"
+                                                Command="{Binding ContactFacilityCommand}"
+                                                CommandParameter="{Binding Source={x:Reference FrameView}, Path=BindingContext}"
+                                                FontSize="11"
+                                                Text="{localization:Render CallString}"
+                                                TextColor="White"
+                                                VerticalOptions="End">
+                                                <Button.WidthRequest>
+                                                    <OnPlatform
+                                                        x:TypeArguments="x:Double"
+                                                        Android="87"
+                                                        iOS="73" />
+                                                </Button.WidthRequest>
+                                                <Button.HeightRequest>
+                                                    <OnPlatform
+                                                        x:TypeArguments="x:Double"
+                                                        Android="33"
+                                                        iOS="27" />
+                                                </Button.HeightRequest>
+                                            </Button>
+                                        </ContentView>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </ContentView>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!--  - BUSY INDICATOR  -->
+        <ContentView
+            Grid.RowSpan="3"
+            IsVisible="{Binding IsBusy}"
+            Style="{StaticResource ContentViewForActivityIndicator}">
+            <StackLayout
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsBusy}"
+                VerticalOptions="Center">
+                <ActivityIndicator
+                    IsRunning="{Binding IsBusy, Mode=OneWay}"
+                    IsVisible="{Binding IsBusy}"
+                    Style="{StaticResource ActivityIndicatorMain}" />
+
+                <customControl:MuseoLabel
+                    HorizontalOptions="Center"
+                    Opacity="1"
+                    Style="{StaticResource LabelSmall}"
+                    Text="{localization:Render LoadingDataOrig}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </ContentView>
+
+        <!--  FILTER MODAL  -->
+        <ContentView
+            Grid.RowSpan="3"
+            Padding="30,60"
+            BackgroundColor="{StaticResource PopUpBackgroundColor}"
+            IsVisible="{Binding IsShowFilterModal}">
+            <template:ModalFilter />
+        </ContentView>
+
+        <!--  SORT MODAL  -->
+        <ContentView
+            Grid.RowSpan="3"
+            BackgroundColor="{StaticResource PopUpBackgroundColor}"
+            IsVisible="{Binding IsShowSortModal}">
+            <ContentView.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="30,160"
+                    iOS="30,160" />
+            </ContentView.Padding>
+            <template:ModalSort />
+        </ContentView>
+    </Grid>
+</local:AppViewBase>

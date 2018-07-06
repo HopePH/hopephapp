@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Yol.Punla.Templates.NavigationSearchBar"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:triggers="clr-namespace:Yol.Punla.Triggers;assembly=Yol.Punla">
+    <Grid BackgroundColor="{StaticResource GreenColorDim}" ColumnSpacing="5">
+        <Grid.Padding>
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                Android="10"
+                iOS="10,26,10,5" />
+        </Grid.Padding>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition>
+                <RowDefinition.Height>
+                    <OnPlatform x:TypeArguments="GridLength">
+                        <On Platform="iOS" Value="64" />
+                        <On Platform="Android" Value="54" />
+                    </OnPlatform>
+                </RowDefinition.Height>
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Column="0"
+            Margin="0,0,10,0"
+            FontFamily="FontAwesome"
+            FontSize="20"
+            HorizontalTextAlignment="Center"
+            Text="{StaticResource fa-navicon}"
+            TextColor="White"
+            VerticalTextAlignment="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ShowSideBarCommand}" NumberOfTapsRequired="1" />
+            </Label.GestureRecognizers>
+        </Label>
+        <ContentView Grid.Column="1">
+            <SearchBar
+                x:Name="SearchBarCoptrol"
+                BackgroundColor="White"
+                HeightRequest="40"
+                HorizontalOptions="Fill"
+                IsEnabled="False"
+                Placeholder="Search"
+                VerticalOptions="Center">
+                <SearchBar.WidthRequest>
+                    <!--
+                        REYNZ: Setting a specific widthRequest for IOS is necessary for SearchBar work in IOS.
+                        Failure to set default value will cause the SeachBar to throw an exception
+                    -->
+                    <OnPlatform x:TypeArguments="x:Double" iOS="50" />
+                </SearchBar.WidthRequest>
+                <SearchBar.Effects>
+                    <effects:TransparentBottomBorderSearchBarEffect />
+                </SearchBar.Effects>
+            </SearchBar>
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ShowUnavailablePopUpCommand}" NumberOfTapsRequired="1" />
+            </ContentView.GestureRecognizers>
+        </ContentView>
+        <ContentView Grid.Column="2" Padding="5,10,5,10">
+            <ffImage:CachedImage
+                Aspect="AspectFit"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                Source="{Binding CurrentContact.PhotoURL}"
+                WidthRequest="40">
+                <ffImage:CachedImage.Transformations>
+                    <ffImageTransformation:CircleTransformation />
+                </ffImage:CachedImage.Transformations>
+            </ffImage:CachedImage>
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding DisplayOwnPostsCommand}" NumberOfTapsRequired="1" />
+            </ContentView.GestureRecognizers>
+        </ContentView>
+    </Grid>
+</ContentView>

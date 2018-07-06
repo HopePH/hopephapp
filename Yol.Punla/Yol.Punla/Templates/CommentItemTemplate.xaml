@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="Yol.Punla.Templates.CommentItemTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="1" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="60" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+
+    <ffImage:CachedImage
+        Grid.Row="0"
+        Grid.Column="0"
+        Margin="20,5,0,0"
+        Aspect="AspectFit"
+        BackgroundColor="Transparent"
+        HeightRequest="35"
+        Source="{Binding PosterProfilePhoto}">
+        <ffImage:CachedImage.Transformations>
+            <ffImageTransformation:CircleTransformation />
+        </ffImage:CachedImage.Transformations>
+    </ffImage:CachedImage>
+
+    <StackLayout
+        Grid.Row="0"
+        Grid.Column="1"
+        Margin="0,20,0,0">
+        <customControl:MuseoLabel
+            FontAttributes="Bold"
+            Text="{Binding AliasName}"
+            TextColor="Black">
+            <customControl:MuseoLabel.FontSize>
+                <OnPlatform
+                    x:TypeArguments="x:Double"
+                    Android="15"
+                    iOS="18" />
+            </customControl:MuseoLabel.FontSize>
+        </customControl:MuseoLabel>
+        <customControl:MuseoLabel
+            FontSize="12"
+            Text="{Binding DatePosted, Converter={StaticResource ToElapsedTime}}"
+            TextColor="Black" />
+    </StackLayout>
+
+    <ContentView
+        x:Name="EllipsisContainer"
+        Grid.Row="0"
+        Grid.Column="2"
+        Margin="0,10,10,0"
+        WidthRequest="40">
+        <ContentView.WidthRequest>
+            <OnPlatform
+                x:TypeArguments="x:Double"
+                Android="40"
+                iOS="40" />
+        </ContentView.WidthRequest>
+        <Label
+            x:Name="Ellipsis"
+            Margin="0,8,0,0"
+            FontFamily="FontAwesome"
+            FontSize="15"
+            HorizontalTextAlignment="Center"
+            IsVisible="{Binding IsSelfPosted, Mode=TwoWay}"
+            Text="{StaticResource fa-ellipsis-v}"
+            VerticalTextAlignment="Start" />
+        <ContentView.GestureRecognizers>
+            <TapGestureRecognizer x:Name="moreOptionsSupportGesture" NumberOfTapsRequired="1" />
+        </ContentView.GestureRecognizers>
+    </ContentView>
+
+    <customControl:MuseoLabel
+        x:Name="CommentLabel"
+        Grid.Row="1"
+        Grid.Column="1"
+        Grid.ColumnSpan="2"
+        Margin="0,5,0,5"
+        BackgroundColor="Transparent"
+        FontSize="12"
+        Text="{Binding ContentText}"
+        TextColor="Black" />
+
+    <Grid
+        Grid.Row="2"
+        Grid.Column="1"
+        Grid.ColumnSpan="2"
+        Padding="0,5,20,5"
+        BackgroundColor="Transparent"
+        Grid.ColumnSpacing="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackLayout
+            Grid.Column="0"
+            HorizontalOptions="CenterAndExpand"
+            Orientation="Horizontal">
+            <Label
+                x:Name="labelHeart"
+                FontFamily="FontAwesome"
+                FontSize="15"
+                VerticalTextAlignment="Center">
+                <Label.Triggers>
+                    <DataTrigger
+                        Binding="{Binding IsSelfSupported, Mode=TwoWay}"
+                        TargetType="Label"
+                        Value="True">
+                        <Setter Property="Text" Value="{StaticResource fa-heart}" />
+                        <Setter Property="TextColor" Value="{StaticResource GreenColorDim}" />
+                    </DataTrigger>
+                    <DataTrigger
+                        Binding="{Binding IsSelfSupported, Mode=TwoWay}"
+                        TargetType="Label"
+                        Value="False">
+                        <Setter Property="Text" Value="{StaticResource fa-heart-o}" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+            <customControl:MuseoLabel
+                FontFamily="FontAwesome"
+                FontSize="12"
+                Text="{localization:Render SupportText}"
+                VerticalTextAlignment="Center" />
+            <Label
+                FontFamily="FontAwesome"
+                FontSize="8"
+                HorizontalOptions="Start"
+                Text="{StaticResource fa-circle}"
+                VerticalTextAlignment="Center" />
+            <customControl:MuseoLabel
+                x:Name="supportCount"
+                FontSize="10"
+                HorizontalOptions="Start"
+                Text="{Binding NoOfSupports, StringFormat='{0} Supports'}"
+                VerticalTextAlignment="Center" />
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer x:Name="commentItemSupportGesture" NumberOfTapsRequired="1" />
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+        <StackLayout
+            Grid.Column="1"
+            HorizontalOptions="CenterAndExpand"
+            IsVisible="False"
+            Orientation="Horizontal">
+            <Label
+                FontFamily="FontAwesome"
+                FontSize="15"
+                Text="{StaticResource fa-comment-o}"
+                VerticalTextAlignment="Center" />
+            <customControl:MuseoLabel
+                FontFamily="FontAwesome"
+                FontSize="12"
+                Text="{localization:Render ReplyText}"
+                VerticalTextAlignment="Center" />
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CommentCommand}" NumberOfTapsRequired="1" />
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+        <BoxView Grid.Column="2" />
+    </Grid>
+
+    <BoxView
+        Grid.Row="3"
+        Grid.Column="1"
+        Grid.ColumnSpan="2"
+        BackgroundColor="{StaticResource BoxGrayBorderColor}" />
+</Grid>

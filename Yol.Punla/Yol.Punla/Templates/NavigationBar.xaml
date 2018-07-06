@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Yol.Punla.Templates.NavigationBar"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla">
+    <Grid
+        BackgroundColor="{StaticResource GreenColorDim}"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <Grid.Padding>
+            <OnPlatform x:TypeArguments="Thickness" Android="20,0,20,0" iOS="20,13,20,0"/>
+        </Grid.Padding>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition>
+                <RowDefinition.Height>
+                    <OnPlatform x:TypeArguments="GridLength">
+                        <On Platform="iOS" Value="64" />
+                        <On Platform="Android" Value="54" />
+                    </OnPlatform>
+                </RowDefinition.Height>
+            </RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ContentView
+            Grid.Column="0"
+            HeightRequest="40"
+            HorizontalOptions="Start"
+            IsEnabled="true"
+            IsVisible="{Binding IsShowBackArrow}"
+            VerticalOptions="End"
+            WidthRequest="40">
+            <ContentView.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="0,15,20,14"
+                    iOS="0,26,20,14" />
+            </ContentView.Padding>
+            <ContentView.HeightRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS" Value="48" />
+                    <On Platform="Android" Value="54" />
+                </OnPlatform>
+            </ContentView.HeightRequest>
+            <Label
+                AutomationId="BackLabel"
+                FontFamily="FontAwesome"
+                IsVisible="true"
+                Text="{StaticResource fa-angle-left}"
+                TextColor="White">
+                <Label.FontSize>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="20"
+                        iOS="18" />
+                </Label.FontSize>
+            </Label>
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateBackCommand}" NumberOfTapsRequired="1" />
+            </ContentView.GestureRecognizers>
+        </ContentView>
+
+        <ContentView
+            Grid.Column="1"
+            HorizontalOptions="Start"
+            VerticalOptions="End">
+            <ContentView.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="0,14,0,0"
+                    iOS="0,21,0,0" />
+            </ContentView.Padding>
+            <ContentView.HeightRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS" Value="48" />
+                    <On Platform="Android" Value="54" />
+                </OnPlatform>
+            </ContentView.HeightRequest>
+            <customControl:MuseoLabel
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Style="{StaticResource LabelDefault}"
+                Text="{Binding Title}" />
+        </ContentView>
+
+        <ContentView
+            Grid.Column="2"
+            HorizontalOptions="End"
+            IsEnabled="false"
+            IsVisible="false"
+            VerticalOptions="End"
+            WidthRequest="20">
+            <ContentView.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="0,13,20,0"
+                    iOS="20,15,20,0" />
+            </ContentView.Padding>
+            <ContentView.HeightRequest>
+                <OnPlatform x:TypeArguments="x:Double">
+                    <On Platform="iOS" Value="48" />
+                    <On Platform="Android" Value="54" />
+                </OnPlatform>
+            </ContentView.HeightRequest>
+            <Label
+                FontFamily="FontAwesome"
+                IsVisible="false"
+                Text="{StaticResource fa-home}"
+                TextColor="White">
+                <Label.FontSize>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="23"
+                        iOS="24" />
+                </Label.FontSize>
+            </Label>
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToHomePage}" NumberOfTapsRequired="1" />
+            </ContentView.GestureRecognizers>
+        </ContentView>
+    </Grid>
+</ContentView>

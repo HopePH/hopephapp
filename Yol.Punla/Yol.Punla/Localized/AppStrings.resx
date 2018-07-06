@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountAlready" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
+  <data name="ActiveCarousel" xml:space="preserve">
+    <value>Someone to encourage you</value>
+  </data>
+  <data name="AdMessage" xml:space="preserve">
+    <value>Welcome to HopePH Alpha version. Some of the features are not yet activated in this version.</value>
+  </data>
+  <data name="AdMessageRequiresAttention" xml:space="preserve">
+    <value>This message requires action. Apology for the inconvenience.</value>
+  </data>
+  <data name="AliasText" xml:space="preserve">
+    <value>Alias</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Pangga Health</value>
+  </data>
+  <data name="AuthenticatingCredentialsLoadingText" xml:space="preserve">
+    <value>Authenticating your credentials. Please wait...</value>
+  </data>
+  <data name="AvatarChoiceText" xml:space="preserve">
+    <value>Choose your avatar</value>
+  </data>
+  <data name="CallString" xml:space="preserve">
+    <value>Call</value>
+  </data>
+  <data name="ChangePhoto" xml:space="preserve">
+    <value>CHANGE PHOTO</value>
+  </data>
+  <data name="CommentPlaceholderText" xml:space="preserve">
+    <value>Add a comment...</value>
+  </data>
+  <data name="CommentText" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="CrisisHotlineReminder" xml:space="preserve">
+    <value>Reminder to everyone</value>
+  </data>
+  <data name="CrisisHotlines" xml:space="preserve">
+    <value>Crisis Hotlines</value>
+  </data>
+  <data name="DeletingComment" xml:space="preserve">
+    <value>Deleting your comment...</value>
+  </data>
+  <data name="DeletingPostNotSuccessful" xml:space="preserve">
+    <value>Deleting your post wasnt successful. Please try again!</value>
+  </data>
+  <data name="DepressionBlurb" xml:space="preserve">
+    <value>Depression can happen to anyone and does happen to one in four of us over our lifetimes. Different factors that make it more likely to happen, include biological make-up, upbringing, or reaction to life events. What keeps it going though, is how we deal with those things. The way we think and what we do affects the way we feel. Depression is often accompanied by other feelings such as guilt, shame anger and anxiety.</value>
+  </data>
+  <data name="DontHaveAccountYetText" xml:space="preserve">
+    <value>Don't have account yet?</value>
+  </data>
+  <data name="DuplicateSignUpBlurb" xml:space="preserve">
+    <value>This account already exists. Please use login instead.</value>
+  </data>
+  <data name="EmailText" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmptyCommentErrorMessage" xml:space="preserve">
+    <value>Empty comment is not allowed. Please write a comment.</value>
+  </data>
+  <data name="EmptyPostErrorMessage" xml:space="preserve">
+    <value>Posting with empty content is not allowed.</value>
+  </data>
+  <data name="EnterAValidEmailText" xml:space="preserve">
+    <value>Please enter a valid email address.</value>
+  </data>
+  <data name="ForceUpdateMessage" xml:space="preserve">
+    <value>Please download the latest version</value>
+  </data>
+  <data name="FullNameText" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="HamburgerMenuClicked" xml:space="preserve">
+    <value>Please click on the hamburger menu at the top left corner to browse our menu.</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="LoadingComments" xml:space="preserve">
+    <value>Fetching comments for the first time might take a while. Please wait while we cache the data...</value>
+  </data>
+  <data name="LoadingData" xml:space="preserve">
+    <value>Reloading for the first time might take a while. Please wait while we cache the data...</value>
+  </data>
+  <data name="LoadingErrorPostFeed" xml:space="preserve">
+    <value>Ooops! There was an error in the uploading of the post feed. Please try again.</value>
+  </data>
+  <data name="LoadingOwnData" xml:space="preserve">
+    <value>Please wait while we load your own posts...</value>
+  </data>
+  <data name="LoginText" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginWithText" xml:space="preserve">
+    <value>Login with</value>
+  </data>
+  <data name="LogonIncorrect" xml:space="preserve">
+    <value>Wrong username or password please try again.</value>
+  </data>
+  <data name="LoremIpsumText" xml:space="preserve">
+    <value>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin feugiat luctus posuere. Sed scelerisque, purus ultricies consequat pellentesque, est magna aliquet mi, id tincidunt arcu enim id tellus. Nam gravida risus at enim lacinia, a imperdiet libero commodo. Fusce eget neque id augue rutrum aliquet ut aliquam tortor. Nunc sit amet quam sodales, auctor dui quis, posuere est. Sed et elit vitae sem porttitor blandit a eu nunc. Curabitur tempus dui tincidunt metus pretium feugiat. Mauris ullamcorper nulla mollis purus tristique, non gravida libero accumsan.</value>
+  </data>
+  <data name="MentalCareFacilities" xml:space="preserve">
+    <value>Mental Care Facilities</value>
+  </data>
+  <data name="MenuClicked" xml:space="preserve">
+    <value>Please click on the hamburger menu at the top left corner to browse our menu.</value>
+  </data>
+  <data name="MobilePhoneText" xml:space="preserve">
+    <value>Mobile Phone</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NotSupportedChangePhoto" xml:space="preserve">
+    <value>Change photo is not supported by this version of the app. Please wait for our next version.</value>
+  </data>
+  <data name="NotSupportedRatingAndSpecializations" xml:space="preserve">
+    <value>Sort by rating and specializations are not supported by this version of the app. Please wait for our next version.</value>
+  </data>
+  <data name="NotSupportedSettings" xml:space="preserve">
+    <value>Settings is not yet available by this version of the app. Please wait for our next version.</value>
+  </data>
+  <data name="NotSupportedSortByRating" xml:space="preserve">
+    <value>Sort by rating is not supported by this version of the app. Please wait for our next version.</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="PasswordText" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PostingReminder" xml:space="preserve">
+    <value>Any post</value>
+  </data>
+  <data name="PostText" xml:space="preserve">
+    <value>Post</value>
+  </data>
+  <data name="PostUploading" xml:space="preserve">
+    <value>Uploading post...</value>
+  </data>
+  <data name="PullDownInstruction" xml:space="preserve">
+    <value>When needed, you could pull down to refresh posts from the server :)</value>
+  </data>
+  <data name="ReplyText" xml:space="preserve">
+    <value>Reply</value>
+  </data>
+  <data name="RequestProcessingLoadingText" xml:space="preserve">
+    <value>Processing your request. Please wait...</value>
+  </data>
+  <data name="RequiresSignUp" xml:space="preserve">
+    <value>Requires signing up</value>
+  </data>
+  <data name="SaveAndContinue" xml:space="preserve">
+    <value>Save &amp; Continue</value>
+  </data>
+  <data name="SearchAvailableNextVersionText" xml:space="preserve">
+    <value>Search Function is available for the next version.</value>
+  </data>
+  <data name="SharePostText" xml:space="preserve">
+    <value>Share an article, photo, video or idea</value>
+  </data>
+  <data name="ShareText" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="SignUpMessage" xml:space="preserve">
+    <value>Please signup. Signing up wont display your profile to the other users. You will still maintain your anonymity.</value>
+  </data>
+  <data name="SignUpText" xml:space="preserve">
+    <value>Signup.</value>
+  </data>
+  <data name="SortSelect" xml:space="preserve">
+    <value>Please select a sort item.</value>
+  </data>
+  <data name="SupportersText" xml:space="preserve">
+    <value>Supporters</value>
+  </data>
+  <data name="SupportText" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="TagLine" xml:space="preserve">
+    <value>Mental heath support group and services.</value>
+  </data>
+  <data name="TitleCall" xml:space="preserve">
+    <value>View Map or Call</value>
+  </data>
+  <data name="TitleComments" xml:space="preserve">
+    <value>Write your Comments</value>
+  </data>
+  <data name="TitleFeelings" xml:space="preserve">
+    <value>Write down your thoughts or feelings</value>
+  </data>
+  <data name="TitleReadContents" xml:space="preserve">
+    <value>Contents &amp; Details</value>
+  </data>
+  <data name="TitleSettings" xml:space="preserve">
+    <value>My Settings</value>
+  </data>
+  <data name="TitleThoughts" xml:space="preserve">
+    <value>My Thoughts &amp; Feelings</value>
+  </data>
+  <data name="UpdateText" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UsefulStuff" xml:space="preserve">
+    <value>Useful Stuff</value>
+  </data>
+  <data name="UsernameText" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="ViewMapText" xml:space="preserve">
+    <value>View Map</value>
+  </data>
+  <data name="WDWYWTS" xml:space="preserve">
+    <value>Write Down What You Want to Say</value>
+  </data>
+  <data name="WelcomeInstructions1" xml:space="preserve">
+    <value>You could post your feelings anonymously. No one knows you here.</value>
+  </data>
+  <data name="WelcomeInstructions2" xml:space="preserve">
+    <value>If you wish to see a local psychologist or psychiatrist, you could browse the mental care facilities and sort them by location and check their tel nos and location.</value>
+  </data>
+  <data name="WelcomeInstructions3" xml:space="preserve">
+    <value>Three</value>
+  </data>
+  <data name="WelcomeInstructions4" xml:space="preserve">
+    <value>Four</value>
+  </data>
+  <data name="SignUpWithUserName" xml:space="preserve">
+    <value>Sign up with aliasname</value>
+  </data>
+  <data name="VerficationCodeError" xml:space="preserve">
+    <value>Please enter a valid verification code</value>
+  </data>
+  <data name="EmailExists" xml:space="preserve">
+    <value>The email already exists.</value>
+  </data>
+  <data name="VerificationEmailMsg" xml:space="preserve">
+    <value>We need to know how to contact you</value>
+  </data>
+  <data name="VerificationEmailPlaceholder" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="VerificationEmailTitle" xml:space="preserve">
+    <value>Enter your email address</value>
+  </data>
+  <data name="VerifiedEmailMsg" xml:space="preserve">
+    <value>We sent the verification code in your email</value>
+  </data>
+  <data name="VerifiedEmailPlaceholder" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
+  <data name="VerifiedEmailTitle" xml:space="preserve">
+    <value>Enter your verification code</value>
+  </data>
+  <data name="LogonContentCode" xml:space="preserve">
+    <value>You'll need a verification code to sign in to the app. Please enter your registered email.</value>
+  </data>
+  <data name="LogonContentVerify" xml:space="preserve">
+    <value>We sent you a verification code.</value>
+  </data>
+  <data name="LogonTitleCode" xml:space="preserve">
+    <value>Verification Code Request</value>
+  </data>
+  <data name="LogonTitleVerify" xml:space="preserve">
+    <value>Enter your verification code</value>
+  </data>
+  <data name="LogonWithUserName" xml:space="preserve">
+    <value>Login with username</value>
+  </data>
+  <data name="LoadingDataOrig" xml:space="preserve">
+    <value>Fetching data from the server. Please wait...</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="LoadingNotifications" xml:space="preserve">
+    <value>Fetching notifications from the server. Please wait...</value>
+  </data>
+  <data name="NotificationsHasUnReadComments" xml:space="preserve">
+    <value>You have 1 unread comment to this post</value>
+  </data>
+  <data name="NotificationsShowSupport" xml:space="preserve">
+    <value>Please show support or care by clicking support or by writing friendly advises to</value>
+  </data>
+  <data name="LoadingMoreData" xml:space="preserve">
+    <value>Fetching more posts from the server. Please wait...</value>
+  </data>
+</root>
