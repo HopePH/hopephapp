@@ -113,6 +113,7 @@ namespace Yol.Punla
         protected override void OnInitialized()
         {
             InitializeComponent();
+            InitFakeData();
             ConfigureAppWideSettings();
             ConfigureDatabaseInitilization();
 
@@ -303,6 +304,14 @@ namespace Yol.Punla
             {
                 return Expired;
             }
+        }
+
+        private void InitFakeData()
+        {
+            FakeData.FakeUsers.Init();
+            FakeData.FakeMentalFacility.Init();
+            FakeData.FakePostFeeds.Init();
+            FakeData.FakeWikis.Init();
         }
     }
 }

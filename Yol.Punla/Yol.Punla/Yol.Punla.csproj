@@ -87,8 +87,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EntryPoint\" />
-  </ItemGroup>
-
 </Project>

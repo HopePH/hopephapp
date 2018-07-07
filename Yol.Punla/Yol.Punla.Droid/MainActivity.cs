@@ -4,7 +4,6 @@ using Android.Content.PM;
 using Android.OS;
 using Prism;
 using Prism.Ioc;
-using Yol.Punla.EntryPoint;
 using Android.Content;
 using Android.Widget;
 using HockeyApp.Android;
