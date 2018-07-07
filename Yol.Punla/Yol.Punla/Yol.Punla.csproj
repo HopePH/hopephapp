@@ -18,14 +18,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="App.xaml.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="App.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="CommonServiceLocator" Version="2.0.2" />
@@ -93,6 +85,10 @@
     <EmbeddedResource Update="Views\zTestPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="EntryPoint\" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,6 @@ using Unity.Lifetime;
 using Prism.Ioc;
 using Unity;
 using Prism.Services;
-using Plugin.Connectivity;
 using Yol.Punla.UnitTest.Mocks;
 using Plugin.Connectivity.Abstractions;
 using Acr.UserDialogs;
@@ -167,7 +166,7 @@ namespace Yol.Punla.UnitTest.Barrack
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             Bootstrapper.InitContainer(containerRegistry);
-            Bootstrapper.AutoTypesRegistration<Yol.Punla.Module>();
+            Bootstrapper.AutoTypesRegistration<Yol.Punla.App>();
             ManualTypeRegistration(containerRegistry);
         }
 

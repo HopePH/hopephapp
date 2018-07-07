@@ -23,7 +23,7 @@ using Yol.Punla.Managers;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 
-namespace Yol.Punla.EntryPoint
+namespace Yol.Punla
 {
     public partial class App : PrismApplication, IAppConfigurations
     {
@@ -132,7 +132,7 @@ namespace Yol.Punla.EntryPoint
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             Bootstrapper.InitContainer(containerRegistry);
-            Bootstrapper.AutoTypesRegistration<Yol.Punla.Module>();
+            Bootstrapper.AutoTypesRegistration<App>();
             ManualTypeRegistration(containerRegistry);
         }
 
