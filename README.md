@@ -12,5 +12,5 @@ iPhone 5 and above
 We'll update here soon
 
 # Contributing
-How to contribute https://github.com/HopePH/hopephapp/blob/master/CONTRIBUTING.md
+<a href="https://github.com/HopePH/hopephapp/blob/master/CONTRIBUTING.md">How to contribute </a>
 
