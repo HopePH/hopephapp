@@ -18,7 +18,7 @@ Advocating for or encouraging any of the above behaviors.<br/>
 Understand disagreements: Disagreements, both social and technical, are useful learning opportunities. Seek to understand the other viewpoints and resolve differences constructively.<br/>
 This code is not exhaustive or complete. It serves to capture our common understanding of a productive, collaborative environment. We expect the code to be followed in spirit as much as in the letter.
 
-#Code Standards
+# Code Standards
 1. Fields and methods sequence <br/>
   fields sequence: private, protected, public <br/>
   method sequence: public, protected, private <br/>
