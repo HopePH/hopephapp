@@ -1,5 +1,5 @@
 # HopePH App
-HopePH app is a powerful mental health app built on top of the blockchain
+HopePH app is a mental health app built on top of the blockchain
 
 # Support 
 We'll update here soon
