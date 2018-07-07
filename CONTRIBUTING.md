@@ -22,4 +22,14 @@ This code is not exhaustive or complete. It serves to capture our common underst
 1. Fields and methods sequence <br/>
   fields sequence: private, protected, public <br/>
   method sequence: public, protected, private <br/>
+  
+2. Creating method is in this format. We are using Prism Commands.<br/>
+e.g. public ICommand SortCommand => new DelegateCommand(SortWikis); <br/>
+
+3. Code Comments <br/>
+Sorry no comments in the code please. We are able to understand your code. :) <br/>
+
+4. Remove unused codes like unused namespaces, unused reference in xaml, etc. <br />
+
+
 
