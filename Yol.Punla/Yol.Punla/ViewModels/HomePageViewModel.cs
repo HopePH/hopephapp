@@ -125,7 +125,7 @@ namespace Yol.Punla.ViewModels
         {
             try
             {                
-                var cts = CreateNewHandledTokenSource("HomePageViewModel.PreparePageBindingsAsync", 20);
+                CreateNewHandledTokenSource("HomePageViewModel.PreparePageBindingsAsync", 20);
 
                 var results = await Task.Run(async () =>
                 {

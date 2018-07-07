@@ -80,7 +80,7 @@ namespace Yol.Punla.ViewModels
         {
             try
             {
-                var cts = CreateNewHandledTokenSource("InfoPageViewModel.PreparePageBindingAsync", 20);
+                CreateNewHandledTokenSource("InfoPageViewModel.PreparePageBindingAsync", 20);
 
                 Wikis = await Task.Run(async () => 
                 {

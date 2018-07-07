@@ -67,7 +67,7 @@ namespace Yol.Punla.ViewModels
         {
             try
             {
-                var cts = CreateNewHandledTokenSource("CrisisHotlineListPageViewModel.PreparePageBindingsAsync");
+                CreateNewHandledTokenSource("CrisisHotlineListPageViewModel.PreparePageBindingsAsync");
 
                 CrisisHotlines = await Task.Run(async () =>
                 {

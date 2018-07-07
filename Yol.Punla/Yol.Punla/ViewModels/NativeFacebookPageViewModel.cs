@@ -166,7 +166,7 @@ namespace Yol.Punla.ViewModels
         {
             try
             {
-                var cts = CreateNewHandledTokenSource("NativeFacebookPageViewModel.GetLogonDetailsFromRemoteDBAsync", 20);
+                CreateNewHandledTokenSource("NativeFacebookPageViewModel.GetLogonDetailsFromRemoteDBAsync", 20);
 
                 var clientFromRemote = await Task.Run(async () =>
                 {

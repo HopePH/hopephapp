@@ -106,7 +106,7 @@ namespace Yol.Punla.ViewModels
         {
             try
             {
-                var cts = CreateNewHandledTokenSource("SignUpAsync");
+                CreateNewHandledTokenSource("SignUpAsync");
 
                 var resultId = await Task.Run<int>(() =>
                 {

@@ -137,7 +137,7 @@ namespace Yol.Punla.ViewModels
 
             try
             {
-                var cts = CreateNewHandledTokenSource("PostFeedPageViewModel.PreparePageBindingsAsync", 20);
+                CreateNewHandledTokenSource("PostFeedPageViewModel.PreparePageBindingsAsync", 20);
 
                 var postList = await Task.Run(() =>
                 {
@@ -199,7 +199,7 @@ namespace Yol.Punla.ViewModels
         {
             try
             {
-                var cts = CreateNewHandledTokenSource("GetCommentsAsync", 20);
+                CreateNewHandledTokenSource("GetCommentsAsync", 20);
 
                 var results = await Task.Run(() =>
                 {
