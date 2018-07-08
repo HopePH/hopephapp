@@ -31,5 +31,7 @@ Sorry no comments in the code please. We are able to understand your code. :) <b
 
 4. Remove unused codes like unused namespaces, unused reference in xaml, etc. <br />
 
+5. We follow this <a href='https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/coding-style.md'>coding standards </a> specifically the nos: 1,3,4,5,6 (except alpahbetically), 7, 10, 11, 12, and 13. <br/>
+
 
 
