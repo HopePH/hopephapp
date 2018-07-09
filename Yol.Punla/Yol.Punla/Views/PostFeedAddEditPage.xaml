@@ -49,9 +49,9 @@
             Grid.Row="1"
             Grid.Column="1"
             Text="{Binding Content}">
-          <Editor.Effects>
-            <effects:EditorTransparentBottomlineEffect />
-          </Editor.Effects>
+            <Editor.Effects>
+                <effects:EditorTransparentBottomlineEffect />
+            </Editor.Effects>
         </Editor>
 
         <BoxView
