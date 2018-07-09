@@ -33,5 +33,10 @@ Sorry no comments in the code please. We are able to understand your code. :) <b
 
 5. We follow this <a href='https://github.com/dotnet/corefx/blob/master/Documentation/coding-guidelines/coding-style.md'>coding standards </a> specifically the nos: 1,3,4,5,6 (except alpahbetically), 7, 10, 11, 12, and 13. <br/>
 
+6. Single-line method must be written in expression body format <br />
+e.g. public ICommand SortCommand => new DelegateCommand(SortWikis); <br/>
 
+7. Hardcoded strings are discouraged, use the nameof() operator instead <br/>
+
+8. Logic should not be written in the xaml.cs file. We are strict MVVM fanatics. <br />
 
