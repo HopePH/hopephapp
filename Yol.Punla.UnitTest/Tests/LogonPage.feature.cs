@@ -17,37 +17,55 @@ namespace Yol.Punla.UnitTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("LogonPage")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class LogonPageFeature
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
 #line 1 "LogonPage.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
-        public virtual void FeatureSetup()
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "LogonPage", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "LogonPage")))
+            {
+                global::Yol.Punla.UnitTest.Tests.LogonPageFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -56,6 +74,7 @@ namespace Yol.Punla.UnitTest.Tests
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -87,9 +106,6 @@ namespace Yol.Punla.UnitTest.Tests
 #line hidden
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Logging in to the app using facebook email account via PostFeed Page")]
-        [NUnit.Framework.TestCaseAttribute("hynrbf@gmail.com", null)]
         public virtual void LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPage(string fbAccount, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using facebook email account via PostFeed Page", exampleTags);
@@ -111,9 +127,19 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Logging in to the app using facebook mobile number account")]
-        [NUnit.Framework.TestCaseAttribute("09477691857", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logging in to the app using facebook email account via PostFeed Page: hynrbf@gmai" +
+            "l.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "LogonPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbAccount", "hynrbf@gmail.com")]
+        public virtual void LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPage_HynrbfGmail_Com()
+        {
+#line 13
+this.LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPage("hynrbf@gmail.com", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void LoggingInToTheAppUsingFacebookMobileNumberAccount(string fbMobileNumber, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using facebook mobile number account", exampleTags);
@@ -135,8 +161,21 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating to SignUp Page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logging in to the app using facebook mobile number account: 09477691857")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "LogonPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "09477691857")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbMobileNumber", "09477691857")]
+        public virtual void LoggingInToTheAppUsingFacebookMobileNumberAccount_09477691857()
+        {
+#line 24
+this.LoggingInToTheAppUsingFacebookMobileNumberAccount("09477691857", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating to SignUp Page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "LogonPage")]
         public virtual void NavigatingToSignUpPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating to SignUp Page", ((string[])(null)));
@@ -156,10 +195,6 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Logging in to the app using facebook email account via PostFeed Page but the acco" +
-            "unt is not registered to the hopeph system")]
-        [NUnit.Framework.TestCaseAttribute("hello@pangga.ph", null)]
         public virtual void LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPageButTheAccountIsNotRegisteredToTheHopephSystem(string fbAccount, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using facebook email account via PostFeed Page but the acco" +
@@ -180,6 +215,19 @@ this.FeatureBackground();
   testRunner.And("I am redirected to the page \"SignUpPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logging in to the app using facebook email account via PostFeed Page but the acco" +
+            "unt is not registered to the hopeph system: hello@pangga.ph")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "LogonPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hello@pangga.ph")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbAccount", "hello@pangga.ph")]
+        public virtual void LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPageButTheAccountIsNotRegisteredToTheHopephSystem_HelloPangga_Ph()
+        {
+#line 41
+this.LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPageButTheAccountIsNotRegisteredToTheHopephSystem("hello@pangga.ph", ((string[])(null)));
+#line hidden
         }
     }
 }

@@ -17,37 +17,55 @@ namespace Yol.Punla.UnitTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("SignUpPage")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class SignUpPageFeature
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
 #line 1 "SignUpPage.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
-        public virtual void FeatureSetup()
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SignUpPage", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "SignUpPage")))
+            {
+                global::Yol.Punla.UnitTest.Tests.SignUpPageFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -56,6 +74,7 @@ namespace Yol.Punla.UnitTest.Tests
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -87,12 +106,6 @@ namespace Yol.Punla.UnitTest.Tests
 #line hidden
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up with complete inputs and using the fb test account")]
-        [NUnit.Framework.TestCaseAttribute("hynrbf@gmail.com", "Chito Salano", "Chito1", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/alfeo.jpg", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/rabbit.png", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/manavatar.png", null)]
         public virtual void SigningUpWithCompleteInputsAndUsingTheFbTestAccount(string fbEmail, string fullname, string alias, string mobilePhone, string photoURL, string picture, string defaultPicture, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up with complete inputs and using the fb test account", exampleTags);
@@ -136,10 +149,30 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up using the fb test account but without alias")]
-        [NUnit.Framework.TestCaseAttribute("hynrbf@gmail.com", "Chito Salano", "", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/alfeo.jpg", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up with complete inputs and using the fb test account: hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SignUpPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbEmail", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fullname", "Chito Salano")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:alias", "Chito1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:mobilePhone", "026500987")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:photoURL", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/alfeo.jpg")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:picture", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/rabbit.png")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:defaultPicture", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/manavatar.png")]
+        public virtual void SigningUpWithCompleteInputsAndUsingTheFbTestAccount_HynrbfGmail_Com()
+        {
+#line 13
+this.SigningUpWithCompleteInputsAndUsingTheFbTestAccount("hynrbf@gmail.com", "Chito Salano", "Chito1", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/alfeo.jpg", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/rabbit.png", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/manavatar.png", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningUpUsingTheFbTestAccountButWithoutAlias(string fbEmail, string fullname, string alias, string mobilePhone, string photoURL, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up using the fb test account but without alias", exampleTags);
@@ -170,10 +203,24 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up using the fb test account but without mobile no")]
-        [NUnit.Framework.TestCaseAttribute("hynrbf@gmail.com", "Chito Salano", "Chito1", "", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/alfeo.jpg", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up using the fb test account but without alias: hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SignUpPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbEmail", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fullname", "Chito Salano")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:alias", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:mobilePhone", "026500987")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:photoURL", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/alfeo.jpg")]
+        public virtual void SigningUpUsingTheFbTestAccountButWithoutAlias_HynrbfGmail_Com()
+        {
+#line 34
+this.SigningUpUsingTheFbTestAccountButWithoutAlias("hynrbf@gmail.com", "Chito Salano", "", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/alfeo.jpg", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningUpUsingTheFbTestAccountButWithoutMobileNo(string fbEmail, string fullname, string alias, string mobilePhone, string photoURL, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up using the fb test account but without mobile no", exampleTags);
@@ -204,9 +251,24 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up using the fb test account but already signed up previously")]
-        [NUnit.Framework.TestCaseAttribute("09477691857", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up using the fb test account but without mobile no: hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SignUpPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbEmail", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fullname", "Chito Salano")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:alias", "Chito1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:mobilePhone", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:photoURL", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/alfeo.jpg")]
+        public virtual void SigningUpUsingTheFbTestAccountButWithoutMobileNo_HynrbfGmail_Com()
+        {
+#line 49
+this.SigningUpUsingTheFbTestAccountButWithoutMobileNo("hynrbf@gmail.com", "Chito Salano", "Chito1", "", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/alfeo.jpg", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningUpUsingTheFbTestAccountButAlreadySignedUpPreviously(string fbMobileNo, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up using the fb test account but already signed up previously", exampleTags);
@@ -233,11 +295,19 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up with complete inputs and changing the avatar photo")]
-        [NUnit.Framework.TestCaseAttribute("hynrbf@gmail.com", "Chito Salano", "Chito1", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/alfeo.jpg", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/chicken.png", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up using the fb test account but already signed up previously: 0947769185" +
+            "7")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SignUpPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "09477691857")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbMobileNo", "09477691857")]
+        public virtual void SigningUpUsingTheFbTestAccountButAlreadySignedUpPreviously_09477691857()
+        {
+#line 64
+this.SigningUpUsingTheFbTestAccountButAlreadySignedUpPreviously("09477691857", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningUpWithCompleteInputsAndChangingTheAvatarPhoto(string fbEmail, string fullname, string alias, string mobilePhone, string photoURL, string newPhotoURL, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up with complete inputs and changing the avatar photo", exampleTags);
@@ -279,10 +349,27 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up using the fb test account but without changing the default picture")]
-        [NUnit.Framework.TestCaseAttribute("hynrbf@gmail.com", "Chito Salano", "Chito1", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/alfeo.jpg", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up with complete inputs and changing the avatar photo: hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SignUpPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbEmail", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fullname", "Chito Salano")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:alias", "Chito1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:mobilePhone", "026500987")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:photoURL", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/alfeo.jpg")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:newPhotoURL", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/chicken.png")]
+        public virtual void SigningUpWithCompleteInputsAndChangingTheAvatarPhoto_HynrbfGmail_Com()
+        {
+#line 77
+this.SigningUpWithCompleteInputsAndChangingTheAvatarPhoto("hynrbf@gmail.com", "Chito Salano", "Chito1", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/alfeo.jpg", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/chicken.png", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningUpUsingTheFbTestAccountButWithoutChangingTheDefaultPicture(string fbEmail, string fullname, string alias, string mobilePhone, string photoURL, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up using the fb test account but without changing the default picture", exampleTags);
@@ -311,6 +398,25 @@ this.FeatureBackground();
   testRunner.And("I should see registration error message \"Please change your \'Photo\'.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up using the fb test account but without changing the default picture: hy" +
+            "nrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SignUpPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbEmail", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fullname", "Chito Salano")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:alias", "Chito1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:mobilePhone", "026500987")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:photoURL", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/alfeo.jpg")]
+        public virtual void SigningUpUsingTheFbTestAccountButWithoutChangingTheDefaultPicture_HynrbfGmail_Com()
+        {
+#line 97
+this.SigningUpUsingTheFbTestAccountButWithoutChangingTheDefaultPicture("hynrbf@gmail.com", "Chito Salano", "Chito1", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/alfeo.jpg", ((string[])(null)));
+#line hidden
         }
     }
 }

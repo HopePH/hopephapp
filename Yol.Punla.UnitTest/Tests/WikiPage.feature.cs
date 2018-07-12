@@ -17,37 +17,55 @@ namespace Yol.Punla.UnitTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("WikiPage")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class WikiPageFeature
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
 #line 1 "WikiPage.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
-        public virtual void FeatureSetup()
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "WikiPage", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "WikiPage")))
+            {
+                global::Yol.Punla.UnitTest.Tests.WikiPageFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -56,6 +74,7 @@ namespace Yol.Punla.UnitTest.Tests
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -85,30 +104,6 @@ namespace Yol.Punla.UnitTest.Tests
 #line hidden
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating to WikiDetailsPage and Back")]
-        [NUnit.Framework.TestCaseAttribute("Depression in Philippines", "<h3>Depression in Philippines</h3>", "<html><body style=\'background-color:#F5F5F5\'><h3>Depression in Philippines</h3><p" +
-            ">We are top 1 in Asia in terms of depression</p></body></html>", null)]
-        [NUnit.Framework.TestCaseAttribute("Mental health law to help fight illegal drugs", "<h3>Mental health law to help fight illegal drugs</h3>", "<html><body style=\'background-color:#F5F5F5\'><h3>Mental health law to help fight " +
-            "illegal drugs</h3><p>Senator Risa Hontiveros believes passing a Mental Health La" +
-            "w would also help the country fight illegal drugs.</p><p>Hontiveros said illegal" +
-            " drugs, which also deals with addiction, is not only a law enforcement issue but" +
-            " also a public health issue. &quot;<i>We should look at it also as a public heal" +
-            "th problem, hindi lang law enforcement. At sa ilalim niyan, mental health proble" +
-            "m nga,&quot;</i> she told ANC on Monday.</p><p>The senator said the <i>Mental He" +
-            "alth Bill</i>, which was recently passed on third reading at the Senate, will he" +
-            "lp patients become fully-functioning members of the society again. According to " +
-            "Hontiveros, mental health remains a concern as data show 7 Filipinos commit suic" +
-            "ide everyday. She added that people with mental health concerns also suffer stig" +
-            "ma from society.</p><p>Under the <i>Philippine Mental Health Act of 2017</i>, sh" +
-            "e said, mental health will be integrated into the school curriculum to reduce di" +
-            "scrimination of patients. Hontiveros added that the Department of Health is mand" +
-            "ated to increase mental health professionals in the country under the proposed m" +
-            "easure.<i>&quot;May isang pag-aaral na half of all adult Filipinos consulting he" +
-            "alth professionals in rural areas, kalahati, may nade-detect na mental health pr" +
-            "oblem dahil sa kakulangan ng pagkakataon para magpa-checkup,&quot;</i> she said." +
-            "</p><p>Hontiveros hopes the House of Representatives will be able to pass its ve" +
-            "rsion of the Mental Health Bill this year.</p></body></html>", null)]
         public virtual void NavigatingToWikiDetailsPageAndBack(string title, string wikiTitle, string content, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating to WikiDetailsPage and Back", exampleTags);
@@ -136,8 +131,78 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Tapping the Sort Modal")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating to WikiDetailsPage and Back: Depression in Philippines")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WikiPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Depression in Philippines")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:title", "Depression in Philippines")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:wikiTitle", "<h3>Depression in Philippines</h3>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:content", "<html><body style=\'background-color:#F5F5F5\'><h3>Depression in Philippines</h3><p" +
+            ">We are top 1 in Asia in terms of depression</p></body></html>")]
+        public virtual void NavigatingToWikiDetailsPageAndBack_DepressionInPhilippines()
+        {
+#line 13
+this.NavigatingToWikiDetailsPageAndBack("Depression in Philippines", "<h3>Depression in Philippines</h3>", "<html><body style=\'background-color:#F5F5F5\'><h3>Depression in Philippines</h3><p" +
+                    ">We are top 1 in Asia in terms of depression</p></body></html>", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating to WikiDetailsPage and Back: Mental health law to help fight illegal d" +
+            "rugs")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WikiPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Mental health law to help fight illegal drugs")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:title", "Mental health law to help fight illegal drugs")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:wikiTitle", "<h3>Mental health law to help fight illegal drugs</h3>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:content", "<html><body style=\'background-color:#F5F5F5\'><h3>Mental health law to help fight " +
+            "illegal drugs</h3><p>Senator Risa Hontiveros believes passing a Mental Health La" +
+            "w would also help the country fight illegal drugs.</p><p>Hontiveros said illegal" +
+            " drugs, which also deals with addiction, is not only a law enforcement issue but" +
+            " also a public health issue. &quot;<i>We should look at it also as a public heal" +
+            "th problem, hindi lang law enforcement. At sa ilalim niyan, mental health proble" +
+            "m nga,&quot;</i> she told ANC on Monday.</p><p>The senator said the <i>Mental He" +
+            "alth Bill</i>, which was recently passed on third reading at the Senate, will he" +
+            "lp patients become fully-functioning members of the society again. According to " +
+            "Hontiveros, mental health remains a concern as data show 7 Filipinos commit suic" +
+            "ide everyday. She added that people with mental health concerns also suffer stig" +
+            "ma from society.</p><p>Under the <i>Philippine Mental Health Act of 2017</i>, sh" +
+            "e said, mental health will be integrated into the school curriculum to reduce di" +
+            "scrimination of patients. Hontiveros added that the Department of Health is mand" +
+            "ated to increase mental health professionals in the country under the proposed m" +
+            "easure.<i>&quot;May isang pag-aaral na half of all adult Filipinos consulting he" +
+            "alth professionals in rural areas, kalahati, may nade-detect na mental health pr" +
+            "oblem dahil sa kakulangan ng pagkakataon para magpa-checkup,&quot;</i> she said." +
+            "</p><p>Hontiveros hopes the House of Representatives will be able to pass its ve" +
+            "rsion of the Mental Health Bill this year.</p></body></html>")]
+        public virtual void NavigatingToWikiDetailsPageAndBack_MentalHealthLawToHelpFightIllegalDrugs()
+        {
+#line 13
+this.NavigatingToWikiDetailsPageAndBack("Mental health law to help fight illegal drugs", "<h3>Mental health law to help fight illegal drugs</h3>", "<html><body style=\'background-color:#F5F5F5\'><h3>Mental health law to help fight " +
+                    "illegal drugs</h3><p>Senator Risa Hontiveros believes passing a Mental Health La" +
+                    "w would also help the country fight illegal drugs.</p><p>Hontiveros said illegal" +
+                    " drugs, which also deals with addiction, is not only a law enforcement issue but" +
+                    " also a public health issue. &quot;<i>We should look at it also as a public heal" +
+                    "th problem, hindi lang law enforcement. At sa ilalim niyan, mental health proble" +
+                    "m nga,&quot;</i> she told ANC on Monday.</p><p>The senator said the <i>Mental He" +
+                    "alth Bill</i>, which was recently passed on third reading at the Senate, will he" +
+                    "lp patients become fully-functioning members of the society again. According to " +
+                    "Hontiveros, mental health remains a concern as data show 7 Filipinos commit suic" +
+                    "ide everyday. She added that people with mental health concerns also suffer stig" +
+                    "ma from society.</p><p>Under the <i>Philippine Mental Health Act of 2017</i>, sh" +
+                    "e said, mental health will be integrated into the school curriculum to reduce di" +
+                    "scrimination of patients. Hontiveros added that the Department of Health is mand" +
+                    "ated to increase mental health professionals in the country under the proposed m" +
+                    "easure.<i>&quot;May isang pag-aaral na half of all adult Filipinos consulting he" +
+                    "alth professionals in rural areas, kalahati, may nade-detect na mental health pr" +
+                    "oblem dahil sa kakulangan ng pagkakataon para magpa-checkup,&quot;</i> she said." +
+                    "</p><p>Hontiveros hopes the House of Representatives will be able to pass its ve" +
+                    "rsion of the Mental Health Bill this year.</p></body></html>", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Tapping the Sort Modal")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WikiPage")]
         public virtual void TappingTheSortModal()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tapping the Sort Modal", ((string[])(null)));
@@ -161,8 +226,9 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Tapping the Filter Modal")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Tapping the Filter Modal")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WikiPage")]
         public virtual void TappingTheFilterModal()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tapping the Filter Modal", ((string[])(null)));
@@ -186,8 +252,9 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Sorting the wiki page alphabetically")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sorting the wiki page alphabetically")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WikiPage")]
         public virtual void SortingTheWikiPageAlphabetically()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sorting the wiki page alphabetically", ((string[])(null)));
@@ -213,8 +280,9 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Sorting the wiki page alphabetically but didnt select the alphabetical input")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sorting the wiki page alphabetically but didnt select the alphabetical input")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WikiPage")]
         public virtual void SortingTheWikiPageAlphabeticallyButDidntSelectTheAlphabeticalInput()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sorting the wiki page alphabetically but didnt select the alphabetical input", ((string[])(null)));
@@ -240,10 +308,6 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Forcing a user to download a new version of the app")]
-        [NUnit.Framework.TestCaseAttribute("Depression in Philippines", "<h3>Depression in Philippines</h3>", "<html><body style=\'background-color:#F5F5F5\'><h3>Depression in Philippines</h3><p" +
-            ">We are top 1 in Asia in terms of depression</p></body></html>", "Welcome to HopePH.", "Sorry for the inconvenience but please download the latest version now.", null)]
         public virtual void ForcingAUserToDownloadANewVersionOfTheApp(string title, string wikiTitle, string content, string defaultAddMessage, string newAddMessage, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Forcing a user to download a new version of the app", exampleTags);
@@ -274,6 +338,24 @@ this.FeatureBackground();
   testRunner.And(string.Format("I should see the pop message \"{0}\"", newAddMessage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Forcing a user to download a new version of the app: Depression in Philippines")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WikiPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Depression in Philippines")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:title", "Depression in Philippines")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:wikiTitle", "<h3>Depression in Philippines</h3>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:content", "<html><body style=\'background-color:#F5F5F5\'><h3>Depression in Philippines</h3><p" +
+            ">We are top 1 in Asia in terms of depression</p></body></html>")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:defaultAddMessage", "Welcome to HopePH.")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:newAddMessage", "Sorry for the inconvenience but please download the latest version now.")]
+        public virtual void ForcingAUserToDownloadANewVersionOfTheApp_DepressionInPhilippines()
+        {
+#line 69
+this.ForcingAUserToDownloadANewVersionOfTheApp("Depression in Philippines", "<h3>Depression in Philippines</h3>", "<html><body style=\'background-color:#F5F5F5\'><h3>Depression in Philippines</h3><p" +
+                    ">We are top 1 in Asia in terms of depression</p></body></html>", "Welcome to HopePH.", "Sorry for the inconvenience but please download the latest version now.", ((string[])(null)));
+#line hidden
         }
     }
 }

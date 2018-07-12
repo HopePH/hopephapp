@@ -17,38 +17,56 @@ namespace Yol.Punla.UnitTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("EmailVerificationPage")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class EmailVerificationPageFeature
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
 #line 1 "EmailVerificationPage.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
-        public virtual void FeatureSetup()
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "EmailVerificationPage", "\tThis is another alternative in signing up to the app.\r\n\tThis will require the us" +
                     "er to enter email and confirm\r\n\tthe verification code sent to their email.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "EmailVerificationPage")))
+            {
+                global::Yol.Punla.UnitTest.Tests.EmailVerificationPageFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -57,6 +75,7 @@ namespace Yol.Punla.UnitTest.Tests
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -96,11 +115,6 @@ namespace Yol.Punla.UnitTest.Tests
 #line hidden
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up via email verification and entering valid email and requesting verific" +
-            "ation code")]
-        [NUnit.Framework.TestCaseAttribute("momoy@gmail.com", "1111", "Undisclosed Name", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/manavatar.png", null)]
         public virtual void SigningUpViaEmailVerificationAndEnteringValidEmailAndRequestingVerificationCode(string email, string typedVerificationCode, string fullname, string defaultPicture, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up via email verification and entering valid email and requesting verific" +
@@ -132,9 +146,24 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up via email verification but entering incorrect verification code")]
-        [NUnit.Framework.TestCaseAttribute("Please enter a valid verification code", "momoy@gmail.com", "1112", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up via email verification and entering valid email and requesting verific" +
+            "ation code: momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EmailVerificationPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:typedVerificationCode", "1111")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fullname", "Undisclosed Name")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:defaultPicture", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/manavatar.png")]
+        public virtual void SigningUpViaEmailVerificationAndEnteringValidEmailAndRequestingVerificationCode_MomoyGmail_Com()
+        {
+#line 20
+this.SigningUpViaEmailVerificationAndEnteringValidEmailAndRequestingVerificationCode("momoy@gmail.com", "1111", "Undisclosed Name", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/manavatar.png", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningUpViaEmailVerificationButEnteringIncorrectVerificationCode(string errorMsg, string email, string typedVerificationCode, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up via email verification but entering incorrect verification code", exampleTags);
@@ -159,9 +188,21 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up via email verification but using an email that exists already")]
-        [NUnit.Framework.TestCaseAttribute("The email already exists.", "hynrbf@gmail.com", "1112", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up via email verification but entering incorrect verification code: Pleas" +
+            "e enter a valid verification code")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EmailVerificationPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Please enter a valid verification code")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMsg", "Please enter a valid verification code")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:typedVerificationCode", "1112")]
+        public virtual void SigningUpViaEmailVerificationButEnteringIncorrectVerificationCode_PleaseEnterAValidVerificationCode()
+        {
+#line 35
+this.SigningUpViaEmailVerificationButEnteringIncorrectVerificationCode("Please enter a valid verification code", "momoy@gmail.com", "1112", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningUpViaEmailVerificationButUsingAnEmailThatExistsAlready(string errorMsg, string email, string typedVerificationCode, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up via email verification but using an email that exists already", exampleTags);
@@ -181,8 +222,24 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Submitting request for verification code when there is no email supplied")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up via email verification but using an email that exists already: The ema" +
+            "il already exists.")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EmailVerificationPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "The email already exists.")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMsg", "The email already exists.")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:typedVerificationCode", "1112")]
+        public virtual void SigningUpViaEmailVerificationButUsingAnEmailThatExistsAlready_TheEmailAlreadyExists_()
+        {
+#line 47
+this.SigningUpViaEmailVerificationButUsingAnEmailThatExistsAlready("The email already exists.", "hynrbf@gmail.com", "1112", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Submitting request for verification code when there is no email supplied")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EmailVerificationPage")]
         public virtual void SubmittingRequestForVerificationCodeWhenThereIsNoEmailSupplied()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Submitting request for verification code when there is no email supplied", ((string[])(null)));
@@ -202,10 +259,6 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up via email verification but without alias name")]
-        [NUnit.Framework.TestCaseAttribute("momoy@gmail.com", "", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/manavatar.png", "Undisclosed Name", null)]
         public virtual void SigningUpViaEmailVerificationButWithoutAliasName(string email, string alias, string mobilePhone, string defaultPicture, string fullName, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up via email verification but without alias name", exampleTags);
@@ -243,11 +296,24 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up via email verification and completing the signup process")]
-        [NUnit.Framework.TestCaseAttribute("momoy@gmail.com", "Pitts", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/rabbit.png", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/manavatar.png", "Undisclosed Name", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up via email verification but without alias name: momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EmailVerificationPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:alias", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:mobilePhone", "026500987")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:defaultPicture", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/manavatar.png")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fullName", "Undisclosed Name")]
+        public virtual void SigningUpViaEmailVerificationButWithoutAliasName_MomoyGmail_Com()
+        {
+#line 63
+this.SigningUpViaEmailVerificationButWithoutAliasName("momoy@gmail.com", "", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/manavatar.png", "Undisclosed Name", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningUpViaEmailVerificationAndCompletingTheSignupProcess(string email, string alias, string mobilePhone, string picture, string defaultPicture, string fullName, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up via email verification and completing the signup process", exampleTags);
@@ -293,11 +359,28 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing up via email verification but without mobile phone")]
-        [NUnit.Framework.TestCaseAttribute("momoy@gmail.com", "Pitts", "", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/rabbit.png", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/manavatar.png", "Undisclosed Name", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up via email verification and completing the signup process: momoy@gmail." +
+            "com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EmailVerificationPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:alias", "Pitts")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:mobilePhone", "026500987")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:picture", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/rabbit.png")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:defaultPicture", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/manavatar.png")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fullName", "Undisclosed Name")]
+        public virtual void SigningUpViaEmailVerificationAndCompletingTheSignupProcess_MomoyGmail_Com()
+        {
+#line 81
+this.SigningUpViaEmailVerificationAndCompletingTheSignupProcess("momoy@gmail.com", "Pitts", "026500987", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/rabbit.png", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/manavatar.png", "Undisclosed Name", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningUpViaEmailVerificationButWithoutMobilePhone(string email, string alias, string mobilePhone, string picture, string defaultPicture, string fullName, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up via email verification but without mobile phone", exampleTags);
@@ -341,6 +424,27 @@ this.FeatureBackground();
   testRunner.And("I should see registration error message \"Please enter your mobile no.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing up via email verification but without mobile phone: momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "EmailVerificationPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "momoy@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:alias", "Pitts")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:mobilePhone", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:picture", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/rabbit.png")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:defaultPicture", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/manavatar.png")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fullName", "Undisclosed Name")]
+        public virtual void SigningUpViaEmailVerificationButWithoutMobilePhone_MomoyGmail_Com()
+        {
+#line 103
+this.SigningUpViaEmailVerificationButWithoutMobilePhone("momoy@gmail.com", "Pitts", "", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/rabbit.png", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/manavatar.png", "Undisclosed Name", ((string[])(null)));
+#line hidden
         }
     }
 }

@@ -17,38 +17,56 @@ namespace Yol.Punla.UnitTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("RequestVerificationCodePage")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class RequestVerificationCodePageFeature
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
 #line 1 "RequestVerificationCodePage.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
-        public virtual void FeatureSetup()
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "RequestVerificationCodePage", "\tThis is the alternative workflow for signing in\r\n\twhich uses your email to recei" +
                     "ve a verification \r\n\tcode which you will confirm to sign in using your\r\n\talias", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "RequestVerificationCodePage")))
+            {
+                global::Yol.Punla.UnitTest.Tests.RequestVerificationCodePageFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -57,6 +75,7 @@ namespace Yol.Punla.UnitTest.Tests
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -94,12 +113,6 @@ namespace Yol.Punla.UnitTest.Tests
 #line hidden
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing in using Verfication code but Email field is not supplied or has invalid " +
-            "data")]
-        [NUnit.Framework.TestCaseAttribute("momoyfailed.com", "Please enter a valid email address.", null)]
-        [NUnit.Framework.TestCaseAttribute("", "Please enter a valid email address.", null)]
-        [NUnit.Framework.TestCaseAttribute("momoy@gmail", "Please enter a valid email address.", null)]
         public virtual void SigningInUsingVerficationCodeButEmailFieldIsNotSuppliedOrHasInvalidData(string email, string errorMsg, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing in using Verfication code but Email field is not supplied or has invalid " +
@@ -119,10 +132,47 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing in using Verfication code by entering the correct verification code sent " +
-            "to the email")]
-        [NUnit.Framework.TestCaseAttribute("alfeo.salano@gmail.com", "1111", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing in using Verfication code but Email field is not supplied or has invalid " +
+            "data: momoyfailed.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestVerificationCodePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "momoyfailed.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "momoyfailed.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMsg", "Please enter a valid email address.")]
+        public virtual void SigningInUsingVerficationCodeButEmailFieldIsNotSuppliedOrHasInvalidData_Momoyfailed_Com()
+        {
+#line 20
+this.SigningInUsingVerficationCodeButEmailFieldIsNotSuppliedOrHasInvalidData("momoyfailed.com", "Please enter a valid email address.", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing in using Verfication code but Email field is not supplied or has invalid " +
+            "data: ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestVerificationCodePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMsg", "Please enter a valid email address.")]
+        public virtual void SigningInUsingVerficationCodeButEmailFieldIsNotSuppliedOrHasInvalidData_()
+        {
+#line 20
+this.SigningInUsingVerficationCodeButEmailFieldIsNotSuppliedOrHasInvalidData("", "Please enter a valid email address.", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing in using Verfication code but Email field is not supplied or has invalid " +
+            "data: momoy@gmail")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestVerificationCodePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "momoy@gmail")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "momoy@gmail")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMsg", "Please enter a valid email address.")]
+        public virtual void SigningInUsingVerficationCodeButEmailFieldIsNotSuppliedOrHasInvalidData_MomoyGmail()
+        {
+#line 20
+this.SigningInUsingVerficationCodeButEmailFieldIsNotSuppliedOrHasInvalidData("momoy@gmail", "Please enter a valid email address.", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningInUsingVerficationCodeByEnteringTheCorrectVerificationCodeSentToTheEmail(string email, string code, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing in using Verfication code by entering the correct verification code sent " +
@@ -152,10 +202,20 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Signing in using Verfication code but verification is incorrect or not supplied")]
-        [NUnit.Framework.TestCaseAttribute("alfeo.salano@gmail.com", "1112", "Please enter a valid verification code", null)]
-        [NUnit.Framework.TestCaseAttribute("alfeo.salano@gmail.com", "", "Please enter a valid verification code", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing in using Verfication code by entering the correct verification code sent " +
+            "to the email: alfeo.salano@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestVerificationCodePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "alfeo.salano@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "alfeo.salano@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "1111")]
+        public virtual void SigningInUsingVerficationCodeByEnteringTheCorrectVerificationCodeSentToTheEmail_Alfeo_SalanoGmail_Com()
+        {
+#line 31
+this.SigningInUsingVerficationCodeByEnteringTheCorrectVerificationCodeSentToTheEmail("alfeo.salano@gmail.com", "1111", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void SigningInUsingVerficationCodeButVerificationIsIncorrectOrNotSupplied(string email, string code, string errorMessage, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing in using Verfication code but verification is incorrect or not supplied", exampleTags);
@@ -184,6 +244,36 @@ this.FeatureBackground();
   testRunner.And("I should stay on the same page \"ConfirmVerificationCodePage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing in using Verfication code but verification is incorrect or not supplied: " +
+            "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestVerificationCodePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 0")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "alfeo.salano@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "1112")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMessage", "Please enter a valid verification code")]
+        public virtual void SigningInUsingVerficationCodeButVerificationIsIncorrectOrNotSupplied_Variant0()
+        {
+#line 45
+this.SigningInUsingVerficationCodeButVerificationIsIncorrectOrNotSupplied("alfeo.salano@gmail.com", "1112", "Please enter a valid verification code", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Signing in using Verfication code but verification is incorrect or not supplied: " +
+            "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "RequestVerificationCodePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Variant 1")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:email", "alfeo.salano@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMessage", "Please enter a valid verification code")]
+        public virtual void SigningInUsingVerficationCodeButVerificationIsIncorrectOrNotSupplied_Variant1()
+        {
+#line 45
+this.SigningInUsingVerficationCodeButVerificationIsIncorrectOrNotSupplied("alfeo.salano@gmail.com", "", "Please enter a valid verification code", ((string[])(null)));
+#line hidden
         }
     }
 }

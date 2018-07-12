@@ -17,37 +17,55 @@ namespace Yol.Punla.UnitTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("PostFeedDetailsPage")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class PostFeedDetailsPageFeature
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
 #line 1 "PostFeedDetailsPage.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
-        public virtual void FeatureSetup()
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "PostFeedDetailsPage", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "PostFeedDetailsPage")))
+            {
+                global::Yol.Punla.UnitTest.Tests.PostFeedDetailsPageFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -56,6 +74,7 @@ namespace Yol.Punla.UnitTest.Tests
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -63,10 +82,11 @@ namespace Yol.Punla.UnitTest.Tests
             testRunner.CollectScenarioErrors();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating to PostFeedDetailsPage Then Back")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("FacebookLogonViaWriteYourThoughtsMenu")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating to PostFeedDetailsPage Then Back")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "PostFeedDetailsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("FacebookLogonViaWriteYourThoughtsMenu")]
         public virtual void NavigatingToPostFeedDetailsPageThenBack()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating to PostFeedDetailsPage Then Back", new string[] {
@@ -102,11 +122,6 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Adding Comments to a post")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("FacebookLogonViaWriteYourThoughtsMenu")]
-        [NUnit.Framework.TestCaseAttribute("Hello, This is a comment", null)]
         public virtual void AddingCommentsToAPost(string comment, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -141,11 +156,20 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Adding Empty comment to a post")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("FacebookLogonViaWriteYourThoughtsMenu")]
-        [NUnit.Framework.TestCaseAttribute("", "Empty comment is not allowed. Please write a comment.", null)]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Adding Comments to a post: Hello, This is a comment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "PostFeedDetailsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("FacebookLogonViaWriteYourThoughtsMenu")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "Hello, This is a comment")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:comment", "Hello, This is a comment")]
+        public virtual void AddingCommentsToAPost_HelloThisIsAComment()
+        {
+#line 17
+this.AddingCommentsToAPost("Hello, This is a comment", ((string[])(null)));
+#line hidden
+        }
+        
         public virtual void AddingEmptyCommentToAPost(string comment, string errorMessage, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -178,6 +202,20 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Then(string.Format("I should see an empty comment message \"{0}\"", errorMessage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Adding Empty comment to a post: ")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "PostFeedDetailsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("FacebookLogonViaWriteYourThoughtsMenu")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:comment", "")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMessage", "Empty comment is not allowed. Please write a comment.")]
+        public virtual void AddingEmptyCommentToAPost_()
+        {
+#line 31
+this.AddingEmptyCommentToAPost("", "Empty comment is not allowed. Please write a comment.", ((string[])(null)));
+#line hidden
         }
     }
 }

@@ -17,39 +17,57 @@ namespace Yol.Punla.UnitTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("WelcomeInstructionPage")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class WelcomeInstructionPageFeature
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
 #line 1 "WelcomeInstructionPage.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
-        public virtual void FeatureSetup()
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "WelcomeInstructionPage", "\tThis is the first page the user will be \r\n\tnavigated to when he / she run the ap" +
                     "p\r\n\tfor the first time.\r\n\r\n\tRunning again the app after that will not\r\n\tnavigate" +
                     " the user to the WelcomeInstructionPage\r\n\tagain.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "WelcomeInstructionPage")))
+            {
+                global::Yol.Punla.UnitTest.Tests.WelcomeInstructionPageFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -58,6 +76,7 @@ namespace Yol.Punla.UnitTest.Tests
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -65,10 +84,11 @@ namespace Yol.Punla.UnitTest.Tests
             testRunner.CollectScenarioErrors();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Running the app for the first time")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Running the app for the first time")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WelcomeInstructionPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
         public virtual void RunningTheAppForTheFirstTime()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Running the app for the first time", new string[] {
@@ -89,10 +109,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating to the second page of the instructions page")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating to the second page of the instructions page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WelcomeInstructionPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
         public virtual void NavigatingToTheSecondPageOfTheInstructionsPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating to the second page of the instructions page", new string[] {
@@ -119,10 +140,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating back to the previous instruction page from last instruction")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating back to the previous instruction page from last instruction")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WelcomeInstructionPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
         public virtual void NavigatingBackToThePreviousInstructionPageFromLastInstruction()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating back to the previous instruction page from last instruction", new string[] {
@@ -154,10 +176,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating back to the previous instruction page from third instruction")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating back to the previous instruction page from third instruction")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WelcomeInstructionPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
         public virtual void NavigatingBackToThePreviousInstructionPageFromThirdInstruction()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating back to the previous instruction page from third instruction", new string[] {
@@ -190,10 +213,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating back to the previous instruction page from second instruction")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating back to the previous instruction page from second instruction")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WelcomeInstructionPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
         public virtual void NavigatingBackToThePreviousInstructionPageFromSecondInstruction()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating back to the previous instruction page from second instruction", new string[] {
@@ -225,11 +249,12 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating to WikiPage via tapping the forward arrow in the last instruction text" +
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating to WikiPage via tapping the forward arrow in the last instruction text" +
             "")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "WelcomeInstructionPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("WelcomeInstructionIsNotLoadedYet")]
         public virtual void NavigatingToWikiPageViaTappingTheForwardArrowInTheLastInstructionText()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating to WikiPage via tapping the forward arrow in the last instruction text" +

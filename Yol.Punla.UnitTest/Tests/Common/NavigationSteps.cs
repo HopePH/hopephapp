@@ -27,7 +27,7 @@ namespace Yol.Punla.UnitTest.Tests
             navigationStackService.CurrentStack.ShouldEqual(pageName);
 
             string fullTypeName = "Yol.Punla.ViewModels." + pageName + "ViewModel";
-            var viewModelType = typeof(Module).GetTypeInfo().Assembly.GetType(fullTypeName);
+            var viewModelType = typeof(App).GetTypeInfo().Assembly.GetType(fullTypeName);
             ViewModelBase viewModel = (ViewModelBase)Main.App.Container.GetContainer().Resolve(viewModelType);
             viewModel.IsBusy.ShouldBeFalse();
         }

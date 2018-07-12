@@ -17,37 +17,55 @@ namespace Yol.Punla.UnitTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("NotificationsPage")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class NotificationsPageFeature
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
 #line 1 "NotificationsPage.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
-        public virtual void FeatureSetup()
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "NotificationsPage", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "NotificationsPage")))
+            {
+                global::Yol.Punla.UnitTest.Tests.NotificationsPageFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -56,6 +74,7 @@ namespace Yol.Punla.UnitTest.Tests
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -63,10 +82,11 @@ namespace Yol.Punla.UnitTest.Tests
             testRunner.CollectScenarioErrors();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Resuming the app but the user didnt logon to the app")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("OnResume")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Resuming the app but the user didnt logon to the app")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "NotificationsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("OnResume")]
         public virtual void ResumingTheAppButTheUserDidntLogonToTheApp()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Resuming the app but the user didnt logon to the app", new string[] {
@@ -85,10 +105,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Resuming the app and the user logon to app previously")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("OnResumeLogon")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Resuming the app and the user logon to app previously")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "NotificationsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("OnResumeLogon")]
         public virtual void ResumingTheAppAndTheUserLogonToAppPreviously()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Resuming the app and the user logon to app previously", new string[] {
@@ -112,11 +133,12 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Resuming the app and the user logon to app previously but the date when the notif" +
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Resuming the app and the user logon to app previously but the date when the notif" +
             "ications was pushed was not yet expired")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("OnResumeLogonAndPushedDateNotExpired")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "NotificationsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("OnResumeLogonAndPushedDateNotExpired")]
         public virtual void ResumingTheAppAndTheUserLogonToAppPreviouslyButTheDateWhenTheNotificationsWasPushedWasNotYetExpired()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Resuming the app and the user logon to app previously but the date when the notif" +
@@ -139,10 +161,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Going to the notifications page for the first time")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("FacebookLogonViaNotificationsMenu")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Going to the notifications page for the first time")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "NotificationsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("FacebookLogonViaNotificationsMenu")]
         public virtual void GoingToTheNotificationsPageForTheFirstTime()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Going to the notifications page for the first time", new string[] {
@@ -160,10 +183,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Going to the notifications page but the user is not connected to the internet")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("FacebookLogonViaNotificationsMenu")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Going to the notifications page but the user is not connected to the internet")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "NotificationsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("FacebookLogonViaNotificationsMenu")]
         public virtual void GoingToTheNotificationsPageButTheUserIsNotConnectedToTheInternet()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Going to the notifications page but the user is not connected to the internet", new string[] {
@@ -199,10 +223,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Going to the notifications page and refreshing the notifications")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("FacebookLogonViaNotificationsMenu")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Going to the notifications page and refreshing the notifications")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "NotificationsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("FacebookLogonViaNotificationsMenu")]
         public virtual void GoingToTheNotificationsPageAndRefreshingTheNotifications()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Going to the notifications page and refreshing the notifications", new string[] {
@@ -224,10 +249,11 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Loading comments from the notifications page")]
-        [NUnit.Framework.CategoryAttribute("tag")]
-        [NUnit.Framework.CategoryAttribute("FacebookLogonViaNotificationsMenu")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Loading comments from the notifications page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "NotificationsPage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("tag")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("FacebookLogonViaNotificationsMenu")]
         public virtual void LoadingCommentsFromTheNotificationsPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Loading comments from the notifications page", new string[] {

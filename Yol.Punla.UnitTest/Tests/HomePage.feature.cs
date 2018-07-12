@@ -17,37 +17,55 @@ namespace Yol.Punla.UnitTest.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("HomePage")]
+    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
     public partial class HomePageFeature
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        
+        private Microsoft.VisualStudio.TestTools.UnitTesting.TestContext _testContext;
         
 #line 1 "HomePage.feature"
 #line hidden
         
-        [NUnit.Framework.OneTimeSetUpAttribute()]
-        public virtual void FeatureSetup()
+        public virtual Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext
         {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+            get
+            {
+                return this._testContext;
+            }
+            set
+            {
+                this._testContext = value;
+            }
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
+        public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
+        {
+            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner(null, 0);
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "HomePage", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [NUnit.Framework.OneTimeTearDownAttribute()]
-        public virtual void FeatureTearDown()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.ClassCleanupAttribute()]
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
         }
         
-        [NUnit.Framework.SetUpAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestInitializeAttribute()]
         public virtual void TestInitialize()
         {
+            if (((testRunner.FeatureContext != null) 
+                        && (testRunner.FeatureContext.FeatureInfo.Title != "HomePage")))
+            {
+                global::Yol.Punla.UnitTest.Tests.HomePageFeature.FeatureSetup(null);
+            }
         }
         
-        [NUnit.Framework.TearDownAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestCleanupAttribute()]
         public virtual void ScenarioTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -56,6 +74,7 @@ namespace Yol.Punla.UnitTest.Tests
         public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Microsoft.VisualStudio.TestTools.UnitTesting.TestContext>(TestContext);
         }
         
         public virtual void ScenarioCleanup()
@@ -63,10 +82,6 @@ namespace Yol.Punla.UnitTest.Tests
             testRunner.CollectScenarioErrors();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Displaying the list of mental health care facilities")]
-        [NUnit.Framework.TestCaseAttribute("New Day Recovery Center", "Babista Compd., Beach Club Rd., Lanang, Davao City", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/nanaydrug.jpg", "026226874", "7.1047938", "125.6442052", null)]
         public virtual void DisplayingTheListOfMentalHealthCareFacilities(string name, string address, string photoUrl, string telNo, string latitude, string longitude, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Displaying the list of mental health care facilities", exampleTags);
@@ -91,8 +106,28 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Displaying the list of mental health care facilities when offline")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Displaying the list of mental health care facilities: New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:address", "Babista Compd., Beach Club Rd., Lanang, Davao City")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:photoUrl", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/nanaydrug.jpg")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:telNo", "026226874")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:latitude", "7.1047938")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:longitude", "125.6442052")]
+        public virtual void DisplayingTheListOfMentalHealthCareFacilities_NewDayRecoveryCenter()
+        {
+#line 3
+this.DisplayingTheListOfMentalHealthCareFacilities("New Day Recovery Center", "Babista Compd., Beach Club Rd., Lanang, Davao City", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/nanaydrug.jpg", "026226874", "7.1047938", "125.6442052", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Displaying the list of mental health care facilities when offline")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void DisplayingTheListOfMentalHealthCareFacilitiesWhenOffline()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Displaying the list of mental health care facilities when offline", ((string[])(null)));
@@ -118,8 +153,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating to the Wiki Page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating to the Wiki Page")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void NavigatingToTheWikiPage()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating to the Wiki Page", ((string[])(null)));
@@ -147,10 +183,6 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Navigating to the mental care details")]
-        [NUnit.Framework.TestCaseAttribute("New Day Recovery Center", "Babista Compd., Beach Club Rd., Lanang, Davao City", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/nanaydrug.jpg", "026226874", "7.1047938", "125.6442052", null)]
         public virtual void NavigatingToTheMentalCareDetails(string name, string address, string photoUrl, string telNo, string latitude, string longitude, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating to the mental care details", exampleTags);
@@ -185,8 +217,28 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Dialing the phone no of the mental care facility")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating to the mental care details: New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:address", "Babista Compd., Beach Club Rd., Lanang, Davao City")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:photoUrl", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/nanaydrug.jpg")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:telNo", "026226874")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:latitude", "7.1047938")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:longitude", "125.6442052")]
+        public virtual void NavigatingToTheMentalCareDetails_NewDayRecoveryCenter()
+        {
+#line 36
+this.NavigatingToTheMentalCareDetails("New Day Recovery Center", "Babista Compd., Beach Club Rd., Lanang, Davao City", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/nanaydrug.jpg", "026226874", "7.1047938", "125.6442052", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Dialing the phone no of the mental care facility")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void DialingThePhoneNoOfTheMentalCareFacility()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Dialing the phone no of the mental care facility", ((string[])(null)));
@@ -217,10 +269,6 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Viewing the Mental Health Facility in map")]
-        [NUnit.Framework.TestCaseAttribute("New Day Recovery Center", "Babista Compd., Beach Club Rd., Lanang, Davao City", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/nanaydrug.jpg", "026226874", "7.1047938", "125.6442052", null)]
         public virtual void ViewingTheMentalHealthFacilityInMap(string name, string address, string photoUrl, string telNo, string latitude, string longitude, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Viewing the Mental Health Facility in map", exampleTags);
@@ -261,8 +309,28 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Filtering Mental Care Facilities then close it")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Viewing the Mental Health Facility in map: New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:address", "Babista Compd., Beach Club Rd., Lanang, Davao City")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:photoUrl", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/nanaydrug.jpg")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:telNo", "026226874")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:latitude", "7.1047938")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:longitude", "125.6442052")]
+        public virtual void ViewingTheMentalHealthFacilityInMap_NewDayRecoveryCenter()
+        {
+#line 65
+this.ViewingTheMentalHealthFacilityInMap("New Day Recovery Center", "Babista Compd., Beach Club Rd., Lanang, Davao City", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/nanaydrug.jpg", "026226874", "7.1047938", "125.6442052", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Filtering Mental Care Facilities then close it")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void FilteringMentalCareFacilitiesThenCloseIt()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Filtering Mental Care Facilities then close it", ((string[])(null)));
@@ -297,8 +365,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Sorting Mental Care Facilities then close it")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sorting Mental Care Facilities then close it")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void SortingMentalCareFacilitiesThenCloseIt()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sorting Mental Care Facilities then close it", ((string[])(null)));
@@ -333,10 +402,6 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Closing the Alpha Advertisement from the first load of the app")]
-        [NUnit.Framework.TestCaseAttribute("New Day Recovery Center", "Babista Compd., Beach Club Rd., Lanang, Davao City", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
-            "/nanaydrug.jpg", "026226874", "7.1047938", "125.6442052", null)]
         public virtual void ClosingTheAlphaAdvertisementFromTheFirstLoadOfTheApp(string name, string address, string photoUrl, string telNo, string latitude, string longitude, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Closing the Alpha Advertisement from the first load of the app", exampleTags);
@@ -358,8 +423,29 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Writing down the thoughts when not authenticated and not signedup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Closing the Alpha Advertisement from the first load of the app: New Day Recovery " +
+            "Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:name", "New Day Recovery Center")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:address", "Babista Compd., Beach Club Rd., Lanang, Davao City")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:photoUrl", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+            "/nanaydrug.jpg")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:telNo", "026226874")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:latitude", "7.1047938")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:longitude", "125.6442052")]
+        public virtual void ClosingTheAlphaAdvertisementFromTheFirstLoadOfTheApp_NewDayRecoveryCenter()
+        {
+#line 113
+this.ClosingTheAlphaAdvertisementFromTheFirstLoadOfTheApp("New Day Recovery Center", "Babista Compd., Beach Club Rd., Lanang, Davao City", "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo" +
+                    "/nanaydrug.jpg", "026226874", "7.1047938", "125.6442052", ((string[])(null)));
+#line hidden
+        }
+        
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Writing down the thoughts when not authenticated and not signedup")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void WritingDownTheThoughtsWhenNotAuthenticatedAndNotSignedup()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Writing down the thoughts when not authenticated and not signedup", ((string[])(null)));
@@ -387,8 +473,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Writing down the thoughts when not authenticated and but was signup already")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Writing down the thoughts when not authenticated and but was signup already")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void WritingDownTheThoughtsWhenNotAuthenticatedAndButWasSignupAlready()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Writing down the thoughts when not authenticated and but was signup already", ((string[])(null)));
@@ -413,8 +500,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Writing down the thoughts when authenticated and has signedup already")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Writing down the thoughts when authenticated and has signedup already")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void WritingDownTheThoughtsWhenAuthenticatedAndHasSignedupAlready()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Writing down the thoughts when authenticated and has signedup already", ((string[])(null)));
@@ -439,8 +527,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Refeshing the mental care facilities from the server again")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Refeshing the mental care facilities from the server again")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void RefeshingTheMentalCareFacilitiesFromTheServerAgain()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Refeshing the mental care facilities from the server again", ((string[])(null)));
@@ -472,8 +561,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Filtering Mental Care Facilities by proximity")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Filtering Mental Care Facilities by proximity")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void FilteringMentalCareFacilitiesByProximity()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Filtering Mental Care Facilities by proximity", ((string[])(null)));
@@ -509,8 +599,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Sorting Mental Care Facilities by proximity")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sorting Mental Care Facilities by proximity")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void SortingMentalCareFacilitiesByProximity()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sorting Mental Care Facilities by proximity", ((string[])(null)));
@@ -549,8 +640,9 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Sorting Mental Care Facilities without choosing any inputs")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Sorting Mental Care Facilities without choosing any inputs")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "HomePage")]
         public virtual void SortingMentalCareFacilitiesWithoutChoosingAnyInputs()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sorting Mental Care Facilities without choosing any inputs", ((string[])(null)));
