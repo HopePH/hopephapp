@@ -4,7 +4,6 @@ namespace Yol.Punla.Barrack
 {
     public static class GeolocationHelper
     {
-        // Ref : https://stackoverflow.com/questions/6366408/calculating-distance-between-two-latitude-and-longitude-geocoordinates
         public static double DistanceTo(double lat1, double lon1, double lat2, double lon2, char unit = 'K')
         {
             double rlat1 = Math.PI * lat1 / 180;

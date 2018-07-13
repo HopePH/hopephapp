@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Unity;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
-using Unity;
 using Yol.Punla.FakeEntries;
-using System;
 
 namespace Yol.Punla.Repository
 {

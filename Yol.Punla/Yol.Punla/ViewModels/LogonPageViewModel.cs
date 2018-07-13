@@ -1,7 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
 using PropertyChanged;
-using System;
 using System.Windows.Input;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;

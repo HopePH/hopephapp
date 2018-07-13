@@ -1,8 +1,6 @@
 ﻿using Plugin.Notifications;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Yol.Punla.UnitTest.Mocks

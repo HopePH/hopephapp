@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Entity = Yol.Punla.Entity;
 
 namespace Yol.Punla.Repository
 {

@@ -1,5 +1,4 @@
 ﻿using PropertyChanged;
-using System;
 using System.Collections.ObjectModel;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;

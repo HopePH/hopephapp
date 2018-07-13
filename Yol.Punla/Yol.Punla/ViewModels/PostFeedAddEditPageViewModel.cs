@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using FluentValidation;
-using Unity;
 using Prism.Commands;
 using Prism.Navigation;
 using PropertyChanged;
@@ -8,6 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Net;
 using System.Windows.Input;
+using Unity;
 using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;

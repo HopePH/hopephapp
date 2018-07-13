@@ -1,6 +1,6 @@
 ﻿using SQLite;
-using Yol.Punla.AttributeBase;
 using System.Diagnostics;
+using Yol.Punla.AttributeBase;
 
 namespace Yol.Punla.Repository
 {

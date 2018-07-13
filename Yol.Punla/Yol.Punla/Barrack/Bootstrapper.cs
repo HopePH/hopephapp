@@ -1,13 +1,13 @@
-﻿using Prism.Unity;
-using Yol.Punla.AttributeBase;
+﻿using Prism.Ioc;
+using Prism.Unity;
 using System;
-using System.Reflection;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using Unity;
 using Unity.Lifetime;
 using Unity.Registration;
-using Prism.Ioc;
-using Unity;
-using System.Diagnostics;
+using Yol.Punla.AttributeBase;
 
 namespace Yol.Punla.Barrack
 {

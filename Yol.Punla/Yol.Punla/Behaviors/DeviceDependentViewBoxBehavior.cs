@@ -1,5 +1,5 @@
-﻿using Unity;
-using System;
+﻿using System;
+using Unity;
 using Xamarin.Forms;
 using Yol.Punla.Barrack;
 using Yol.Punla.Utility;

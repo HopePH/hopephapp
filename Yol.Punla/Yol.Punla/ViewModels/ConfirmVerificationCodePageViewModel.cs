@@ -2,10 +2,12 @@
 using FluentValidation;
 using Prism.Commands;
 using Prism.Navigation;
+using Prism.Services;
 using PropertyChanged;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Unity;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
@@ -16,8 +18,6 @@ using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 using Yol.Punla.ViewModels.Validators;
-using Unity;
-using Prism.Services;
 
 namespace Yol.Punla.ViewModels
 {

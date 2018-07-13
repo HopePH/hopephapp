@@ -1,11 +1,10 @@
-﻿using System;
-using TechTalk.SpecFlow;
-using Yol.Punla.UnitTest.Barrack;
-using Yol.Punla.ViewModels;
-using Unity;
+﻿using Prism.Unity;
 using Should;
+using TechTalk.SpecFlow;
+using Unity;
+using Yol.Punla.UnitTest.Barrack;
 using Yol.Punla.UnitTest.Mocks;
-using Prism.Unity;
+using Yol.Punla.ViewModels;
 
 namespace Yol.Punla.UnitTest
 {

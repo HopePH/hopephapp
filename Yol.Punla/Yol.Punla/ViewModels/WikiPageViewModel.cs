@@ -1,5 +1,4 @@
 ﻿using Acr.UserDialogs;
-using Unity;
 using Prism.Commands;
 using Prism.Navigation;
 using PropertyChanged;
@@ -9,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Unity;
 using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;

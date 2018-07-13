@@ -21,7 +21,6 @@ using Yol.Punla.Mapper;
 using Yol.Punla.Model;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
-using Yol.Punla.Views;
 
 namespace Yol.Punla.ViewModels
 {

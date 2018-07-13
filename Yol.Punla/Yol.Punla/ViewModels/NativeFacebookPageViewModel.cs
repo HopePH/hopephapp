@@ -4,8 +4,8 @@ using PropertyChanged;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
+using Unity;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
@@ -15,7 +15,6 @@ using Yol.Punla.Managers;
 using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
-using Unity;
 
 namespace Yol.Punla.ViewModels
 {

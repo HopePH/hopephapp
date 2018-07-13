@@ -3,7 +3,6 @@ using Should;
 using TechTalk.SpecFlow;
 using Unity;
 using Yol.Punla.UnitTest.Barrack;
-using Yol.Punla.UnitTest.Mocks;
 using Yol.Punla.ViewModels;
 
 namespace Yol.Punla.UnitTest.Tests

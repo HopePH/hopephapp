@@ -87,7 +87,7 @@ namespace Yol.Punla.FakeData
                 {
                     GroupName = "Natasha Foundation 2",
                     Description = "A national foundation for mental health here in the Philippines",
-                    Location = "2/F Glorietta 2 Ayala AvenueAyala Center 1200, Makati City",
+                    Location = "2/F Glorietta 2 Ayala Avenue, Ayala Center 1200, Makati City",
                     PhotoUrl ="ngf.jpg",
                     PhoneNumber = "09175584673",
                     FirstName = "Crisis",

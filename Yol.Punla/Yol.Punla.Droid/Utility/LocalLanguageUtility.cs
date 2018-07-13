@@ -1,5 +1,5 @@
-﻿using Xamarin.Forms;
-using Java.Util;
+﻿using Java.Util;
+using Xamarin.Forms;
 using Yol.Punla.Utility;
 
 [assembly: Dependency(typeof(Yol.Punla.Droid.Utility.LocalLanguageUtility))]

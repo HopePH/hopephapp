@@ -1,15 +1,15 @@
-﻿using Yol.Punla.AttributeBase;
-using System.Net.Http;
-using ModernHttpClient;
-using Xamarin.Forms;
-using Yol.Punla.Mapper;
-using System.Threading.Tasks;
+﻿using ModernHttpClient;
+using Newtonsoft.Json;
 using Polly;
 using System;
-using Newtonsoft.Json;
 using System.Diagnostics;
-using Yol.Punla.Barrack;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+using Yol.Punla.AttributeBase;
+using Yol.Punla.Barrack;
+using Yol.Punla.Mapper;
 
 namespace Yol.Punla.GatewayAccess
 {

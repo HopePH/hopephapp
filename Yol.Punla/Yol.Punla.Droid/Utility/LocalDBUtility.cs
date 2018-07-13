@@ -1,6 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using System.IO;
+using Xamarin.Forms;
 using Yol.Punla.Utility;
-using System.IO;
 
 [assembly: Dependency(typeof(Yol.Punla.Droid.Utility.LocalDBUtility))]
 namespace Yol.Punla.Droid.Utility

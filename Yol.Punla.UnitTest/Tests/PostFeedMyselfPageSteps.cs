@@ -1,11 +1,11 @@
-﻿using Unity;
+﻿using Prism.Unity;
 using Should;
 using System.Linq;
 using TechTalk.SpecFlow;
+using Unity;
 using Yol.Punla.FakeEntries;
 using Yol.Punla.UnitTest.Barrack;
 using Yol.Punla.ViewModels;
-using Prism.Unity;
 
 namespace Yol.Punla.UnitTest
 {

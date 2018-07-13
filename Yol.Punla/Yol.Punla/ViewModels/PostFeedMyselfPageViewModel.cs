@@ -5,19 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Unity;
+using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
+using Yol.Punla.Barrack;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
 using Yol.Punla.Mapper;
-using Yol.Punla.NavigationHeap;
-using System.Linq;
 using Yol.Punla.Messages;
-using Yol.Punla.Barrack;
-using Xamarin.Forms;
-using Unity;
+using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 
 namespace Yol.Punla.ViewModels

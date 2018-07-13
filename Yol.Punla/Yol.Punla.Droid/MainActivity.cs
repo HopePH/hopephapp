@@ -1,18 +1,20 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Prism;
-using Prism.Ioc;
-using Android.Content;
 using Android.Widget;
+using FFImageLoading.Forms.Droid;
 using HockeyApp.Android;
 using HockeyApp.Android.Metrics;
 using Java.Security;
-using Unity;
 using Newtonsoft.Json;
+using Prism;
+using Prism.Ioc;
 using Prism.Unity;
 using System;
+using Unity;
+using Unity.Lifetime;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Yol.Punla.Barrack;
@@ -24,8 +26,6 @@ using Yol.Punla.Messages;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 using Yol.Punla.Views;
-using Unity.Lifetime;
-using FFImageLoading.Forms.Droid;
 
 namespace Yol.Punla.Droid
 {

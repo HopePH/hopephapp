@@ -1,12 +1,11 @@
-﻿using Foundation;
+﻿using FFImageLoading.Forms.Touch;
+using Foundation;
+using HockeyApp.iOS;
 using Prism;
 using Prism.Ioc;
-using UIKit;
-using Yol.Punla.EntryPoint;
-using FFImageLoading.Forms.Touch;
-using HockeyApp.iOS;
-using Unity;
 using Prism.Unity;
+using UIKit;
+using Unity;
 using Xamarin.Forms;
 using Yol.Punla.iOS.CustomRenderers;
 using Yol.Punla.iOS.Services;

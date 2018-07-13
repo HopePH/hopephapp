@@ -1,10 +1,10 @@
 ﻿using Prism.Services;
 using System.Linq;
+using Unity;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
 using Yol.Punla.Utility;
-using Unity;
 
 namespace Yol.Punla.Repository
 {

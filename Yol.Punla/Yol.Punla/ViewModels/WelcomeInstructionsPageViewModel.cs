@@ -1,16 +1,16 @@
 ﻿using Prism.Commands;
+using Prism.Navigation;
 using PropertyChanged;
+using System.Linq;
 using System.Windows.Input;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
+using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
 using Yol.Punla.Mapper;
-using Yol.Punla.ViewModels.Data;
-using System.Linq;
 using Yol.Punla.NavigationHeap;
-using Prism.Navigation;
 using Yol.Punla.Utility;
-using Yol.Punla.Barrack;
+using Yol.Punla.ViewModels.Data;
 
 namespace Yol.Punla.ViewModels
 {

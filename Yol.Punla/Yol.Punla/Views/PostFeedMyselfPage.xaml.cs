@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Yol.Punla.AttributeBase;
@@ -6,7 +7,6 @@ using Yol.Punla.Barrack;
 using Yol.Punla.Mapper;
 using Yol.Punla.Messages;
 using Yol.Punla.ViewModels;
-using Unity;
 
 namespace Yol.Punla.Views
 {

@@ -1,5 +1,5 @@
-﻿using TechTalk.SpecFlow;
-using System;
+﻿using System;
+using TechTalk.SpecFlow;
 using Yol.Punla.UnitTest.Tests;
 
 namespace Yol.Punla.UnitTest.Barrack

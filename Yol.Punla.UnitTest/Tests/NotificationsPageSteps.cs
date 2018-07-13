@@ -1,13 +1,12 @@
-﻿using TechTalk.SpecFlow;
-using Yol.Punla.UnitTest.Barrack;
-using Should;
-using Unity;
-using Yol.Punla.FakeEntries;
-using System.Linq;
+﻿using Plugin.Connectivity.Abstractions;
 using Prism.Unity;
-using Yol.Punla.ViewModels;
+using Should;
+using System.Linq;
+using TechTalk.SpecFlow;
+using Unity;
+using Yol.Punla.UnitTest.Barrack;
 using Yol.Punla.UnitTest.Mocks;
-using Plugin.Connectivity.Abstractions;
+using Yol.Punla.ViewModels;
 
 namespace Yol.Punla.UnitTest
 {

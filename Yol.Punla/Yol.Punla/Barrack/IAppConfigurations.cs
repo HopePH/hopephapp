@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Yol.Punla.Barrack
+﻿namespace Yol.Punla.Barrack
 {
     public interface IAppConfigurations
     {

@@ -1,5 +1,5 @@
-﻿using System;
-using Java.Util;
+﻿using Java.Util;
+using System;
 
 namespace Yol.Punla.Droid.Utility
 {

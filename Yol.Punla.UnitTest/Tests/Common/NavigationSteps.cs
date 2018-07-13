@@ -1,11 +1,11 @@
-﻿using TechTalk.SpecFlow;
-using Yol.Punla.UnitTest.Barrack;
-using Unity;
+﻿using Prism.Unity;
 using Should;
-using Yol.Punla.NavigationHeap;
 using System.Reflection;
+using TechTalk.SpecFlow;
+using Unity;
+using Yol.Punla.NavigationHeap;
+using Yol.Punla.UnitTest.Barrack;
 using Yol.Punla.ViewModels;
-using Prism.Unity;
 
 namespace Yol.Punla.UnitTest.Tests
 {

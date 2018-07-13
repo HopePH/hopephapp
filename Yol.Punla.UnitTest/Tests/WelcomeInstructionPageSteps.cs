@@ -1,8 +1,8 @@
-﻿using TechTalk.SpecFlow;
-using Yol.Punla.UnitTest.Barrack;
-using Unity;
+﻿using Prism.Unity;
 using Should;
-using Prism.Unity;
+using TechTalk.SpecFlow;
+using Unity;
+using Yol.Punla.UnitTest.Barrack;
 
 namespace Yol.Punla.UnitTest.Tests
 {

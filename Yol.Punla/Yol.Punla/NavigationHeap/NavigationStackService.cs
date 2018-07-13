@@ -5,7 +5,6 @@
  *   
  * */
 
-using System;
 using System.Collections.Generic;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Repository;
