@@ -43,7 +43,7 @@ namespace Yol.Punla.Managers
                     SaveMentalFacilitiesToLocalDB(_cachedMentalHealthFacilities);
                     return _cachedMentalHealthFacilities;
                 }
-
+                
                 if (_cachedMentalHealthFacilities == null || (_cachedMentalHealthFacilities != null && _cachedMentalHealthFacilities.Count() < 1))
                 {
                     _cachedMentalHealthFacilities = await _facilitiesService.GetAllFacilities();
