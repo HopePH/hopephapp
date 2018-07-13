@@ -42,13 +42,13 @@
             CachingStrategy="RecycleElement"
             HasUnevenRows="false"
             HorizontalOptions="FillAndExpand"
+            IsPullToRefreshEnabled="true"
             IsRefreshing="{Binding IsRefreshingList}"
             ItemsSource="{Binding MentalFacilities}"
             RefreshCommand="{Binding RefreshMentalCareCommand}"
             SelectedItem="{Binding CurrentSelectedItem, Mode=TwoWay}"
             SeparatorVisibility="None"
-            VerticalOptions="FillAndExpand"
-            IsPullToRefreshEnabled="true">
+            VerticalOptions="FillAndExpand">
             <ListView.RowHeight>
                 <OnPlatform
                     x:TypeArguments="x:Int32"
