@@ -80,7 +80,7 @@ namespace Yol.Punla.FakeData
                     PhotoUrl ="ngf.jpg",
                     FirstName = "Crisis",
                     LastName = "Hotline",
-                    Latitude = 14.573595,
+                    Latitude = 16.573595,
                     Longitude = 121.058297
                 },
                 new Entity.MentalHealthFacility
@@ -92,7 +92,7 @@ namespace Yol.Punla.FakeData
                     PhoneNumber = "09175584673",
                     FirstName = "Crisis",
                     LastName = "Hotline",
-                    Latitude = 14.573595,
+                    Latitude = 18.573595,
                     Longitude = 121.058297
                 }
             };

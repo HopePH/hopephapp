@@ -34,7 +34,7 @@ namespace Yol.Punla.FakeData
                new Entity.Wiki{ Title="Title Nineteen"},
                new Entity.Wiki{ Title="Title Twenty"},
                new Entity.Wiki{ Title="Title Twenty-One"},
-               new Entity.Wiki{ Title="Title Twenty-Two"}
+               new Entity.Wiki{ Title="Depression in Philippines", ForceToVersionNo = "1.9"}
             };
 
             foreach (var item in WikisField)
@@ -42,7 +42,6 @@ namespace Yol.Punla.FakeData
                 item.Content = string.Format(WIKICONTENTS, item.Title);
                 item.IconPath = "icon.png";
             }
-                
         }
     }
 }

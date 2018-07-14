@@ -180,7 +180,7 @@ Scenario: Filtering Mental Care Facilities by proximity
 	When I tap the Filter tab above the list
 	Then I should see the filter modal appear
 	When I choose the radius km "1" with the current position latitude "14.572372", longitude "121.054156" and tap the filter button
-	Then I should see that there are "2" mental care is displayed within the proximity
+	Then I should see that there are "5" mental care is displayed within the proximity
 
 Scenario: Sorting Mental Care Facilities by proximity
 	Given I am not authenticated
@@ -195,7 +195,7 @@ Scenario: Sorting Mental Care Facilities by proximity
 	When I tap the Sort tab above the list
 	Then I should see the sort modal appear
 	When I select the sort by location and tap the sort button
-	Then I should see the first item mental care name "Estrellas Home Care Clinic & Hospital Inc."
+	Then I should see the first item mental care name "Natasha Foundation 2"
 
 Scenario: Sorting Mental Care Facilities without choosing any inputs
 	Given I am not authenticated

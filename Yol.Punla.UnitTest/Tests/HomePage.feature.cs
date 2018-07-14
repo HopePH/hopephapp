@@ -594,7 +594,7 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("I choose the radius km \"1\" with the current position latitude \"14.572372\", longit" +
                     "ude \"121.054156\" and tap the filter button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 183
- testRunner.Then("I should see that there are \"2\" mental care is displayed within the proximity", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see that there are \"5\" mental care is displayed within the proximity", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -634,8 +634,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 197
  testRunner.When("I select the sort by location and tap the sort button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 198
- testRunner.Then("I should see the first item mental care name \"Estrellas Home Care Clinic & Hospit" +
-                    "al Inc.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should see the first item mental care name \"Natasha Foundation 2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
