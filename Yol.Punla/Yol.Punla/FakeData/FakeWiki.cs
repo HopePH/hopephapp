@@ -13,6 +13,7 @@ namespace Yol.Punla.FakeData
         {
             WikisField = new List<Entity.Wiki>
             {
+               new Entity.Wiki{ Title="Depression in Philippines", ForceToVersionNo = "1.9"},
                new Entity.Wiki{ Title="Title One"},
                new Entity.Wiki{ Title="Title Two"},
                new Entity.Wiki{ Title="Title Three"},
@@ -32,9 +33,8 @@ namespace Yol.Punla.FakeData
                new Entity.Wiki{ Title="Title Seventeen"},
                new Entity.Wiki{ Title="Title Eighteen"},
                new Entity.Wiki{ Title="Title Nineteen"},
-               new Entity.Wiki{ Title="Title Twenty"},
-               new Entity.Wiki{ Title="Title Twenty-One"},
-               new Entity.Wiki{ Title="Depression in Philippines", ForceToVersionNo = "1.9"}
+               new Entity.Wiki{ Title="1 out of 5 Filipinos suffer from depression"},
+               new Entity.Wiki{ Title="Title Twenty-One"}
             };
 
             foreach (var item in WikisField)
