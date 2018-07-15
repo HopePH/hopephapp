@@ -14,7 +14,8 @@ namespace Yol.Punla.UnitTest.Barrack
 
         [BeforeScenario(Order = 0)]
         public void BeforeScenario()
-        {          
+        {
+            AuthenticatedAlreadyOrNot(false);
             AppInitsHolder.IsWelcomeInstructionsLoaded = true;
             Xamarin.Forms.Mocks.MockForms.Init();
             App = new UnitTestApp();
@@ -75,6 +76,7 @@ namespace Yol.Punla.UnitTest.Barrack
         [BeforeScenario("FacebookLogonViaNotificationsMenu", Order = 1)]
         public void FacebookLogonViaNotificationsMenu()
         {
+            App = new UnitTestApp();
             var authenticationSteps = new AuthenticationSteps(ScenarioContext.Current);
             authenticationSteps.GivenIAmNotAuthenticated();
 
