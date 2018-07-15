@@ -1,5 +1,5 @@
 # HopePH App
-HopePH app is a mental health app built on top of the eosio blockchain
+HopePH app is a mental health app built for mental health carers to strugglers. The app is built for securing the medical records and clinical notes. This app is targetted to Asian market.
 
 # Support 
 Please send us a proposal at remote.alfon@gmail.com or Chito@pangga.ph ;)
