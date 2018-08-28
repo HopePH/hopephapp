@@ -84,11 +84,11 @@ namespace Yol.Punla.ViewModels
             AppStrings.Culture = new CultureInfo(AppSettingsProvider.Instance.GetValue("AppCulture"));
         }
 
-        public void OnNavigatedFrom(NavigationParameters parameters) => PassingParameters = parameters;
+        public virtual void OnNavigatedFrom(NavigationParameters parameters) => PassingParameters = parameters;
 
-        public void OnNavigatedTo(NavigationParameters parameters) => PassingParameters = parameters;
+        public virtual void OnNavigatedTo(NavigationParameters parameters) => PassingParameters = parameters;
 
-        public void OnNavigatingTo(NavigationParameters parameters)
+        public virtual void OnNavigatingTo(NavigationParameters parameters)
         {
             PassingParameters = parameters;
             PreparingPageBindings();

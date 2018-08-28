@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using PropertyChanged;
 using System;
@@ -24,7 +25,7 @@ namespace Yol.Punla.ViewModels
     [ModuleIgnore]
     [DefaultModuleFake]
     [AddINotifyPropertyChangedInterface]
-    public class WikiPageViewModel : ViewModelBase
+    public class WikiPageViewModel : ChildViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly INavigationStackService _navigationStackService;
@@ -51,11 +52,12 @@ namespace Yol.Punla.ViewModels
         public string AdMessage { get; set; } = AppStrings.AdMessage;
         public bool IsForceUpdateVersion { get; set; }
 
-        public WikiPageViewModel(IServiceMapper serviceMapper, 
+        public WikiPageViewModel(IEventAggregator eventAggregator,
+            IServiceMapper serviceMapper, 
             IAppUser appUser,
             INavigationService navigationService, 
             INavigationStackService navigationStackService,
-            IMentalHealthManager mentalHealthManager) : base(serviceMapper, appUser)
+            IMentalHealthManager mentalHealthManager) : base(eventAggregator, serviceMapper, appUser, navigationService)
         {
             _navigationService = navigationService; 
             _navigationStackService = navigationStackService;

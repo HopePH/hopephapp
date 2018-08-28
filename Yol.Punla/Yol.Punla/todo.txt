@@ -1,1 +1,4 @@
-﻿update xamarin already make sure working bdd
+﻿check if logon if yes tab on PostFee page
+if not Logon Page
+discuss Alvn on bz model
+remove wiki page already

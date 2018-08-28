@@ -122,8 +122,9 @@ namespace Yol.Punla
             AppUnityContainer.Init(unityContainer);
             AppCrossConnectivity.Init(CrossConnectivity.Current);
 
+            NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
             //if (WasWelcomeInstructionsLoaded())
-            //    NavigateToRootPage(nameof(WikiPage), Container.Resolve<INavigationStackService>(), NavigationService);
+            //    NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
             //else
             //    NavigateToRootPage(nameof(WelcomeInstructionsPage), Container.Resolve<INavigationStackService>(), NavigationService);
 
@@ -180,9 +181,16 @@ namespace Yol.Punla
             }
         }
 
-        private void NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
+        private void NavigateToRootMasterPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
         {
             var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(AppMasterPage)}/{nameof(NavigationPage)}/{page}";
+            navigationStackService.UpdateStackState(page);
+            navigationService.NavigateAsync(rootPage);
+        }
+
+        private void NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
+        {
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavigationPage)}/{page}";
             navigationStackService.UpdateStackState(page);
             navigationService.NavigateAsync(rootPage);
         }
@@ -312,6 +320,15 @@ namespace Yol.Punla
             FakeData.FakeMentalFacility.Init();
             FakeData.FakePostFeeds.Init();
             FakeData.FakeWikis.Init();
+        }
+
+        private string AddPagesInTab()
+        {
+            string path = "";
+            var children = new List<string>();
+            children.Add("addTab=WikiPage");
+            path += "?" + string.Join("&", children);
+            return path;
         }
     }
 }
