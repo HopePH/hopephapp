@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Yol.Punla.UnitTest</RootNamespace>
     <AssemblyName>Yol.Punla.UnitTest</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
@@ -20,6 +20,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -261,7 +262,7 @@
       <HintPath>..\packages\Xamarin.Forms.3.1.0.697729\lib\netstandard2.0\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core.UnitTests, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.Mocks.2.5.0.4\lib\netstandard2.0\Xamarin.Forms.Core.UnitTests.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.Mocks.3.0.0.2\lib\netstandard2.0\Xamarin.Forms.Core.UnitTests.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Forms.3.1.0.697729\lib\netstandard2.0\Xamarin.Forms.Platform.dll</HintPath>
@@ -270,7 +271,7 @@
       <HintPath>..\packages\Xamarin.Forms.3.1.0.697729\lib\netstandard2.0\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml.UnitTests, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Xamarin.Forms.Mocks.2.5.0.4\lib\netstandard2.0\Xamarin.Forms.Xaml.UnitTests.dll</HintPath>
+      <HintPath>..\packages\Xamarin.Forms.Mocks.3.0.0.2\lib\netstandard2.0\Xamarin.Forms.Xaml.UnitTests.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -377,7 +378,9 @@
     <Compile Include="Tests\WikiPageSteps.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Tests\AccountRegistrationPage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
