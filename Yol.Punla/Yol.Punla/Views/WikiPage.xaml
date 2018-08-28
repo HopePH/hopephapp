@@ -10,7 +10,7 @@
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
-    x:Name="WikiPage"
+    x:Name="WikiPageView"
     Title="Info Page"
     prism:ViewModelLocator.AutowireViewModel="True">
     <local:AppViewBase.Resources>
@@ -46,7 +46,7 @@
                         FlowColumnCount="2"
                         FlowIsLoadingInfinite="False"
                         FlowIsLoadingInfiniteEnabled="False"
-                        FlowItemTappedCommand="{Binding Source={x:Reference Name=WikiPage}, Path=BindingContext.ItemNavigationCommand}"
+                        FlowItemTappedCommand="{Binding Source={x:Reference Name=WikiPageView}, Path=BindingContext.ItemNavigationCommand}"
                         FlowItemsSource="{Binding .}"
                         HasUnevenRows="true"
                         HorizontalOptions="FillAndExpand">

@@ -74,7 +74,7 @@ namespace Yol.Punla
                             break;
                     }
                     break;
-                case Device.WinPhone:
+                case Device.UWP:
                 default:
                     break;
             }
@@ -122,10 +122,10 @@ namespace Yol.Punla
             AppUnityContainer.Init(unityContainer);
             AppCrossConnectivity.Init(CrossConnectivity.Current);
 
-            if (WasWelcomeInstructionsLoaded())
-                NavigateToRootPage(nameof(WikiPage), Container.Resolve<INavigationStackService>(), NavigationService);
-            else
-                NavigateToRootPage(nameof(WelcomeInstructionsPage), Container.Resolve<INavigationStackService>(), NavigationService);
+            //if (WasWelcomeInstructionsLoaded())
+            //    NavigateToRootPage(nameof(WikiPage), Container.Resolve<INavigationStackService>(), NavigationService);
+            //else
+            //    NavigateToRootPage(nameof(WelcomeInstructionsPage), Container.Resolve<INavigationStackService>(), NavigationService);
 
             AllowAppPermissions();
         }

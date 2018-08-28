@@ -15,7 +15,7 @@ namespace Yol.Punla.BugXamarin
                         navigationService.NavigateAsync(rootPage, parameters, useModalNavigation, animated);
                     break;
                 case Device.Android:
-                case Device.WinPhone:
+                case Device.UWP:
                 default:
                     navigationService.NavigateAsync(rootPage, parameters, useModalNavigation, animated);
                     break;
