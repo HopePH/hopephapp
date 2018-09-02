@@ -20,11 +20,8 @@ namespace Yol.Punla.ViewModels
         private readonly INavigationStackService _navigationStackService;
         private readonly IContactManager _userManager;
 
-        public ICommand FacebookLogonCommand => new DelegateCommand(FacebookLogin);
         public ICommand GoToSignUpCommand => new DelegateCommand(Signup);
         public ICommand GoToSigninWithAliasCommand => new DelegateCommand(SigninWithAlias);
-
-
         public Contact CurrentContact { get; set; }
 
         public LogonPageViewModel(IServiceMapper serviceMapper, 
@@ -44,15 +41,6 @@ namespace Yol.Punla.ViewModels
         }
 
         private void Signup() => NavigateToPageHelper(nameof(ViewNames.SignUpPage), _navigationStackService, _navigationService, PassingParameters);
-
-        private void FacebookLogin()
-        {
-            if (ProcessInternetConnection(true))
-            {
-                PassingParameters.Add("ComingFromLogin", true);
-                NavigateToPageHelper(nameof(ViewNames.NativeFacebookPage), _navigationStackService, _navigationService, PassingParameters); 
-            }
-        }
 
         private void SigninWithAlias()
         {

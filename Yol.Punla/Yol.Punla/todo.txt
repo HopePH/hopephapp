@@ -2,3 +2,8 @@
 if not Logon Page
 discuss Alvn on bz model
 remove wiki page already
+
+
+==IMPT===
+1. Designing XAML
+ change AppViewBase to this Xamarin.Forms.ContentPage 

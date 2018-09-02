@@ -34,6 +34,7 @@
             <Color x:Key="PopUpBackgroundColor">#BF000000</Color>
             <Color x:Key="ColorRed">#f84330</Color>
             <Color x:Key="ColorGreenLight">#b2c68b</Color>
+            <Color x:Key="ColorGreenDimB">#FF417505</Color>
 
             <!--  Unit Values  -->
             <x:Double x:Key="MainMenuHeaderFontsize">18</x:Double>
@@ -44,7 +45,6 @@
             <x:Double x:Key="BaseButtonWidthTwo">154</x:Double>
             <x:Double x:Key="BaseFontSizeLarge">18</x:Double>
             <x:Double x:Key="PickerHeight">34</x:Double>
-
 
             <!--  Label Sizes  -->
             <Style x:Key="LabelSmall" TargetType="Label">
@@ -124,6 +124,26 @@
                 BasedOn="{StaticResource LabelDefault}"
                 TargetType="Label">
                 <Setter Property="TextColor" Value="Black" />
+            </Style>
+            <Style
+                x:Key="LabelDefaultGreen"
+                BasedOn="{StaticResource LabelDefault}"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource ColorGreenDimB}" />
+            </Style>
+            <Style
+                x:Key="LabelLargeGreen"
+                BasedOn="{StaticResource LabelDefault}"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource ColorGreenDimB}" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="Android" Value="40" />
+                            <On Platform="iOS" Value="40" />
+                        </OnPlatform>
+                    </Setter.Value>
+                </Setter>
             </Style>
             <Style x:Key="IconFont" TargetType="Label">
                 <Setter Property="FontSize">

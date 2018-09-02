@@ -7,7 +7,7 @@ namespace Yol.Punla.Views
     [ModuleView]
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class RequestSigninVerificationCodePage : AppViewBase
-	{
+    {
 		public RequestSigninVerificationCodePage ()
 		{
             try

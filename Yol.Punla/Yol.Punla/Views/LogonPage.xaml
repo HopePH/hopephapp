@@ -69,23 +69,7 @@
                     Padding="0,30,0,10"
                     HorizontalOptions="Center"
                     Spacing="20"
-                    VerticalOptions="FillAndExpand">
-                    <ContentView
-                        Margin="0"
-                        HorizontalOptions="Center"
-                        IsEnabled="True"
-                        IsVisible="True">
-                        <ffImage:CachedImage
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            AutomationId="SignInFFImage"
-                            HeightRequest="43"
-                            Source="signinfb.png"
-                            WidthRequest="200" />
-                        <ContentView.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding FacebookLogonCommand}" NumberOfTapsRequired="1" />
-                        </ContentView.GestureRecognizers>
-                    </ContentView>
+                    VerticalOptions="FillAndExpand">                    
                     <ContentView
                         BackgroundColor="Transparent"
                         HorizontalOptions="Center"
