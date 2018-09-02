@@ -188,6 +188,7 @@
     <Compile Include="CustomRenderers\MuseoLabelRenderer.cs" />
     <Compile Include="CustomRenderers\NativeFacebookPageRenderer.cs" />
     <Compile Include="Effects\EditorTransparentBottomlineEffectDroid.cs" />
+    <Compile Include="Effects\EntryEffectDroid.cs" />
     <Compile Include="Effects\SliderColorEffectDroid.cs" />
     <Compile Include="Effects\SwitchColorEffectDroid.cs" />
     <Compile Include="Effects\TransparentBottomBorderSearchBarEffectDroid.cs" />

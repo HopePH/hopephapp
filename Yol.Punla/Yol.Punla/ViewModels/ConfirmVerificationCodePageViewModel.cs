@@ -35,6 +35,10 @@ namespace Yol.Punla.ViewModels
 
         public ICommand SendVerificationCodeCommand => new DelegateCommand(async () => await SendVerificationCode());
         public ICommand NavigateBackCommand => new DelegateCommand(GoBack);
+        public string VerificationCodeEntered1 { get; set; }
+        public string VerificationCodeEntered2 { get; set; }
+        public string VerificationCodeEntered3 { get; set; }
+        public string VerificationCodeEntered4 { get; set; }
         public string VerificationCodeEntered { get; set; }
         public string VerificationCode { get; set; }
         public bool IsLogonIncorrectMessageDisplayed { get; set; }
@@ -66,6 +70,7 @@ namespace Yol.Punla.ViewModels
         {
             if (VerificationCode.HasValue())
             {
+                VerificationCodeEntered = VerificationCodeEntered1 + VerificationCodeEntered2 + VerificationCodeEntered3 + VerificationCodeEntered4;
                 _validator = new VerificationCodeValidator(VerificationCodeEntered);
 
                 if (ProcessValidationErrors(_validator.Validate(this), true))
