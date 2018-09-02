@@ -91,6 +91,9 @@
     <PackageReference Include="Microsoft.CSharp">
       <Version>4.4.1</Version>
     </PackageReference>
+    <PackageReference Include="Mindscape.Raygun4Net">
+      <Version>5.5.4</Version>
+    </PackageReference>
     <PackageReference Include="modernhttpclient">
       <Version>2.4.2</Version>
     </PackageReference>
@@ -202,6 +205,7 @@
     <Compile Include="Utility\KeyValueCacheUtility.cs" />
     <Compile Include="Utility\LocalDBUtility.cs" />
     <Compile Include="Utility\LocalLanguageUtility.cs" />
+    <Compile Include="Utility\Logger.cs" />
     <Compile Include="Utility\PermissionUtility.cs" />
   </ItemGroup>
   <ItemGroup>

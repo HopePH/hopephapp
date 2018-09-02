@@ -197,6 +197,7 @@ namespace Yol.Punla.Droid
 			global::HockeyApp.Resource.Style.HockeyApp_ButtonStyle = global::Yol.Punla.Droid.Resource.Style.HockeyApp_ButtonStyle;
 			global::HockeyApp.Resource.Style.HockeyApp_EditTextStyle = global::Yol.Punla.Droid.Resource.Style.HockeyApp_EditTextStyle;
 			global::HockeyApp.Resource.Style.HockeyApp_SingleLineInputStyle = global::Yol.Punla.Droid.Resource.Style.HockeyApp_SingleLineInputStyle;
+			global::Mindscape.Raygun4Net.Xamarin.Android.Resource.String.library_name = global::Yol.Punla.Droid.Resource.String.library_name;
 			global::ModernHttpClient.Resource.String.library_name = global::Yol.Punla.Droid.Resource.String.library_name;
 			global::Splat.Resource.String.library_name = global::Yol.Punla.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::Yol.Punla.Droid.Resource.Attribute.actionBarSize;

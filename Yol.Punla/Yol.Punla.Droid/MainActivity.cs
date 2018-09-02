@@ -3,11 +3,14 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Android.Runtime;
 using Android.Widget;
+using DrTalk.Droid.Utility;
 using FFImageLoading.Forms.Droid;
 using HockeyApp.Android;
 using HockeyApp.Android.Metrics;
 using Java.Security;
+using Mindscape.Raygun4Net;
 using Newtonsoft.Json;
 using Prism;
 using Prism.Ioc;
@@ -37,7 +40,7 @@ namespace Yol.Punla.Droid
         private const string PACKAGENAME = "com.haiyangrpdev.HopePH";
         private const string HOCKEYAPPID = "b544024f438f40a482972fa96280e89e"; //chito. when debugging change not to record to the live correct one b544024f438f40a482972fa96280e89e
         private KeyValueCacheUtility keyValueCacheUtility = new KeyValueCacheUtility();
-        private string[] masterMenuPages = new string[] { nameof(WikiPage), nameof(HomePage), nameof(PostFeedPage), nameof(CrisisHotlineListPage), nameof(SettingsPage), nameof(NotificationsPage) };
+        private string[] masterMenuPages = new string[] { nameof(PostFeedPage), nameof(CrisisHotlineListPage), nameof(SettingsPage), nameof(NotificationsPage) };
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -47,9 +50,10 @@ namespace Yol.Punla.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
             CachedImageRenderer.Init(enableFastRenderer: true);
             UserDialogs.Init(this);
-            InitHockeyApp();
+            InitHockeyAppAndRaygun();
             GetPackageInfoAndHashKey();
             BackgroundedMessagingCenter();
+            RecordUnHandledException();
             app = new App(new AndroidInitializer());
             LoadApplication(app);
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
@@ -89,7 +93,6 @@ namespace Yol.Punla.Droid
         {
             HockeyAppUnregister();
             UnsubscribeToMessagingCenter();
-
             base.OnDestroy();
         }
 
@@ -99,10 +102,11 @@ namespace Yol.Punla.Droid
                 base.OnBackPressed();
         }
 
-        private void InitHockeyApp()
+        private void InitHockeyAppAndRaygun()
         {
             UpdateManager.Register(this, HOCKEYAPPID);
             MetricsManager.Register(Application, HOCKEYAPPID);
+            RaygunClient.Initialize("gNHcZkwjVWdhTW4nuDL/NA==").AttachCrashReporting().AttachPulse(this);
         }
 
         private void InitHockeyApp2()
@@ -209,6 +213,16 @@ namespace Yol.Punla.Droid
             }
 
             return hitTheButton;
+        }
+
+        private void RecordUnHandledException()
+        {
+            AndroidEnvironment.UnhandledExceptionRaiser += (sender, args) =>
+            {
+                var logger = new Logger();
+                logger.Log(args.Exception);
+                args.Handled = true;
+            };
         }
     }
 
