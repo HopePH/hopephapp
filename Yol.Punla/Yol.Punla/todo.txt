@@ -1,7 +1,9 @@
-﻿check if logon if yes tab on PostFee page
-if not Logon Page
-discuss Alvn on bz model
-remove wiki page already
+﻿to do
+alfon
+1. wilbert to send the logon background
+
+community
+1. finalize look of request page
 
 
 ==IMPT===
