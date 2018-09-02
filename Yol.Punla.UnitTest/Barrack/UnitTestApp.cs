@@ -71,7 +71,7 @@ namespace Yol.Punla.UnitTest.Barrack
                             break;
                     }
                     break;
-                case Device.WinPhone:
+                case Device.UWP:
                 default:
                     break;
             }

@@ -15,6 +15,7 @@ using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
 using Xamarin.Forms;
+using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.GatewayAccess;
 using Yol.Punla.Managers;
@@ -74,7 +75,7 @@ namespace Yol.Punla
                             break;
                     }
                     break;
-                case Device.WinPhone:
+                case Device.UWP:
                 default:
                     break;
             }
@@ -122,10 +123,10 @@ namespace Yol.Punla
             AppUnityContainer.Init(unityContainer);
             AppCrossConnectivity.Init(CrossConnectivity.Current);
 
-            if (WasWelcomeInstructionsLoaded())
-                NavigateToRootPage(nameof(WikiPage), Container.Resolve<INavigationStackService>(), NavigationService);
+            if (WasSignedUpAndLogon())
+                NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
             else
-                NavigateToRootPage(nameof(WelcomeInstructionsPage), Container.Resolve<INavigationStackService>(), NavigationService);
+                NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
             AllowAppPermissions();
         }
@@ -182,7 +183,14 @@ namespace Yol.Punla
 
         private void NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
         {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(AppMasterPage)}/{nameof(NavigationPage)}/{page}";
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavigationPage)}/{page}";
+            navigationStackService.UpdateStackState(page);
+            navigationService.NavigateAsync(rootPage);
+        }
+
+        private void NavigateToModalRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
+        {
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{page}";
             navigationStackService.UpdateStackState(page);
             navigationService.NavigateAsync(rootPage);
         }
@@ -312,6 +320,22 @@ namespace Yol.Punla
             FakeData.FakeMentalFacility.Init();
             FakeData.FakePostFeeds.Init();
             FakeData.FakeWikis.Init();
+        }
+
+        private string AddPagesInTab()
+        {
+            string path = "";
+            var children = new List<string>();
+            children.Add("addTab=WikiPage");
+            path += "?" + string.Join("&", children);
+            return path;
+        }
+
+        private bool WasSignedUpAndLogon()
+        {
+            var unityContainer = Container.GetContainer();
+            var result = unityContainer.Resolve<IAppUser>().IsAuthenticated && unityContainer.Resolve<IAppUser>().SignUpCompleted;
+            return result;
         }
     }
 }

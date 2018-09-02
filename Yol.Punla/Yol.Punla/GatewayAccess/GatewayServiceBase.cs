@@ -38,7 +38,7 @@ namespace Yol.Punla.GatewayAccess
                     _httpClient = new HttpClient();
                     break;
                 case Device.Android:
-                case Device.WinPhone:
+                case Device.UWP:
                 default:
                     _httpClient = new HttpClient(new NativeMessageHandler());
                     break;

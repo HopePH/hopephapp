@@ -4,12 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
-    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
-    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla">
     <AbsoluteLayout HorizontalOptions="Fill" VerticalOptions="Fill">
         <Image
@@ -18,12 +15,10 @@
             Aspect="AspectFill"
             BackgroundColor="Transparent"
             Source="{StaticResource SignUpBackgroundImage}" />
-
         <ContentView
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             BackgroundColor="#40000000" />
-
         <Grid
             Padding="0"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -42,13 +37,11 @@
                 </RowDefinition>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
             <BoxView
                 Grid.Row="0"
                 BackgroundColor="#CC88B04B"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand" />
-
             <Grid
                 Grid.Row="1"
                 ColumnSpacing="0"
@@ -62,25 +55,21 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <BoxView
                     Grid.Row="0"
                     BackgroundColor="Transparent"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand" />
-
                 <template:HopeBrand
                     Grid.Row="1"
                     HorizontalOptions="Center"
                     VerticalOptions="End" />
-
                 <StackLayout
                     Grid.Row="2"
                     Padding="0,30,0,10"
                     HorizontalOptions="Center"
                     Spacing="20"
                     VerticalOptions="FillAndExpand">
-
                     <ContentView
                         Margin="0"
                         HorizontalOptions="Center"
@@ -97,7 +86,6 @@
                             <TapGestureRecognizer Command="{Binding FacebookLogonCommand}" NumberOfTapsRequired="1" />
                         </ContentView.GestureRecognizers>
                     </ContentView>
-
                     <ContentView
                         BackgroundColor="Transparent"
                         HorizontalOptions="Center"
@@ -120,7 +108,6 @@
                         </ContentView.GestureRecognizers>
                     </ContentView>
                 </StackLayout>
-
                 <StackLayout
                     Grid.Row="3"
                     Padding="20,20"
@@ -145,7 +132,6 @@
                     </StackLayout>
                 </StackLayout>
             </Grid>
-
             <ContentView
                 Grid.RowSpan="2"
                 IsVisible="{Binding IsBusy}"
@@ -158,7 +144,6 @@
                         IsRunning="{Binding IsBusy, Mode=OneWay}"
                         IsVisible="{Binding IsBusy}"
                         Style="{StaticResource ActivityIndicatorMain}" />
-
                     <customControl:MuseoLabel
                         HorizontalOptions="Center"
                         Opacity="1"
