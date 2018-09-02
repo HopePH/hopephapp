@@ -2,6 +2,7 @@
  */
 using Acr.UserDialogs;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using PropertyChanged;
 using System;
@@ -29,7 +30,7 @@ namespace Yol.Punla.ViewModels
     [ModuleIgnore]
     [DefaultModuleFake]
     [AddINotifyPropertyChangedInterface]
-    public class PostFeedPageViewModel : ViewModelBase
+    public class PostFeedPageViewModel : ChildViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly INavigationStackService _navigationStackService;
@@ -69,12 +70,13 @@ namespace Yol.Punla.ViewModels
         public int SecondsDelay { get; set; }
         public bool IsNavigatingToDetailsPage { get; set; }
 
-        public PostFeedPageViewModel(IServiceMapper serviceMapper, 
+        public PostFeedPageViewModel(IEventAggregator eventAggregator,
+            IServiceMapper serviceMapper, 
             IAppUser appUser,
             INavigationService navigationService,
             INavigationStackService navigationStackService,
             IPostFeedManager postFeedManager,
-            IContactManager contactManager) : base(serviceMapper, appUser)
+            IContactManager contactManager) : base(eventAggregator, serviceMapper, appUser, navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
