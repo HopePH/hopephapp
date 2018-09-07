@@ -8,4 +8,5 @@ community
 
 ==IMPT===
 1. Designing XAML
- change AppViewBase to this Xamarin.Forms.ContentPage 
+  >change AppViewBase to this Xamarin.Forms.ContentPage 
+  >local:AppViewBase

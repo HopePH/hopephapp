@@ -15,109 +15,86 @@
             Aspect="AspectFill"
             BackgroundColor="Transparent"
             Source="{StaticResource SignUpBackgroundImage}" />
-        <ContentView
-            AbsoluteLayout.LayoutBounds="0,0,1,1"
-            AbsoluteLayout.LayoutFlags="All"
-            BackgroundColor="#40000000" />
         <Grid
-            Padding="0"
+            Padding="40"
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
             HorizontalOptions="FillAndExpand"
             RowSpacing="0"
             VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition>
-                    <RowDefinition.Height>
-                        <OnPlatform
-                            x:TypeArguments="GridLength"
-                            Android="0"
-                            iOS="22" />
-                    </RowDefinition.Height>
-                </RowDefinition>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <BoxView
+            <ffImage:CachedImage
                 Grid.Row="0"
-                BackgroundColor="#CC88B04B"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand" />
-            <Grid
+                Margin="0,100,0,0"
+                Aspect="AspectFit"
+                HeightRequest="124"
+                Source="icon"
+                VerticalOptions="Start"
+                WidthRequest="124" />
+            <Button
                 Grid.Row="1"
-                ColumnSpacing="0"
+                Margin="60,194,60,0"
+                BackgroundColor="#FF7ED321"
+                BorderRadius="4"
+                Command="{Binding GoToSigninWithAliasCommand}"
+                FontAttributes="Bold"
+                FontSize="14"
                 HorizontalOptions="FillAndExpand"
-                RowSpacing="0"
+                Text="{localization:Render LogonWithUserName}"
+                TextColor="White" />
+            <ContentView
+                Grid.Row="2"
+                Padding="20,12,20,0"
+                HorizontalOptions="Center"
+                IsVisible="True"
                 VerticalOptions="FillAndExpand">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <BoxView
-                    Grid.Row="0"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand" />
-                <template:HopeBrand
-                    Grid.Row="1"
-                    HorizontalOptions="Center"
-                    VerticalOptions="End" />
                 <StackLayout
                     Grid.Row="2"
-                    Padding="0,30,0,10"
-                    HorizontalOptions="Center"
-                    Spacing="20"
-                    VerticalOptions="FillAndExpand">                    
-                    <ContentView
-                        BackgroundColor="Transparent"
-                        HorizontalOptions="Center"
-                        VerticalOptions="FillAndExpand">
+                    BackgroundColor="Transparent"
+                    Orientation="Horizontal">
+                    <customControl:MuseoLabel
+                        FontSize="18"
+                        Text="{localization:Render DontHaveAccountYetText}"
+                        TextColor="{StaticResource GreenColorDim}"
+                        VerticalOptions="Center" />
+                    <ContentView Padding="0,10">
                         <customControl:MuseoLabel
-                            FontAttributes="Bold"
-                            Opacity="1"
-                            Text="{localization:Render LogonWithUserName}"
-                            TextColor="White"
-                            VerticalOptions="Center">
-                            <customControl:MuseoLabel.FontSize>
-                                <OnPlatform
-                                    x:TypeArguments="x:Double"
-                                    Android="14"
-                                    iOS="12" />
-                            </customControl:MuseoLabel.FontSize>
-                        </customControl:MuseoLabel>
+                            FontSize="18"
+                            IsUnderlined="True"
+                            Text="{localization:Render SignUpText}"
+                            TextColor="{StaticResource GreenColorDim}" />
                         <ContentView.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GoToSigninWithAliasCommand}" NumberOfTapsRequired="1" />
+                            <TapGestureRecognizer Command="{Binding GoToSignUpCommand}" NumberOfTapsRequired="1" />
                         </ContentView.GestureRecognizers>
                     </ContentView>
                 </StackLayout>
-                <StackLayout
-                    Grid.Row="3"
-                    Padding="20,20"
-                    HorizontalOptions="Center"
-                    IsVisible="True"
-                    Orientation="Vertical"
-                    VerticalOptions="FillAndExpand">
-                    <StackLayout BackgroundColor="Transparent" Orientation="Horizontal">
-                        <customControl:MuseoLabel
-                            Style="{StaticResource LabelSmall}"
-                            Text="{localization:Render DontHaveAccountYetText}"
-                            VerticalOptions="Center" />
-                        <ContentView Padding="0,10">
-                            <customControl:MuseoLabel
-                                IsUnderlined="True"
-                                Style="{StaticResource LabelSmall}"
-                                Text="{localization:Render SignUpText}" />
-                            <ContentView.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding GoToSignUpCommand}" NumberOfTapsRequired="1" />
-                            </ContentView.GestureRecognizers>
-                        </ContentView>
-                    </StackLayout>
-                </StackLayout>
-            </Grid>
+            </ContentView>
+            <StackLayout
+                Grid.Row="3"
+                Margin="0,20,0,0"
+                HorizontalOptions="Center"
+                IsVisible="True"
+                Orientation="Horizontal"
+                Spacing="1">
+                <ContentView>
+                    <ffImage:CachedImage
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        HeightRequest="56"
+                        Source="signinfb.png"
+                        WidthRequest="310" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding FacebookSignUpCommand}" NumberOfTapsRequired="1" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+            </StackLayout>
             <ContentView
-                Grid.RowSpan="2"
+                Grid.RowSpan="3"
                 IsVisible="{Binding IsBusy}"
                 Style="{StaticResource ContentViewForActivityIndicator}">
                 <StackLayout
