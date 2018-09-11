@@ -4,7 +4,7 @@ alfon
 
 community
 1. finalize look of request page
-2. the EmailVerificationPage page
+2. the EmailVerificationPage page, also ViewModel logic of this not good
 
 
 ==IMPT===
