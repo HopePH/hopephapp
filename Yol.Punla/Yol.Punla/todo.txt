@@ -4,6 +4,7 @@ alfon
 
 community
 1. finalize look of request page
+2. the EmailVerificationPage page
 
 
 ==IMPT===

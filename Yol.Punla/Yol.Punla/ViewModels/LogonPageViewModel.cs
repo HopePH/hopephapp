@@ -40,7 +40,7 @@ namespace Yol.Punla.ViewModels
             IsBusy = false;
         }
 
-        private void Signup() => NavigateToPageHelper(nameof(ViewNames.SignUpPage), _navigationStackService, _navigationService, PassingParameters);
+        private void Signup() => NavigateToPageHelper(nameof(ViewNames.EmailVerificationPage), _navigationStackService, _navigationService, PassingParameters);
 
         private void SigninWithAlias()
         {
