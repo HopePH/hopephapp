@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Unity;
 using Unity.Lifetime;
 using Xamarin.Forms;
+using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.GatewayAccess;
 using Yol.Punla.Managers;
@@ -150,10 +151,10 @@ namespace Yol.Punla.UnitTest.Barrack
                 AppUnityContainer.Init(unityContainer);
                 AppCrossConnectivity.Init(unityContainer.Resolve<IConnectivity>());
 
-                if (WasWelcomeInstructionsLoaded())
-                    NavigateToRootPage(nameof(WikiPage), Container.Resolve<INavigationStackService>(), NavigationService);
+                if (WasSignedUpAndLogon())
+                    NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
                 else
-                    NavigateToRootPage(nameof(WelcomeInstructionsPage), Container.Resolve<INavigationStackService>(), NavigationService);
+                    NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
                 AllowAppPermissions();
             }
@@ -187,13 +188,6 @@ namespace Yol.Punla.UnitTest.Barrack
             }
         }
 
-        private void NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
-        {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(AppMasterPage)}/{nameof(NavigationPage)}/{page}";
-            navigationStackService.UpdateStackState(page);
-            navigationService.NavigateAsync(rootPage);
-        }
-
         private void CreateMocks()
         {
             UserDialogs.Instance = new UserDialogMock();
@@ -223,6 +217,20 @@ namespace Yol.Punla.UnitTest.Barrack
             ((KeyValueCacheMock)Container.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>()).SetNotificationsPushedDateManually(notificationsPushedDate);
             ((KeyValueCacheMock)Container.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>()).SetAuthenticationManually(wasLogon);
             ((KeyValueCacheMock)Container.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>()).SetSignUpCompletionManually(wasSignUpCompleted);
+        }
+
+        private void NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
+        {
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavigationPage)}/{page}";
+            navigationStackService.UpdateStackState(page);
+            navigationService.NavigateAsync(rootPage);
+        }
+
+        private void NavigateToModalRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
+        {
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{page}";
+            navigationStackService.UpdateStackState(page);
+            navigationService.NavigateAsync(rootPage);
         }
 
         private void ManualTypeRegistration(IContainerRegistry containerRegistry)
@@ -319,6 +327,22 @@ namespace Yol.Punla.UnitTest.Barrack
             {
                 return Expired;
             }
+        }
+
+        private string AddPagesInTab()
+        {
+            string path = "";
+            var children = new List<string>();
+            children.Add("addTab=WikiPage");
+            path += "?" + string.Join("&", children);
+            return path;
+        }
+
+        private bool WasSignedUpAndLogon()
+        {
+            var unityContainer = Container.GetContainer();
+            var result = unityContainer.Resolve<IAppUser>().IsAuthenticated && unityContainer.Resolve<IAppUser>().SignUpCompleted;
+            return result;
         }
     }
 }

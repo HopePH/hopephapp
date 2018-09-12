@@ -38,14 +38,15 @@ namespace Yol.Punla.UnitTest.Barrack
             var navigationSteps = new NavigationSteps(ScenarioContext.Current);
             navigationSteps.ThenIAmRedirectedToThePage("WikiPage");
 
-            var homePageSteps = new HomePageSteps(ScenarioContext.Current);
-            homePageSteps.GivenTheMenuDetailIsClosed();
-            homePageSteps.WhenITapTheHanburgerIcon();
-            homePageSteps.ThenIShouldSeeTheMenuDetailIsOpened();
+            //ct0.temp
+            //var homePageSteps = new HomePageSteps(ScenarioContext.Current);
+            //homePageSteps.GivenTheMenuDetailIsClosed();
+            //homePageSteps.WhenITapTheHanburgerIcon();
+            //homePageSteps.ThenIShouldSeeTheMenuDetailIsOpened();
 
-            var crisisPageSteps = new CrisisHotlineListPageSteps(ScenarioContext.Current);
-            crisisPageSteps.WhenITapTheCrisisIconFromTheMenuDetail();
-            navigationSteps.ThenIAmRedirectedToThePage("LogonPage");
+            //var crisisPageSteps = new CrisisHotlineListPageSteps(ScenarioContext.Current);
+            //crisisPageSteps.WhenITapTheCrisisIconFromTheMenuDetail();
+            //navigationSteps.ThenIAmRedirectedToThePage("LogonPage");
 
             var loginSteps = new LogonPageSteps(ScenarioContext.Current);
             loginSteps.WhenITapTheLoginWithFacebookButtonWithAccount(LOGONUSEREMAIL);
@@ -60,14 +61,15 @@ namespace Yol.Punla.UnitTest.Barrack
             var navigationSteps = new NavigationSteps(ScenarioContext.Current);
             navigationSteps.ThenIAmRedirectedToThePage("WikiPage");
 
-            var homePageSteps = new HomePageSteps(ScenarioContext.Current);
-            homePageSteps.GivenTheMenuDetailIsClosed();
-            homePageSteps.WhenITapTheHanburgerIcon();
-            homePageSteps.ThenIShouldSeeTheMenuDetailIsOpened();
+            //ct0.temp
+            //var homePageSteps = new HomePageSteps(ScenarioContext.Current);
+            //homePageSteps.GivenTheMenuDetailIsClosed();
+            //homePageSteps.WhenITapTheHanburgerIcon();
+            //homePageSteps.ThenIShouldSeeTheMenuDetailIsOpened();
 
-            var postFeedPageSteps = new PostFeedPageSteps(ScenarioContext.Current);
-            postFeedPageSteps.WhenITapTheWriteDownIconFromTheMenuDetail();
-            navigationSteps.ThenIAmRedirectedToThePage("LogonPage");
+            //var postFeedPageSteps = new PostFeedPageSteps(ScenarioContext.Current);
+            //postFeedPageSteps.WhenITapTheWriteDownIconFromTheMenuDetail();
+            //navigationSteps.ThenIAmRedirectedToThePage("LogonPage");
 
             var loginSteps = new LogonPageSteps(ScenarioContext.Current);
             loginSteps.WhenITapTheLoginWithFacebookButtonWithMobileAccount(LOGONUSERMOBILE);
@@ -83,14 +85,15 @@ namespace Yol.Punla.UnitTest.Barrack
             var navigationSteps = new NavigationSteps(ScenarioContext.Current);
             navigationSteps.ThenIAmRedirectedToThePage("WikiPage");
 
-            var homePageSteps = new HomePageSteps(ScenarioContext.Current);
-            homePageSteps.GivenTheMenuDetailIsClosed();
-            homePageSteps.WhenITapTheHanburgerIcon();
-            homePageSteps.ThenIShouldSeeTheMenuDetailIsOpened();
+            //ct0.temp
+            //var homePageSteps = new HomePageSteps(ScenarioContext.Current);
+            //homePageSteps.GivenTheMenuDetailIsClosed();
+            //homePageSteps.WhenITapTheHanburgerIcon();
+            //homePageSteps.ThenIShouldSeeTheMenuDetailIsOpened();
 
-            var notificationsPageSteps = new NotificationsPageSteps(ScenarioContext.Current);
-            notificationsPageSteps.WhenITapTheNotificationsFromTheMenuDetail();
-            navigationSteps.ThenIAmRedirectedToThePage("LogonPage");
+            //var notificationsPageSteps = new NotificationsPageSteps(ScenarioContext.Current);
+            //notificationsPageSteps.WhenITapTheNotificationsFromTheMenuDetail();
+            //navigationSteps.ThenIAmRedirectedToThePage("LogonPage");
 
             var loginSteps = new LogonPageSteps(ScenarioContext.Current);
             loginSteps.WhenITapTheLoginWithFacebookButtonWithMobileAccount(LOGONUSERMOBILE);

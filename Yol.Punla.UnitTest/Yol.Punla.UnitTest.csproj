@@ -290,153 +290,23 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite.cs" />
     <Compile Include="SQLiteAsync.cs" />
-    <Compile Include="Tests\AccountRegistrationPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AccountRegistrationPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\AccountRegistrationPageSteps.cs" />
     <Compile Include="Tests\Common\AuthenticationSteps.cs" />
     <Compile Include="Tests\Common\NavigationSteps.cs" />
-    <Compile Include="Tests\CrisisHotlineListPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CrisisHotlineListPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\CrisisHotlineListPageSteps.cs" />
-    <Compile Include="Tests\EmailVerificationPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EmailVerificationPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\EmailVerificationPageSteps.cs" />
-    <Compile Include="Tests\HomePage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HomePage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\HomePageSteps.cs" />
     <Compile Include="Tests\LogonPage.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LogonPage.feature</DependentUpon>
     </Compile>
     <Compile Include="Tests\LogonPageSteps.cs" />
-    <Compile Include="Tests\NotificationsPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NotificationsPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\NotificationsPageSteps.cs" />
-    <Compile Include="Tests\PostFeedDetailsPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PostFeedDetailsPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\PostFeedDetailsPageSteps.cs" />
-    <Compile Include="Tests\PostFeedMyselfPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PostFeedMyselfPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\PostFeedMyselfPageSteps.cs" />
-    <Compile Include="Tests\PostFeedPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PostFeedPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\PostFeedPageSteps.cs" />
-    <Compile Include="Tests\RequestVerificationCodePage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RequestVerificationCodePage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\RequestVerificationCodePageSteps.cs" />
-    <Compile Include="Tests\SettingsPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SettingsPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\SettingsPageSteps.cs" />
-    <Compile Include="Tests\SignUpPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SignUpPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\SignUpPageSteps.cs" />
-    <Compile Include="Tests\WelcomeInstructionPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WelcomeInstructionPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\WelcomeInstructionPageSteps.cs" />
-    <Compile Include="Tests\WikiPage.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WikiPage.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Tests\WikiPageSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Tests\AccountRegistrationPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AccountRegistrationPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\CrisisHotlineListPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>CrisisHotlineListPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\EmailVerificationPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>EmailVerificationPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\HomePage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>HomePage.feature.cs</LastGenOutput>
-    </None>
     <None Include="Tests\LogonPage.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>LogonPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\NotificationsPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>NotificationsPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\PostFeedDetailsPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>PostFeedDetailsPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\PostFeedMyselfPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>PostFeedMyselfPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\PostFeedPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>PostFeedPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\RequestVerificationCodePage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>RequestVerificationCodePage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\SettingsPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SettingsPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\SignUpPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SignUpPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\WelcomeInstructionPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>WelcomeInstructionPage.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Tests\WikiPage.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>WikiPage.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ for /d /r . %%d in (bin,obj) do @if exist "%%d" rd /s/q "%%d"
 pause
 
 REM If in case there is permission error for the above just delete the files inside instead
-set root="C:\_Work.Dir.GitHub.HopePH\hopephappp"
+set root="C:\_Work.Dir.GitHub.HopePH.BDD\hopephapp"
 del /F /Q /S "%root%\Yol.Punla.Common\bin\Debug\*"
 del /F /Q /S "%root%\Yol.Punla.Business\bin\Debug\*"
 del /F /Q /S "%root%\Yol.Punla\Yol.Punla\bin\Debug\*"
