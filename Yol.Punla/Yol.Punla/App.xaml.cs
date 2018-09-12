@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Plugin.Connectivity;
+using Plugin.Connectivity.Abstractions;
 using Plugin.Notifications;
 using Prism;
 using Prism.Ioc;
@@ -113,22 +114,29 @@ namespace Yol.Punla
 
         protected override void OnInitialized()
         {
-            InitializeComponent();
-            InitFakeData();
-            ConfigureAppWideSettings();
-            ConfigureDatabaseInitilization();
+            try
+            {
+                InitializeComponent();
+                InitFakeData();
+                ConfigureAppWideSettings();
+                ConfigureDatabaseInitilization();
 
-            var unityContainer = Container.GetContainer();
-            unityContainer.RegisterInstance<INavigationService>(NavigationService, new ContainerControlledLifetimeManager());
-            AppUnityContainer.Init(unityContainer);
-            AppCrossConnectivity.Init(CrossConnectivity.Current);
+                var unityContainer = Container.GetContainer();
+                unityContainer.RegisterInstance<INavigationService>(NavigationService, new ContainerControlledLifetimeManager());
+                AppUnityContainer.Init(unityContainer);
+                AppCrossConnectivity.Init(unityContainer.Resolve<IConnectivity>());
 
-            if (WasSignedUpAndLogon())
-                NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
-            else
-                NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                if (WasSignedUpAndLogon())
+                    NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                else
+                    NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
-            AllowAppPermissions();
+                AllowAppPermissions();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -211,6 +219,7 @@ namespace Yol.Punla
             unityContainer.RegisterType<IContactRepository, ContactRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
             unityContainer.RegisterType<ILocalTableTrackingRepository, LocalTableTrackingRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
             unityContainer.RegisterType<IPostFeedRepository, PostFeedRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
+            unityContainer.RegisterInstance<IConnectivity>(CrossConnectivity.Current, new ContainerControlledLifetimeManager());
             containerRegistry.RegisterForNavigation<NavigationPage>();
         }
 

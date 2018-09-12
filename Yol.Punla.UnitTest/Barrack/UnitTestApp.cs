@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using Plugin.Notifications;
 using Prism.Ioc;
@@ -113,6 +114,7 @@ namespace Yol.Punla.UnitTest.Barrack
         {
             try
             {
+                AppCrossConnectivity.Init(CrossConnectivity.Current);
                 UserDialogs.Instance.ShowLoading("Reconnecting, please wait...");
 
                 if (AppCrossConnectivity.Instance.IsConnected)
@@ -243,8 +245,12 @@ namespace Yol.Punla.UnitTest.Barrack
         {
             var helperUtility = Container.Resolve<IDependencyService>().Get<IHelperUtility>();
             await helperUtility.CheckIfPermissionToLocationGranted();
-            await CrossNotifications.Current.RequestPermission();
-            await ShowLocalNotifications();
+
+            if (AppCrossConnectivity.Instance.IsConnected)
+            {
+                await CrossNotifications.Current.RequestPermission();
+                await ShowLocalNotifications();
+            }
         }
 
         private void ProcessErrorReportingForHockeyApp(Exception ex)
