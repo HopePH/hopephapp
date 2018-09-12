@@ -162,7 +162,7 @@ namespace Yol.Punla.UnitTest.Barrack
             }
             catch (Exception ex)
             {
-
+                AppUnityContainer.Instance.Resolve<IDependencyService>().Get<ILogger>().Log(ex);
             }
         }
 

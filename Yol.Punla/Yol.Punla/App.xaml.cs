@@ -126,16 +126,17 @@ namespace Yol.Punla
                 AppUnityContainer.Init(unityContainer);
                 AppCrossConnectivity.Init(unityContainer.Resolve<IConnectivity>());
 
-                if (WasSignedUpAndLogon())
-                    NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
-                else
-                    NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                NavigateToModalRootPage(nameof(QuestionnairePage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                //if (WasSignedUpAndLogon())
+                //    NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                //else
+                //    NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
                 AllowAppPermissions();
             }
             catch (Exception ex)
             {
-
+                AppUnityContainer.Instance.Resolve<IDependencyService>().Get<ILogger>().Log(ex);
             }
         }
 
