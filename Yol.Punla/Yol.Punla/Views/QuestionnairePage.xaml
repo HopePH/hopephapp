@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<local:AppViewBase
     x:Class="Yol.Punla.Views.QuestionnairePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     prism:ViewModelLocator.AutowireViewModel="True">
     <ScrollView
@@ -17,7 +18,17 @@
                 FontSize="40"
                 Text="{Binding Question}"
                 TextColor="{StaticResource ColorGreenDimB}" />
-            <FlexLayout BackgroundColor="Yellow" FlexLayout.Grow="1" />
+            <FlexLayout
+                Direction="Column"
+                FlexLayout.Grow="1"
+                JustifyContent="SpaceEvenly">
+                <Picker
+                    IsVisible="{Binding IsChoices}"
+                    ItemDisplayBinding="{Binding Text}"
+                    ItemsSource="{Binding QuestionChoices}"
+                    VerticalOptions="Center" />
+                <Entry IsVisible="{Binding !IsChoices}" Text="Test" />
+            </FlexLayout>
             <Button
                 BackgroundColor="#FF7ED321"
                 BorderRadius="4"
@@ -29,4 +40,4 @@
                 WidthRequest="104" />
         </FlexLayout>
     </ScrollView>
-</ContentPage>
+</local:AppViewBase>

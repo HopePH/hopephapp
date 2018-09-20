@@ -1,5 +1,4 @@
 ﻿using System;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Yol.Punla.AttributeBase;
 
@@ -7,7 +6,7 @@ namespace Yol.Punla.Views
 {
     [ModuleView]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class QuestionnairePage : ContentPage
+    public partial class QuestionnairePage : AppViewBase
     {
         public QuestionnairePage()
         {
