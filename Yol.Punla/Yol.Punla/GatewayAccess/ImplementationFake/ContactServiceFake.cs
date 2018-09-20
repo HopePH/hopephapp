@@ -22,7 +22,7 @@ namespace Yol.Punla.GatewayAccess
 
         public Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions()
         {
-            return Task.FromResult<IEnumerable<SurveyQuestion>>(new List<SurveyQuestion>());
+            return Task.FromResult<IEnumerable<SurveyQuestion>>(FakeData.FakeSurveys.Surveys);
         }
 
         public Task<int> PostReceiver(Contact receiver)

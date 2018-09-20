@@ -205,6 +205,7 @@ namespace Yol.Punla.UnitTest.Barrack
             FakeData.FakeMentalFacility.Init();
             FakeData.FakePostFeeds.Init();
             FakeData.FakeWikis.Init();
+            FakeData.FakeSurveys.Init();
 
             //chito.by default assume that these were presumptions
             var isLoaded = AppInitsHolder.IsWelcomeInstructionsLoaded;
