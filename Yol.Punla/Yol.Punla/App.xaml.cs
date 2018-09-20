@@ -329,6 +329,7 @@ namespace Yol.Punla
             FakeData.FakeMentalFacility.Init();
             FakeData.FakePostFeeds.Init();
             FakeData.FakeWikis.Init();
+            FakeData.FakeSurveys.Init();
         }
 
         private string AddPagesInTab()
