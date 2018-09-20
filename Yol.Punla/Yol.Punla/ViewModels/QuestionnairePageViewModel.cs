@@ -10,6 +10,8 @@ namespace Yol.Punla.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class QuestionnairePageViewModel : ViewModelBase
     {
+        public string Question { get; set; } = "Are you single?";
+
         public QuestionnairePageViewModel(IServiceMapper serviceMapper, 
             IAppUser appUser) : base(serviceMapper, appUser)
         {
