@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Entity;
@@ -17,6 +18,11 @@ namespace Yol.Punla.GatewayAccess
                 FbId = "zz0876";
 
             return Task.FromResult(FakeData.FakeUsers.Contacts.Where(c => c.EmailAdd == EmailAdd || c.FBId == FbId).FirstOrDefault());
+        }
+
+        public Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions()
+        {
+            return Task.FromResult<IEnumerable<SurveyQuestion>>(new List<SurveyQuestion>());
         }
 
         public Task<int> PostReceiver(Contact receiver)

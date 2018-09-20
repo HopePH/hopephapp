@@ -156,7 +156,7 @@ namespace Yol.Punla.UnitTest.Barrack
                 if (WasSignedUpAndLogon())
                     NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
                 else
-                    NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                    NavigateToModalRootPage(nameof(QuestionnairePage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
                 AllowAppPermissions();
             }

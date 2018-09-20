@@ -88,27 +88,13 @@ namespace Yol.Punla.UnitTest.Tests
 #line 4
  testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 5
-  testRunner.And("I am on the page \"WikiPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 6
-  testRunner.And("the menu detail is closed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 7
- testRunner.When("I tap the hamburger icon", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 8
- testRunner.Then("I should see the menu detail is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 9
- testRunner.When("I tap the Write Down icon from the menu detail with authenticated \"false\" and sig" +
-                    "ned up \"true\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 10
- testRunner.Then("I should see a message saying the user to sign up \"When logging in your profile w" +
-                    "ill still remain anonymous to the other users.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 11
-  testRunner.And("I am redirected to the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I am on the page \"QuestionnairePage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
         }
         
-        public virtual void LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPage(string fbAccount, string[] exampleTags)
+        public virtual void LoggingInToTheAppUsingValidEmailAndPassword(string fbAccount, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using facebook email account via PostFeed Page", exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using valid email and password", exampleTags);
 #line 13
 this.ScenarioSetup(scenarioInfo);
 #line 3
@@ -128,105 +114,14 @@ this.FeatureBackground();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logging in to the app using facebook email account via PostFeed Page: hynrbf@gmai" +
-            "l.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logging in to the app using valid email and password: hynrbf@gmail.com")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "LogonPage")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hynrbf@gmail.com")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbAccount", "hynrbf@gmail.com")]
-        public virtual void LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPage_HynrbfGmail_Com()
+        public virtual void LoggingInToTheAppUsingValidEmailAndPassword_HynrbfGmail_Com()
         {
 #line 13
-this.LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPage("hynrbf@gmail.com", ((string[])(null)));
-#line hidden
-        }
-        
-        public virtual void LoggingInToTheAppUsingFacebookMobileNumberAccount(string fbMobileNumber, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using facebook mobile number account", exampleTags);
-#line 24
-this.ScenarioSetup(scenarioInfo);
-#line 3
-this.FeatureBackground();
-#line 25
- testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 26
-  testRunner.And("I am on the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
- testRunner.When(string.Format("I tap the Login with Facebook Button with mobile account \"{0}\"", fbMobileNumber), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 28
- testRunner.Then("I am authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 29
-  testRunner.And("I am redirected to the page \"PostFeedPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logging in to the app using facebook mobile number account: 09477691857")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "LogonPage")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "09477691857")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbMobileNumber", "09477691857")]
-        public virtual void LoggingInToTheAppUsingFacebookMobileNumberAccount_09477691857()
-        {
-#line 24
-this.LoggingInToTheAppUsingFacebookMobileNumberAccount("09477691857", ((string[])(null)));
-#line hidden
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Navigating to SignUp Page")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "LogonPage")]
-        public virtual void NavigatingToSignUpPage()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Navigating to SignUp Page", ((string[])(null)));
-#line 35
-this.ScenarioSetup(scenarioInfo);
-#line 3
-this.FeatureBackground();
-#line 36
- testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 37
-  testRunner.And("I am on the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
- testRunner.When("I tap the Sign up link text", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 39
- testRunner.Then("I am redirected to the page \"SignUpPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        public virtual void LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPageButTheAccountIsNotRegisteredToTheHopephSystem(string fbAccount, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using facebook email account via PostFeed Page but the acco" +
-                    "unt is not registered to the hopeph system", exampleTags);
-#line 41
-this.ScenarioSetup(scenarioInfo);
-#line 3
-this.FeatureBackground();
-#line 42
- testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 43
-  testRunner.And("I am on the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
- testRunner.When(string.Format("I tap the Login with Facebook Button with account \"{0}\"", fbAccount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 45
- testRunner.Then("I should see not registered account message is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 46
-  testRunner.And("I am redirected to the page \"SignUpPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logging in to the app using facebook email account via PostFeed Page but the acco" +
-            "unt is not registered to the hopeph system: hello@pangga.ph")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "LogonPage")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hello@pangga.ph")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbAccount", "hello@pangga.ph")]
-        public virtual void LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPageButTheAccountIsNotRegisteredToTheHopephSystem_HelloPangga_Ph()
-        {
-#line 41
-this.LoggingInToTheAppUsingFacebookEmailAccountViaPostFeedPageButTheAccountIsNotRegisteredToTheHopephSystem("hello@pangga.ph", ((string[])(null)));
+this.LoggingInToTheAppUsingValidEmailAndPassword("hynrbf@gmail.com", ((string[])(null)));
 #line hidden
         }
     }

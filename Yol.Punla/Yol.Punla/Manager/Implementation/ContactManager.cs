@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
@@ -45,6 +46,12 @@ namespace Yol.Punla.Managers
             {
                 return _item;
             }
+        }
+
+        public async Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions()
+        {
+            var results = await _userService.GetSurveyQuestions();
+            return results;
         }
 
         public Task<int> SaveDetailsToRemoteDB(Entity.Contact item)

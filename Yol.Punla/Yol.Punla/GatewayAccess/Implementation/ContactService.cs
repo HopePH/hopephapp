@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Entity;
@@ -40,6 +41,11 @@ namespace Yol.Punla.GatewayAccess
         {
             await Task.Delay(1);
             return FakeData.FakeUsers.Contacts.Where(c => c.EmailAdd == emailAddress).FirstOrDefault();
+        }
+
+        public Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
