@@ -19,28 +19,28 @@
 
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
-    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="CommonServiceLocator" Version="2.0.2" />
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView" Version="2.0.10" />
     <PackageReference Include="FluentValidation" Version="8.0.100" />
-    <PackageReference Include="Fody" Version="3.1.7">
+    <PackageReference Include="Fody" Version="3.2.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="HockeySDK.Xamarin" Version="5.1.2" />
     <PackageReference Include="LiveXAML" Version="2.1.41" />
-    <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.2.3" />
+    <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.3.0" />
     <PackageReference Include="Microsoft.Bcl" Version="1.1.10" />
     <PackageReference Include="Microsoft.Bcl.Build" Version="1.0.21" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.4.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="modernhttpclient" Version="2.4.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Plugin.Notifications" Version="5.0.0-beta3" />
-    <PackageReference Include="Polly" Version="5.8.0" />
+    <PackageReference Include="Polly" Version="6.1.0" />
     <PackageReference Include="Prism.Core" Version="7.0.0.396" />
     <PackageReference Include="Prism.Forms" Version="7.0.0.396" />
-    <PackageReference Include="PropertyChanged.Fody" Version="2.5.9" />
+    <PackageReference Include="PropertyChanged.Fody" Version="2.5.11" />
     <PackageReference Include="Splat" Version="3.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
     <PackageReference Include="SQLitePCL.raw" Version="0.9.3" />
@@ -50,9 +50,9 @@
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.1.1" />
     <PackageReference Include="Xam.Plugin.ExternalMaps" Version="4.0.1" />
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.2.0" />
-    <PackageReference Include="Xamarin.FFImageLoading" Version="2.3.6" />
-    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.3.6" />
-    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.3.6" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.3.840" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.3.840" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.3.840" />
     <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.0.0.396" />
     <PackageReference Include="Xamarin.Forms.CarouselView" Version="2.3.0-pre2" />
