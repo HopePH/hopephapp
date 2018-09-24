@@ -43,9 +43,10 @@ namespace Yol.Punla.GatewayAccess
             return FakeData.FakeUsers.Contacts.Where(c => c.EmailAdd == emailAddress).FirstOrDefault();
         }
 
-        public Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions()
+        public async Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions()
         {
-            throw new System.NotImplementedException();
+            await Task.Delay(1);
+            return FakeData.FakeSurveys.Surveys;
         }
     }
 }
