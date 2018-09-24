@@ -48,8 +48,8 @@ namespace Yol.Punla.UnitTest.Barrack
             //crisisPageSteps.WhenITapTheCrisisIconFromTheMenuDetail();
             //navigationSteps.ThenIAmRedirectedToThePage("LogonPage");
 
-            var loginSteps = new LogonPageSteps(ScenarioContext.Current);
-            loginSteps.WhenITapTheLoginWithFacebookButtonWithAccount(LOGONUSEREMAIL);
+            //var loginSteps = new LogonPageSteps(ScenarioContext.Current);
+            //loginSteps.WhenITapTheLoginWithFacebookButtonWithAccount(LOGONUSEREMAIL);
         }
 
         [BeforeScenario("FacebookLogonViaWriteYourThoughtsMenu", Order = 1)]
@@ -71,8 +71,8 @@ namespace Yol.Punla.UnitTest.Barrack
             //postFeedPageSteps.WhenITapTheWriteDownIconFromTheMenuDetail();
             //navigationSteps.ThenIAmRedirectedToThePage("LogonPage");
 
-            var loginSteps = new LogonPageSteps(ScenarioContext.Current);
-            loginSteps.WhenITapTheLoginWithFacebookButtonWithMobileAccount(LOGONUSERMOBILE);
+            //var loginSteps = new LogonPageSteps(ScenarioContext.Current);
+            //loginSteps.WhenITapTheLoginWithFacebookButtonWithMobileAccount(LOGONUSERMOBILE);
         }
 
         [BeforeScenario("FacebookLogonViaNotificationsMenu", Order = 1)]
@@ -95,8 +95,8 @@ namespace Yol.Punla.UnitTest.Barrack
             //notificationsPageSteps.WhenITapTheNotificationsFromTheMenuDetail();
             //navigationSteps.ThenIAmRedirectedToThePage("LogonPage");
 
-            var loginSteps = new LogonPageSteps(ScenarioContext.Current);
-            loginSteps.WhenITapTheLoginWithFacebookButtonWithMobileAccount(LOGONUSERMOBILE);
+            //var loginSteps = new LogonPageSteps(ScenarioContext.Current);
+            //loginSteps.WhenITapTheLoginWithFacebookButtonWithMobileAccount(LOGONUSERMOBILE);
         }
 
         //#the OnResume bdd not working good

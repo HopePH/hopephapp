@@ -88,27 +88,23 @@ namespace Yol.Punla.UnitTest.Tests
 #line 4
  testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 5
-  testRunner.And("I am on the page \"QuestionnairePage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I am on the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 6
+ testRunner.When("I tap on the Sign In button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 7
+ testRunner.Then("I am redirected to the page \"RequestSigninVerificationCodePage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
         }
         
         public virtual void LoggingInToTheAppUsingValidEmailAndPassword(string fbAccount, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using valid email and password", exampleTags);
-#line 13
+#line 15
 this.ScenarioSetup(scenarioInfo);
 #line 3
 this.FeatureBackground();
-#line 14
- testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 15
-  testRunner.And("I am on the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
- testRunner.When(string.Format("I tap the Login with Facebook Button with account \"{0}\"", fbAccount), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
- testRunner.Then("I am authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 18
-  testRunner.And("I am redirected to the page \"PostFeedPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -120,7 +116,7 @@ this.FeatureBackground();
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbAccount", "hynrbf@gmail.com")]
         public virtual void LoggingInToTheAppUsingValidEmailAndPassword_HynrbfGmail_Com()
         {
-#line 13
+#line 15
 this.LoggingInToTheAppUsingValidEmailAndPassword("hynrbf@gmail.com", ((string[])(null)));
 #line hidden
         }

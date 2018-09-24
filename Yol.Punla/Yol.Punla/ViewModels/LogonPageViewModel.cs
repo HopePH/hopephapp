@@ -42,9 +42,6 @@ namespace Yol.Punla.ViewModels
 
         private void Signup() => NavigateToPageHelper(nameof(ViewNames.EmailVerificationPage), _navigationStackService, _navigationService, PassingParameters);
 
-        private void SigninWithAlias()
-        {
-            NavigateToPageHelper(nameof(ViewNames.RequestSigninVerificationCodePage), _navigationStackService, _navigationService, PassingParameters);
-        }
+        private void SigninWithAlias() => NavigateToPageHelper(nameof(ViewNames.RequestSigninVerificationCodePage), _navigationStackService, _navigationService, PassingParameters);
     }
 }

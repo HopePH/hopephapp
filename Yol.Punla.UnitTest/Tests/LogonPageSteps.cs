@@ -13,24 +13,10 @@ namespace Yol.Punla.UnitTest.Tests
     {
         public LogonPageSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }
 
-        [When(@"I tap the Login with Facebook Button with account ""(.*)""")]
-        public void WhenITapTheLoginWithFacebookButtonWithAccount(string fbEmail)
+        [When(@"I tap on the Sign In button")]
+        public void WhenITapOnTheSignInButton()
         {
-            Main.App.Container.GetContainer().Resolve<ContactEntry>().EmailAddress = fbEmail;
-           //ct0.temp Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().FacebookLogonCommand.Execute(null);
-        }
-
-        [When(@"I tap the Login with Facebook Button with mobile account ""(.*)""")]
-        public void WhenITapTheLoginWithFacebookButtonWithMobileAccount(string fbMobileNumber)
-        {
-            Main.App.Container.GetContainer().Resolve<ContactEntry>().MobilePhone = fbMobileNumber;
-            //ct0.temp  Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().FacebookLogonCommand.Execute(null);
-        }
-
-        [Then(@"I should see not registered account message is displayed")]
-        public void ThenIShouldSeeNotRegisteredAccountMessageIsDisplayed()
-        {
-            Main.App.Container.GetContainer().Resolve<NativeFacebookPageViewModel>().IsLogonIncorrectMessageDisplayed.ShouldBeTrue();
+            Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().GoToSigninWithAliasCommand.Execute(null);
         }
     }
 }

@@ -2,7 +2,9 @@
 
 Background:
 	Given I am not authenticated
-		And I am on the page "QuestionnairePage"
+		And I am on the page "LogonPage"
+	When I tap on the Sign In button
+	Then I am redirected to the page "RequestSigninVerificationCodePage"
 	#	And the menu detail is closed
 	#When I tap the hamburger icon
 	#Then I should see the menu detail is opened
@@ -12,10 +14,10 @@ Background:
 	
 Scenario Outline: Logging in to the app using valid email and password
 	Given I am not authenticated
-		And I am on the page "LogonPage"
-	When I tap the Login with Facebook Button with account "<fbAccount>"
-	Then I am authenticated
-		And I am redirected to the page "PostFeedPage"
+	#	And I am on the page "LogonPage"
+	#When I tap the Login with Facebook Button with account "<fbAccount>"
+	#Then I am authenticated
+	#	And I am redirected to the page "PostFeedPage"
 
 	Examples: 
 	| fbAccount        |

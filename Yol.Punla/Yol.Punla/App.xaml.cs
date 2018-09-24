@@ -129,7 +129,7 @@ namespace Yol.Punla
                 if (WasSignedUpAndLogon())
                     NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
                 else
-                    NavigateToModalRootPage(nameof(QuestionnairePage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                    NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
                 AllowAppPermissions();
             }
