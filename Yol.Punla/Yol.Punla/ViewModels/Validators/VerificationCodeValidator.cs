@@ -8,6 +8,7 @@ namespace Yol.Punla.ViewModels.Validators
     public class VerificationCodeValidator : AbstractValidator<ConfirmVerificationCodePageViewModel>
     {
         public readonly string CODEEQUALMSG = AppStrings.VerficationCodeError;
+
         public VerificationCodeValidator(string verificationCodeEntered)
         {
             RuleFor(x => x.VerificationCode)

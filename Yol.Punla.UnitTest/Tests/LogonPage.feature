@@ -1,27 +1,18 @@
 ﻿Feature: LogonPage
-
-Background:
+	
+Scenario Outline: Logging in to the app using valid email but incorrect verification code
 	Given I am not authenticated
 		And I am on the page "LogonPage"
 	When I tap on the Sign In button
 	Then I am redirected to the page "RequestSigninVerificationCodePage"
-	#	And the menu detail is closed
-	#When I tap the hamburger icon
-	#Then I should see the menu detail is opened
-	#When I tap the Write Down icon from the menu detail with authenticated "false" and signed up "true"
-	#Then I should see a message saying the user to sign up "When logging in your profile will still remain anonymous to the other users."
-	#	And I am redirected to the page "LogonPage"
-	
-Scenario Outline: Logging in to the app using valid email and password
-	Given I am not authenticated
-	#	And I am on the page "LogonPage"
-	#When I tap the Login with Facebook Button with account "<fbAccount>"
-	#Then I am authenticated
-	#	And I am redirected to the page "PostFeedPage"
+	When I enter my email address "<emailAddress>" and tap on the submit button
+	Then I am redirected to the page "ConfirmVerificationCodePage"
+	When I enter verification code "<verificationCode>" and tap submit button
+	Then I should see an error message "<errorMessage>"
 
 	Examples: 
-	| fbAccount        |
-	| hynrbf@gmail.com |
+	| emailAddress           | verificationCode | errorMessage                           |
+	| alfeo.salano@gmail.com | 2-2-2-2          | Please enter a valid verification code |
 
 #Scenario Outline: Logging in to the app using facebook mobile number account
 #	Given I am not authenticated

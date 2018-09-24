@@ -18,6 +18,8 @@ namespace Yol.Punla.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class RequestSigninVerificationCodePageViewModel : ViewModelBase
     {
+        private const string APPNAME = "HopePH";
+        private const string FAKEEMAIL = "Ret45ujhh@gboy.com";
         private readonly INavigationStackService _navigationStackService;
         private readonly INavigationService _navigationService;
         private readonly IContactManager _contactManager;
@@ -51,7 +53,7 @@ namespace Yol.Punla.ViewModels
             try
             {
                 IsBusy = true;
-                string existingEmail = (await _contactManager.CheckIfEmailExists(EmailAddress, "HopePH")) ? EmailAddress : "Ret45ujhh@gboy.com";
+                string existingEmail = (await _contactManager.CheckIfEmailExists(EmailAddress, APPNAME)) ? EmailAddress : FAKEEMAIL;
                 _validator = new RequestVerificationCodePageEmailValidator(EmailAddress, existingEmail);
 
                 if (ProcessValidationErrors(_validator.Validate(this), true))

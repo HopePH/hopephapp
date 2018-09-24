@@ -80,7 +80,7 @@
       <Version>2.0.10</Version>
     </PackageReference>
     <PackageReference Include="FluentValidation">
-      <Version>7.4.0</Version>
+      <Version>8.0.100</Version>
     </PackageReference>
     <PackageReference Include="HockeySDK.Xamarin">
       <Version>5.1.2</Version>

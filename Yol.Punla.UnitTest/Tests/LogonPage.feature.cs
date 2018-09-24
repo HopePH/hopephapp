@@ -82,9 +82,11 @@ namespace Yol.Punla.UnitTest.Tests
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
+        public virtual void LoggingInToTheAppUsingValidEmailButIncorrectVerificationCode(string emailAddress, string verificationCode, string errorMessage, string[] exampleTags)
         {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using valid email but incorrect verification code", exampleTags);
 #line 3
+this.ScenarioSetup(scenarioInfo);
 #line 4
  testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 5
@@ -93,31 +95,30 @@ namespace Yol.Punla.UnitTest.Tests
  testRunner.When("I tap on the Sign In button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 7
  testRunner.Then("I am redirected to the page \"RequestSigninVerificationCodePage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-        }
-        
-        public virtual void LoggingInToTheAppUsingValidEmailAndPassword(string fbAccount, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Logging in to the app using valid email and password", exampleTags);
-#line 15
-this.ScenarioSetup(scenarioInfo);
-#line 3
-this.FeatureBackground();
-#line 16
- testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 8
+ testRunner.When(string.Format("I enter my email address \"{0}\" and tap on the submit button", emailAddress), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 9
+ testRunner.Then("I am redirected to the page \"ConfirmVerificationCodePage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 10
+ testRunner.When(string.Format("I enter verification code \"{0}\" and tap submit button", verificationCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 11
+ testRunner.Then(string.Format("I should see an error message \"{0}\"", errorMessage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logging in to the app using valid email and password: hynrbf@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Logging in to the app using valid email but incorrect verification code: alfeo.sa" +
+            "lano@gmail.com")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "LogonPage")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "hynrbf@gmail.com")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:fbAccount", "hynrbf@gmail.com")]
-        public virtual void LoggingInToTheAppUsingValidEmailAndPassword_HynrbfGmail_Com()
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("VariantName", "alfeo.salano@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:emailAddress", "alfeo.salano@gmail.com")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:verificationCode", "2-2-2-2")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMessage", "Please enter a valid verification code")]
+        public virtual void LoggingInToTheAppUsingValidEmailButIncorrectVerificationCode_Alfeo_SalanoGmail_Com()
         {
-#line 15
-this.LoggingInToTheAppUsingValidEmailAndPassword("hynrbf@gmail.com", ((string[])(null)));
+#line 3
+this.LoggingInToTheAppUsingValidEmailButIncorrectVerificationCode("alfeo.salano@gmail.com", "2-2-2-2", "Please enter a valid verification code", ((string[])(null)));
 #line hidden
         }
     }
