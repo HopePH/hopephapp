@@ -15,171 +15,183 @@
         HorizontalOptions="FillAndExpand"
         RowSpacing="0"
         VerticalOptions="FillAndExpand">
-        <Grid
+        <ScrollView
             Padding="40,20,40,20"
             HorizontalOptions="FillAndExpand"
-            RowSpacing="0"
             VerticalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <ffImage:CachedImage
-                Grid.Row="0"
-                Margin="0,24,0,0"
-                Aspect="AspectFit"
-                HeightRequest="96"
-                HorizontalOptions="Center"
-                Source="icon"
-                VerticalOptions="Start"
-                WidthRequest="96" />
-            <customControl:MuseoLabel
-                Grid.Row="1"
-                Margin="0,46,0,0"
-                HorizontalOptions="Center"
-                Style="{StaticResource LabelLargeGreen}"
-                Text="{localization:Render LogonTitleVerify}"
-                VerticalOptions="Start" />
-            <customControl:MuseoLabel
-                Grid.Row="2"
-                Margin="0,20,0,0"
-                Text="{localization:Render LogonContentVerify}"
-                VerticalOptions="End">
-                <Label.Style>
-                    <OnPlatform
-                        x:TypeArguments="Style"
-                        Android="{StaticResource LabelXSmallDark}"
-                        iOS="{StaticResource LabelSmallDark}" />
-                </Label.Style>
-            </customControl:MuseoLabel>
-            <StackLayout
-                Grid.Row="3"
-                Margin="0,46,0,0"
-                HorizontalOptions="Center"
-                Orientation="Horizontal"
-                VerticalOptions="Start">
-                <Frame
-                    Padding="1"
-                    BackgroundColor="#FF979797"
-                    CornerRadius="4"
-                    HasShadow="False"
-                    HorizontalOptions="FillAndExpand"
-                    OutlineColor="#FF979797"
-                    WidthRequest="68">
-                    <Frame
-                        Padding="4"
-                        BackgroundColor="White"
-                        CornerRadius="5"
-                        HasShadow="False"
-                        HeightRequest="68"
-                        HorizontalOptions="FillAndExpand"
-                        OutlineColor="#FF979797">
-                        <Entry
-                            FontSize="40"
-                            HorizontalOptions="Center"
-                            Text="{Binding VerificationCodeEntered1}"
-                            VerticalOptions="Center">
-                            <Entry.Effects>
-                                <effects:EntryEffect />
-                            </Entry.Effects>
-                        </Entry>
-                    </Frame>
-                </Frame>
-                <Frame
-                    Padding="1"
-                    BackgroundColor="#FF979797"
-                    CornerRadius="4"
-                    HasShadow="False"
-                    HorizontalOptions="FillAndExpand"
-                    OutlineColor="#FF979797"
-                    WidthRequest="68">
-                    <Frame
-                        Padding="4"
-                        BackgroundColor="White"
-                        CornerRadius="5"
-                        HasShadow="False"
-                        HeightRequest="68"
-                        HorizontalOptions="FillAndExpand"
-                        OutlineColor="#FF979797">
-                        <Entry
-                            FontSize="40"
-                            HorizontalOptions="Center"
-                            Text="{Binding VerificationCodeEntered2}"
-                            VerticalOptions="Center">
-                            <Entry.Effects>
-                                <effects:EntryEffect />
-                            </Entry.Effects>
-                        </Entry>
-                    </Frame>
-                </Frame>
-                <Frame
-                    Padding="1"
-                    BackgroundColor="#FF979797"
-                    CornerRadius="4"
-                    HasShadow="False"
-                    HorizontalOptions="FillAndExpand"
-                    OutlineColor="#FF979797"
-                    WidthRequest="68">
-                    <Frame
-                        Padding="4"
-                        BackgroundColor="White"
-                        CornerRadius="5"
-                        HasShadow="False"
-                        HeightRequest="68"
-                        HorizontalOptions="FillAndExpand"
-                        OutlineColor="#FF979797">
-                        <Entry
-                            FontSize="40"
-                            HorizontalOptions="Center"
-                            Text="{Binding VerificationCodeEntered3}"
-                            VerticalOptions="End">
-                            <Entry.Effects>
-                                <effects:EntryEffect />
-                            </Entry.Effects>
-                        </Entry>
-                    </Frame>
-                </Frame>
-                <Frame
-                    Padding="1"
-                    BackgroundColor="#FF979797"
-                    CornerRadius="4"
-                    HasShadow="False"
-                    HorizontalOptions="FillAndExpand"
-                    OutlineColor="#FF979797"
-                    WidthRequest="68">
-                    <Frame
-                        Padding="4"
-                        BackgroundColor="White"
-                        CornerRadius="5"
-                        HasShadow="False"
-                        HeightRequest="68"
-                        HorizontalOptions="FillAndExpand"
-                        OutlineColor="#FF979797">
-                        <Entry
-                            FontSize="40"
-                            HorizontalOptions="Center"
-                            Text="{Binding VerificationCodeEntered4}"
-                            VerticalOptions="Center">
-                            <Entry.Effects>
-                                <effects:EntryEffect />
-                            </Entry.Effects>
-                        </Entry>
-                    </Frame>
-                </Frame>
-            </StackLayout>
-            <Button
-                Grid.Row="4"
-                Margin="0,0,0,18"
-                Command="{Binding SendVerificationCodeCommand}"
-                FontAttributes="Bold"
+            <Grid
                 HorizontalOptions="FillAndExpand"
-                Style="{StaticResource ButtonGreenSlim}"
-                Text="Continue"
-                VerticalOptions="End" />
-        </Grid>
+                RowSpacing="0"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ffImage:CachedImage
+                    Grid.Row="0"
+                    Margin="0,24,0,0"
+                    Aspect="AspectFit"
+                    HeightRequest="96"
+                    HorizontalOptions="Center"
+                    Source="icon"
+                    VerticalOptions="Start"
+                    WidthRequest="96" />
+                <customControl:MuseoLabel
+                    Grid.Row="1"
+                    Margin="0,46,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource LabelLargeGreen}"
+                    Text="{localization:Render LogonTitleVerify}"
+                    VerticalOptions="Start" />
+                <customControl:MuseoLabel
+                    Grid.Row="2"
+                    Margin="0,20,0,0"
+                    Text="{localization:Render LogonContentVerify}"
+                    VerticalOptions="End">
+                    <Label.Style>
+                        <OnPlatform
+                            x:TypeArguments="Style"
+                            Android="{StaticResource LabelXSmallDark}"
+                            iOS="{StaticResource LabelSmallDark}" />
+                    </Label.Style>
+                </customControl:MuseoLabel>
+                <StackLayout
+                    Grid.Row="3"
+                    Margin="0,46,0,0"
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    VerticalOptions="Start">
+                    <Frame
+                        Padding="1"
+                        BackgroundColor="#FF979797"
+                        CornerRadius="4"
+                        HasShadow="False"
+                        HorizontalOptions="FillAndExpand"
+                        OutlineColor="#FF979797"
+                        WidthRequest="68">
+                        <Frame
+                            Padding="4"
+                            BackgroundColor="White"
+                            CornerRadius="5"
+                            HasShadow="False"
+                            HeightRequest="68"
+                            HorizontalOptions="FillAndExpand"
+                            OutlineColor="#FF979797">
+                            <Entry
+                                FontSize="40"
+                                HorizontalOptions="Center"
+                                Text="{Binding VerificationCodeEntered1}"
+                                VerticalOptions="Center"
+                                WidthRequest="40">
+                                <Entry.Effects>
+                                    <effects:EntryEffect />
+                                </Entry.Effects>
+                            </Entry>
+                        </Frame>
+                    </Frame>
+                    <Frame
+                        Padding="1"
+                        BackgroundColor="#FF979797"
+                        CornerRadius="4"
+                        HasShadow="False"
+                        HorizontalOptions="FillAndExpand"
+                        OutlineColor="#FF979797"
+                        WidthRequest="68">
+                        <Frame
+                            Padding="4"
+                            BackgroundColor="White"
+                            CornerRadius="5"
+                            HasShadow="False"
+                            HeightRequest="68"
+                            HorizontalOptions="FillAndExpand"
+                            OutlineColor="#FF979797">
+                            <Entry
+                                FontSize="40"
+                                HorizontalOptions="Center"
+                                Text="{Binding VerificationCodeEntered2}"
+                                VerticalOptions="Center"
+                                WidthRequest="40">
+                                <Entry.Effects>
+                                    <effects:EntryEffect />
+                                </Entry.Effects>
+                            </Entry>
+                        </Frame>
+                    </Frame>
+                    <Frame
+                        Padding="1"
+                        BackgroundColor="#FF979797"
+                        CornerRadius="4"
+                        HasShadow="False"
+                        HorizontalOptions="FillAndExpand"
+                        OutlineColor="#FF979797"
+                        WidthRequest="68">
+                        <Frame
+                            Padding="4"
+                            BackgroundColor="White"
+                            CornerRadius="5"
+                            HasShadow="False"
+                            HeightRequest="68"
+                            HorizontalOptions="FillAndExpand"
+                            OutlineColor="#FF979797">
+                            <Entry
+                                FontSize="40"
+                                HorizontalOptions="Center"
+                                Text="{Binding VerificationCodeEntered3}"
+                                VerticalOptions="End"
+                                WidthRequest="40">
+                                <Entry.Effects>
+                                    <effects:EntryEffect />
+                                </Entry.Effects>
+                            </Entry>
+                        </Frame>
+                    </Frame>
+                    <Frame
+                        Padding="1"
+                        BackgroundColor="#FF979797"
+                        CornerRadius="4"
+                        HasShadow="False"
+                        HorizontalOptions="FillAndExpand"
+                        OutlineColor="#FF979797"
+                        WidthRequest="68">
+                        <Frame
+                            Padding="4"
+                            BackgroundColor="White"
+                            CornerRadius="5"
+                            HasShadow="False"
+                            HeightRequest="68"
+                            HorizontalOptions="FillAndExpand"
+                            OutlineColor="#FF979797">
+                            <Entry
+                                FontSize="40"
+                                HorizontalOptions="Center"
+                                Text="{Binding VerificationCodeEntered4}"
+                                VerticalOptions="Center"
+                                WidthRequest="40">
+                                <Entry.Effects>
+                                    <effects:EntryEffect />
+                                </Entry.Effects>
+                            </Entry>
+                        </Frame>
+                    </Frame>
+                </StackLayout>
+                <Button
+                    Grid.Row="4"
+                    Margin="0,0,0,16"
+                    Padding="36,0"
+                    BackgroundColor="#FF7ED321"
+                    BorderRadius="4"
+                    Command="{Binding SendVerificationCodeCommand}"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    Text="Next"
+                    TextColor="White"
+                    VerticalOptions="End" />
+            </Grid>
+        </ScrollView>
         <!--  Busy Indicator  -->
         <ContentView IsVisible="{Binding IsBusy}" Style="{StaticResource ContentViewForActivityIndicator}">
             <StackLayout
