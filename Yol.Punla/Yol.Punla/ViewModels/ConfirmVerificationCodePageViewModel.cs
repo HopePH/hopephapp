@@ -5,6 +5,7 @@ using Prism.Navigation;
 using Prism.Services;
 using PropertyChanged;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Unity;
@@ -18,6 +19,7 @@ using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 using Yol.Punla.ViewModels.Validators;
+using Yol.Punla.Views;
 
 namespace Yol.Punla.ViewModels
 {
@@ -78,12 +80,8 @@ namespace Yol.Punla.ViewModels
                     try
                     {
                         IsBusy = true;
-                        var clientFromRemote =  await _userManager.GetContact(emailAddress, "", true);
-
-                        if (clientFromRemote != null)
-                            GetLogonDetailsFromRemoteDBResult(clientFromRemote);
-                        else
-                            await GetLogonDetailsFromRemoteDBWrongResult();
+                        var clientFromRemote =  await _userManager.GetContact(emailAddress, true);
+                        if (clientFromRemote != null) NavigateSuccess(clientFromRemote);
                     }
                     catch (Exception ex)
                     {
@@ -93,9 +91,9 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        private void GetLogonDetailsFromRemoteDBResult(Entity.Contact clientFromRemote, bool isSuccess = true)
+        private void NavigateSuccess(Entity.Contact clientFromRemote)
         {
-            if (clientFromRemote != null && isSuccess)
+            if (clientFromRemote != null)
             {
                 string newPage = _keyValueCacheUtility.GetUserDefaultsKeyValue("NewPage");
                 _keyValueCacheUtility.RemoveKeyObject("NewPage");
@@ -107,12 +105,21 @@ namespace Yol.Punla.ViewModels
                 _keyValueCacheUtility.GetUserDefaultsKeyValue("CurrentContactId", clientFromRemote.RemoteId.ToString());
 
                 if (string.IsNullOrEmpty(newPage))
-                    ChangeRootAndNavigateToPageHelper(nameof(ViewNames.HomePage), _navigationStackService, _navigationService, PassingParameters);
+                    ChangeRootAndNavigateToPageHelper(nameof(MainTabbedPage) + AddPagesInTab(), _navigationStackService, _navigationService);
                 else
-                    ChangeRootAndNavigateToPageHelper(newPage, _navigationStackService, _navigationService, PassingParameters);
+                    ChangeRootAndNavigateToPageHelper(newPage, _navigationStackService, _navigationService);
             }
 
             IsBusy = false;
+        }
+        private string AddPagesInTab()
+        {
+            string path = "";
+            var children = new List<string>();
+            children.Add("addTab=PostFeedPage");
+            children.Add("addTab=SettingsPage"); 
+            path += "?" + string.Join("&", children);
+            return path;
         }
 
         private async Task GetLogonDetailsFromRemoteDBWrongResult(bool isSuccess = true)

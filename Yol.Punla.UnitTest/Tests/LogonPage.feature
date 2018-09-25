@@ -14,6 +14,32 @@ Scenario Outline: Logging in to the app using valid email but incorrect verifica
 	| emailAddress           | verificationCode | errorMessage                           |
 	| alfeo.salano@gmail.com | 2-2-2-2          | Please enter a valid verification code |
 
+Scenario Outline: Logging in to the app using not valid email
+	Given I am not authenticated
+		And I am on the page "LogonPage"
+	When I tap on the Sign In button
+	Then I am redirected to the page "RequestSigninVerificationCodePage"
+	When I enter my email address "<emailAddress>" and tap on the submit button
+	Then I should see in page request verification an error message "<errorMessage>"
+
+	Examples: 
+	| emailAddress                    | verificationCode | errorMessage                                          |
+	| alfeo.salano.notvalid@gmail.com | 2-2-2-2          | Your email does not exists yet. Please signup instead |
+
+Scenario Outline: Logging in to the app using valid email and valid verification code
+	Given I am not authenticated
+		And I am on the page "LogonPage"
+	When I tap on the Sign In button
+	Then I am redirected to the page "RequestSigninVerificationCodePage"
+	When I enter my email address "<emailAddress>" and tap on the submit button
+	Then I am redirected to the page "ConfirmVerificationCodePage"
+	When I enter verification code "<verificationCode>" and tap submit button
+	Then I am redirected to the page "MainTabbedPage"
+
+	Examples: 
+	| emailAddress           | verificationCode |
+	| alfeo.salano@gmail.com | 1-1-1-1          |
+
 #Scenario Outline: Logging in to the app using facebook mobile number account
 #	Given I am not authenticated
 #		And I am on the page "LogonPage"

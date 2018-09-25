@@ -28,7 +28,7 @@ namespace Yol.Punla.Managers
             _keyValueCachedUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
         }
 
-        public async Task<Contact> GetContact(string fbEmail, string FbId, bool isGetFromRest = true)
+        public async Task<Contact> GetContact(string fbEmail, bool isGetFromRest = true)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace Yol.Punla.Managers
 
                 if (_item == null || isGetFromRest)
                 {
-                    _item = await _userService.GetUserProfile(fbEmail, FbId);
+                    _item = await _userService.GetUserProfile(fbEmail);
                     _userRepository.UpdateItem(_item);
                 }
 

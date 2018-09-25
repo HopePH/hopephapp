@@ -13,10 +13,8 @@ namespace Yol.Punla.UnitTest.Tests
         public LogonPageSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }
 
         [When(@"I tap on the Sign In button")]
-        public void WhenITapOnTheSignInButton()
-        {
-            Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().GoToSigninWithAliasCommand.Execute(null);
-        }
+        public void WhenITapOnTheSignInButton() 
+            => Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().GoToSigninWithAliasCommand.Execute(null);
 
         [When(@"I enter my email address ""(.*)"" and tap on the submit button")]
         public void WhenIEnterMyEmailAddressAndTapOnTheSubmitButton(string emailAddress)
@@ -24,6 +22,10 @@ namespace Yol.Punla.UnitTest.Tests
             Main.App.Container.GetContainer().Resolve<RequestSigninVerificationCodePageViewModel>().EmailAddress = emailAddress;
             Main.App.Container.GetContainer().Resolve<RequestSigninVerificationCodePageViewModel>().RequestVerificationCodeCommand.Execute(null);
         }
+
+        [Then(@"I should see in page request verification an error message ""(.*)""")]
+        public void ThenIShouldSeeInPageRequestVerificationAnErrorMessage(string errorMessage)
+            => Main.App.Container.GetContainer().Resolve<RequestSigninVerificationCodePageViewModel>().PageErrors.ToString().ShouldEqual(errorMessage);
 
         [When(@"I enter verification code ""(.*)"" and tap submit button")]
         public void WhenIEnterVerificationCodeAndTapSubmitButton(string verificationCode)
@@ -37,9 +39,8 @@ namespace Yol.Punla.UnitTest.Tests
         }
 
         [Then(@"I should see an error message ""(.*)""")]
-        public void ThenIShouldSeeAnErrorMessage(string errorMessage)
-        {
-            Main.App.Container.GetContainer().Resolve<ConfirmVerificationCodePageViewModel>().PageErrors.ToString().ShouldEqual(errorMessage);
-        }
+        public void ThenIShouldSeeAnErrorMessage(string errorMessage) 
+            => Main.App.Container.GetContainer().Resolve<ConfirmVerificationCodePageViewModel>().PageErrors.ToString().ShouldEqual(errorMessage);
+        
     }
 }

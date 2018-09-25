@@ -35,10 +35,7 @@ namespace Yol.Punla.ViewModels
             _userManager = userManager;
         }
 
-        public override void PreparingPageBindings()
-        {
-            IsBusy = false;
-        }
+        public override void PreparingPageBindings() => IsBusy = false;
 
         private void Signup() => NavigateToPageHelper(nameof(ViewNames.EmailVerificationPage), _navigationStackService, _navigationService, PassingParameters);
 

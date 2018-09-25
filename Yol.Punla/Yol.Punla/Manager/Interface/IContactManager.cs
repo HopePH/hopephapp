@@ -7,7 +7,7 @@ namespace Yol.Punla.Managers
     public interface IContactManager
     {
         Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions();
-        Task<Entity.Contact> GetContact(string fbEmail,string FbId, bool isGetFromRest = true);
+        Task<Entity.Contact> GetContact(string fbEmail, bool isGetFromRest = true);
         Task<int> SaveDetailsToRemoteDB(Entity.Contact item);
         Task<string> SendVerificationCode(string emailAddress);
         Task<bool> CheckIfEmailExists(string emailAddress, string companyName);
