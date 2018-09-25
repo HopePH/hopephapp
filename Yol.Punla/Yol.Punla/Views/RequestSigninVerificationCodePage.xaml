@@ -14,70 +14,78 @@
         HorizontalOptions="FillAndExpand"
         RowSpacing="0"
         VerticalOptions="FillAndExpand">
-        <Grid
+        <ScrollView
             Padding="40,20,40,20"
             HorizontalOptions="FillAndExpand"
-            RowSpacing="0"
             VerticalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <ffImage:CachedImage
-                Grid.Row="0"
-                Margin="0,24,0,0"
-                Aspect="AspectFit"
-                HeightRequest="96"
-                HorizontalOptions="Center"
-                Source="icon"
-                VerticalOptions="Start"
-                WidthRequest="96" />
-            <customControl:MuseoLabel
-                Grid.Row="1"
-                Margin="0,46,0,0"
-                HorizontalOptions="Center"
-                Style="{StaticResource LabelLargeGreen}"
-                Text="{localization:Render LogonTitleCode}"
-                VerticalOptions="Start" />
-            <customControl:MuseoLabel
-                Grid.Row="2"
-                Margin="0,20,0,0"
-                HorizontalOptions="Center"
-                Style="{StaticResource LabelXSmallDark}"
-                Text="{localization:Render LogonContentCode}"
-                VerticalOptions="Start" />
-            <customControl:CustomEntry
-                Grid.Row="3"
-                BottomLineColor="Gray"
-                Placeholder="{Binding PlaceholderTitle}"
-                Text="{Binding EmailAddress}"
-                VerticalOptions="End">
-                <Entry.Style>
-                    <OnPlatform
-                        x:TypeArguments="Style"
-                        Android="{StaticResource EntrySmallDark}"
-                        iOS="{StaticResource EntryDefaultDark}" />
-                </Entry.Style>
-                <Entry.Margin>
-                    <OnPlatform
-                        x:TypeArguments="Thickness"
-                        Android="0,60,0,0"
-                        iOS="0,10,0,80" />
-                </Entry.Margin>
-            </customControl:CustomEntry>
-            <Button
-                Grid.Row="4"
-                Margin="0,0,0,18"
-                Command="{Binding RequestVerificationCodeCommand}"
-                FontAttributes="Bold"
+            <Grid
                 HorizontalOptions="FillAndExpand"
-                Style="{StaticResource ButtonGreenSlim}"
-                Text="Continue"
-                VerticalOptions="End" />
-        </Grid>
+                RowSpacing="0"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <ffImage:CachedImage
+                    Grid.Row="0"
+                    Margin="0,24,0,0"
+                    Aspect="AspectFit"
+                    HeightRequest="96"
+                    HorizontalOptions="Center"
+                    Source="icon"
+                    VerticalOptions="Start"
+                    WidthRequest="96" />
+                <customControl:MuseoLabel
+                    Grid.Row="1"
+                    Margin="0,46,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource LabelLargeGreen}"
+                    Text="{localization:Render LogonTitleCode}"
+                    VerticalOptions="Start" />
+                <customControl:MuseoLabel
+                    Grid.Row="2"
+                    Margin="0,20,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource LabelXSmallDark}"
+                    Text="{localization:Render LogonContentCode}"
+                    VerticalOptions="Start" />
+                <customControl:CustomEntry
+                    Grid.Row="3"
+                    BottomLineColor="Gray"
+                    Placeholder="{Binding PlaceholderTitle}"
+                    Text="{Binding EmailAddress}"
+                    VerticalOptions="End">
+                    <Entry.Style>
+                        <OnPlatform
+                            x:TypeArguments="Style"
+                            Android="{StaticResource EntrySmallDark}"
+                            iOS="{StaticResource EntryDefaultDark}" />
+                    </Entry.Style>
+                    <Entry.Margin>
+                        <OnPlatform
+                            x:TypeArguments="Thickness"
+                            Android="0,60,0,0"
+                            iOS="0,10,0,80" />
+                    </Entry.Margin>
+                </customControl:CustomEntry>
+                <Button
+                    Grid.Row="4"
+                    Margin="0,0,0,16"
+                    Padding="36,0"
+                    BackgroundColor="#FF7ED321"
+                    BorderRadius="4"
+                    Command="{Binding RequestVerificationCodeCommand}"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Text="Next"
+                    TextColor="White" />
+            </Grid>
+        </ScrollView>
         <!--  Busy Indicator  -->
         <ContentView IsVisible="{Binding IsBusy}" Style="{StaticResource ContentViewForActivityIndicator}">
             <StackLayout

@@ -61,6 +61,8 @@ namespace Yol.Punla.ViewModels
                     PassingParameters.Add("EmailAddress", EmailAddress);
                     NavigateToPageHelper(nameof(ViewNames.ConfirmVerificationCodePage), _navigationStackService, _navigationService, PassingParameters);
                 }
+                else
+                    EmailAddress = String.Empty;
             }
             catch (Exception ex)
             {
