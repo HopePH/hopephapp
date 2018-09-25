@@ -29,13 +29,12 @@ namespace Yol.Punla.ViewModels
             IAppUser appUser) : base(serviceMapper, appUser)
         {
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
-            Title = AppStrings.TitleSettings;
+            Title = "Settings";
         }
 
         public override void PreparingPageBindings()
         {
             IsShowBackArrow = false;
-            //ct0.temp  to ayus pa itsura Title = "Settings";
             IsBusy = false;
         }
 

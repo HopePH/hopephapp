@@ -51,6 +51,10 @@ namespace Yol.Punla.ViewModels
             System.Diagnostics.Debug.WriteLine($"{Title} is executing OnNavigatingTo");
             var message = parameters.GetValue<string>("message");
             Message = $"{Title} Initialized by OnNavigatingTo: {message}";
+
+            PassingParameters = parameters;
+            PreparingPageBindingsChild();
+            PassingParameters = new NavigationParameters();
         }
 
         public void Destroy()
@@ -59,9 +63,14 @@ namespace Yol.Punla.ViewModels
             _ea.GetEvent<InitializeTabbedChildrenEvent>().Unsubscribe(OnInitializationEventFired);
         }
 
-        public override void PreparingPageBindings()
+        public new virtual void OnAppearing() { }
+
+        public new virtual void OnDisappearing() { }
+
+        public override void PreparingPageBindings() { }
+
+        public virtual void PreparingPageBindingsChild()
         {
-            //do nothing
         }
     }
 }
