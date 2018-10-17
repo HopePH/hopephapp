@@ -18,6 +18,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="darkGreen">#417504</Color>
+            <Color x:Key="placeholderGray">#A5A5A5</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
     <!--<Grid
@@ -567,11 +568,11 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="65" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--  HEADER  -->
-        <Grid Grid.Row="0" BackgroundColor="Yellow">
+        <Grid Grid.Row="0" BackgroundColor="Transparent">
             <Grid.Padding>
                 <OnPlatform
                     x:TypeArguments="Thickness"
@@ -619,13 +620,63 @@
                 HeightRequest="50"
                 Source="http://www.miscellaneoushi.com/thumbnails/detail/20121023/aircraft%20wood%20toys%20children%20objects%20ornaments%201600x900%20wallpaper_www.miscellaneoushi.com_13.jpg">
                 <ffImage:CachedImage.Transformations>
-                    <ffImageTransformation:CircleTransformation />
+                    <ffImageTransformation:CircleTransformation BorderHexColor="#7FCD27" BorderSize="20" />
                 </ffImage:CachedImage.Transformations>
             </ffImage:CachedImage>
             <ContentView Grid.Column="2" />
         </Grid>
-        <!--  NEW POST ENTRY  -->
-
+        <!--  WHAT'S ON YOUR MIND  -->
+        <Frame
+            Grid.Row="1"
+            Margin="10,3,10,0"
+            Padding="1"
+            BackgroundColor="Transparent"
+            BorderColor="#eeeff0"
+            CornerRadius="2"
+            HasShadow="True">
+            <Grid Padding="10,2,10,0" BackgroundColor="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <!--  PROFILE IMAGE  -->
+                <ffImage:CachedImage
+                    Grid.Column="0"
+                    Aspect="AspectFit"
+                    BackgroundColor="Transparent"
+                    HeightRequest="30"
+                    Source="http://www.miscellaneoushi.com/thumbnails/detail/20121023/aircraft%20wood%20toys%20children%20objects%20ornaments%201600x900%20wallpaper_www.miscellaneoushi.com_13.jpg">
+                    <ffImage:CachedImage.Transformations>
+                        <ffImageTransformation:CircleTransformation />
+                    </ffImage:CachedImage.Transformations>
+                </ffImage:CachedImage>
+                <!--  POST ENTRY  -->
+                <customControl:CustomEntry
+                    Grid.Column="1"
+                    BottomLineColor="Transparent"
+                    Keyboard="Default"
+                    Placeholder="What's on your mind ?"
+                    PlaceholderColor="{StaticResource placeholderGray}"
+                    Text=""
+                    TextSize="12"
+                    VerticalOptions="Center" />
+                <!--  CAMERA ICON  -->
+                <Label
+                    Grid.Column="2"
+                    Margin="0,0,10,0"
+                    FontFamily="FontAwesome"
+                    FontSize="20"
+                    HorizontalTextAlignment="Center"
+                    Text="{StaticResource fa-camera}"
+                    TextColor="{StaticResource darkGreen}"
+                    VerticalTextAlignment="Center">
+                    <Label.Behaviors>
+                        <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                    </Label.Behaviors>
+                </Label>
+            </Grid>
+        </Frame>
         <!--  LIST OF POSTS  -->
     </Grid>
 </local:AppViewBase>
