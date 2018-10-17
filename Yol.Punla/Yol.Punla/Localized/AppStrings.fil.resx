@@ -426,4 +426,7 @@ Kindly click the close button above to start. :)</value>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot Password</value>
   </data>
+  <data name="Wall" xml:space="preserve">
+    <value>Wall</value>
+  </data>
 </root>

@@ -907,6 +907,15 @@ namespace Yol.Punla.Localized {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wall.
+        /// </summary>
+        public static string Wall {
+            get {
+                return ResourceManager.GetString("Wall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Write Down What You Want to Say.
         /// </summary>
         public static string WDWYWTS {
