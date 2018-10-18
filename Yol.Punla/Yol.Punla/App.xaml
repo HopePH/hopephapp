@@ -181,6 +181,7 @@
             <x:String x:Key="fa-comment-o">&#xf0e5;</x:String>
             <x:String x:Key="fa-share-alt">&#xf1e0;</x:String>
             <x:String x:Key="fa-ellipsis-v">&#xf142;</x:String>
+            <x:String x:Key="fa-ellipsis-h">&#xf141;</x:String>
             <x:String x:Key="fa-video-camera">&#xf03d;</x:String>
             <x:String x:Key="fa-camera">&#xf030;</x:String>
             <x:String x:Key="fa-gear">&#xf013;</x:String>
@@ -194,6 +195,9 @@
             <x:String x:Key="fa-arrow-left">&#xf060;</x:String>
             <x:String x:Key="fa-locked">&#xf023;</x:String>
             <x:String x:Key="fa-bell">&#xf0f3;</x:String>
+            <x:String x:Key="fa-arrow-alt-circle-up">&#xf35b;</x:String>
+            <x:String x:Key="fa-cared-down">&#xf0d7;</x:String>
+            <x:String x:Key="fa-comment-rectangle">&#xf27a;</x:String>
 
             <Style x:Key="FontIcon" TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center" />

@@ -183,11 +183,11 @@
   <ItemGroup>
     <Compile Include="CustomRenderers\CustomEntryRenderer.cs" />
     <Compile Include="CustomRenderers\DroidResource.cs" />
-    <Compile Include="CustomRenderers\FontAwesomeRenderer.cs" />
     <Compile Include="CustomRenderers\MultilineEntryRenderer.cs" />
     <Compile Include="CustomRenderers\MuseoLabelRenderer.cs" />
     <Compile Include="Effects\EditorTransparentBottomlineEffectDroid.cs" />
     <Compile Include="Effects\EntryEffectDroid.cs" />
+    <Compile Include="Effects\FontIconEffectDroid.cs" />
     <Compile Include="Effects\SliderColorEffectDroid.cs" />
     <Compile Include="Effects\SwitchColorEffectDroid.cs" />
     <Compile Include="Effects\TransparentBottomBorderSearchBarEffectDroid.cs" />
@@ -214,6 +214,8 @@
     <AndroidAsset Include="Assets\MuseoSansBold.otf" />
     <AndroidAsset Include="Assets\MuseoSansBoldItalic.otf" />
     <AndroidAsset Include="Assets\MuseoSansCyrl_0.otf" />
+    <AndroidAsset Include="Assets\FontAwesomeRegular.otf" />
+    <AndroidAsset Include="Assets\FontAwesomeSolid.otf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\FacebookLayout.axml" />

@@ -4,7 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
+    xmlns:converters="clr-namespace:Yol.Punla.Converters;assembly=Yol.Punla"
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
@@ -19,6 +21,13 @@
         <ResourceDictionary>
             <Color x:Key="darkGreen">#417504</Color>
             <Color x:Key="placeholderGray">#A5A5A5</Color>
+            <Color x:Key="posterAliasColor">#4A4A4A</Color>
+            <Color x:Key="postContentTextColor">#707070</Color>
+            <Color x:Key="ellipsisHTextColor">#9B9B9B</Color>
+            <Color x:Key="postDateTextColor">#B4B4B4</Color>
+            <Color x:Key="statsLightGreen">#85D52D</Color>
+
+            <converters:DateTextToElapsedTimeConverter x:Key="ToElapsedTime" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <!--<Grid
@@ -596,6 +605,9 @@
                     Text="{StaticResource fa-bell}"
                     TextColor="{StaticResource darkGreen}"
                     VerticalTextAlignment="Start">
+                    <Label.Effects>
+                        <effects:FontIconEffect />
+                    </Label.Effects>
                     <Label.Behaviors>
                         <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
                     </Label.Behaviors>
@@ -625,6 +637,7 @@
             </ffImage:CachedImage>
             <ContentView Grid.Column="2" />
         </Grid>
+
         <!--  WHAT'S ON YOUR MIND  -->
         <Frame
             Grid.Row="1"
@@ -671,12 +684,280 @@
                     Text="{StaticResource fa-camera}"
                     TextColor="{StaticResource darkGreen}"
                     VerticalTextAlignment="Center">
+                    <Label.Effects>
+                        <effects:FontIconEffect />
+                    </Label.Effects>
                     <Label.Behaviors>
                         <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
                     </Label.Behaviors>
                 </Label>
             </Grid>
         </Frame>
+
         <!--  LIST OF POSTS  -->
+        <ScrollView
+            Grid.Row="2"
+            Margin="0,8,0,0"
+            BackgroundColor="Transparent">
+            <ListView
+                HasUnevenRows="True"
+                ItemsSource="{Binding PostsList}"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                Margin="10,3,10,0"
+                                Padding="1"
+                                BackgroundColor="Transparent"
+                                BorderColor="#eeeff0"
+                                CornerRadius="2"
+                                HasShadow="True">
+                                <Grid
+                                    Padding="0,10,0,0"
+                                    BackgroundColor="Transparent"
+                                    RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="1" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <!--  POSTER NAME AND DATE POSTED  -->
+                                    <Grid Grid.Row="0" Margin="15,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <!--  PROFILE IMAGE  -->
+                                        <ffImage:CachedImage
+                                            Grid.Column="0"
+                                            Aspect="AspectFit"
+                                            BackgroundColor="Transparent"
+                                            HeightRequest="30"
+                                            Source="http://www.miscellaneoushi.com/thumbnails/detail/20121023/aircraft%20wood%20toys%20children%20objects%20ornaments%201600x900%20wallpaper_www.miscellaneoushi.com_13.jpg">
+                                            <ffImage:CachedImage.Transformations>
+                                                <ffImageTransformation:CircleTransformation />
+                                            </ffImage:CachedImage.Transformations>
+                                        </ffImage:CachedImage>
+
+                                        <!--  ALIAS AND DATE POSTED  -->
+                                        <StackLayout
+                                            Grid.Column="1"
+                                            Spacing="0"
+                                            VerticalOptions="Center">
+                                            <customControl:MuseoLabel
+                                                Font="15"
+                                                FontAttributes="Bold"
+                                                Text="{Binding AliasName}"
+                                                TextColor="{StaticResource posterAliasColor}" />
+                                            <customControl:MuseoLabel
+                                                FontSize="10"
+                                                Text="{Binding DatePosted, Converter={StaticResource ToElapsedTime}}"
+                                                TextColor="{StaticResource postDateTextColor}" />
+                                        </StackLayout>
+
+                                        <!--  OTHER OPTIONS ICON  -->
+                                        <Label
+                                            Grid.Column="2"
+                                            FontFamily="FontAwesome"
+                                            FontSize="15"
+                                            Text="{StaticResource fa-ellipsis-h}"
+                                            TextColor="{StaticResource ellipsisHTextColor}"
+                                            VerticalTextAlignment="Center">
+                                            <Label.Effects>
+                                                <effects:FontIconEffect />
+                                            </Label.Effects>
+                                            <Label.Behaviors>
+                                                <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                            </Label.Behaviors>
+                                        </Label>
+                                        <!--  IsVisible={Binding IsSelfPosted, Mode=TwoWay}  -->
+                                    </Grid>
+
+                                    <!--  POST TEXT  -->
+                                    <ContentView Grid.Row="1" Margin="15,0,15,10">
+                                        <customControl:MuseoLabel
+                                            BackgroundColor="Transparent"
+                                            FontSize="12"
+                                            Text="{Binding ContentText}"
+                                            TextColor="{StaticResource postContentTextColor}" />
+                                    </ContentView>
+
+                                    <!--  POST STATS  -->
+                                    <Grid Grid.Row="2" Margin="15,0,15,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--  PAYOUT STAT  -->
+                                        <StackLayout
+                                            Grid.Column="0"
+                                            BackgroundColor="Transparent"
+                                            Orientation="Horizontal"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                FontFamily="FontAwesome"
+                                                FontSize="12"
+                                                Text="{StaticResource fa-arrow-alt-circle-up}"
+                                                TextColor="{StaticResource statsLightGreen}"
+                                                VerticalTextAlignment="Center">
+                                                <Label.Effects>
+                                                    <effects:FontIconEffect IconType="REGULAR" />
+                                                </Label.Effects>
+                                                <Label.Behaviors>
+                                                    <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                                </Label.Behaviors>
+                                            </Label>
+                                            <customControl:MuseoLabel
+                                                FontSize="12"
+                                                Text="$526.51"
+                                                TextColor="{StaticResource statsLightGreen}" />
+                                            <Label
+                                                FontFamily="FontAwesome"
+                                                FontSize="12"
+                                                Text="{StaticResource fa-cared-down}"
+                                                TextColor="#4A7B10"
+                                                VerticalTextAlignment="Center">
+                                                <Label.Effects>
+                                                    <effects:FontIconEffect IconType="SOLID" />
+                                                </Label.Effects>
+                                                <Label.Behaviors>
+                                                    <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                                </Label.Behaviors>
+                                            </Label>
+                                        </StackLayout>
+
+                                        <!--  COMMENTS  -->
+                                        <customControl:MuseoLabel
+                                            Grid.Column="1"
+                                            FontAttributes="Bold"
+                                            FontSize="9"
+                                            Text="24 Comments"
+                                            TextColor="#5E8A2A"
+                                            VerticalTextAlignment="Center" />
+
+                                        <!--  SUPPORTS  -->
+                                        <StackLayout
+                                            Grid.Column="2"
+                                            Margin="10,0,0,0"
+                                            Orientation="Horizontal"
+                                            VerticalOptions="Center">
+                                            <Label
+                                                FontFamily="FontAwesome"
+                                                FontSize="10"
+                                                Text="{StaticResource fa-heart}"
+                                                TextColor="#5E8A2A"
+                                                VerticalTextAlignment="Center">
+                                                <Label.Effects>
+                                                    <effects:FontIconEffect IconType="SOLID" />
+                                                </Label.Effects>
+                                                <Label.Behaviors>
+                                                    <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                                </Label.Behaviors>
+                                            </Label>
+                                            <customControl:MuseoLabel
+                                                FontAttributes="Bold"
+                                                FontSize="9"
+                                                Text="20"
+                                                TextColor="#5E8A2A"
+                                                VerticalTextAlignment="Center" />
+                                        </StackLayout>
+                                    </Grid>
+
+                                    <!--  SEPARATOR  -->
+                                    <BoxView Grid.Row="3" BackgroundColor="#EFEFEF" />
+
+                                    <!--  POST ACTIONS  -->
+                                    <Grid
+                                        Grid.Row="4"
+                                        Margin="15,0,15,0"
+                                        Padding="0"
+                                        BackgroundColor="#EFEFEF"
+                                        ColumnSpacing="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--  COMMENT POST  -->
+                                        <ContentView
+                                            Grid.Column="0"
+                                            BackgroundColor="White"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill">
+                                            <StackLayout
+                                                HorizontalOptions="Center"
+                                                Orientation="Horizontal"
+                                                Spacing="10"
+                                                VerticalOptions="Center">
+                                                <Label
+                                                    FontFamily="FontAwesome"
+                                                    FontSize="15"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    Text="{StaticResource fa-comment-rectangle}"
+                                                    TextColor="#5E8A2A"
+                                                    VerticalTextAlignment="Center">
+                                                    <Label.Effects>
+                                                        <effects:FontIconEffect IconType="SOLID" />
+                                                    </Label.Effects>
+                                                    <Label.Behaviors>
+                                                        <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                                    </Label.Behaviors>
+                                                </Label>
+                                                <customControl:MuseoLabel
+                                                    BackgroundColor="Transparent"
+                                                    FontSize="12"
+                                                    Text="Comment"
+                                                    TextColor="{StaticResource postContentTextColor}"
+                                                    VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                        </ContentView>
+
+                                        <!--  SUPPORT POST  -->
+                                        <ContentView
+                                            Grid.Column="1"
+                                            BackgroundColor="White"
+                                            HorizontalOptions="Fill"
+                                            VerticalOptions="Fill">
+                                            <StackLayout
+                                                HorizontalOptions="Center"
+                                                Orientation="Horizontal"
+                                                Spacing="10"
+                                                VerticalOptions="Center">
+                                                <Label
+                                                    FontFamily="FontAwesome"
+                                                    FontSize="15"
+                                                    HorizontalOptions="EndAndExpand"
+                                                    Text="{StaticResource fa-heart-o}"
+                                                    TextColor="#5E8A2A"
+                                                    VerticalTextAlignment="Center">
+                                                    <Label.Effects>
+                                                        <effects:FontIconEffect />
+                                                    </Label.Effects>
+                                                    <Label.Behaviors>
+                                                        <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                                    </Label.Behaviors>
+                                                </Label>
+                                                <customControl:MuseoLabel
+                                                    BackgroundColor="Transparent"
+                                                    FontSize="12"
+                                                    Text="Support"
+                                                    TextColor="{StaticResource postContentTextColor}"
+                                                    VerticalTextAlignment="Center" />
+                                            </StackLayout>
+                                        </ContentView>
+                                    </Grid>
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
     </Grid>
 </local:AppViewBase>

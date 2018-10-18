@@ -102,6 +102,7 @@
     <Compile Include="CustomRenderers\MuseoLabelRenderer.cs" />
     <Compile Include="CustomRenderers\NativeFacebookPageRenderer.cs" />
     <Compile Include="Effects\EditorTransparentBottomlineEffectiOS.cs" />
+    <Compile Include="Effects\FontIconEffectIos.cs" />
     <Compile Include="Effects\SwitchColorEffectsIOS.cs" />
     <Compile Include="Effects\TransparentBottomBorderSearchBarEffectiOS.cs" />
     <Compile Include="Main.cs" />
@@ -123,6 +124,8 @@
     <BundleResource Include="Resources\MuseoSansBold.otf" />
     <BundleResource Include="Resources\MuseoSansBoldItalic.otf" />
     <BundleResource Include="Resources\MuseoSansCyrl_0.otf" />
+    <BundleResource Include="Resources\FontAwesomeRegular.otf" />
+    <BundleResource Include="Resources\FontAwesomeSolid.otf" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-60%402x.png" />
