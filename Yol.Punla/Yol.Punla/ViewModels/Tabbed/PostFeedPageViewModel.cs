@@ -142,13 +142,18 @@ namespace Yol.Punla.ViewModels
             {
                 CreateNewHandledTokenSource("PostFeedPageViewModel.PreparePageBindingsAsync", 20);
 
-                var postList = await Task.Run(() =>
+                if (CurrentContact != null)
                 {
-                    Debug.WriteLine("HOPEPH Getting all post");
-                    return _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
-                }, TokenHandler.Token);
+                    var postList = await Task.Run(() =>
+                            {
+                                Debug.WriteLine("HOPEPH Getting all post");
+                                return _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
+                            }, TokenHandler.Token); 
+                }
                 
-                PostsList = new ObservableCollection<Entity.PostFeed>(postList.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
+                // TODO : Uncomment this. This is the original
+                //PostsList = new ObservableCollection<Entity.PostFeed>(postList.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
+                PostsList = new ObservableCollection<Entity.PostFeed>(FakeData.FakePostFeeds.Posts.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
                 PreparePageBindingsResult(TokenHandler.IsTokenSourceCompleted());
             }
             catch (Exception ex)

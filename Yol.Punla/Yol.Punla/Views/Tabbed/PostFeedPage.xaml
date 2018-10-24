@@ -707,7 +707,7 @@
                     <DataTemplate>
                         <ViewCell>
                             <Frame
-                                Margin="10,3,10,0"
+                                Margin="10,3,10,10"
                                 Padding="1"
                                 BackgroundColor="Transparent"
                                 BorderColor="#eeeff0"
@@ -891,13 +891,14 @@
                                             HorizontalOptions="Fill"
                                             VerticalOptions="Fill">
                                             <StackLayout
+                                                Padding="7"
                                                 HorizontalOptions="Center"
                                                 Orientation="Horizontal"
                                                 Spacing="10"
                                                 VerticalOptions="Center">
                                                 <Label
                                                     FontFamily="FontAwesome"
-                                                    FontSize="15"
+                                                    FontSize="10"
                                                     HorizontalOptions="EndAndExpand"
                                                     Text="{StaticResource fa-comment-rectangle}"
                                                     TextColor="#5E8A2A"
@@ -911,7 +912,7 @@
                                                 </Label>
                                                 <customControl:MuseoLabel
                                                     BackgroundColor="Transparent"
-                                                    FontSize="12"
+                                                    FontSize="10"
                                                     Text="Comment"
                                                     TextColor="{StaticResource postContentTextColor}"
                                                     VerticalTextAlignment="Center" />
@@ -931,7 +932,7 @@
                                                 VerticalOptions="Center">
                                                 <Label
                                                     FontFamily="FontAwesome"
-                                                    FontSize="15"
+                                                    FontSize="10"
                                                     HorizontalOptions="EndAndExpand"
                                                     Text="{StaticResource fa-heart-o}"
                                                     TextColor="#5E8A2A"
@@ -945,7 +946,7 @@
                                                 </Label>
                                                 <customControl:MuseoLabel
                                                     BackgroundColor="Transparent"
-                                                    FontSize="12"
+                                                    FontSize="10"
                                                     Text="Support"
                                                     TextColor="{StaticResource postContentTextColor}"
                                                     VerticalTextAlignment="Center" />
