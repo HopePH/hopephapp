@@ -12,6 +12,7 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
     x:Name="PostDetailPage"
+    Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True">
     <Grid
         Padding="0"
@@ -23,9 +24,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
         <template:NavigationSearchBar Grid.Row="0" />
-
         <ContentView
             Grid.Row="1"
             Margin="0"
@@ -47,7 +46,6 @@
                 </customControl:MuseoLabel>
             </ContentView>
         </ContentView>
-
         <StackLayout
             Grid.Row="2"
             Padding="20,10"
@@ -76,7 +74,6 @@
                 </ContentView.GestureRecognizers>
             </ContentView>
         </StackLayout>
-
         <!--  POSTS HERE  -->
         <ListView
             x:Name="PostsList"
@@ -204,14 +201,12 @@
                                             </ContentView>
                                         </ContentView>
                                     </Grid>
-
                                     <customControl:MuseoLabel
                                         Grid.Row="1"
                                         BackgroundColor="Transparent"
                                         FontSize="12"
                                         Text="{Binding ContentText}"
                                         TextColor="Black" />
-
                                     <Grid
                                         Grid.Row="2"
                                         Padding="0,0,10,0"
@@ -285,7 +280,6 @@
                                             </Grid>
                                         </ContentView>
                                     </Grid>
-
                                     <StackLayout Grid.Row="3" Orientation="Horizontal">
                                         <StackLayout.Padding>
                                             <OnPlatform
@@ -310,12 +304,10 @@
                                             Text="{Binding NoOfComments, StringFormat='{0} Comments'}"
                                             VerticalTextAlignment="Center" />
                                     </StackLayout>
-
                                     <BoxView
                                         Grid.Row="4"
                                         Margin="0,0,10,0"
                                         BackgroundColor="{StaticResource BoxGrayBorderColor}" />
-
                                     <Grid
                                         Grid.Row="5"
                                         Padding="20,0,30,0"
@@ -428,7 +420,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
         <!--  POST OPTIONS MODAL  -->
         <ContentView
             Grid.RowSpan="4"
@@ -459,7 +450,6 @@
                     <RowDefinition Height="1" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <ContentView Grid.Row="0">
                     <Label
                         BackgroundColor="Transparent"
@@ -481,7 +471,6 @@
                         <TapGestureRecognizer Command="{Binding ClosePostOptionsCommand}" NumberOfTapsRequired="1" />
                     </ContentView.GestureRecognizers>
                 </ContentView>
-
                 <StackLayout Grid.Row="1" Orientation="Horizontal">
                     <customControl:MuseoLabel HorizontalOptions="StartAndExpand" Text="Edit Current Post" />
                     <Label
@@ -492,9 +481,7 @@
                         <TapGestureRecognizer Command="{Binding EditPostCommand}" NumberOfTapsRequired="1" />
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
-
                 <BoxView Grid.Row="2" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
-
                 <StackLayout Grid.Row="3" Orientation="Horizontal">
                     <customControl:MuseoLabel HorizontalOptions="StartAndExpand" Text="Delete Current Post" />
                     <Label
@@ -507,7 +494,6 @@
                 </StackLayout>
             </Grid>
         </ContentView>
-
         <!--  BUSY INDICATOR  -->
         <ContentView
             Grid.RowSpan="4"
@@ -521,7 +507,6 @@
                     IsRunning="{Binding IsBusy, Mode=OneWay}"
                     IsVisible="{Binding IsBusy}"
                     Style="{StaticResource ActivityIndicatorMain}" />
-
                 <customControl:MuseoLabel
                     HorizontalOptions="Center"
                     Opacity="1"
@@ -530,21 +515,20 @@
                     VerticalOptions="Center" />
             </StackLayout>
         </ContentView>
-
         <!--  Instructions MODAL  -->
         <StackLayout
             Grid.RowSpan="4"
             BackgroundColor="{StaticResource PopUpBackgroundColor}"
             IsVisible="{Binding IsShowPullDownInstruction}">
-            <ContentView.Padding>
+            <StackLayout.Padding>
                 <OnPlatform
                     x:TypeArguments="Thickness"
                     Android="40,400,40,140"
                     iOS="40,400,40,140" />
-            </ContentView.Padding>
-            <ContentView.GestureRecognizers>
+            </StackLayout.Padding>
+            <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding RemovePullDownInstructionCommand}" NumberOfTapsRequired="1" />
-            </ContentView.GestureRecognizers>
+            </StackLayout.GestureRecognizers>
             <Label
                 FontFamily="FontAwesome"
                 FontSize="85"

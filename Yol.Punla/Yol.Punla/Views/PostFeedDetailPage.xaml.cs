@@ -125,7 +125,7 @@ namespace Yol.Punla.Views
                         var currentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.Contact>(message.CurrentUser);
                         addedComment.PosterId = message.CurrentUser.Id;
 
-                        if (addedComment.PostFeedLevel == 1)
+                        if (addedComment.PostFeedLevel == 1 && viewModel.CurrentPostFeed.PostFeedID == addedComment.PostFeedParentId)
                         {
                             addedComment.Poster = currentUser;
                             addedComment.PosterProfilePhotoFB = addedComment.Poster.FBLink;

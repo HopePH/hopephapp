@@ -186,7 +186,6 @@
     <Compile Include="CustomRenderers\FontAwesomeRenderer.cs" />
     <Compile Include="CustomRenderers\MultilineEntryRenderer.cs" />
     <Compile Include="CustomRenderers\MuseoLabelRenderer.cs" />
-    <Compile Include="CustomRenderers\NativeFacebookPageRenderer.cs" />
     <Compile Include="Effects\EditorTransparentBottomlineEffectDroid.cs" />
     <Compile Include="Effects\EntryEffectDroid.cs" />
     <Compile Include="Effects\SliderColorEffectDroid.cs" />

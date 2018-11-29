@@ -140,8 +140,7 @@ namespace Yol.Punla.Utility
             HttpClient httpClient = new HttpClient();
             var result = await httpClient.PostAsync(endPoint, jsonContent);
             var resultCode = result.StatusCode;
-            MessagingCenter.Send<HttpResponseMessage<int>>(new HttpResponseMessage<int> { HttpStatusCode = resultCode }, "DeletePostFeedToHubResultCode");
-    
+            MessagingCenter.Send<HttpResponseMessage<int>>(new HttpResponseMessage<int> { HttpStatusCode = resultCode }, "DeletePostFeedToHubResultCode");    
         }
 
         private static async Task<HttpResponseMessage<T>> PostRemoteAsync<T>(string endPoint, HttpContent httpContent)

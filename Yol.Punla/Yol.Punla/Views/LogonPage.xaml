@@ -6,8 +6,7 @@
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
-    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
-    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla">
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla">
     <AbsoluteLayout HorizontalOptions="Fill" VerticalOptions="Fill">
         <Image
             AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -60,39 +59,28 @@
                     <customControl:MuseoLabel
                         FontSize="18"
                         Text="{localization:Render DontHaveAccountYetText}"
-                        TextColor="{StaticResource GreenColorDim}"
+                        TextColor="{StaticResource ColorGreenDimB}"
                         VerticalOptions="Center" />
                     <ContentView Padding="0,10">
                         <customControl:MuseoLabel
                             FontSize="18"
                             IsUnderlined="True"
                             Text="{localization:Render SignUpText}"
-                            TextColor="{StaticResource GreenColorDim}" />
+                            TextColor="{StaticResource ColorGreenDimB}" />
                         <ContentView.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding GoToSignUpCommand}" NumberOfTapsRequired="1" />
                         </ContentView.GestureRecognizers>
                     </ContentView>
                 </StackLayout>
             </ContentView>
-            <StackLayout
+            <customControl:MuseoLabel
                 Grid.Row="3"
                 Margin="0,20,0,0"
+                FontSize="18"
                 HorizontalOptions="Center"
-                IsVisible="True"
-                Orientation="Horizontal"
-                Spacing="1">
-                <ContentView>
-                    <ffImage:CachedImage
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        HeightRequest="56"
-                        Source="signinfb.png"
-                        WidthRequest="310" />
-                    <ContentView.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding FacebookSignUpCommand}" NumberOfTapsRequired="1" />
-                    </ContentView.GestureRecognizers>
-                </ContentView>
-            </StackLayout>
+                Text="{localization:Render ForgotPassword}"
+                TextColor="{StaticResource ColorGreenDimB}"
+                VerticalOptions="Start" />
             <ContentView
                 Grid.RowSpan="3"
                 IsVisible="{Binding IsBusy}"

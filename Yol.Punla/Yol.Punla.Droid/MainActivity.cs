@@ -80,11 +80,7 @@ namespace Yol.Punla.Droid
                 if (resultCode == Android.App.Result.Ok)
                 {
                     var imagePhoto = FindViewById<ImageView>(Resource.Id.imageViewPhoto);
-
-                    if (imagePhoto != null)
-                        imagePhoto.SetImageURI(data.Data);
-
-                    NativeFacebookPageRenderer.callbackManager.OnActivityResult(requestCode, (int)resultCode, data);
+                    if (imagePhoto != null) imagePhoto.SetImageURI(data.Data);
                 }
             });
         }
