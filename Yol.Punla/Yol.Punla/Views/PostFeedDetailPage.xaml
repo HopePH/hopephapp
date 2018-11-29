@@ -5,13 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
-    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
-    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
     x:Name="ThisPage"
     Title="Post Details Page"
@@ -46,7 +43,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <Grid
                     Grid.Row="0"
                     Padding="20,10"
@@ -319,7 +315,6 @@
                 </StackLayout>-->
 
                 <BoxView Grid.Row="1" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
-
                 <ContentView Grid.Row="2" BackgroundColor="Transparent" />
 
                 <!--  - COMMENT LISTS SECTION  -->
