@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Entity;
@@ -14,13 +15,10 @@ namespace Yol.Punla.GatewayAccess
            
         }
 
-        public async Task<Contact> GetUserProfile(string EmailAdd, string FbId)
+        public async Task<Contact> GetUserProfile(string EmailAdd)
         {
             await Task.Delay(1);
-            if (string.IsNullOrEmpty(FbId))
-                FbId = "zz0876";
-
-            return FakeData.FakeUsers.Contacts.Where(c => c.EmailAdd == EmailAdd || c.FBId == FbId).FirstOrDefault();
+            return FakeData.FakeUsers.Contacts.Where(c => c.EmailAdd == EmailAdd).FirstOrDefault();
         }
 
         public async Task<int> PostReceiver(Contact receiver)
@@ -40,6 +38,12 @@ namespace Yol.Punla.GatewayAccess
         {
             await Task.Delay(1);
             return FakeData.FakeUsers.Contacts.Where(c => c.EmailAdd == emailAddress).FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions()
+        {
+            await Task.Delay(1);
+            return FakeData.FakeSurveys.Surveys;
         }
     }
 }

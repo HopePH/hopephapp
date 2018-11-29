@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
@@ -27,7 +28,7 @@ namespace Yol.Punla.Managers
             _keyValueCachedUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
         }
 
-        public async Task<Contact> GetContact(string fbEmail, string FbId, bool isGetFromRest = true)
+        public async Task<Contact> GetContact(string fbEmail, bool isGetFromRest = true)
         {
             try
             {
@@ -35,7 +36,7 @@ namespace Yol.Punla.Managers
 
                 if (_item == null || isGetFromRest)
                 {
-                    _item = await _userService.GetUserProfile(fbEmail, FbId);
+                    _item = await _userService.GetUserProfile(fbEmail);
                     _userRepository.UpdateItem(_item);
                 }
 
@@ -45,6 +46,12 @@ namespace Yol.Punla.Managers
             {
                 return _item;
             }
+        }
+
+        public async Task<IEnumerable<SurveyQuestion>> GetSurveyQuestions()
+        {
+            var results = await _userService.GetSurveyQuestions();
+            return results;
         }
 
         public Task<int> SaveDetailsToRemoteDB(Entity.Contact item)

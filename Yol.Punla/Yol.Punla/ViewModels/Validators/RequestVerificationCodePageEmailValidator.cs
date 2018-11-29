@@ -7,18 +7,19 @@ namespace Yol.Punla.ViewModels.Validators
     [ModuleIgnore]
     public class RequestVerificationCodePageEmailValidator : AbstractValidator<RequestSigninVerificationCodePageViewModel>
     {
-        public readonly string EMAILADDMSG = AppStrings.EnterAValidEmailText;
-        public readonly string CODEEQUALMSG = AppStrings.VerficationCodeError;
-        public readonly string NOTEXISTSEMAIL = "Your email does not exists yet. Please signup instead";
+        private const string FAKEEMAIL = "Ret45ujhh@gboy.com";
+        private const string NOTEXISTSEMAIL = "Your email does not exists yet. Please signup instead";
+        private readonly string EMAILADDMSG = AppStrings.EnterAValidEmailText;
+        private readonly string CODEEQUALMSG = AppStrings.VerficationCodeError;
 
-        public RequestVerificationCodePageEmailValidator(string emailString, string existingEmail)
+        public RequestVerificationCodePageEmailValidator(string emailString)
         {
             RuleFor(x => x.EmailAddress)
                 .NotEmpty()
                 .WithMessage(EMAILADDMSG)
                 .Matches(@"^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}(\.[A-Za-z]{2})?$")
                 .WithMessage(EMAILADDMSG)
-                .Equal(existingEmail)
+                .NotEqual(FAKEEMAIL)
                 .WithMessage(NOTEXISTSEMAIL);
         }
     }

@@ -12,10 +12,7 @@ namespace Yol.Punla.Managers
         private readonly ILocalTableTrackingRepository _localTableTrackingRepository;
         private bool _isExpired;
 
-        protected bool IsInternetConnected
-        {
-            get => AppCrossConnectivity.Instance.IsConnected;
-        }
+        protected bool IsInternetConnected => AppCrossConnectivity.Instance.IsConnected;
 
         protected ManagerBase(ILocalTableTrackingRepository localTableTrackingRepository)
         {

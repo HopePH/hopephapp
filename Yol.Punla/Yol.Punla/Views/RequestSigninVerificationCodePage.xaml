@@ -8,98 +8,84 @@
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource ColorWhite}">
     <Grid
         HorizontalOptions="FillAndExpand"
         RowSpacing="0"
         VerticalOptions="FillAndExpand">
-        <Grid
-            Padding="20"
+        <ScrollView
+            Padding="40,20,40,20"
             HorizontalOptions="FillAndExpand"
-            RowSpacing="0"
             VerticalOptions="FillAndExpand">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <StackLayout
-                Grid.Row="0"
-                Orientation="Horizontal"
-                VerticalOptions="Start">
+            <Grid
+                HorizontalOptions="FillAndExpand"
+                RowSpacing="0"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
                 <ffImage:CachedImage
+                    Grid.Row="0"
+                    Margin="0,24,0,0"
                     Aspect="AspectFit"
-                    HeightRequest="40"
-                    Source="rawbrain"
-                    WidthRequest="40"/>
-                <customControl:MuseoLabel Margin="10,10,0,0" Text="{localization:Render ApplicationName}">
-                    <Label.Style>
+                    HeightRequest="96"
+                    HorizontalOptions="Center"
+                    Source="icon"
+                    VerticalOptions="Start"
+                    WidthRequest="96" />
+                <customControl:MuseoLabel
+                    Grid.Row="1"
+                    Margin="0,46,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource LabelLargeGreen}"
+                    Text="{localization:Render LogonTitleCode}"
+                    VerticalOptions="Start" />
+                <customControl:MuseoLabel
+                    Grid.Row="2"
+                    Margin="0,20,0,0"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource LabelXSmallDark}"
+                    Text="{localization:Render LogonContentCode}"
+                    VerticalOptions="Start" />
+                <customControl:CustomEntry
+                    Grid.Row="3"
+                    BottomLineColor="Gray"
+                    Placeholder="{Binding PlaceholderTitle}"
+                    Text="{Binding EmailAddress}"
+                    VerticalOptions="End">
+                    <Entry.Style>
                         <OnPlatform
                             x:TypeArguments="Style"
-                            Android="{StaticResource LabelXSmallDark}"
-                            iOS="{StaticResource LabelSmallDark}" />
-                    </Label.Style>
-                </customControl:MuseoLabel>
-            </StackLayout>
-            <customControl:MuseoLabel
-                Grid.Row="1"
-                Margin="0,0,0,20"
-                Text="{localization:Render LogonTitleCode}"
-                VerticalOptions="End">
-                <Label.Style>
-                    <OnPlatform
-                        x:TypeArguments="Style"
-                        Android="{StaticResource LabelDefaultDark}"
-                        iOS="{StaticResource LabelDefaultDark}" />
-                </Label.Style>
-            </customControl:MuseoLabel>
-            <customControl:MuseoLabel
-                Grid.Row="2"
-                Margin="0"
-                Text="{localization:Render LogonContentCode}"
-                VerticalOptions="End">
-                <Label.Style>
-                    <OnPlatform
-                        x:TypeArguments="Style"
-                        Android="{StaticResource LabelXSmallDark}"
-                        iOS="{StaticResource LabelSmallDark}" />
-                </Label.Style>
-            </customControl:MuseoLabel>
-            <customControl:CustomEntry
-                Grid.Row="3"
-                Margin="0,0,0,80"
-                BottomLineColor="Gray"
-                Placeholder="{Binding PlaceholderTitle}"
-                Text="{Binding EmailAddress}"
-                VerticalOptions="End">
-                <Entry.Style>
-                    <OnPlatform
-                        x:TypeArguments="Style"
-                        Android="{StaticResource EntrySmallDark}"
-                        iOS="{StaticResource EntryDefaultDark}" />
-                </Entry.Style>
-                <Entry.Margin>
-                    <OnPlatform
-                        x:TypeArguments="Thickness"
-                        Android="0,0,0,80"
-                        iOS="0,10,0,80" />
-                </Entry.Margin>
-            </customControl:CustomEntry>
-            <Button
-                Grid.Row="4"
-                Margin="0,20,0,100"
-                Command="{Binding RequestVerificationCodeCommand}"
-                FontAttributes="Bold"
-                HorizontalOptions="FillAndExpand"
-                Style="{StaticResource ButtonGreenSlim}"
-                Text="Continue"
-                VerticalOptions="End" />
-        </Grid>
-
+                            Android="{StaticResource EntrySmallDark}"
+                            iOS="{StaticResource EntryDefaultDark}" />
+                    </Entry.Style>
+                    <Entry.Margin>
+                        <OnPlatform
+                            x:TypeArguments="Thickness"
+                            Android="0,60,0,0"
+                            iOS="0,10,0,80" />
+                    </Entry.Margin>
+                </customControl:CustomEntry>
+                <Button
+                    Grid.Row="4"
+                    Margin="0,0,0,16"
+                    Padding="36,0"
+                    BackgroundColor="#FF7ED321"
+                    BorderRadius="4"
+                    Command="{Binding RequestVerificationCodeCommand}"
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    HorizontalOptions="Center"
+                    VerticalOptions="End"
+                    Text="Next"
+                    TextColor="White" />
+            </Grid>
+        </ScrollView>
         <!--  Busy Indicator  -->
         <ContentView IsVisible="{Binding IsBusy}" Style="{StaticResource ContentViewForActivityIndicator}">
             <StackLayout
@@ -110,7 +96,6 @@
                     IsRunning="{Binding IsBusy, Mode=OneWay}"
                     IsVisible="{Binding IsBusy}"
                     Style="{StaticResource ActivityIndicatorMain}" />
-
                 <customControl:MuseoLabel
                     HorizontalOptions="Center"
                     Opacity="1"

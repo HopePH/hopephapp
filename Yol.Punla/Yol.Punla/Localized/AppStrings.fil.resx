@@ -423,4 +423,7 @@ Kindly click the close button above to start. :)</value>
   <data name="LoadingMoreData" xml:space="preserve">
     <value>Fetching more posts from the server. Please wait...</value>
   </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot Password</value>
+  </data>
 </root>

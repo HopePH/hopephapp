@@ -84,11 +84,12 @@ namespace Yol.Punla.ViewModels
             _contactManager = contactManager;
             _busyComments = AppStrings.LoadingData;
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
+            Title = "Wall";
         }
 
         #region PREPARE PAGE BINDINGS
 
-        public override void PreparingPageBindings()
+        public override void PreparingPageBindingsChild()
         {
             if (PassingParameters != null && PassingParameters.ContainsKey("CurrentContact"))
                 CurrentContact = (Entity.Contact)PassingParameters["CurrentContact"];
@@ -144,7 +145,6 @@ namespace Yol.Punla.ViewModels
                 var postList = await Task.Run(() =>
                 {
                     Debug.WriteLine("HOPEPH Getting all post");
-                    //chito. this is the old and slow -> return _postFeedManager.GetAllPosts(isForceToGetToTheRest, CurrentContact.RemoteId);
                     return _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
                 }, TokenHandler.Token);
                 

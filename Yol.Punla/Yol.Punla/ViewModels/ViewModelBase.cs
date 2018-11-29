@@ -193,7 +193,7 @@ namespace Yol.Punla.ViewModels
         protected void ChangeRootAndNavigateToPageHelper(string page, INavigationStackService navigationStackService, INavigationService navigationService, NavigationParameters parameters = null
            , bool? useModalNavigation = null, bool animated = true)
         {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(ViewNames.AppMasterPage)}/{nameof(NavigationPage)}/{page}";
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavigationPage)}/{page}";
             navigationStackService.ResetStackStateTo(page);
             navigationService.NavigateAsync(rootPage, parameters, useModalNavigation, animated);
 

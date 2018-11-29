@@ -4,15 +4,10 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
-    xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
-    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
-    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
-    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
-    Title="Home Page"
+    Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource ColorGrayTwo}">
     <Grid
@@ -24,16 +19,13 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
         <template:NavigationHamburgerBar Grid.Row="0" />
-
         <customControl:MuseoLabel
             Grid.Row="1"
             HorizontalOptions="Center"
             IsVisible="{Binding IsShowOfflineMessage}"
             Text="You are in offline mode."
             TextColor="Red" />
-
         <Grid
             Grid.Row="2"
             Padding="0"

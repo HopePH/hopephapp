@@ -1,4 +1,13 @@
-﻿check if logon if yes tab on PostFee page
-if not Logon Page
-discuss Alvn on bz model
-remove wiki page already
+﻿to do
+alfon
+1. wilbert to send the logon background
+
+community
+1. finalize look of request page
+2. the EmailVerificationPage page, also ViewModel logic of this not good
+
+
+==IMPT===
+1. Designing XAML
+  >change AppViewBase to this Xamarin.Forms.ContentPage 
+  >local:AppViewBase
