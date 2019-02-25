@@ -2,6 +2,7 @@
 using Prism.Navigation;
 using PropertyChanged;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
@@ -25,14 +26,14 @@ namespace Yol.Punla.ViewModels
         private int _instructionIndex;
 
         public WelcomeInstruction InstructionContent { get; set; }
-        public ICommand NextCommand => new DelegateCommand(GoNext);
+        public ICommand NextCommand => new DelegateCommand(async () => await GoNext());
         public ICommand PrevCommand => new DelegateCommand(GoBack);
         public bool IsNotFirstInstruction { get; set; }
 
         public WelcomeInstructionsPageViewModel(IServiceMapper serviceMapper, 
             IAppUser appUser,
             INavigationStackService navigationStackService,
-            INavigationService navigationService) : base(serviceMapper, appUser)
+            INavigationService navigationService) : base(navigationService)
         {
             WelcomeInstructionsData.Init();
             _navigationStackService = navigationStackService;
@@ -47,7 +48,7 @@ namespace Yol.Punla.ViewModels
             IsBusy = false;
         }
 
-        private void GoNext()
+        private async Task GoNext()
         {
             ++_instructionIndex;
             IsNotFirstInstruction = true;
@@ -57,7 +58,7 @@ namespace Yol.Punla.ViewModels
             else
             {
                 _keyValueCacheUtility.GetUserDefaultsKeyValue("WasWelcomeInstructionLoaded", "true");
-                ChangeRootAndNavigateToPageHelper(nameof(ViewNames.WikiPage), _navigationStackService, _navigationService, PassingParameters);
+                await ChangeRootAndNavigateToPageHelper(nameof(ViewNames.WikiPage), PassingParameters);
             }
         }
 

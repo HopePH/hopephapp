@@ -64,7 +64,7 @@ namespace Yol.Punla.ViewModels
             IPostFeedManager postFeedManager,
             INavigationService navigationService,
             INavigationStackService navigationStackService,
-            PostFeedDetailsPageValidator validator) : base(serviceMapper, appUser)
+            PostFeedDetailsPageValidator validator) : base(navigationService)
         {
             _postFeedManager = postFeedManager;
             _navigationService = navigationService;
@@ -272,7 +272,7 @@ namespace Yol.Punla.ViewModels
         {
             _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetToLocal", "true");
             _keyboardHelper.HideKeyboard();
-            NavigateBackHelper(_navigationStackService, _navigationService, PassingParameters);
+            NavigateBackHelper(PassingParameters);
         }
 
         private void SupportPost(Entity.PostFeed SelectedPost)

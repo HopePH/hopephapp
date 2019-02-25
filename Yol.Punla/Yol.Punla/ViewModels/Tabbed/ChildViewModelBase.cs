@@ -32,7 +32,7 @@ namespace Yol.Punla.ViewModels
             IServiceMapper serviceMapper, 
             IAppUser appUser, 
             INavigationService navigationService)
-            : base(serviceMapper, appUser)
+            : base(navigationService)
         {
             _ea = eventAggregator;
             _ea.GetEvent<InitializeTabbedChildrenEvent>().Subscribe(OnInitializationEventFired);
@@ -46,7 +46,7 @@ namespace Yol.Punla.ViewModels
             Message = $"{Title} Initialized by Event: {message}";
         }
 
-        public override void OnNavigatingTo(NavigationParameters parameters)
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
             System.Diagnostics.Debug.WriteLine($"{Title} is executing OnNavigatingTo");
             var message = parameters.GetValue<string>("message");

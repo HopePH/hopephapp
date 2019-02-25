@@ -61,7 +61,7 @@ namespace Yol.Punla.ViewModels
             INavigationService navigationService,
             INavigationStackService navigationStackService,
             IContactManager contactManager,
-            AccountRegistrationPageValidator validator) : base(serviceMapper, appUser)
+            AccountRegistrationPageValidator validator) : base(navigationService)
         {
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
             _navigationService = navigationService;
@@ -143,9 +143,9 @@ namespace Yol.Punla.ViewModels
                 _keyValueCacheUtility.RemoveKeyObject("NewPage");
 
                 if (string.IsNullOrEmpty(newPage))
-                    ChangeRootAndNavigateToPageHelper(nameof(ViewNames.HomePage), _navigationStackService, _navigationService, PassingParameters);
+                    ChangeRootAndNavigateToPageHelper(nameof(ViewNames.HomePage),PassingParameters);
                 else            
-                    ChangeRootAndNavigateToPageHelper(newPage, _navigationStackService, _navigationService, PassingParameters);
+                    ChangeRootAndNavigateToPageHelper(newPage, PassingParameters);
 
                 _keyValueCacheUtility.GetUserDefaultsKeyValue("WasLogin", "true");
                 _keyValueCacheUtility.GetUserDefaultsKeyValue("WasSignUpCompleted", "true");

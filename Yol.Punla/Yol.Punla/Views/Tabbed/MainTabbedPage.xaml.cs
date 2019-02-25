@@ -17,7 +17,7 @@ namespace Yol.Punla.Views
 			InitializeComponent ();
 		}
 
-        public void OnNavigatingTo(NavigationParameters parameters)
+        public void OnNavigatingTo(INavigationParameters parameters)
         {
             System.Diagnostics.Debug.WriteLine($"{Title} OnNavigatingTo");
             var tabs = parameters.GetValues<string>("addTab");
@@ -26,7 +26,7 @@ namespace Yol.Punla.Views
                 AddChild(name, parameters);
         }
 
-        private void AddChild(string name, NavigationParameters parameters)
+        private void AddChild(string name, INavigationParameters parameters)
         {
             var page = AppUnityContainer.Instance.Resolve<object>(name) as Page;
             if (ViewModelLocator.GetAutowireViewModel(page) == null) ViewModelLocator.SetAutowireViewModel(page, true);

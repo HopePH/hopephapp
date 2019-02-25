@@ -44,7 +44,7 @@ namespace Yol.Punla.ViewModels
             IAppUser appUser, 
             INavigationStackService navigationStackService, 
             INavigationService navigationService,
-            IContactManager contactManager) : base(serviceMapper, appUser)
+            IContactManager contactManager) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
@@ -112,7 +112,7 @@ namespace Yol.Punla.ViewModels
                 };
 
                 PassingParameters.Add("CurrentContact", contact);
-                NavigateToPageHelper(nameof(ViewNames.AccountRegistrationPage), _navigationStackService, _navigationService, PassingParameters);
+                await NavigateToPageHelper(nameof(ViewNames.AccountRegistrationPage), PassingParameters);
             }
         }
 

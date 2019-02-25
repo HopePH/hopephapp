@@ -21,6 +21,7 @@
         EmailVerificationPage,
         RequestSigninVerificationCodePage,
         ConfirmVerificationCodePage,
-        NotificationsPage
+        NotificationsPage,
+        NavPage
     }
 }

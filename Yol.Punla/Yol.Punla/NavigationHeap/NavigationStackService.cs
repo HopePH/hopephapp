@@ -4,7 +4,6 @@
  *   Xamarin.Forms.Application.Current.MainPage.Navigation.NavigationStack?.Last();
  *   
  * */
-
 using System.Collections.Generic;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Repository;
@@ -15,25 +14,31 @@ namespace Yol.Punla.NavigationHeap
     [DefaultModuleInterfaced(ParentInterface = typeof(INavigationStackService))]
     public class NavigationStackService : INavigationStackService
     {
-        private string _currentPage;
-        private readonly Stack<string> _navigationStack = new Stack<string>();
         private readonly INavigationStackRepository _navigationStackRepository;
         private Entity.NavigationStackDefinition _item;
 
+        private string _currentlyRemovedPage;
+        public string CurrentlyRemovedPage
+        {
+            get => _currentlyRemovedPage;
+        }
+
+        private string _currentPage;
         public string CurrentStack
         {
             get => _currentPage;
         }
 
+        private readonly Stack<string> _navigationStack = new Stack<string>();
         public Stack<string> NavigationStack
         {
             get => _navigationStack;
         }
 
+        public bool IsDisableNavPagePop { get; set; } = false;
+
         public NavigationStackService(INavigationStackRepository navigationStackRepository)
-        {
-            _navigationStackRepository = navigationStackRepository;
-        }
+            => _navigationStackRepository = navigationStackRepository;
 
         public void UpdateStackState(string page)
         {
@@ -58,9 +63,9 @@ namespace Yol.Punla.NavigationHeap
         {
             try
             {
+                _currentlyRemovedPage = _navigationStack.Peek();
                 _navigationStack.Pop();
                 var dbItem = GetDBRecord(page);
-
                 _currentPage = _navigationStack.Peek();
                 _navigationStackRepository.DeleteTable(dbItem);
             }
@@ -82,10 +87,7 @@ namespace Yol.Punla.NavigationHeap
             try
             {
                 _item = _navigationStackRepository.GetPageByName(page);
-
-                if (_item == null)
-                    _item = new Entity.NavigationStackDefinition { PageName = page };
-
+                if (_item == null) _item = new Entity.NavigationStackDefinition { PageName = page };
                 return _item;
             }
             catch (SQLite.SQLiteException)

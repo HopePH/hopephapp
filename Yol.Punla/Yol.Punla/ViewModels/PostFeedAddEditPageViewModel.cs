@@ -47,7 +47,7 @@ namespace Yol.Punla.ViewModels
             INavigationService navigationService,
             INavigationStackService navigationStackService,
             IPostFeedManager postFeedManager,
-            PostFeedAddEditPageValidators validator) : base(serviceMapper, appUser)
+            PostFeedAddEditPageValidators validator) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
@@ -93,7 +93,7 @@ namespace Yol.Punla.ViewModels
                     {
                         _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetFromRest", "true");
                         _keyValueCacheUtility.GetUserDefaultsKeyValue("SecondsDelay", "2");
-                        NavigateBackHelper(_navigationStackService, _navigationService, PassingParameters);
+                        NavigateBackHelper(PassingParameters);
                     });
                 }
                 else
@@ -210,9 +210,9 @@ namespace Yol.Punla.ViewModels
 
             IsBusy = false;
             PassingParameters.Add("IsForceToGetFromRest", true);
-            NavigateBackHelper(_navigationStackService, _navigationService, PassingParameters);
+            NavigateBackHelper(PassingParameters);
         }
 
-        private void GoBack() => NavigateBackHelper(_navigationStackService, _navigationService);
+        private void GoBack() => NavigateBackHelper();
     }
 }

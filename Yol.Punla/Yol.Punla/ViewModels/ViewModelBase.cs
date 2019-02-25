@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Unity;
 using Xamarin.Forms;
@@ -29,6 +30,9 @@ namespace Yol.Punla.ViewModels
     public abstract class ViewModelBase : BindableBase, INavigationAware, IViewEventsListener
     {
         #region "ViewModel Wide Specifics"
+
+        private readonly INavigationStackService _navigationStackService;
+        private readonly INavigationService _navigationService;
         private const string VALIDATIONERRMSG = "Please correct the following: \r\n\r\n{0}";
         private const string NOINTERNETMSG = "Your internet connection seems to have dropped out. You are now offline mode.";
         private const string TASKCANCELLEDMSG = "The fetching of data is running slow. Please check the speed of your internet connection then try again.";
@@ -44,7 +48,10 @@ namespace Yol.Punla.ViewModels
 
         private readonly IAppUser _appUser;
         public IAppUser AppUser { get => _appUser; }
-        
+
+        private readonly IUserDialogs _userDialogs;
+        public IUserDialogs UserDialog { get => _userDialogs; }
+
         private bool _isCustomNavBarVisible = true;
         public bool IsCustomNavBarVisible
         {
@@ -68,31 +75,43 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        public NavigationParameters PassingParameters { get; set; }
+        public IDisposable AlertResponse { get; set; }
+        public ICommand TapNavigationBackCommand => new DelegateCommand(RemoveCurrentPage);
+        public INavigationParameters ParametersBeforePageNavigate { get; set; } = new NavigationParameters();
+        public INavigationParameters PassingParameters { get; set; } = new NavigationParameters();
         protected TokenHandler TokenHandler { get; set; }
-        public StringBuilder PageErrors { get; set; }
-        public IDisposable AlertResponseNoInternet { get; set; }
+        public StringBuilder PageErrors { get; set; }       
         public string Title { get; set; }
         public bool IsShowBackArrow { get; set; } = true;
 
-        protected ViewModelBase(IServiceMapper serviceMapper, IAppUser appUser)
+        protected ViewModelBase(INavigationService navigationService)
         {
             Debug.WriteLine(string.Format("HOPEPH Loading constructor {0}.", this.GetType().Name));
-            _serviceMapper = serviceMapper;
-            _appUser = appUser;
-
+            _navigationService = navigationService;
+            _serviceMapper = AppUnityContainer.Instance.Resolve<IServiceMapper>();
+            _appUser = AppUnityContainer.Instance.Resolve<IAppUser>();
+            _navigationStackService = AppUnityContainer.Instance.Resolve<INavigationStackService>();
+            _userDialogs = AppUnityContainer.Instance.Resolve<IUserDialogs>();
             AppStrings.Culture = new CultureInfo(AppSettingsProvider.Instance.GetValue("AppCulture"));
         }
 
-        public virtual void OnNavigatedFrom(NavigationParameters parameters) => PassingParameters = parameters;
+        //before we navigate
+        //https://medium.com/@hminaya/prism-101-navigation-8433eb30f578
+        public virtual void OnNavigatedFrom(INavigationParameters parameters)
+            => ParametersBeforePageNavigate = parameters;
 
-        public virtual void OnNavigatedTo(NavigationParameters parameters) => PassingParameters = parameters;
+        //after the viewmodel has been pushed to stack
+        public virtual void OnNavigatedTo(INavigationParameters parameters)
+        {
+            PassingParameters = new NavigationParameters();
+            ParametersBeforePageNavigate = new NavigationParameters();
+            AppUnityContainer.Instance.Resolve<INavigationStackService>().IsDisableNavPagePop = false;
+        }
 
-        public virtual void OnNavigatingTo(NavigationParameters parameters)
+        public virtual void OnNavigatingTo(INavigationParameters parameters)
         {
             PassingParameters = parameters;
             PreparingPageBindings();
-            PassingParameters = new NavigationParameters();
         }
 
         public virtual void OnAppearing() { }
@@ -101,7 +120,7 @@ namespace Yol.Punla.ViewModels
 
         public abstract void PreparingPageBindings();
 
-        protected bool ProcessValidationErrors(ValidationResult validationResult, bool isShowErrorDialog = false)
+        protected bool ProcessValidationErrors(ValidationResult validationResult, bool isShowErrorDialog = true)
         {
             IsBusy = true;
 
@@ -118,8 +137,8 @@ namespace Yol.Punla.ViewModels
                 }
 
                 if (isShowErrorDialog)
-                    UserDialogs.Instance.Alert(string.Format(VALIDATIONERRMSG, PageErrors.ToString()), "Error", "OK");
-                
+                    _userDialogs.Alert(string.Format(VALIDATIONERRMSG, PageErrors.ToString()), "Error", "OK");
+
                 IsBusy = false;
                 return false;
             }
@@ -127,13 +146,13 @@ namespace Yol.Punla.ViewModels
             return true;
         }
 
-        protected bool ProcessInternetConnection(bool isShowErrorDialog = false)
+        protected bool ProcessInternetConnection(bool isShowErrorDialog = true)
         {
+            IsBusy = true;
+
             if (!IsInternetConnected)
             {
-                if (isShowErrorDialog)
-                    AlertResponseNoInternet = UserDialogs.Instance.Alert(NOINTERNETMSG, "Offline", "Ok");
-
+                if (isShowErrorDialog) AlertResponse = _userDialogs.Alert(NOINTERNETMSG, "Offline", "Ok");
                 IsBusy = false;
                 return IsInternetConnected;
             }
@@ -141,15 +160,26 @@ namespace Yol.Punla.ViewModels
             return IsInternetConnected;
         }
 
-        protected void ProcessCustomPageErrors(string customError, bool isShowErrorDialog = false)
+        protected void ProcessCustomPageErrors(string customError, bool isShowErrorDialog = true)
         {
             PageErrors = new StringBuilder();
             PageErrors.Append(customError);
-
-            if (isShowErrorDialog)
-                UserDialogs.Instance.Alert(PageErrors.ToString(), "Error", "OK");
-
+            if (isShowErrorDialog) _userDialogs.Alert(PageErrors.ToString(), "Error", "OK");
             IsBusy = false;
+        }
+
+        protected void ProcessErrorReportingForRaygun(Exception ex, bool isShowErrorDialog = true)
+        {
+            IsBusy = false;
+
+#if !FAKE
+            AppUnityContainer.Instance.Resolve<IDependencyService>().Get<ILogger>().Log(ex);
+#endif
+            if (isShowErrorDialog)
+            {
+                var maskedServerAPIURI = ex.Message.Replace(AppSettingsProvider.Instance.GetValue("MaskingAPI"), FAKEAPIURI);
+                _userDialogs.Alert(maskedServerAPIURI);
+            }
         }
 
         protected void ProcessErrorReportingForHockeyApp(Exception ex, bool isShowErrorDialog = false)
@@ -183,43 +213,38 @@ namespace Yol.Punla.ViewModels
 #endif
         }
 
-        protected void NavigateToPageHelper(string page, INavigationStackService navigationStackService, INavigationService navigationService, NavigationParameters parameters = null
-            ,bool? useModalNavigation = null, bool animated = true)
+        protected async Task NavigateToPageHelper(string page, INavigationParameters parameters = null, bool? useModalNavigation = null, bool animated = true)
         {
-            navigationStackService.UpdateStackState(page);
-            navigationService.NavigateAsync(page, parameters, useModalNavigation, animated);
+            _navigationStackService.UpdateStackState(CleanedPageName(page));
+            await _navigationService.NavigateAsync(page, parameters, useModalNavigation, animated);
         }
 
-        protected void ChangeRootAndNavigateToPageHelper(string page, INavigationStackService navigationStackService, INavigationService navigationService, NavigationParameters parameters = null
-           , bool? useModalNavigation = null, bool animated = true)
+        protected async Task ChangeRootAndNavigateToPageHelper(string page, INavigationParameters parameters = null, bool? useModalNavigation = null, bool animated = true)
         {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavigationPage)}/{page}";
-            navigationStackService.ResetStackStateTo(page);
-            navigationService.NavigateAsync(rootPage, parameters, useModalNavigation, animated);
-
-            ////chito. bug in ios requires twice call
-            ////navigationService.NavigateAsync(rootPage, parameters, useModalNavigation, animated);            
-            //NavigationBug.SetAbsoluteURI(navigationService, rootPage, parameters, useModalNavigation, animated);
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{ViewNames.AppMasterPage}/{nameof(ViewNames.NavPage)}/{page}";
+            _navigationStackService.ResetStackStateTo(CleanedPageName(page));
+            await _navigationService.NavigateAsync(rootPage, parameters, useModalNavigation, animated);
         }
 
-        protected void NavigateBackHelper(INavigationStackService navigationStackService, INavigationService navigationService, NavigationParameters parameters = null
-          , bool? useModalNavigation = null, bool animated = true)
+        protected async Task NavigateBackHelper(INavigationParameters parameters = null, bool? useModalNavigation = null, bool animated = true)
         {
-            var toBeRemovedPage = navigationStackService.CurrentStack;
-            navigationStackService.RemovePageFromNavigationStack(toBeRemovedPage);
+            AppUnityContainer.Instance.Resolve<INavigationStackService>().IsDisableNavPagePop = true;
+            await _navigationService.GoBackAsync(parameters, useModalNavigation, animated);
+            RemoveCurrentPage();
+        }
 
-            var currentStack = navigationStackService.CurrentStack;
+        private void RemoveCurrentPage()
+        {
+            var toBeRemovedPage = _navigationStackService.CurrentStack;
+            _navigationStackService.RemovePageFromNavigationStack(toBeRemovedPage);
+        }
 
-            if (currentStack == ViewNames.HomePage.ToString())
-            {
-                ChangeRootAndNavigateToPageHelper(ViewNames.HomePage.ToString(), navigationStackService, navigationService);
-                return;
-            }
-
-            if (navigationStackService.NavigationStack.Count > 1)
-                navigationService.GoBackAsync(parameters, useModalNavigation, animated);
-            else
-                ChangeRootAndNavigateToPageHelper(currentStack, navigationStackService, navigationService);
+        private string CleanedPageName(string pageName)
+        {
+            string newPageName = pageName;
+            int qIdx = pageName.IndexOf('/');
+            if (qIdx >= 0) newPageName = pageName.Substring(qIdx + 1);
+            return newPageName;
         }
 
         protected CancellationTokenSource CreateNewHandledTokenSource(string taskName, int cancelTaskInSecs = CANCELTASKINSECS)
@@ -277,7 +302,9 @@ namespace Yol.Punla.ViewModels
             if (isShowErrorDialog)
                 UserDialogs.Instance.Alert(PageErrors.ToString(), "Error", "OK");
         }
+
         #endregion
+
 
         #region Extended
 
