@@ -119,7 +119,7 @@ namespace Yol.Punla
             }
         }
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
             try
             {
@@ -134,9 +134,9 @@ namespace Yol.Punla
                 AppUnityContainer.Init(unityContainer);
 
                 if (WasSignedUpAndLogon())
-                    NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                    await NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
                 else
-                    NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                    await NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
                 AllowAppPermissions();
             }
@@ -196,18 +196,18 @@ namespace Yol.Punla
             }
         }
 
-        private void NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
+        private async Task NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
         {
             var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavPage)}/{page}";
             navigationStackService.UpdateStackState(page);
-            navigationService.NavigateAsync(rootPage);
+            await navigationService.NavigateAsync(rootPage);
         }
 
-        private void NavigateToModalRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
+        private async Task NavigateToModalRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
         {
             var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{page}";
             navigationStackService.UpdateStackState(page);
-            navigationService.NavigateAsync(rootPage);
+            await navigationService.NavigateAsync(rootPage);
         }
 
         private void ManualTypeRegistration(IContainerRegistry containerRegistry)
@@ -226,6 +226,7 @@ namespace Yol.Punla
             unityContainer.RegisterType<IContactRepository, ContactRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
             unityContainer.RegisterType<ILocalTableTrackingRepository, LocalTableTrackingRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
             unityContainer.RegisterType<IPostFeedRepository, PostFeedRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
+            unityContainer.RegisterInstance<IUserDialogs>(UserDialogs.Instance, new ContainerControlledLifetimeManager());
             unityContainer.RegisterInstance<IConnectivity>(CrossConnectivity.Current, new ContainerControlledLifetimeManager());
             containerRegistry.RegisterForNavigation<NavigationPage>();
         }
