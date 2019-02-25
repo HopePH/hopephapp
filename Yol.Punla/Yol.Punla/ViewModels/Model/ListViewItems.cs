@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace Yol.Punla.Model
+namespace Yol.Punla.ViewModels
 {
     public class ListViewItems
     {

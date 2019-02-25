@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:AppViewBase
+<ContentPage
     x:Class="Yol.Punla.Views.LogonPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
-    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla">
-    <AbsoluteLayout HorizontalOptions="Fill" VerticalOptions="Fill">
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
+    BackgroundColor="White">
+    <AbsoluteLayout
+        BackgroundColor="Transparent"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
         <Image
             AbsoluteLayout.LayoutBounds="0,0,1,1"
             AbsoluteLayout.LayoutFlags="All"
@@ -52,10 +56,7 @@
                 HorizontalOptions="Center"
                 IsVisible="True"
                 VerticalOptions="FillAndExpand">
-                <StackLayout
-                    Grid.Row="2"
-                    BackgroundColor="Transparent"
-                    Orientation="Horizontal">
+                <StackLayout Grid.Row="2" Orientation="Horizontal">
                     <customControl:MuseoLabel
                         FontSize="18"
                         Text="{localization:Render DontHaveAccountYetText}"
@@ -103,4 +104,4 @@
             </ContentView>
         </Grid>
     </AbsoluteLayout>
-</local:AppViewBase>
+</ContentPage>

@@ -1,7 +1,7 @@
 ﻿
 using AutoMapper;
 
-namespace Yol.Punla.Mapper
+namespace Yol.Punla.Barrack
 {
     public interface IServiceMapper
     {

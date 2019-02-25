@@ -10,7 +10,6 @@ using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.ViewModels.Validators;
 
@@ -66,6 +65,10 @@ namespace Yol.Punla.ViewModels
             {
                 IsBusy = true;
                 string emailDuplicate = (await _contactManager.CheckIfEmailExists(EmailAddress, "HopePH")) ? EmailAddress : "Ret45ujhh@gboy.com";
+
+#if (FAKE || DEBUG)
+                if (EmailAddress == Constants.TESTEMAIL1) emailDuplicate = "";
+#endif
 
                 if (!IsVerification)
                     _validator = new EmailVerificationPageValidator(VerificationCode, IsVerification, emailDuplicate);

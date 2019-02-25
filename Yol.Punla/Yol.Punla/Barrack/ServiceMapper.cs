@@ -7,11 +7,11 @@
  * */
 
 using Yol.Punla.AttributeBase;
-using ViewModel = Yol.Punla.Model;
+using ViewModel = Yol.Punla.ViewModels;
 using System.Diagnostics;
 using AutoMapper;
 
-namespace Yol.Punla.Mapper
+namespace Yol.Punla.Barrack
 {
     [DefaultModuleInterfacedFake(ParentInterface = typeof(IServiceMapper))]
     [DefaultModuleInterfaced(ParentInterface = typeof(IServiceMapper))]

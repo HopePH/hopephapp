@@ -4,7 +4,6 @@ using Prism.Navigation;
 using System;
 using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
-using Yol.Punla.Mapper;
 
 namespace Yol.Punla.ViewModels
 {

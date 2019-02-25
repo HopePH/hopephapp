@@ -1,4 +1,4 @@
-﻿namespace Yol.Punla.Extensions
+﻿namespace Yol.Punla.Utility
 {
     public static class StringExtensions
     {

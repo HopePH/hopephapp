@@ -12,12 +12,10 @@ using Unity;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
-using Yol.Punla.Extensions;
+using Yol.Punla.Utility;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
-using Yol.Punla.Utility;
 using Yol.Punla.ViewModels.Validators;
 using Yol.Punla.Views;
 

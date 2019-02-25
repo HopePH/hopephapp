@@ -1,4 +1,4 @@
-﻿namespace Yol.Punla.Model
+﻿namespace Yol.Punla.ViewModels
 {
     public static class Specializations
     {

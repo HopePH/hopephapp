@@ -16,7 +16,6 @@ using Yol.Punla.Entity;
 using Yol.Punla.GatewayAccess;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 

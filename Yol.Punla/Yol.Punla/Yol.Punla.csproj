@@ -18,6 +18,18 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <Compile Remove="BugXamarin\**" />
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Mapper\**" />
+    <EmbeddedResource Remove="BugXamarin\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Mapper\**" />
+    <None Remove="BugXamarin\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="Mapper\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Compile Remove="ViewModels\CrisisHotlineListPageViewModel.cs" />
     <Compile Remove="Views\CrisisHotlineListPage.xaml.cs" />
   </ItemGroup>
@@ -83,7 +95,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Templates\NavigationHamburgerBar.xaml">
+    <EmbeddedResource Update="Views\Templates\NavigationHamburgerBar.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ConfirmVerificationCodePage.xaml">
@@ -111,45 +123,6 @@
 
   <ItemGroup>
     <None Update="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\Banner.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\CommentItemTemplate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\HopeBrand.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\ModalAdvertisements.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\ModalFilter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\ModalFilterWiki.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\ModalSort.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\ModalSortWiki.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\NavigationBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\NavigationHamburgerBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\NavigationSearchBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\PostNavigationBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Templates\SortAndFilter.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\AccountRegistrationPage.xaml">

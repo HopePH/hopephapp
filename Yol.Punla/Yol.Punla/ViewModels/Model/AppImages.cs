@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Yol.Punla.Model
+namespace Yol.Punla.ViewModels
 {
     public static class AppImages
     {

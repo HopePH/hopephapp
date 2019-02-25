@@ -15,7 +15,6 @@ using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.Messages;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;

@@ -8,7 +8,6 @@ using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
-using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 using Yol.Punla.ViewModels.Data;
