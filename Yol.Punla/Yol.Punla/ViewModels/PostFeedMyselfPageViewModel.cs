@@ -15,7 +15,6 @@ using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.Messages;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
@@ -57,7 +56,7 @@ namespace Yol.Punla.ViewModels
             INavigationService navigationService, 
             INavigationStackService navigationStackService,
             IContactManager contactManager,
-            IPostFeedManager postFeedManager) : base(serviceMapper, appUser)
+            IPostFeedManager postFeedManager) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
@@ -166,7 +165,7 @@ namespace Yol.Punla.ViewModels
                 CurrentPostFeed.Comments = new ObservableCollection<Entity.PostFeed>(commentList.Where(p => p.PostFeedParentId == CurrentPostFeed.PostFeedID));
                 PassingParameters.Add("CurrentUser", CurrentContact);
                 PassingParameters.Add("SelectedPost", CurrentPostFeed);
-                NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), _navigationStackService, _navigationService, PassingParameters);
+                NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
             }
 
             IsBusy = false;
@@ -218,7 +217,7 @@ namespace Yol.Punla.ViewModels
         private void GoBack()
         {
             _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetToLocal", "true");
-            NavigateBackHelper(_navigationStackService, _navigationService);
+            NavigateBackHelper();
         }
 
         private void SupportPost(Entity.PostFeed SelectedPost)

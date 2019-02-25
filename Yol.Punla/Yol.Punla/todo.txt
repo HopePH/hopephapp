@@ -1,6 +1,6 @@
 ﻿to do
 alfon
-1. wilbert to send the logon background
+1. get test projects from rey
 
 community
 1. finalize look of request page
@@ -8,6 +8,4 @@ community
 
 
 ==IMPT===
-1. Designing XAML
-  >change AppViewBase to this Xamarin.Forms.ContentPage 
-  >local:AppViewBase
+1. 

@@ -12,7 +12,6 @@ using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 
@@ -23,8 +22,8 @@ namespace Yol.Punla.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class AccountRegistrationPageViewModel : ViewModelBase
     {
-        private readonly string picDefaultMale = Model.AppImages.PandaAvatar;
-        private readonly string picDefaultFemale = Model.AppImages.PandaAvatar;
+        private readonly string picDefaultMale = AppImages.PandaAvatar;
+        private readonly string picDefaultFemale = AppImages.PandaAvatar;
         private readonly IValidator _validator;
         private readonly INavigationService _navigationService;
         private readonly INavigationStackService _navigationStackService;
@@ -43,8 +42,8 @@ namespace Yol.Punla.ViewModels
         public ICommand RetakePhotoCommand => new DelegateCommand(TakePhoto);
         public ICommand SignupCommand => new DelegateCommand(SignUp);
         public ICommand ShowOrHideAvatarSelectionCommand => new DelegateCommand<object>(ShowHideAvatarSelection);
-        public ICommand SetAvatarUrlCommand => new DelegateCommand<Model.Avatar>(ChangeAvatar);
-        public IEnumerable<Model.Avatar> PredefinedAvatars { get; set; }
+        public ICommand SetAvatarUrlCommand => new DelegateCommand<Avatar>(ChangeAvatar);
+        public IEnumerable<Avatar> PredefinedAvatars { get; set; }
         public Entity.Contact CurrentContact { get; set; }
         public string Picture { get; set; }
         public bool HasPicture { get; set; }
@@ -61,7 +60,7 @@ namespace Yol.Punla.ViewModels
             INavigationService navigationService,
             INavigationStackService navigationStackService,
             IContactManager contactManager,
-            AccountRegistrationPageValidator validator) : base(serviceMapper, appUser)
+            AccountRegistrationPageValidator validator) : base(navigationService)
         {
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
             _navigationService = navigationService;
@@ -80,7 +79,7 @@ namespace Yol.Punla.ViewModels
             HasPicture = true;
             Picture = (CurrentContact.GenderCode.ToLower() == "male") ? picDefaultMale : picDefaultFemale;
             EmailEnabled = (!string.IsNullOrEmpty(EmailAddress)) ? false : true;
-            PredefinedAvatars = Model.AppImages.Avatars;
+            PredefinedAvatars = AppImages.Avatars;
             IsBusy = false;
         }
 
@@ -143,9 +142,9 @@ namespace Yol.Punla.ViewModels
                 _keyValueCacheUtility.RemoveKeyObject("NewPage");
 
                 if (string.IsNullOrEmpty(newPage))
-                    ChangeRootAndNavigateToPageHelper(nameof(ViewNames.HomePage), _navigationStackService, _navigationService, PassingParameters);
+                    ChangeRootAndNavigateToPageHelper(nameof(ViewNames.HomePage),PassingParameters);
                 else            
-                    ChangeRootAndNavigateToPageHelper(newPage, _navigationStackService, _navigationService, PassingParameters);
+                    ChangeRootAndNavigateToPageHelper(newPage, PassingParameters);
 
                 _keyValueCacheUtility.GetUserDefaultsKeyValue("WasLogin", "true");
                 _keyValueCacheUtility.GetUserDefaultsKeyValue("WasSignUpCompleted", "true");
@@ -161,7 +160,7 @@ namespace Yol.Punla.ViewModels
 
         private void ShowHideAvatarSelection(object isVisible) => IsAvatarModalVisible = bool.Parse(isVisible.ToString());
 
-        private void ChangeAvatar(Model.Avatar avatar)
+        private void ChangeAvatar(Avatar avatar)
         {
             Picture = avatar.SourceUrl;
             ShowHideAvatarSelection(false);

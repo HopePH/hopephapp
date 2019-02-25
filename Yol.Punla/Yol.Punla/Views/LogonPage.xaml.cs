@@ -6,7 +6,7 @@ namespace Yol.Punla.Views
 {
     [ModuleView]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LogonPage : AppViewBase
+    public partial class LogonPage : Xamarin.Forms.ContentPage //AppViewBase
     {
         public LogonPage()
         {

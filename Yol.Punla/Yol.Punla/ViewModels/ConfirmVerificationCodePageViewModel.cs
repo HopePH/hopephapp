@@ -12,12 +12,10 @@ using Unity;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
-using Yol.Punla.Extensions;
+using Yol.Punla.Utility;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
-using Yol.Punla.Utility;
 using Yol.Punla.ViewModels.Validators;
 using Yol.Punla.Views;
 
@@ -36,7 +34,7 @@ namespace Yol.Punla.ViewModels
         private string emailAddress;
 
         public ICommand SendVerificationCodeCommand => new DelegateCommand(async () => await SendVerificationCode());
-        public ICommand NavigateBackCommand => new DelegateCommand(GoBack);
+        public ICommand NavigateBackCommand => new DelegateCommand(async () => await GoBack());
         public string VerificationCodeEntered1 { get; set; }
         public string VerificationCodeEntered2 { get; set; }
         public string VerificationCodeEntered3 { get; set; }
@@ -49,7 +47,7 @@ namespace Yol.Punla.ViewModels
             IAppUser appUser,
             INavigationService navigationService,
             INavigationStackService navigationStackService,
-            IContactManager userManager) : base(serviceMapper, appUser)
+            IContactManager userManager) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;            
@@ -81,7 +79,7 @@ namespace Yol.Punla.ViewModels
                     {
                         IsBusy = true;
                         var clientFromRemote =  await _userManager.GetContact(emailAddress, true);
-                        if (clientFromRemote != null) NavigateSuccess(clientFromRemote);
+                        if (clientFromRemote != null) await NavigateSuccess(clientFromRemote);
                     }
                     catch (Exception ex)
                     {
@@ -91,7 +89,7 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        private void NavigateSuccess(Entity.Contact clientFromRemote)
+        private async Task NavigateSuccess(Entity.Contact clientFromRemote)
         {
             if (clientFromRemote != null)
             {
@@ -105,9 +103,9 @@ namespace Yol.Punla.ViewModels
                 _keyValueCacheUtility.GetUserDefaultsKeyValue("CurrentContactId", clientFromRemote.RemoteId.ToString());
 
                 if (string.IsNullOrEmpty(newPage))
-                    ChangeRootAndNavigateToPageHelper(nameof(MainTabbedPage) + AddPagesInTab(), _navigationStackService, _navigationService);
+                    await ChangeRootAndNavigateToPageHelper(nameof(MainTabbedPage) + AddPagesInTab());
                 else
-                    ChangeRootAndNavigateToPageHelper(newPage, _navigationStackService, _navigationService);
+                    await ChangeRootAndNavigateToPageHelper(newPage);
             }
 
             IsBusy = false;
@@ -128,7 +126,7 @@ namespace Yol.Punla.ViewModels
             {
                 IsLogonIncorrectMessageDisplayed = await UserDialogs.Instance.ConfirmAsync(AppStrings.LogonIncorrect);
                 _keyValueCacheUtility.RemoveKeyObject("WasLogin");
-                ChangeRootAndNavigateToPageHelper(nameof(ViewNames.SignUpPage), _navigationStackService, _navigationService);
+                await ChangeRootAndNavigateToPageHelper(nameof(ViewNames.SignUpPage));
             }
 
             IsBusy = false;
@@ -150,6 +148,6 @@ namespace Yol.Punla.ViewModels
             return email;
         }
         
-        private void GoBack() => NavigateBackHelper(_navigationStackService, _navigationService);
+        private async Task GoBack() => await NavigateBackHelper();
     }
 }

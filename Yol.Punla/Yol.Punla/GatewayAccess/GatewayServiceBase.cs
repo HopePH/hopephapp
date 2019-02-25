@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
-using Yol.Punla.Mapper;
 
 namespace Yol.Punla.GatewayAccess
 {

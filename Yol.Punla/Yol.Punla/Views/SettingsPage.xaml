@@ -6,7 +6,7 @@
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
+    xmlns:template="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource ColorGrayTwo}">

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Authentication;
+using Yol.Punla.Barrack;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.ViewModels.Validators;
 
@@ -27,7 +27,7 @@ namespace Yol.Punla.ViewModels
         private IValidator _validator;
 
         public ICommand RequestVerificationCodeCommand => new DelegateCommand(async() => await RequestVerificationCode());
-        public ICommand NavigateBackCommand => new DelegateCommand(GoBack);
+        public ICommand NavigateBackCommand => new DelegateCommand(async ()=> await GoBack());
         public string EmailAddress { get; set; }
         public string VerificationCode { get; set; }
 
@@ -35,7 +35,7 @@ namespace Yol.Punla.ViewModels
             IAppUser appUser, 
             INavigationStackService navigationStackService,
             INavigationService navigationService,
-            IContactManager contactManager) : base(serviceMapper, appUser)
+            IContactManager contactManager) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
@@ -44,7 +44,7 @@ namespace Yol.Punla.ViewModels
 
         public override void PreparingPageBindings() => IsBusy = false;
 
-        private void GoBack() => NavigateBackHelper(_navigationStackService, _navigationService);
+        private async Task GoBack() => await NavigateBackHelper();
 
         private async Task RequestVerificationCode()
         {
@@ -59,7 +59,7 @@ namespace Yol.Punla.ViewModels
                     VerificationCode = await _contactManager.SendVerificationCode(EmailAddress);
                     PassingParameters.Add("VerificationCode", VerificationCode);
                     PassingParameters.Add("EmailAddress", EmailAddress);
-                    NavigateToPageHelper(nameof(ViewNames.ConfirmVerificationCodePage), _navigationStackService, _navigationService, PassingParameters);
+                    await NavigateToPageHelper(nameof(ViewNames.ConfirmVerificationCodePage), PassingParameters);
                 }
                 else
                     EmailAddress = String.Empty;

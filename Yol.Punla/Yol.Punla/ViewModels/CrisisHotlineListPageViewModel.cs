@@ -46,7 +46,7 @@ namespace Yol.Punla.ViewModels
         public CrisisHotlineListPageViewModel(IServiceMapper serviceMapper, IAppUser appUser,
             IMentalHealthManager mentalHealthManager,
             INavigationService navigationService,
-            INavigationStackService navigationStackService) : base(serviceMapper, appUser)
+            INavigationStackService navigationStackService) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="Yol.Punla.Views.ModalSortWiki"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
+    BackgroundColor="White"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="FillAndExpand">
+    <Grid.Padding>
+        <OnPlatform
+            x:TypeArguments="Thickness"
+            Android="0,20,0,0"
+            iOS="0,30,0,0" />
+    </Grid.Padding>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <ContentView Grid.Row="0">
+        <ContentView HorizontalOptions="EndAndExpand">
+            <ContentView.HeightRequest>
+                <OnPlatform
+                    x:TypeArguments="x:Double"
+                    Android="30"
+                    iOS="30" />
+            </ContentView.HeightRequest>
+            <ContentView.WidthRequest>
+                <OnPlatform
+                    x:TypeArguments="x:Double"
+                    Android="100"
+                    iOS="100" />
+            </ContentView.WidthRequest>
+            <Label
+                BackgroundColor="Transparent"
+                FontFamily="FontAwesome"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="End"
+                Text="{StaticResource fa-close}"
+                TextColor="#B2B2B2"
+                VerticalOptions="FillAndExpand"
+                VerticalTextAlignment="Center">
+                <Label.Margin>
+                    <OnPlatform
+                        x:TypeArguments="Thickness"
+                        Android="0,0,20,0"
+                        iOS="0,0,20,0" />
+                </Label.Margin>
+                <Label.FontSize>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="20"
+                        iOS="20" />
+                </Label.FontSize>
+            </Label>
+            <ContentView.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding ShowOrHideSortModal}"
+                    CommandParameter="false"
+                    NumberOfTapsRequired="1" />
+            </ContentView.GestureRecognizers>
+        </ContentView>
+    </ContentView>
+
+    <BoxView Grid.Row="1" VerticalOptions="FillAndExpand" />
+
+    <StackLayout Grid.Row="2">
+        <StackLayout.Padding>
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                Android="10,10"
+                iOS="20,10" />
+        </StackLayout.Padding>
+        <customControl:MuseoLabel FontAttributes="Bold" Text="SORT BY">
+            <customControl:MuseoLabel.Margin>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="10,0,0,0"
+                    iOS="20,0,0,0" />
+            </customControl:MuseoLabel.Margin>
+        </customControl:MuseoLabel>
+    </StackLayout>
+
+    <Grid Grid.Row="3" Padding="20,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <customControl:MuseoLabel
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalOptions="StartAndExpand"
+            Text="Alphabetically">
+            <customControl:MuseoLabel.FontSize>
+                <OnPlatform
+                    x:TypeArguments="x:Double"
+                    Android="15"
+                    iOS="13" />
+            </customControl:MuseoLabel.FontSize>
+        </customControl:MuseoLabel>
+
+        <Switch
+            x:Name="locationSwitch"
+            Grid.Row="0"
+            Grid.Column="1"
+            IsToggled="{Binding IsSortAlphabetical}">
+            <Switch.Effects>
+                <effects:SwitchColorEffect />
+            </Switch.Effects>
+        </Switch>
+    </Grid>
+
+    <BoxView Grid.Row="4" VerticalOptions="FillAndExpand" />
+
+    <Button
+        Grid.Row="5"
+        Margin="20,10,20,20"
+        Command="{Binding SortCommand}"
+        Style="{StaticResource ButtonGreenSlim}"
+        Text="Sort " />
+</Grid>

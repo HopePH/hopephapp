@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Model;
 
 namespace Yol.Punla.ViewModels
 {

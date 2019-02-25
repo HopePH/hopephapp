@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Mapper;
+using Yol.Punla.Barrack;
 
 namespace Yol.Punla.GatewayAccess
 {

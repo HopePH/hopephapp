@@ -6,9 +6,6 @@ using Android.OS;
 using Android.Runtime;
 using Android.Widget;
 using DrTalk.Droid.Utility;
-using FFImageLoading.Forms.Droid;
-using HockeyApp.Android;
-using HockeyApp.Android.Metrics;
 using Java.Security;
 using Mindscape.Raygun4Net;
 using Newtonsoft.Json;
@@ -21,7 +18,6 @@ using Unity.Lifetime;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Yol.Punla.Barrack;
-using Yol.Punla.Droid.CustomRenderers;
 using Yol.Punla.Droid.Services;
 using Yol.Punla.Droid.Utility;
 using Yol.Punla.Localized;
@@ -29,6 +25,7 @@ using Yol.Punla.Messages;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 using Yol.Punla.Views;
+using FFImageLoading.Forms.Platform;
 
 namespace Yol.Punla.Droid
 {
@@ -40,7 +37,7 @@ namespace Yol.Punla.Droid
         private const string PACKAGENAME = "com.haiyangrpdev.HopePH";
         private const string HOCKEYAPPID = "b544024f438f40a482972fa96280e89e"; //chito. when debugging change not to record to the live correct one b544024f438f40a482972fa96280e89e
         private KeyValueCacheUtility keyValueCacheUtility = new KeyValueCacheUtility();
-        private string[] masterMenuPages = new string[] { nameof(PostFeedPage), nameof(CrisisHotlineListPage), nameof(SettingsPage), nameof(NotificationsPage) };
+        private string[] masterMenuPages = new string[] { nameof(PostFeedPage), nameof(SettingsPage), nameof(NotificationsPage) };
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -48,27 +45,14 @@ namespace Yol.Punla.Droid
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            CachedImageRenderer.Init(enableFastRenderer: true);
+            InitCrashProviders();
+            CachedImageRenderer.Init(true);
             UserDialogs.Init(this);
-            InitHockeyAppAndRaygun();
             GetPackageInfoAndHashKey();
             BackgroundedMessagingCenter();
-            RecordUnHandledException();
             app = new App(new AndroidInitializer());
             LoadApplication(app);
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
-        }
-
-        protected override void OnResume()
-        {
-            base.OnResume();
-            InitHockeyApp2();
-        }
-
-        protected override void OnPause()
-        {
-            base.OnPause();
-            HockeyAppUnregister();
         }
 
         protected override void OnActivityResult(int requestCode, Android.App.Result resultCode, Intent data)
@@ -86,8 +70,7 @@ namespace Yol.Punla.Droid
         }
 
         protected override void OnDestroy()
-        {
-            HockeyAppUnregister();
+        { 
             UnsubscribeToMessagingCenter();
             base.OnDestroy();
         }
@@ -96,23 +79,6 @@ namespace Yol.Punla.Droid
         {
             if (IsHitDeviceBackButton())
                 base.OnBackPressed();
-        }
-
-        private void InitHockeyAppAndRaygun()
-        {
-            UpdateManager.Register(this, HOCKEYAPPID);
-            MetricsManager.Register(Application, HOCKEYAPPID);
-            RaygunClient.Initialize("gNHcZkwjVWdhTW4nuDL/NA==").AttachCrashReporting().AttachPulse(this);
-        }
-
-        private void InitHockeyApp2()
-        {
-            CrashManager.Register(this, HOCKEYAPPID, new CrashListener());
-        }
-
-        private void HockeyAppUnregister()
-        {
-            UpdateManager.Unregister();
         }
 
         private void GetPackageInfoAndHashKey()
@@ -211,8 +177,9 @@ namespace Yol.Punla.Droid
             return hitTheButton;
         }
 
-        private void RecordUnHandledException()
+        private void InitCrashProviders()
         {
+            RaygunClient.Initialize("gNHcZkwjVWdhTW4nuDL/NA==").AttachCrashReporting().AttachPulse(this);
             AndroidEnvironment.UnhandledExceptionRaiser += (sender, args) =>
             {
                 var logger = new Logger();

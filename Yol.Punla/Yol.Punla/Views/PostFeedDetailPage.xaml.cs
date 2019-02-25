@@ -6,9 +6,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
-using Yol.Punla.Mapper;
 using Yol.Punla.Messages;
-using Yol.Punla.Templates;
+using Yol.Punla.Views;
 using Yol.Punla.ViewModels;
 
 namespace Yol.Punla.Views

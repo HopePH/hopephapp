@@ -10,7 +10,6 @@ using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.ViewModels.Validators;
 
@@ -44,7 +43,7 @@ namespace Yol.Punla.ViewModels
             IAppUser appUser, 
             INavigationStackService navigationStackService, 
             INavigationService navigationService,
-            IContactManager contactManager) : base(serviceMapper, appUser)
+            IContactManager contactManager) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
@@ -66,6 +65,10 @@ namespace Yol.Punla.ViewModels
             {
                 IsBusy = true;
                 string emailDuplicate = (await _contactManager.CheckIfEmailExists(EmailAddress, "HopePH")) ? EmailAddress : "Ret45ujhh@gboy.com";
+
+#if (FAKE || DEBUG)
+                if (EmailAddress == Constants.TESTEMAIL1) emailDuplicate = "";
+#endif
 
                 if (!IsVerification)
                     _validator = new EmailVerificationPageValidator(VerificationCode, IsVerification, emailDuplicate);
@@ -112,7 +115,7 @@ namespace Yol.Punla.ViewModels
                 };
 
                 PassingParameters.Add("CurrentContact", contact);
-                NavigateToPageHelper(nameof(ViewNames.AccountRegistrationPage), _navigationStackService, _navigationService, PassingParameters);
+                await NavigateToPageHelper(nameof(ViewNames.AccountRegistrationPage), PassingParameters);
             }
         }
 

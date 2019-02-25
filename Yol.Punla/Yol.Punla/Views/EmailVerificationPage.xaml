@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:AppViewBase
+<ContentPage
     x:Class="Yol.Punla.Views.EmailVerificationPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -9,14 +9,20 @@
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     Title="Home Page"
-    prism:ViewModelLocator.AutowireViewModel="True">
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="White">
     <Grid
+        BackgroundColor="Transparent"
         HorizontalOptions="FillAndExpand"
         RowSpacing="0"
         VerticalOptions="FillAndExpand">
-        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView
+            BackgroundColor="Transparent"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
             <Grid
                 Padding="40,20,40,20"
+                BackgroundColor="Transparent"
                 HorizontalOptions="FillAndExpand"
                 RowSpacing="0"
                 VerticalOptions="FillAndExpand">
@@ -59,6 +65,7 @@
                     Grid.Row="3"
                     BottomLineColor="Gray"
                     IsVisible="{Binding IsVerificationNegation}"
+                    Keyboard="Email"
                     Placeholder="{Binding PlaceholderTitle}"
                     Text="{Binding EmailAddress}"
                     VerticalOptions="End">
@@ -92,7 +99,6 @@
                         WidthRequest="68">
                         <Frame
                             Padding="4"
-                            BackgroundColor="White"
                             CornerRadius="5"
                             HasShadow="False"
                             HeightRequest="68"
@@ -100,7 +106,8 @@
                             OutlineColor="#FF979797">
                             <Entry
                                 FontSize="40"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
                                 Text="{Binding VerificationCodeEntered1}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
@@ -127,7 +134,8 @@
                             OutlineColor="#FF979797">
                             <Entry
                                 FontSize="40"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
                                 Text="{Binding VerificationCodeEntered2}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
@@ -154,7 +162,8 @@
                             OutlineColor="#FF979797">
                             <Entry
                                 FontSize="40"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
                                 Text="{Binding VerificationCodeEntered3}"
                                 VerticalOptions="End">
                                 <Entry.Effects>
@@ -181,7 +190,8 @@
                             OutlineColor="#FF979797">
                             <Entry
                                 FontSize="40"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
                                 Text="{Binding VerificationCodeEntered4}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
@@ -193,7 +203,7 @@
                 </StackLayout>
                 <Button
                     Grid.Row="4"
-                    Margin="0,0,0,18"
+                    Margin="0,20,0,18"
                     Command="{Binding SendVerificationCodeCommand}"
                     FontAttributes="Bold"
                     HorizontalOptions="FillAndExpand"
@@ -221,4 +231,4 @@
             </StackLayout>
         </ContentView>
     </Grid>
-</local:AppViewBase>
+</ContentPage>
