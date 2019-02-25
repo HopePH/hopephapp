@@ -21,7 +21,6 @@ using Unity.Lifetime;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Yol.Punla.Barrack;
-using Yol.Punla.Droid.CustomRenderers;
 using Yol.Punla.Droid.Services;
 using Yol.Punla.Droid.Utility;
 using Yol.Punla.Localized;
