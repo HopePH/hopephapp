@@ -106,10 +106,17 @@ namespace Yol.Punla
 
         public void ConfigureDatabaseInitilization()
         {
-            Debug.WriteLine("HOPEPH Create the table here once only.");
-            var unityContainer = Container.GetContainer();
-            var mockRepository = unityContainer.Resolve<IMockRepository>();
-            mockRepository.CreateTablesOnce();
+            try
+            {
+                Debug.WriteLine("HOPEPH Create the table here once only.");
+                var unityContainer = Container.GetContainer();
+                var mockRepository = unityContainer.Resolve<IMockRepository>();
+                mockRepository.CreateTablesOnce();
+            }
+            catch (Exception ex)
+            {
+                Container.GetContainer().Resolve<IDependencyService>().Get<ILogger>().Log(ex);
+            }
         }
 
         protected override void OnInitialized()
@@ -122,9 +129,9 @@ namespace Yol.Punla
                 ConfigureDatabaseInitilization();
 
                 var unityContainer = Container.GetContainer();
-                unityContainer.RegisterInstance<INavigationService>(NavigationService, new ContainerControlledLifetimeManager());
-                AppUnityContainer.Init(unityContainer);
+                unityContainer.RegisterInstance<INavigationService>(NavigationService, new ContainerControlledLifetimeManager());               
                 AppCrossConnectivity.Init(unityContainer.Resolve<IConnectivity>());
+                AppUnityContainer.Init(unityContainer);
 
                 if (WasSignedUpAndLogon())
                     NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
@@ -191,7 +198,7 @@ namespace Yol.Punla
 
         private void NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
         {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavigationPage)}/{page}";
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavPage)}/{page}";
             navigationStackService.UpdateStackState(page);
             navigationService.NavigateAsync(rootPage);
         }
