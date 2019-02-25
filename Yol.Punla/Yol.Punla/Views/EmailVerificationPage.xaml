@@ -108,7 +108,7 @@
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
-                                Text="{Binding VerificationCodeEntered1}"
+                                Text="{Binding ConfirmVerificationCode.VerificationCodeEntered1}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
                                     <effects:EntryEffect />
@@ -136,7 +136,7 @@
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
-                                Text="{Binding VerificationCodeEntered2}"
+                                Text="{Binding ConfirmVerificationCode.VerificationCodeEntered2}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
                                     <effects:EntryEffect />
@@ -164,7 +164,7 @@
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
-                                Text="{Binding VerificationCodeEntered3}"
+                                Text="{Binding ConfirmVerificationCode.VerificationCodeEntered3}"
                                 VerticalOptions="End">
                                 <Entry.Effects>
                                     <effects:EntryEffect />
@@ -192,7 +192,7 @@
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
-                                Text="{Binding VerificationCodeEntered4}"
+                                Text="{Binding ConfirmVerificationCode.VerificationCodeEntered4}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
                                     <effects:EntryEffect />
