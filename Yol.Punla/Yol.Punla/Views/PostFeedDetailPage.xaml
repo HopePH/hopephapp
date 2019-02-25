@@ -9,7 +9,7 @@
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
-    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
+    xmlns:template="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     x:Name="ThisPage"
     Title="Post Details Page"
     BackgroundColor="{StaticResource ColorWhite}">
