@@ -40,7 +40,7 @@ namespace Yol.Punla.Droid
         private const string PACKAGENAME = "com.haiyangrpdev.HopePH";
         private const string HOCKEYAPPID = "b544024f438f40a482972fa96280e89e"; //chito. when debugging change not to record to the live correct one b544024f438f40a482972fa96280e89e
         private KeyValueCacheUtility keyValueCacheUtility = new KeyValueCacheUtility();
-        private string[] masterMenuPages = new string[] { nameof(PostFeedPage), nameof(CrisisHotlineListPage), nameof(SettingsPage), nameof(NotificationsPage) };
+        private string[] masterMenuPages = new string[] { nameof(PostFeedPage), nameof(SettingsPage), nameof(NotificationsPage) };
 
         protected override void OnCreate(Bundle bundle)
         {
