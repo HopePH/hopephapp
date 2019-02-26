@@ -35,6 +35,7 @@
             <Color x:Key="ColorRed">#f84330</Color>
             <Color x:Key="ColorGreenLight">#b2c68b</Color>
             <Color x:Key="ColorGreenDimB">#FF417505</Color>
+            <Color x:Key="CircleImageBorderGreen">#FF7ED321</Color>
 
             <!--  Unit Values  -->
             <x:Double x:Key="MainMenuHeaderFontsize">18</x:Double>
