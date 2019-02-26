@@ -344,7 +344,8 @@ namespace Yol.Punla
         {
             string path = "";
             var children = new List<string>();
-            children.Add("addTab=WikiPage");
+            //children.Add("addTab=WikiPage");
+            children.Add("addTab=PostFeedPage");
             path += "?" + string.Join("&", children);
             return path;
         }
