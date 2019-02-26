@@ -14,6 +14,7 @@ using Yol.Punla.Barrack;
 using Yol.Punla.Managers;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
+using Unity;
 
 namespace Yol.Punla.ViewModels
 {
@@ -109,10 +110,10 @@ namespace Yol.Punla.ViewModels
                 var resultId = await Task.Run<int>(() =>
                 {
                     Debug.WriteLine("HOPEPH Saving details of contact.");
-                    return  _contactManager.SaveDetailsToRemoteDB(CurrentContact);
+                    return _contactManager.SaveDetailsToRemoteDB(CurrentContact);
                 }, TokenHandler.Token);
 
-                SignUpResult(resultId, TokenHandler.IsTokenSourceCompleted());
+                await SignUpResult(resultId, TokenHandler.IsTokenSourceCompleted());
             }
             catch (Exception ex)
             {
@@ -124,10 +125,10 @@ namespace Yol.Punla.ViewModels
         public void SignUpAsyncFake()
         {
             var result = _contactManager.SaveDetailsToRemoteDB(CurrentContact).Result;
-            SignUpResult(result);
+            SignUpResult(result).Wait();
         }
 
-        public void SignUpResult(int resultId, bool IsSuccess = true)
+        public async Task SignUpResult(int resultId, bool IsSuccess = true)
         {
             if (IsSuccess && resultId > 0)
             {
@@ -142,9 +143,11 @@ namespace Yol.Punla.ViewModels
                 _keyValueCacheUtility.RemoveKeyObject("NewPage");
 
                 if (string.IsNullOrEmpty(newPage))
-                    ChangeRootAndNavigateToPageHelper(nameof(ViewNames.HomePage),PassingParameters);
-                else            
-                    ChangeRootAndNavigateToPageHelper(newPage, PassingParameters);
+                    // await ChangeRootAndNavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage),PassingParameters); 
+                    //await ChangeRootAndNavigateToPageHelper(nameof(Views.MainTabbedPage) + AddPagesInTab(), PassingParameters);
+                    await NavigateToRootPage(nameof(Views.MainTabbedPage) + AddPagesInTab());
+                else
+                    await ChangeRootAndNavigateToPageHelper(newPage, PassingParameters);
 
                 _keyValueCacheUtility.GetUserDefaultsKeyValue("WasLogin", "true");
                 _keyValueCacheUtility.GetUserDefaultsKeyValue("WasSignUpCompleted", "true");
@@ -153,7 +156,7 @@ namespace Yol.Punla.ViewModels
 
             IsBusy = false;
         }
-
+        
         #endregion
 
         private void TakePhoto() => IsAvatarModalVisible = true;
@@ -164,6 +167,22 @@ namespace Yol.Punla.ViewModels
         {
             Picture = avatar.SourceUrl;
             ShowHideAvatarSelection(false);
+        }
+
+        private string AddPagesInTab()
+        {
+            string path = "";
+            var children = new List<string>();
+            children.Add("addTab=PostFeedPage");
+            path += "?" + string.Join("&", children);
+            return path;
+        }
+
+        private async Task NavigateToRootPage(string page)
+        {
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{page}";
+            _navigationStackService.UpdateStackState(page);
+            await _navigationService.NavigateAsync(rootPage);
         }
     }
 }

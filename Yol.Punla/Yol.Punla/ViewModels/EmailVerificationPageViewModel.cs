@@ -73,8 +73,11 @@ namespace Yol.Punla.ViewModels
                 if (!IsVerification)
                     _validator = new EmailVerificationPageValidator(VerificationCode, IsVerification, emailDuplicate);
                 else
-                    _validator = new EmailVerificationPageValidator(VerificationCode, IsVerification, emailDuplicate);
-
+                {
+                    ConfirmVerificationCode = $"{VerificationCodeEntered1}{VerificationCodeEntered2}{VerificationCodeEntered3}{VerificationCodeEntered4}";
+                    _validator = new EmailVerificationPageValidator(ConfirmVerificationCode, IsVerification, emailDuplicate);
+                }
+                    
                 if (ProcessValidationErrors(_validator.Validate(this), true))                  
                     await PrepareNavigationToRegistrationPage(IsVerification);
             }

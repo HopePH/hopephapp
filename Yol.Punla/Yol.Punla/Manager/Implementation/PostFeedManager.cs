@@ -260,7 +260,8 @@ namespace Yol.Punla.Managers
 
                 foreach (var item in postFeeds)
                 {
-                    if (item.PosterId == int.Parse(_keyValueCachedUtility.GetUserDefaultsKeyValue("CurrentContactId")))
+                    var currentContactId = _keyValueCachedUtility.GetUserDefaultsKeyValue("CurrentContactId");
+                    if (!string.IsNullOrEmpty(currentContactId) && item.PosterId == int.Parse(currentContactId))
                         item.IsSelfPosted = true;
 
                     if (!string.IsNullOrEmpty(item.ContactsWhoLiked))

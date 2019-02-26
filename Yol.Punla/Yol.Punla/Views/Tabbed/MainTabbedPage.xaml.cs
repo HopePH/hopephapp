@@ -5,17 +5,33 @@ using Xamarin.Forms.Xaml;
 using Yol.Punla.Barrack;
 using Unity;
 using Yol.Punla.AttributeBase;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using System;
 
 namespace Yol.Punla.Views
 {
     [ModuleView]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainTabbedPage : TabbedPage, INavigatingAware
+	public partial class MainTabbedPage : Xamarin.Forms.TabbedPage, INavigatingAware
     {
 		public MainTabbedPage ()
 		{
-			InitializeComponent ();
-		}
+            try
+            {
+                InitializeComponent();
+                On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            }
+            catch (XamlParseException xp)
+            {
+                if (!xp.Message.Contains("StaticResource not found for key"))
+                    throw;
+            }
+            catch (Exception ex)
+            {
+                if (!(ex.Source == "FFImageLoading.Forms" || ex.Source == "FFImageLoading.Transformations"))
+                    throw;
+            }
+        }
 
         public void OnNavigatingTo(INavigationParameters parameters)
         {

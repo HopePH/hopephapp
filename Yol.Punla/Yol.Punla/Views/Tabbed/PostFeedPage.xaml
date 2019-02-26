@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:AppViewBase
+<template:AppViewBase
     x:Class="Yol.Punla.Views.PostFeedPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -13,7 +13,8 @@
     xmlns:template="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     x:Name="PostDetailPage"
     Title="{Binding Title}"
-    prism:ViewModelLocator.AutowireViewModel="True">
+    prism:ViewModelLocator.AutowireViewModel="True"
+    NavigationPage.HasNavigationBar="False">
     <Grid
         Padding="0"
         RowSpacing="0"
@@ -24,9 +25,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <template:NavigationSearchBar Grid.Row="0" />
-        <ContentView
-            Grid.Row="1"
+        <!--<template:NavigationSearchBar Grid.Row="0" />-->
+        <!--<ContentView
+            Grid.Row="0"
             Margin="0"
             Padding="2,1"
             BackgroundColor="{StaticResource BoxGrayBorderColor}"
@@ -45,35 +46,86 @@
                     </customControl:MuseoLabel.FontSize>
                 </customControl:MuseoLabel>
             </ContentView>
-        </ContentView>
+        </ContentView>-->
         <StackLayout
-            Grid.Row="2"
-            Padding="20,10"
+            Grid.Row="1"
+            BackgroundColor="Yellow"
             Orientation="Horizontal"
             Spacing="15">
-            <ContentView Padding="0,10" HorizontalOptions="FillAndExpand">
-                <customControl:MuseoLabel
-                    HorizontalOptions="StartAndExpand"
-                    Text="{localization:Render SharePostText}"
-                    VerticalTextAlignment="Center">
-                    <customControl:MuseoLabel.FontSize>
-                        <OnPlatform
-                            x:TypeArguments="x:Double"
-                            Android="16"
-                            iOS="14" />
-                    </customControl:MuseoLabel.FontSize>
-                </customControl:MuseoLabel>
-                <ContentView.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding AddPostCommand}" NumberOfTapsRequired="1" />
-                </ContentView.GestureRecognizers>
-            </ContentView>
-            <ContentView Padding="10,10,0,10" HorizontalOptions="End">
-                <Label Style="{StaticResource FontIcon}" Text="{StaticResource fa-camera}" />
-                <ContentView.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding CameraCommand}" NumberOfTapsRequired="1" />
-                </ContentView.GestureRecognizers>
-            </ContentView>
+            <!--  notification icon or same  -->
+            <Label
+                FontFamily="FontAwesome"
+                FontSize="23"
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding IsSelfPosted, Mode=TwoWay}"
+                Text="{StaticResource fa-bell}"
+                TextColor="{StaticResource ColorGreenDimB}"
+                VerticalTextAlignment="Start" />
+            <customControl:MuseoLabel
+                FontAttributes="Bold"
+                HorizontalOptions="Start"
+                Text="Wall"
+                TextColor="{StaticResource ColorGreenDimB}"
+                VerticalOptions="Start"
+                VerticalTextAlignment="Center">
+                <customControl:MuseoLabel.FontSize>
+                    <OnPlatform
+                        x:TypeArguments="x:Double"
+                        Android="20"
+                        iOS="18" />
+                </customControl:MuseoLabel.FontSize>
+            </customControl:MuseoLabel>
+            <ffImage:CachedImage
+                HorizontalOptions="StartAndExpand"
+                Source="nologo.jpg"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="70">
+                <ffImage:CachedImage.Transformations>
+                    <ffImageTransformation:CircleTransformation />
+                </ffImage:CachedImage.Transformations>
+            </ffImage:CachedImage>
         </StackLayout>
+        <Frame
+            Grid.Row="2"
+            Margin="10,10,10,0"
+            Padding="0"
+            BackgroundColor="Yellow"
+            CornerRadius="3"
+            HasShadow="True">
+            <StackLayout
+                Padding="20,10"
+                BackgroundColor="Red"
+                Orientation="Horizontal"
+                Spacing="15">
+                <ffImage:CachedImage Source="nologo.jpg" WidthRequest="40">
+                    <ffImage:CachedImage.Transformations>
+                        <ffImageTransformation:CircleTransformation />
+                    </ffImage:CachedImage.Transformations>
+                </ffImage:CachedImage>
+                <ContentView Padding="0,10" HorizontalOptions="FillAndExpand">
+                    <customControl:MuseoLabel
+                        HorizontalOptions="StartAndExpand"
+                        Text="{localization:Render SharePostText}"
+                        VerticalTextAlignment="Center">
+                        <customControl:MuseoLabel.FontSize>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="16"
+                                iOS="14" />
+                        </customControl:MuseoLabel.FontSize>
+                    </customControl:MuseoLabel>
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddPostCommand}" NumberOfTapsRequired="1" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+                <ContentView Padding="10,10,0,10" HorizontalOptions="End">
+                    <Label Style="{StaticResource FontIcon}" Text="{StaticResource fa-camera}" />
+                    <ContentView.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CameraCommand}" NumberOfTapsRequired="1" />
+                    </ContentView.GestureRecognizers>
+                </ContentView>
+            </StackLayout>
+        </Frame>
         <!--  POSTS HERE  -->
         <ListView
             x:Name="PostsList"
@@ -550,4 +602,4 @@
             </customControl:MuseoLabel>
         </StackLayout>
     </Grid>
-</local:AppViewBase>
+</template:AppViewBase>
