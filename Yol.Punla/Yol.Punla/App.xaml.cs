@@ -197,7 +197,8 @@ namespace Yol.Punla
 
         private async Task NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
         {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavPage)}/{page}";
+            //var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavPage)}/{page}";
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{page}";
             navigationStackService.UpdateStackState(page);
             await navigationService.NavigateAsync(rootPage);
         }

@@ -42,33 +42,45 @@
                     Source="icon"
                     VerticalOptions="Start"
                     WidthRequest="96" />
-                <customControl:MuseoLabel
+                <Label
                     Grid.Row="1"
                     Margin="0,46,0,0"
+                    FontAttributes="Bold"
                     HorizontalOptions="Center"
                     Style="{StaticResource LabelLargeGreen}"
                     Text="{Binding TitleMessage}"
-                    VerticalOptions="Start" />
-                <customControl:MuseoLabel
+                    VerticalOptions="Start">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                </Label>
+                <Label
                     Grid.Row="2"
                     Margin="0,20,0,0"
                     Text="{Binding TitleContent}"
                     VerticalOptions="End">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
                     <Label.Style>
                         <OnPlatform
                             x:TypeArguments="Style"
                             Android="{StaticResource LabelXSmallDark}"
                             iOS="{StaticResource LabelSmallDark}" />
                     </Label.Style>
-                </customControl:MuseoLabel>
-                <customControl:CustomEntry
+                </Label>
+                <Entry
                     Grid.Row="3"
-                    BottomLineColor="Gray"
                     IsVisible="{Binding IsVerificationNegation}"
                     Keyboard="Email"
-                    Placeholder="{Binding PlaceholderTitle}"
+                    Placeholder="sample@hopeph.com"
+                    PlaceholderColor="#61000000"
                     Text="{Binding EmailAddress}"
                     VerticalOptions="End">
+                    <!--  Placeholder={Binding PlaceholderTitle}  -->
+                    <Entry.Effects>
+                        <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                    </Entry.Effects>
                     <Entry.Style>
                         <OnPlatform
                             x:TypeArguments="Style"
@@ -81,7 +93,7 @@
                             Android="0,76,0,0"
                             iOS="0,76,0,0" />
                     </Entry.Margin>
-                </customControl:CustomEntry>
+                </Entry>
                 <StackLayout
                     Grid.Row="3"
                     Margin="0,46,0,0"
@@ -108,6 +120,7 @@
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
+                                MaxLength="1"
                                 Text="{Binding VerificationCodeEntered1}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
@@ -136,6 +149,7 @@
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
+                                MaxLength="1"
                                 Text="{Binding VerificationCodeEntered2}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
@@ -164,6 +178,7 @@
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
+                                MaxLength="1"
                                 Text="{Binding VerificationCodeEntered3}"
                                 VerticalOptions="End">
                                 <Entry.Effects>
@@ -192,6 +207,7 @@
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
+                                MaxLength="1"
                                 Text="{Binding VerificationCodeEntered4}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
@@ -222,12 +238,16 @@
                     IsRunning="{Binding IsBusy, Mode=OneWay}"
                     IsVisible="{Binding IsBusy}"
                     Style="{StaticResource ActivityIndicatorMain}" />
-                <customControl:MuseoLabel
+                <Label
                     HorizontalOptions="Center"
                     Opacity="1"
                     Style="{StaticResource LabelSmall}"
                     Text="Please wait..."
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                </Label>
             </StackLayout>
         </ContentView>
     </Grid>

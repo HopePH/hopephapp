@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
-    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
     xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
@@ -14,6 +13,7 @@
     x:Name="PostDetailPage"
     Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="White"
     NavigationPage.HasNavigationBar="False">
     <Grid
         Padding="0"
@@ -38,14 +38,17 @@
                 Padding="20,10"
                 BackgroundColor="White"
                 HorizontalOptions="FillAndExpand">
-                <customControl:MuseoLabel Text="{localization:Render PostingReminder}" TextColor="Black">
-                    <customControl:MuseoLabel.FontSize>
+                <Label Text="{localization:Render PostingReminder}" TextColor="Black">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                    <Label.FontSize>
                         <OnPlatform
                             x:TypeArguments="x:Double"
                             Android="9"
                             iOS="7" />
-                    </customControl:MuseoLabel.FontSize>
-                </customControl:MuseoLabel>
+                    </Label.FontSize>
+                </Label>
             </ContentView>
         </ContentView>-->
         <!--#endregion-->
@@ -199,16 +202,8 @@
                                 VerticalOptions="FillAndExpand">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition>
-                                        <RowDefinition.Height>
-                                            <OnPlatform
-                                                x:TypeArguments="GridLength"
-                                                Android="*"
-                                                iOS="34" />
-                                        </RowDefinition.Height>
-                                    </RowDefinition>
-                                    <RowDefinition Height="0" />
-                                    <!--  Height="*"  -->
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
                                     <RowDefinition>
                                         <RowDefinition.Height>
                                             <OnPlatform
@@ -322,7 +317,7 @@
                                 <!--  ATTACHED POST IMAGE SECTION  -->
                                 <Grid
                                     Grid.Row="2"
-                                    Padding="20,0,40,0"
+                                    Padding="20,0,20,0"
                                     BackgroundColor="Transparent"
                                     RowSpacing="0">
                                     <Grid.RowDefinitions>
@@ -344,6 +339,7 @@
                                     </ffImage:CachedImage>
                                     <ContentView
                                         Grid.Row="1"
+                                        Margin="-3,0"
                                         Padding="1"
                                         BackgroundColor="{StaticResource BoxGrayBorderColor}"
                                         VerticalOptions="FillAndExpand">

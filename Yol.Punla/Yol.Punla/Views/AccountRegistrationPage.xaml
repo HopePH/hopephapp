@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:flowListView="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
@@ -14,7 +15,6 @@
     Title="Account Registration Page"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="White">
-
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <ScrollView
             AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -33,7 +33,7 @@
 
                 <ContentView
                     Grid.Row="0"
-                    Padding="20,0,20,20"
+                    Padding="20,10,20,20"
                     HorizontalOptions="FillAndExpand"
                     IsVisible="{Binding HasPicture}"
                     VerticalOptions="FillAndExpand">
@@ -41,17 +41,17 @@
                         Aspect="AspectFit"
                         CacheDuration="7"
                         Source="{Binding Picture}"
-                        VerticalOptions="End">
+                        VerticalOptions="Center">
                         <ffImage:CachedImage.HeightRequest>
                             <OnPlatform
                                 x:TypeArguments="x:Double"
-                                Android="180"
+                                Android="140"
                                 iOS="130" />
                         </ffImage:CachedImage.HeightRequest>
                         <ffImage:CachedImage.WidthRequest>
                             <OnPlatform
                                 x:TypeArguments="x:Double"
-                                Android="180"
+                                Android="140"
                                 iOS="130" />
                         </ffImage:CachedImage.WidthRequest>
                         <ffImage:CachedImage.Transformations>
@@ -85,17 +85,17 @@
                                     iOS="{StaticResource LabelSmallDark}" />
                             </Label.Style>
                         </customControl:MuseoLabel>
-                        <customControl:CustomEntry
-                            BottomLineColor="Gray"
-                            IsEnabled="false"
-                            Text="{Binding FullName, Mode=TwoWay}">
+                        <Entry IsEnabled="false" Text="{Binding FullName, Mode=TwoWay}">
+                            <Entry.Effects>
+                                <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                            </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource EntrySmallDark}"
                                     iOS="{StaticResource EntryDefaultDark}" />
                             </Entry.Style>
-                        </customControl:CustomEntry>
+                        </Entry>
                     </StackLayout>
                     <BoxView WidthRequest="18">
                         <BoxView.HeightRequest>
@@ -126,17 +126,17 @@
                                     iOS="0" />
                             </Label.Margin>
                         </customControl:MuseoLabel>
-                        <customControl:CustomEntry
-                            BottomLineColor="Gray"
-                            IsEnabled="{Binding EmailEnabled}"
-                            Text="{Binding EmailAddress, Mode=TwoWay}">
+                        <Entry IsEnabled="{Binding EmailEnabled}" Text="{Binding EmailAddress, Mode=TwoWay}">
+                            <Entry.Effects>
+                                <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                            </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource EntrySmallDark}"
                                     iOS="{StaticResource EntryDefaultDark}" />
                             </Entry.Style>
-                        </customControl:CustomEntry>
+                        </Entry>
                     </StackLayout>
                     <BoxView WidthRequest="18">
                         <BoxView.HeightRequest>
@@ -170,7 +170,10 @@
                                     iOS="0" />
                             </customControl:MuseoLabel.Margin>
                         </customControl:MuseoLabel>
-                        <customControl:CustomEntry BottomLineColor="Gray" Text="{Binding AliasName, Mode=TwoWay}">
+                        <Entry Text="{Binding AliasName, Mode=TwoWay}">
+                            <Entry.Effects>
+                                <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                            </Entry.Effects>
                             <customControl:CustomEntry.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
@@ -183,7 +186,7 @@
                                     Android="0,-5,0,0"
                                     iOS="0" />
                             </customControl:CustomEntry.Margin>
-                        </customControl:CustomEntry>
+                        </Entry>
                     </StackLayout>
                     <BoxView WidthRequest="18">
                         <BoxView.HeightRequest>
@@ -214,23 +217,23 @@
                                     iOS="0" />
                             </customControl:MuseoLabel.Margin>
                         </customControl:MuseoLabel>
-                        <customControl:CustomEntry
-                            BottomLineColor="Gray"
-                            Keyboard="Telephone"
-                            Text="{Binding MobilePhoneNo, Mode=TwoWay}">
-                            <customControl:CustomEntry.Style>
+                        <Entry Keyboard="Telephone" Text="{Binding MobilePhoneNo, Mode=TwoWay}">
+                            <Entry.Effects>
+                                <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                            </Entry.Effects>
+                            <Entry.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource EntrySmallDark}"
                                     iOS="{StaticResource EntryDefaultDark}" />
-                            </customControl:CustomEntry.Style>
-                            <customControl:CustomEntry.Margin>
+                            </Entry.Style>
+                            <Entry.Margin>
                                 <OnPlatform
                                     x:TypeArguments="Thickness"
                                     Android="0,-15,0,0"
                                     iOS="0" />
-                            </customControl:CustomEntry.Margin>
-                        </customControl:CustomEntry>
+                            </Entry.Margin>
+                        </Entry>
                     </StackLayout>
                 </StackLayout>
 

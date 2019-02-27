@@ -101,6 +101,8 @@
     <Compile Include="CustomRenderers\MultilineEntryRenderer.cs" />
     <Compile Include="CustomRenderers\MuseoLabelRenderer.cs" />
     <Compile Include="Effects\EditorTransparentBottomlineEffectiOS.cs" />
+    <Compile Include="Effects\EntryEffectIos.cs" />
+    <Compile Include="Effects\LabelFontFamilyEffectIos.cs" />
     <Compile Include="Effects\SwitchColorEffectsIOS.cs" />
     <Compile Include="Effects\TransparentBottomBorderSearchBarEffectiOS.cs" />
     <Compile Include="Main.cs" />

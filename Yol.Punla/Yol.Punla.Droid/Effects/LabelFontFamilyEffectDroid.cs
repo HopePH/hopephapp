@@ -63,9 +63,6 @@ namespace Yol.Punla.Droid.Effects
             }
         }
 
-        protected override void OnDetached()
-        {
-            
-        }
+        protected override void OnDetached() { }
     }
 }
