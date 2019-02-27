@@ -26,7 +26,7 @@ namespace Yol.Punla.ViewModels
 
         public ICommand SendVerificationCodeCommand => new DelegateCommand(async () => await SendVerificationCode());
         public string VerificationCode { get; set; }
-        public string EmailAddress { get; set; }
+        public string EmailAddress { get; set; } = string.Empty;
         public string VerificationCodeEntered1 { get; set; }
         public string VerificationCodeEntered2 { get; set; }
         public string VerificationCodeEntered3 { get; set; }

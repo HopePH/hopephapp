@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
+<local:AppViewBase
     x:Class="Yol.Punla.Views.EmailVerificationPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
     xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
@@ -263,7 +262,35 @@
                     HorizontalOptions="FillAndExpand"
                     Style="{StaticResource ButtonGreenSlim}"
                     Text="Continue"
-                    VerticalOptions="End" />
+                    VerticalOptions="End">
+                    <Button.Triggers>
+                        <DataTrigger
+                            Binding="{Binding EmailAddress}"
+                            TargetType="Button"
+                            Value="">
+                            <Setter Property="BackgroundColor" Value="#FF9B9B9B" />
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding IsVerification}"
+                            TargetType="Button"
+                            Value="true">
+                            <Setter Property="BackgroundColor" Value="#FF9B9B9B" />
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                        <MultiTrigger TargetType="Button">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding IsVerification}" Value="True" />
+                                <BindingCondition Binding="{Binding Text.Length, Source={x:Reference code1Entry}}" Value="1" />
+                                <BindingCondition Binding="{Binding Text.Length, Source={x:Reference code2Entry}}" Value="1" />
+                                <BindingCondition Binding="{Binding Text.Length, Source={x:Reference code3Entry}}" Value="1" />
+                                <BindingCondition Binding="{Binding Text.Length, Source={x:Reference code4Entry}}" Value="1" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="BackgroundColor" Value="{StaticResource GreenColorDim}" />
+                            <Setter Property="IsEnabled" Value="True" />
+                        </MultiTrigger>
+                    </Button.Triggers>
+                </Button>
             </Grid>
         </ScrollView>
         <!--  Busy Indicator  -->
@@ -289,4 +316,4 @@
             </StackLayout>
         </ContentView>
     </Grid>
-</ContentPage>
+</local:AppViewBase>
