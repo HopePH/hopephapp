@@ -104,21 +104,30 @@
                     Orientation="Horizontal"
                     VerticalOptions="Start">
                     <Frame
-                        Padding="1"
+                        Padding="3"
                         BackgroundColor="#FF979797"
                         CornerRadius="4"
                         HasShadow="False"
                         HorizontalOptions="FillAndExpand"
                         OutlineColor="#FF979797"
                         WidthRequest="68">
+                        <Frame.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Text.Length, Source={x:Reference code1Entry}}"
+                                TargetType="Frame"
+                                Value="1">
+                                <Setter Property="BackgroundColor" Value="#FF417505" />
+                            </DataTrigger>
+                        </Frame.Triggers>
                         <Frame
                             Padding="4"
-                            CornerRadius="5"
+                            CornerRadius="2"
                             HasShadow="False"
                             HeightRequest="68"
                             HorizontalOptions="FillAndExpand"
                             OutlineColor="#FF979797">
                             <Entry
+                                x:Name="code1Entry"
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
@@ -132,22 +141,31 @@
                         </Frame>
                     </Frame>
                     <Frame
-                        Padding="1"
+                        Padding="3"
                         BackgroundColor="#FF979797"
                         CornerRadius="4"
                         HasShadow="False"
                         HorizontalOptions="FillAndExpand"
                         OutlineColor="#FF979797"
                         WidthRequest="68">
+                        <Frame.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Text.Length, Source={x:Reference code2Entry}}"
+                                TargetType="Frame"
+                                Value="1">
+                                <Setter Property="BackgroundColor" Value="#FF417505" />
+                            </DataTrigger>
+                        </Frame.Triggers>
                         <Frame
                             Padding="4"
                             BackgroundColor="White"
-                            CornerRadius="5"
+                            CornerRadius="2"
                             HasShadow="False"
                             HeightRequest="68"
                             HorizontalOptions="FillAndExpand"
                             OutlineColor="#FF979797">
                             <Entry
+                                x:Name="code2Entry"
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
@@ -161,22 +179,31 @@
                         </Frame>
                     </Frame>
                     <Frame
-                        Padding="1"
+                        Padding="3"
                         BackgroundColor="#FF979797"
                         CornerRadius="4"
                         HasShadow="False"
                         HorizontalOptions="FillAndExpand"
                         OutlineColor="#FF979797"
                         WidthRequest="68">
+                        <Frame.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Text.Length, Source={x:Reference code3Entry}}"
+                                TargetType="Frame"
+                                Value="1">
+                                <Setter Property="BackgroundColor" Value="#FF417505" />
+                            </DataTrigger>
+                        </Frame.Triggers>
                         <Frame
                             Padding="4"
                             BackgroundColor="White"
-                            CornerRadius="5"
+                            CornerRadius="2"
                             HasShadow="False"
                             HeightRequest="68"
                             HorizontalOptions="FillAndExpand"
                             OutlineColor="#FF979797">
                             <Entry
+                                x:Name="code3Entry"
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
@@ -190,22 +217,31 @@
                         </Frame>
                     </Frame>
                     <Frame
-                        Padding="1"
+                        Padding="3"
                         BackgroundColor="#FF979797"
                         CornerRadius="4"
                         HasShadow="False"
                         HorizontalOptions="FillAndExpand"
                         OutlineColor="#FF979797"
                         WidthRequest="68">
+                        <Frame.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Text.Length, Source={x:Reference code4Entry}}"
+                                TargetType="Frame"
+                                Value="1">
+                                <Setter Property="BackgroundColor" Value="#FF417505" />
+                            </DataTrigger>
+                        </Frame.Triggers>
                         <Frame
                             Padding="4"
                             BackgroundColor="White"
-                            CornerRadius="5"
+                            CornerRadius="2"
                             HasShadow="False"
                             HeightRequest="68"
                             HorizontalOptions="FillAndExpand"
                             OutlineColor="#FF979797">
                             <Entry
+                                x:Name="code4Entry"
                                 FontSize="40"
                                 HorizontalOptions="FillAndExpand"
                                 HorizontalTextAlignment="Center"
