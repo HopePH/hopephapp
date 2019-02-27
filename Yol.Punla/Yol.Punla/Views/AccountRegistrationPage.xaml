@@ -60,10 +60,7 @@
                     </ffImage:CachedImage>
                 </ContentView>
 
-                <StackLayout
-                    Grid.Row="1"
-                    Padding="0"
-                    Spacing="0">
+                <StackLayout Grid.Row="1" Spacing="0">
                     <StackLayout.Padding>
                         <OnPlatform
                             x:TypeArguments="Thickness"
@@ -146,10 +143,7 @@
                                 iOS="18" />
                         </BoxView.HeightRequest>
                     </BoxView>
-                    <StackLayout
-                        Padding="0"
-                        Spacing="6"
-                        VerticalOptions="StartAndExpand">
+                    <StackLayout Padding="0" VerticalOptions="StartAndExpand">
                         <StackLayout.Spacing>
                             <OnPlatform
                                 x:TypeArguments="x:Double"
@@ -170,22 +164,25 @@
                                     iOS="0" />
                             </customControl:MuseoLabel.Margin>
                         </customControl:MuseoLabel>
-                        <Entry Text="{Binding AliasName, Mode=TwoWay}">
+                        <Entry
+                            x:Name="aliasNameEntry"
+                            effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference aliasNameEntry}}"
+                            Text="{Binding AliasName, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                                <effects:EntryEffect LineColor="#1F000000" Thickness="6" />
                             </Entry.Effects>
-                            <customControl:CustomEntry.Style>
+                            <Entry.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource EntrySmallDark}"
                                     iOS="{StaticResource EntryDefaultDark}" />
-                            </customControl:CustomEntry.Style>
-                            <customControl:CustomEntry.Margin>
+                            </Entry.Style>
+                            <Entry.Margin>
                                 <OnPlatform
                                     x:TypeArguments="Thickness"
                                     Android="0,-5,0,0"
                                     iOS="0" />
-                            </customControl:CustomEntry.Margin>
+                            </Entry.Margin>
                         </Entry>
                     </StackLayout>
                     <BoxView WidthRequest="18">
@@ -217,9 +214,13 @@
                                     iOS="0" />
                             </customControl:MuseoLabel.Margin>
                         </customControl:MuseoLabel>
-                        <Entry Keyboard="Telephone" Text="{Binding MobilePhoneNo, Mode=TwoWay}">
+                        <Entry
+                            x:Name="mobilePhoneEntry"
+                            effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference mobilePhoneEntry}}"
+                            Keyboard="Telephone"
+                            Text="{Binding MobilePhoneNo, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                                <effects:EntryEffect LineColor="#1F000000" Thickness="6" />
                             </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
@@ -236,7 +237,6 @@
                         </Entry>
                     </StackLayout>
                 </StackLayout>
-
                 <StackLayout
                     Grid.Row="2"
                     Padding="20,0,20,20"

@@ -30,6 +30,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Compile Remove="Behaviors\EntryBehavior.cs" />
     <Compile Remove="ViewModels\CrisisHotlineListPageViewModel.cs" />
     <Compile Remove="Views\CrisisHotlineListPage.xaml.cs" />
   </ItemGroup>

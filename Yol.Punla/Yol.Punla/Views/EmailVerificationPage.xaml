@@ -70,7 +70,9 @@
                     </Label.Style>
                 </Label>
                 <Entry
+                    x:Name="emailEntry"
                     Grid.Row="3"
+                    effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference emailEntry}}"
                     IsVisible="{Binding IsVerificationNegation}"
                     Keyboard="Email"
                     Placeholder="sample@hopeph.com"
@@ -79,7 +81,7 @@
                     VerticalOptions="End">
                     <!--  Placeholder={Binding PlaceholderTitle}  -->
                     <Entry.Effects>
-                        <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                        <effects:EntryEffect LineColor="#1F000000" Thickness="6" />
                     </Entry.Effects>
                     <Entry.Style>
                         <OnPlatform
