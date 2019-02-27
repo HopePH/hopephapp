@@ -21,7 +21,6 @@ namespace Yol.Punla.Effects
             {
                 var newEffect = new EntryEffect
                 {
-                    LineColor = Color.Red,
                     NumberOfLines = effect.NumberOfLines,
                     PlaceholderToLineDistance = effect.PlaceholderToLineDistance,
                     Thickness = effect.Thickness

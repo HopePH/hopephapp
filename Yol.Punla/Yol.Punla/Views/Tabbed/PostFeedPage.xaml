@@ -212,7 +212,6 @@
                                                 iOS="30" />
                                         </RowDefinition.Height>
                                     </RowDefinition>
-                                    <!--<RowDefinition Height="1" />-->
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <!--  USER, DATE POSTED AND OTHER OPTIONS SECTION  -->
