@@ -8,17 +8,19 @@
     <Application.Resources>
         <ResourceDictionary>
 
-            <!--  CONVERTER  -->
+            <!--#region CONVERTER-->
             <converter:BooleanInvertConverter x:Key="BoolInvert" />
             <converter:DateTextToElapsedTimeConverter x:Key="ToElapsedTime" />
             <converter:BooleanToIsEnableColorConverter x:Key="IsEnabledToColor" />
+            <!--#endregion-->
 
-            <!--  FILE IMAGES  -->
+            <!--#region FILE IMAGES-->
             <FileImageSource x:Key="SignUpBackgroundImage" File="bg3.png" />
             <FileImageSource x:Key="LogoImage" File="hopelogo.png" />
             <FileImageSource x:Key="FloatingAddButton" File="addicon.png" />
+            <!--#endregion-->
 
-            <!--  COLORS  -->
+            <!--#region COLORS-->
             <Color x:Key="GreenColorDim">#88B04B</Color>
             <Color x:Key="MainMenuBackgroundColor">#283441</Color>
             <Color x:Key="ColorWhite">White</Color>
@@ -36,8 +38,9 @@
             <Color x:Key="ColorGreenLight">#b2c68b</Color>
             <Color x:Key="ColorGreenDimB">#FF417505</Color>
             <Color x:Key="CircleImageBorderGreen">#FF7ED321</Color>
+            <!--#endregion-->
 
-            <!--  Unit Values  -->
+            <!--#region  UNIT VALUES-->
             <x:Double x:Key="MainMenuHeaderFontsize">18</x:Double>
             <x:Double x:Key="BaseFontSizeSmall">12</x:Double>
             <x:Double x:Key="BaseFontSize">16</x:Double>
@@ -46,8 +49,49 @@
             <x:Double x:Key="BaseButtonWidthTwo">154</x:Double>
             <x:Double x:Key="BaseFontSizeLarge">18</x:Double>
             <x:Double x:Key="PickerHeight">34</x:Double>
+            <!--#endregion-->
 
-            <!--  Label Sizes  -->
+            <!--#region FONT AWESOME ICONS-->
+            <x:String x:Key="fa-home">&#xf015;</x:String>
+            <x:String x:Key="fa-info-circle">&#xf05a;</x:String>
+            <x:String x:Key="fa-bug">&#xf188;</x:String>
+            <x:String x:Key="fa-pencil">&#xf040;</x:String>
+            <x:String x:Key="fa-pen">&#xf304;</x:String>
+            <x:String x:Key="fa-warning">&#xf071;</x:String>
+            <x:String x:Key="fa-navicon">&#xf0c9;</x:String>
+            <x:String x:Key="fa-close">&#xf00d;</x:String>
+            <x:String x:Key="fa-angle-left">&#xf104;</x:String>
+            <x:String x:Key="fa-sort">&#xf0dc;</x:String>
+            <x:String x:Key="fa-filter">&#xf0b0;</x:String>
+            <x:String x:Key="fa-phone">&#xf095;</x:String>
+            <x:String x:Key="fa-hospital-o">&#xf0f8;</x:String>
+            <x:String x:Key="fa-map-marker">&#xf041;</x:String>
+            <x:String x:Key="fa-bookmark-o">&#xf097;</x:String>
+            <x:String x:Key="fa-bookmark">&#xf02e;</x:String>
+            <x:String x:Key="fa-circle">&#xf111;</x:String>
+            <x:String x:Key="fa-heart-o">&#xf08a;</x:String>
+            <x:String x:Key="fa-heart">&#xf004;</x:String>
+            <x:String x:Key="fa-comment-o">&#xf0e5;</x:String>
+            <x:String x:Key="fa-comment-alt">&#xf27a;</x:String>
+            <x:String x:Key="fa-share-alt">&#xf1e0;</x:String>
+            <x:String x:Key="fa-ellipsis-v">&#xf142;</x:String>
+            <x:String x:Key="fa-ellipsis-h">&#xf141;</x:String>
+            <x:String x:Key="fa-video-camera">&#xf03d;</x:String>
+            <x:String x:Key="fa-camera">&#xf030;</x:String>
+            <x:String x:Key="fa-gear">&#xf013;</x:String>
+            <x:String x:Key="fa-at">&#xf1fa;</x:String>
+            <x:String x:Key="fa-keyboard">&#xf11c;</x:String>
+            <x:String x:Key="fa-trash">&#xf1f8;</x:String>
+            <x:String x:Key="fa-arrow-circle-down">&#xf0ab;</x:String>
+            <x:String x:Key="fa-arrow-circle-o-down">&#xf01a;</x:String>
+            <x:String x:Key="fa-settings">&#xf013;</x:String>
+            <x:String x:Key="fa-arrow-right">&#xf061;</x:String>
+            <x:String x:Key="fa-arrow-left">&#xf060;</x:String>
+            <x:String x:Key="fa-locked">&#xf023;</x:String>
+            <x:String x:Key="fa-bell">&#xf0f3;</x:String>
+            <!--#endregion-->
+
+            <!--#region STYLES-->
             <Style x:Key="LabelSmall" TargetType="Label">
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontSize">
@@ -160,42 +204,6 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="FontFamily" Value="FontAwesome" />
             </Style>
-
-            <!--  - FONT AWESOME ICONS  -->
-            <x:String x:Key="fa-home">&#xf015;</x:String>
-            <x:String x:Key="fa-info-circle">&#xf05a;</x:String>
-            <x:String x:Key="fa-bug">&#xf188;</x:String>
-            <x:String x:Key="fa-pencil">&#xf040;</x:String>
-            <x:String x:Key="fa-warning">&#xf071;</x:String>
-            <x:String x:Key="fa-navicon">&#xf0c9;</x:String>
-            <x:String x:Key="fa-close">&#xf00d;</x:String>
-            <x:String x:Key="fa-angle-left">&#xf104;</x:String>
-            <x:String x:Key="fa-sort">&#xf0dc;</x:String>
-            <x:String x:Key="fa-filter">&#xf0b0;</x:String>
-            <x:String x:Key="fa-phone">&#xf095;</x:String>
-            <x:String x:Key="fa-hospital-o">&#xf0f8;</x:String>
-            <x:String x:Key="fa-map-marker">&#xf041;</x:String>
-            <x:String x:Key="fa-bookmark-o">&#xf097;</x:String>
-            <x:String x:Key="fa-circle">&#xf111;</x:String>
-            <x:String x:Key="fa-heart-o">&#xf08a;</x:String>
-            <x:String x:Key="fa-heart">&#xf004;</x:String>
-            <x:String x:Key="fa-comment-o">&#xf0e5;</x:String>
-            <x:String x:Key="fa-share-alt">&#xf1e0;</x:String>
-            <x:String x:Key="fa-ellipsis-v">&#xf142;</x:String>
-            <x:String x:Key="fa-video-camera">&#xf03d;</x:String>
-            <x:String x:Key="fa-camera">&#xf030;</x:String>
-            <x:String x:Key="fa-gear">&#xf013;</x:String>
-            <x:String x:Key="fa-at">&#xf1fa;</x:String>
-            <x:String x:Key="fa-keyboard">&#xf11c;</x:String>
-            <x:String x:Key="fa-trash">&#xf1f8;</x:String>
-            <x:String x:Key="fa-arrow-circle-down">&#xf0ab;</x:String>
-            <x:String x:Key="fa-arrow-circle-o-down">&#xf01a;</x:String>
-            <x:String x:Key="fa-settings">&#xf013;</x:String>
-            <x:String x:Key="fa-arrow-right">&#xf061;</x:String>
-            <x:String x:Key="fa-arrow-left">&#xf060;</x:String>
-            <x:String x:Key="fa-locked">&#xf023;</x:String>
-            <x:String x:Key="fa-bell">&#xf0f3;</x:String>
-
             <Style x:Key="FontIcon" TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -345,6 +353,7 @@
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontSize" Value="12" />
             </Style>
+            <!--#endregion-->
 
         </ResourceDictionary>
     </Application.Resources>
