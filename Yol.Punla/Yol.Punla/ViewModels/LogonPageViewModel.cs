@@ -4,7 +4,6 @@ using PropertyChanged;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
 using Yol.Punla.Managers;

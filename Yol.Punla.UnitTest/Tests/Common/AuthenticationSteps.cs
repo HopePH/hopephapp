@@ -2,7 +2,7 @@
 using Should;
 using TechTalk.SpecFlow;
 using Unity;
-using Yol.Punla.Authentication;
+using Yol.Punla.Barrack;
 using Yol.Punla.UnitTest.Barrack;
 
 namespace Yol.Punla.UnitTest.Tests

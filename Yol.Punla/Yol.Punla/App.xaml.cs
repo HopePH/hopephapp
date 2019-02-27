@@ -16,7 +16,6 @@ using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
 using Xamarin.Forms;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.GatewayAccess;
 using Yol.Punla.Managers;

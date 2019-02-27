@@ -3,7 +3,7 @@ using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
 using Yol.Punla.Utility;
 
-namespace Yol.Punla.Authentication
+namespace Yol.Punla.Barrack
 {
     [DefaultModuleInterfacedAttribute(ParentInterface = typeof(IAppUser))]
     [DefaultModuleInterfacedFakeAttribute(ParentInterface = typeof(IAppUser))]

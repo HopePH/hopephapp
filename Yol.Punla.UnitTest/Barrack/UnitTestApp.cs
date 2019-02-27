@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using Unity;
 using Unity.Lifetime;
 using Xamarin.Forms;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.GatewayAccess;
 using Yol.Punla.Managers;
@@ -209,6 +208,7 @@ namespace Yol.Punla.UnitTest.Barrack
             UserDialogs.Instance = new UserDialogMock();
             CrossNotifications.Current = new NotificationsMock();
             Container.GetContainer().RegisterInstance<IConnectivity>(new CrossConnectivityMock(), new ContainerControlledLifetimeManager());
+            Container.GetContainer().RegisterInstance<IUserDialogs>(new UserDialogMock(), new ContainerControlledLifetimeManager());
             Xamarin.Forms.DependencyService.Register<IHelperUtility, HelperUtilityMock>();
             Xamarin.Forms.DependencyService.Register<IKeyValueCacheUtility, KeyValueCacheMock>();
             Xamarin.Forms.DependencyService.Register<IKeyboardHelper, KeyboardHelperMock>();
@@ -228,6 +228,7 @@ namespace Yol.Punla.UnitTest.Barrack
             var wasLogon = AppInitsHolder.WasLogin;
             var wasSignUpCompleted = AppInitsHolder.WasSignUpCompleted;
 
+            //keyvalue mock, that could be simplified soon
             ((KeyValueCacheMock)Container.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>()).SetWelcomeInstructionLoadedManually(isLoaded);           
             ((KeyValueCacheMock)Container.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>()).SetUserAndPasswordManually(userName, password);
             ((KeyValueCacheMock)Container.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>()).SetNotificationsPushedDateManually(notificationsPushedDate);

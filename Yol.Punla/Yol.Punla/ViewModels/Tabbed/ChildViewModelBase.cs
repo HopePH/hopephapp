@@ -2,7 +2,6 @@
 using Prism.Events;
 using Prism.Navigation;
 using System;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 
 namespace Yol.Punla.ViewModels

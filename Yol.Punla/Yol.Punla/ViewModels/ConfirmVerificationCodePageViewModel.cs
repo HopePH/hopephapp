@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Unity;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Utility;
 using Yol.Punla.Localized;

@@ -1,4 +1,4 @@
-﻿namespace Yol.Punla.Authentication
+﻿namespace Yol.Punla.Barrack
 {
     public interface IAppUser
     {

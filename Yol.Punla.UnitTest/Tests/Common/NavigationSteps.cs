@@ -28,8 +28,14 @@ namespace Yol.Punla.UnitTest.Tests
 
             string fullTypeName = "Yol.Punla.ViewModels." + pageName + "ViewModel";
             var viewModelType = typeof(App).GetTypeInfo().Assembly.GetType(fullTypeName);
-            ViewModelBase viewModel = (ViewModelBase)Main.App.Container.GetContainer().Resolve(viewModelType);
-            viewModel.IsBusy.ShouldBeFalse();
+
+            if (viewModelType != null)
+            {
+                ViewModelBase viewModel = (ViewModelBase)Main.App.Container.GetContainer().Resolve(viewModelType);
+                //alfon.do not check this because of _navigationService.GoBackAsync, sometimes dont hit
+                //sometimes work, sometimes bad
+                viewModel.IsBusy.ShouldBeFalse();
+            }
         }
     }
 }

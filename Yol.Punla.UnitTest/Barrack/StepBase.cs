@@ -8,8 +8,6 @@ namespace Yol.Punla.UnitTest.Barrack
         public UnitTestApp App => Main.App;
 
         public StepBase(ScenarioContext scenarioContext)
-        {
-            this._scenarioContext = scenarioContext;
-        }
+            => _scenarioContext = scenarioContext;
     }
 }

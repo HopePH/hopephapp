@@ -10,7 +10,6 @@ using System.Windows.Input;
 using Unity;
 using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
 using Yol.Punla.Localized;
