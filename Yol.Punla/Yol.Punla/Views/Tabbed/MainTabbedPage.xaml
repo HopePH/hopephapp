@@ -3,4 +3,8 @@
     x:Class="Yol.Punla.Views.MainTabbedPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="{Binding Title}" />
+    xmlns:local="clr-namespace:Yol.Punla.Views"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="{Binding Title}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    SelectedTabIndex="{Binding SelectedTab}" />

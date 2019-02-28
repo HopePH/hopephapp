@@ -7,6 +7,7 @@ using Unity;
 using Yol.Punla.AttributeBase;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using System;
+using System.Collections.Generic;
 
 namespace Yol.Punla.Views
 {
@@ -14,7 +15,16 @@ namespace Yol.Punla.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainTabbedPage : Xamarin.Forms.TabbedPage, INavigatingAware
     {
-		public MainTabbedPage ()
+        private bool _isTabPageVisible;
+        public static readonly BindableProperty SelectedTabIndexProperty =  BindableProperty.Create( nameof(SelectedTabIndex),  typeof(int), typeof(MainTabbedPage), 0,  BindingMode.TwoWay, null,  propertyChanged: OnSelectedTabIndexChanged);
+
+        public int SelectedTabIndex
+        {
+            get { return (int)GetValue(SelectedTabIndexProperty); }
+            set { SetValue(SelectedTabIndexProperty, value); }
+        }
+
+        public MainTabbedPage ()
 		{
             try
             {
@@ -33,6 +43,28 @@ namespace Yol.Punla.Views
             }
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            _isTabPageVisible = true;
+            CurrentPage = Children[SelectedTabIndex];
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            _isTabPageVisible = false;
+        }
+
+        protected override void OnCurrentPageChanged()
+        {
+            base.OnCurrentPageChanged();
+            
+            SelectedTabIndex = Children.IndexOf(CurrentPage);
+        }
+
         public void OnNavigatingTo(INavigationParameters parameters)
         {
             System.Diagnostics.Debug.WriteLine($"{Title} OnNavigatingTo");
@@ -40,6 +72,14 @@ namespace Yol.Punla.Views
 
             foreach (var name in tabs)
                 AddChild(name, parameters);
+        }
+
+        private static void OnSelectedTabIndexChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            if (((MainTabbedPage)bindable)._isTabPageVisible)
+            {
+                ((MainTabbedPage)bindable).CurrentPage = ((MainTabbedPage)bindable).Children[(int)newValue];
+            }
         }
 
         private void AddChild(string name, INavigationParameters parameters)
