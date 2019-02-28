@@ -85,5 +85,23 @@ namespace Yol.Punla.UnitTest
         {
             ScenarioContext.Current.Pending();
         }
+
+        [When(@"I tap the change photo and select unicorn")]
+        public void WhenITapTheChangePhotoAndSelectUnicorn()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"I should see the photo is change to unicorn")]
+        public void ThenIShouldSeeThePhotoIsChangeToUnicorn()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"I enter my alias ""(.*)"" and mobile no ""(.*)"" and tap save button")]
+        public void WhenIEnterMyAliasAndMobileNoAndTapSaveButton(int p0, int p1)
+        {
+            ScenarioContext.Current.Pending();
+        }
     }
 }
