@@ -99,7 +99,7 @@
                 <ffImage:CachedImage
                     HeightRequest="55"
                     HorizontalOptions="FillAndExpand"
-                    Source="testprofile.jpg"
+                    Source="{Binding CurrentContact.PhotoURL}"
                     VerticalOptions="Center"
                     WidthRequest="55">
                     <ffImage:CachedImage.Transformations>
@@ -228,7 +228,7 @@
                                             Aspect="AspectFit"
                                             BackgroundColor="Transparent"
                                             HeightRequest="35"
-                                            Source="testprofile.jpg"
+                                            Source="{Binding Poster.PhotoURL}"
                                             WidthRequest="35">
                                             <!--  Source = "{Binding PosterProfilePhoto}"  -->
                                             <ffImage:CachedImage.Transformations>

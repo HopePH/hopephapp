@@ -89,7 +89,7 @@ namespace Yol.Punla.ViewModels
 
         #region PREPARE PAGE BINDINGS
 
-        public override void PreparingPageBindingsChild()
+        public async override void PreparingPageBindingsChild()
         {
             if (PassingParameters != null && PassingParameters.ContainsKey("CurrentContact"))
                 CurrentContact = (Entity.Contact)PassingParameters["CurrentContact"];
@@ -127,43 +127,44 @@ namespace Yol.Punla.ViewModels
             BusyComments = AppStrings.LoadingData;
             IsBusy = true;
             CurrentPostFeed = null;
-            PreparePageBindingsAsync();
-            PreparePageBindingsAsyncFake();
+            await PreparePageBindingsAsync();
         }
 
-        [Conditional("DEBUG"), Conditional("TRACE")]
-        private async void PreparePageBindingsAsync()
-        {
-            //chito.22/01/2018. we force to delay for how many seconds when adding/editing a new post so we could get the updated info from fetching from the server 
-            if (IsForceToGetToRest && SecondsDelay > 0)
-                await Task.Delay(TimeSpan.FromSeconds(SecondsDelay));
+        #region OLD CODE
+        //[Conditional("DEBUG"), Conditional("TRACE")]
+        //private async void PreparePageBindingsAsync()
+        //{
+        //    //chito.22/01/2018. we force to delay for how many seconds when adding/editing a new post so we could get the updated info from fetching from the server 
+        //    if (IsForceToGetToRest && SecondsDelay > 0)
+        //        await Task.Delay(TimeSpan.FromSeconds(SecondsDelay));
 
-            try
-            {
-                CreateNewHandledTokenSource("PostFeedPageViewModel.PreparePageBindingsAsync", 20);
+        //    try
+        //    {
+        //        CreateNewHandledTokenSource("PostFeedPageViewModel.PreparePageBindingsAsync", 20);
 
-                var postList = await Task.Run(() =>
-                {
-                    Debug.WriteLine("HOPEPH Getting all post");
-                    return _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
-                }, TokenHandler.Token);
-                
-                PostsList = new ObservableCollection<Entity.PostFeed>(postList.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
-                PreparePageBindingsResult(TokenHandler.IsTokenSourceCompleted());
-            }
-            catch (Exception ex)
-            {
-                ProcessErrorReportingForHockeyApp(ex, true);
-            }
-        }
+        //        var postList = await Task.Run(() =>
+        //        {
+        //            Debug.WriteLine("HOPEPH Getting all post");
+        //            return _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
+        //        }, TokenHandler.Token);
 
-        [Conditional("FAKE")]
-        private void PreparePageBindingsAsyncFake()
-        {
-            PostsList = new ObservableCollection<Entity.PostFeed>(_postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true).Result.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
-            PreparePageBindingsResult();
-        }
+        //        PostsList = new ObservableCollection<Entity.PostFeed>(postList.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
+        //        PreparePageBindingsResult(TokenHandler.IsTokenSourceCompleted());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ProcessErrorReportingForHockeyApp(ex, true);
+        //    }
+        //}
 
+        //[Conditional("FAKE")]
+        //private void PreparePageBindingsAsyncFake()
+        //{
+        //    PostsList = new ObservableCollection<Entity.PostFeed>(_postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true).Result.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
+        //    PreparePageBindingsResult();
+        //}
+
+        #endregion
         private void PreparePageBindingsResult(bool IsSuccess = true)
         {
             if (IsInternetConnected)
@@ -180,36 +181,19 @@ namespace Yol.Punla.ViewModels
 
         #endregion
 
-        #region GET AND ADD COMMENTS
-
-        private void RedirectToPostFeedDetails(Entity.PostFeed SelectedPost)
+        private async Task PreparePageBindingsAsync()
         {
-            IsNavigatingToDetailsPage = true;
-            BusyComments = AppStrings.LoadingComments;
-            IsBusy = true;
-            CurrentPostFeed = SelectedPost;
+            if (IsForceToGetToRest && SecondsDelay > 0)
+                await Task.Delay(TimeSpan.FromSeconds(SecondsDelay));
 
-            if (ProcessInternetConnection(true))
-            {
-                GetCommentsAsync();
-                GetCommentsAsyncFake();
-            }
-        }
-
-        [Conditional("DEBUG"), Conditional("TRACE")]
-        private async void GetCommentsAsync()
-        {
             try
             {
-                CreateNewHandledTokenSource("GetCommentsAsync", 20);
+                CreateNewHandledTokenSource("PostFeedPageViewModel.PreparePageBindingsAsync", 20);
 
-                var results = await Task.Run(() =>
-                {
-                    Debug.WriteLine("HOPEPH Getting comments");
-                    return _postFeedManager.GetComments(CurrentPostFeed.PostFeedID, true, CurrentContact.RemoteId);   
-                }, TokenHandler.Token);
+                var postList = await _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
 
-                GetCommentsResult(results, TokenHandler.IsTokenSourceCompleted());
+                PostsList = new ObservableCollection<Entity.PostFeed>(postList.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
+                PreparePageBindingsResult(TokenHandler.IsTokenSourceCompleted());
             }
             catch (Exception ex)
             {
@@ -217,14 +201,62 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        [Conditional("FAKE")]
-        private void GetCommentsAsyncFake()
+        #region GET AND ADD COMMENTS
+
+        private async void RedirectToPostFeedDetails(Entity.PostFeed SelectedPost)
         {
-            var result = _postFeedManager.GetComments(CurrentPostFeed.PostFeedID, false, CurrentContact.RemoteId).Result;
-            GetCommentsResult(result);
+            IsNavigatingToDetailsPage = true;
+            BusyComments = AppStrings.LoadingComments;
+            IsBusy = true;
+            CurrentPostFeed = SelectedPost;
+
+            if (ProcessInternetConnection(true)) await GetCommentsAsync();
         }
 
-        private void GetCommentsResult(IEnumerable<Entity.PostFeed> commentList, bool IsSuccess = true)
+        #region OLD CODE
+        //[Conditional("DEBUG"), Conditional("TRACE")]
+        //private async void GetCommentsAsync()
+        //{
+        //    try
+        //    {
+        //        CreateNewHandledTokenSource("GetCommentsAsync", 20);
+
+        //        var results = await Task.Run(() =>
+        //        {
+        //            Debug.WriteLine("HOPEPH Getting comments");
+        //            return _postFeedManager.GetComments(CurrentPostFeed.PostFeedID, true, CurrentContact.RemoteId);   
+        //        }, TokenHandler.Token);
+
+        //        GetCommentsResult(results, TokenHandler.IsTokenSourceCompleted());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ProcessErrorReportingForHockeyApp(ex, true);
+        //    }
+        //}
+
+        //[Conditional("FAKE")]
+        //private void GetCommentsAsyncFake()
+        //{
+        //    var result = _postFeedManager.GetComments(CurrentPostFeed.PostFeedID, false, CurrentContact.RemoteId).Result;
+        //    GetCommentsResult(result);
+        //}
+
+        #endregion
+        private async Task GetCommentsAsync()
+        {
+            try
+            {
+                var results =  await _postFeedManager.GetComments(CurrentPostFeed.PostFeedID, true, CurrentContact.RemoteId);
+                GetCommentsResult(results);
+            }
+            catch (Exception ex)
+            {
+                ProcessErrorReportingForHockeyApp(ex, true);
+            }
+        }
+
+        private async void GetCommentsResult(IEnumerable<Entity.PostFeed> commentList, bool IsSuccess = true)
         {
             if (IsSuccess)
             {
@@ -235,7 +267,7 @@ namespace Yol.Punla.ViewModels
                 CurrentPostFeed.Comments = new ObservableCollection<Entity.PostFeed>(commentList.Where(p => p.PostFeedParentId == CurrentPostFeed.PostFeedID));
                 PassingParameters.Add("CurrentUser", CurrentContact);
                 PassingParameters.Add("SelectedPost", CurrentPostFeed);
-                NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
+                await NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
             }
 
             IsBusy = false;
@@ -296,13 +328,13 @@ namespace Yol.Punla.ViewModels
             ProcessErrorReportingForHockeyApp(ex, true);
         }
 
-        private void AddNewPost()
+        private async void AddNewPost()
         {
             PassingParameters.Add("CurrentContact", CurrentContact);
-            NavigateToPageHelper(nameof(ViewNames.PostFeedAddEditPage),PassingParameters);
+            await NavigateToPageHelper(nameof(ViewNames.PostFeedAddEditPage),PassingParameters);
         }
 
-        private void EditPost()
+        private async void EditPost()
         {
             if (!CurrentPostFeed.IsSelfPosted) return;
 
@@ -312,7 +344,7 @@ namespace Yol.Punla.ViewModels
 
             PassingParameters.Add("CurrentContact", CurrentContact);
             PassingParameters.Add("SelectedPost", CurrentPostFeed);
-            NavigateToPageHelper(nameof(ViewNames.PostFeedAddEditPage), PassingParameters);
+            await NavigateToPageHelper(nameof(ViewNames.PostFeedAddEditPage), PassingParameters);
             IsShowPostOptions = false;
         }
 
@@ -389,10 +421,10 @@ namespace Yol.Punla.ViewModels
 
         private void ShowUnavailablePopUp() => UserDialogs.Instance.Alert(AppStrings.SearchAvailableNextVersionText);
 
-        private void RedirectToPostFeedOwn()
+        private async void RedirectToPostFeedOwn()
         {
             PassingParameters.Add("CurrentContact", CurrentContact);
-            NavigateToPageHelper(nameof(ViewNames.PostFeedMyselfPage), PassingParameters);
+            await NavigateToPageHelper(nameof(ViewNames.PostFeedMyselfPage), PassingParameters);
         }
 
         private async Task LoadMorePostListAsync()
