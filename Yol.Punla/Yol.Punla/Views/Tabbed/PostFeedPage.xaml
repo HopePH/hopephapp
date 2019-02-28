@@ -11,7 +11,7 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:template="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     x:Name="PostDetailPage"
-    Title="{Binding Title}"
+    Title="Wall"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="White"
     Icon="{Binding CurrentIcon}"

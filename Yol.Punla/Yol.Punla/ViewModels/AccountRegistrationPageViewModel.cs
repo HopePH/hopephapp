@@ -13,7 +13,6 @@ using Yol.Punla.Barrack;
 using Yol.Punla.Managers;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
-using Unity;
 
 namespace Yol.Punla.ViewModels
 {
@@ -142,8 +141,6 @@ namespace Yol.Punla.ViewModels
                 _keyValueCacheUtility.RemoveKeyObject("NewPage");
 
                 if (string.IsNullOrEmpty(newPage))
-                    // await ChangeRootAndNavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage),PassingParameters); 
-                    //await ChangeRootAndNavigateToPageHelper(nameof(Views.MainTabbedPage) + AddPagesInTab(), PassingParameters);
                     await NavigateToRootPage(nameof(Views.MainTabbedPage) + AddPagesInTab());
                 else
                     await ChangeRootAndNavigateToPageHelper(newPage, PassingParameters);
@@ -173,6 +170,10 @@ namespace Yol.Punla.ViewModels
             string path = "";
             var children = new List<string>();
             children.Add("addTab=PostFeedPage");
+            #region TEMP ONLY
+            children.Add("addTab=TestPage");
+            children.Add("addTab=TestPage2");
+            #endregion
             path += "?" + string.Join("&", children);
             return path;
         }

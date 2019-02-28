@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:AppViewBase
+    x:Class="Yol.Punla.Views.TestPage2"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Tab Two"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    Icon="{Binding CurrentIcon}">
+    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Label
+            HorizontalOptions="FillAndExpand"
+            Text="Hello From Tab 2"
+            VerticalOptions="FillAndExpand" />
+    </StackLayout>
+</local:AppViewBase>

@@ -18,19 +18,11 @@ namespace Yol.Punla.ViewModels
             set => SetProperty(ref _selectedTab, value);
         }
 
-        public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
-        {
-            AppUnityContainer.Instance.RegisterInstance<IMainTabPageSelectedTab>(this, new Unity.Lifetime.ContainerControlledLifetimeManager());
-        }
+        public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService) 
+            => AppUnityContainer.Instance.RegisterInstance<IMainTabPageSelectedTab>(this, new Unity.Lifetime.ContainerControlledLifetimeManager());
 
-        public override void PreparingPageBindings()
-        {
-           
-        }
+        public override void PreparingPageBindings() {  }
 
-        public void SetSelectedTab(int tabIndex)
-        {
-            SelectedTab = tabIndex;
-        }
+        public void SetSelectedTab(int tabIndex) => SelectedTab = tabIndex;
     }
 }

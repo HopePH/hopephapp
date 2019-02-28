@@ -1,13 +1,11 @@
 ﻿using System.Linq;
 using Xamarin.Forms;
+using CONSTANTS = Yol.Punla.Barrack.Constants;
 
 namespace Yol.Punla.Effects
 {
     public static class EntryEffectParameters
     {
-        private const string GREEN = "#FF417505";
-        private const string GRAY = "#1F000000";
-
         public static readonly BindableProperty IsFocusedProperty = BindableProperty.CreateAttached("IsFocused", typeof(bool), typeof(EntryEffectParameters), (bool)false, BindingMode.TwoWay, null, propertyChanged: OnFocusStateChanged);
 
         public static void OnFocusStateChanged(BindableObject bindable, object oldValue, object newValue)
@@ -26,8 +24,8 @@ namespace Yol.Punla.Effects
                     Thickness = effect.Thickness
                 };
 
-                if (view.IsFocused) newEffect.LineColor = Color.FromHex(GREEN);
-                else newEffect.LineColor = Color.FromHex(GRAY);
+                if (view.IsFocused) newEffect.LineColor = Color.FromHex(CONSTANTS.PRIMARYGREEN);
+                else newEffect.LineColor = Color.FromHex(CONSTANTS.PRIMARYGRAY);
                 
                 view.Effects.Remove(effect);
                 view.Effects.Add(newEffect);

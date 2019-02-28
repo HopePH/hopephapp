@@ -115,7 +115,7 @@
                                 Binding="{Binding Text.Length, Source={x:Reference code1Entry}}"
                                 TargetType="Frame"
                                 Value="1">
-                                <Setter Property="BackgroundColor" Value="#FF417505" />
+                                <Setter Property="BackgroundColor" Value="{StaticResource ColorGreenDimB}" />
                             </DataTrigger>
                         </Frame.Triggers>
                         <Frame
@@ -152,7 +152,7 @@
                                 Binding="{Binding Text.Length, Source={x:Reference code2Entry}}"
                                 TargetType="Frame"
                                 Value="1">
-                                <Setter Property="BackgroundColor" Value="#FF417505" />
+                                <Setter Property="BackgroundColor" Value="{StaticResource ColorGreenDimB}" />
                             </DataTrigger>
                         </Frame.Triggers>
                         <Frame
@@ -190,7 +190,7 @@
                                 Binding="{Binding Text.Length, Source={x:Reference code3Entry}}"
                                 TargetType="Frame"
                                 Value="1">
-                                <Setter Property="BackgroundColor" Value="#FF417505" />
+                                <Setter Property="BackgroundColor" Value="{StaticResource ColorGreenDimB}" />
                             </DataTrigger>
                         </Frame.Triggers>
                         <Frame
@@ -228,7 +228,7 @@
                                 Binding="{Binding Text.Length, Source={x:Reference code4Entry}}"
                                 TargetType="Frame"
                                 Value="1">
-                                <Setter Property="BackgroundColor" Value="#FF417505" />
+                                <Setter Property="BackgroundColor" Value="{StaticResource ColorGreenDimB}" />
                             </DataTrigger>
                         </Frame.Triggers>
                         <Frame

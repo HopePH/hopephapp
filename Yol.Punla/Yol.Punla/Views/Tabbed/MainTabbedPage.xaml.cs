@@ -7,7 +7,7 @@ using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
-using Yol.Punla.Utility;
+using CONSTANTS = Yol.Punla.Barrack.Constants;
 
 namespace Yol.Punla.Views
 {
@@ -15,7 +15,6 @@ namespace Yol.Punla.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MainTabbedPage : Xamarin.Forms.TabbedPage, INavigatingAware
     {
-        public event EventHandler UpdateIcons;
         private bool _isTabPageVisible;
         public static readonly BindableProperty SelectedTabIndexProperty =  BindableProperty.Create( nameof(SelectedTabIndex),  typeof(int), typeof(MainTabbedPage), 0,  BindingMode.TwoWay, null,  propertyChanged: OnSelectedTabIndexChanged);
 
@@ -31,8 +30,8 @@ namespace Yol.Punla.Views
             {
                 InitializeComponent();
                 On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
-
-                CurrentPageChanged += OnCurrentPageChanged;
+                On<Xamarin.Forms.PlatformConfiguration.Android>().SetBarItemColor(Color.FromHex(CONSTANTS.PRIMARYGRAY));
+                On<Xamarin.Forms.PlatformConfiguration.Android>().SetBarSelectedItemColor(Color.FromHex(CONSTANTS.PRIMARYGREEN));
             }
             catch (XamlParseException xp)
             {
@@ -92,21 +91,6 @@ namespace Yol.Punla.Views
             (page as INavigatingAware)?.OnNavigatingTo(parameters);
             (page?.BindingContext as INavigatingAware)?.OnNavigatingTo(parameters);
             Children.Add(page);
-        }
-
-        private void OnCurrentPageChanged(object sender, EventArgs e)
-        {
-            var currentPage = this.CurrentPage;
-            var currentBinding = currentPage.BindingContext as IIconChange;
-            if (currentBinding != null)
-                currentBinding.IsSelected = false;
-
-            currentPage = CurrentPage;
-            currentBinding = currentPage.BindingContext as IIconChange;
-            if (currentBinding != null)
-                currentBinding.IsSelected = true;
-
-            UpdateIcons?.Invoke(this, EventArgs.Empty);
         }
     }
 }
