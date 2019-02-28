@@ -28,8 +28,10 @@ namespace Yol.Punla.ViewModels
     [ModuleIgnore]
     [DefaultModuleFake]
     [AddINotifyPropertyChangedInterface]
-    public class PostFeedPageViewModel : ChildViewModelBase
+    public class PostFeedPageViewModel : ChildViewModelBase, IIconChange
     {
+        private bool _isSelected;
+
         private readonly INavigationService _navigationService;
         private readonly INavigationStackService _navigationStackService;
         private readonly IPostFeedManager _postFeedManager;
@@ -42,6 +44,17 @@ namespace Yol.Punla.ViewModels
             get => _busyComments;
             set => SetProperty(ref _busyComments, value);
         }
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (SetProperty(ref _isSelected, value)) RaisePropertyChanged(nameof(CurrentIcon));
+            }
+        }
+
+        public string CurrentIcon => IsSelected ? "list_selected.png" : "nologo.png";
 
         public ICommand ShowPostOptionsCommand => new DelegateCommand<Entity.PostFeed>(ShowPostOptions);
         public ICommand ClosePostOptionsCommand => new DelegateCommand(ClosePostOptions);
@@ -83,6 +96,7 @@ namespace Yol.Punla.ViewModels
             _busyComments = AppStrings.LoadingData;
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
             Title = "Wall";
+            IsSelected = true;
         }
 
         #region PREPARE PAGE BINDINGS

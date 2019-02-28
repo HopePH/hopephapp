@@ -6,5 +6,4 @@
     xmlns:local="clr-namespace:Yol.Punla.Views"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     Title="{Binding Title}"
-    prism:ViewModelLocator.AutowireViewModel="True"
-    SelectedTabIndex="{Binding SelectedTab}" />
+    prism:ViewModelLocator.AutowireViewModel="True" />

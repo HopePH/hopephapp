@@ -11,14 +11,13 @@ namespace Yol.Punla.ViewModels
     [AddINotifyPropertyChangedInterface]
     public class MainTabbedPageViewModel : ViewModelBase, IMainTabPageSelectedTab
     {
-
         private int _selectedTab;
         public int SelectedTab
         {
             get => _selectedTab;
             set => SetProperty(ref _selectedTab, value);
         }
-    
+
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             AppUnityContainer.Instance.RegisterInstance<IMainTabPageSelectedTab>(this, new Unity.Lifetime.ContainerControlledLifetimeManager());
