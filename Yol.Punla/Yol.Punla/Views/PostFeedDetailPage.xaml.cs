@@ -14,7 +14,7 @@ namespace Yol.Punla.Views
 {
     [ModuleView]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PostFeedDetailPage : AppViewBase
+    public partial class PostFeedDetailPage : Xamarin.Forms.ContentPage//AppViewBase
     {
         private PostFeedDetailPageViewModel viewModel;
         private List<CommentsIndexValue> commentsIndexValueList = null;
@@ -37,405 +37,405 @@ namespace Yol.Punla.Views
             }
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            SetupComments();
-        }
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    SetupComments();
+        //}
 
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
+        //protected override void OnBindingContextChanged()
+        //{
+        //    base.OnBindingContextChanged();
 
-            if (BindingContext != null)
-            {
-                viewModel = BindingContext as PostFeedDetailPageViewModel;
-                viewModel.PropertyChanged += ViewModel_PropertyChanged;
-            }
-        }
+        //    if (BindingContext != null)
+        //    {
+        //        viewModel = BindingContext as PostFeedDetailPageViewModel;
+        //        viewModel.PropertyChanged += ViewModel_PropertyChanged;
+        //    }
+        //}
 
-        protected override void AttachedPageEvents()
-        {
-            base.AttachedPageEvents();
+        //protected override void AttachedPageEvents()
+        //{
+        //    base.AttachedPageEvents();
 
-            try
-            {
-                stackCommentGesture.Tapped += StackCommentGesture_Tapped;
-                deleteCommentOption.Tapped += DeleteCommentOption_Tapped;
-                editPostStackLayout.Tapped += EditPostStackLayout_Tapped;
-                multiEntry.Focused += MultiEntry_Focused;
-                multiEntry.Unfocused += MultiEntry_Unfocused;
-                hidingStack.PropertyChanged += HidingStack_PropertyChanged;
+        //    try
+        //    {
+        //        stackCommentGesture.Tapped += StackCommentGesture_Tapped;
+        //        deleteCommentOption.Tapped += DeleteCommentOption_Tapped;
+        //        editPostStackLayout.Tapped += EditPostStackLayout_Tapped;
+        //        multiEntry.Focused += MultiEntry_Focused;
+        //        multiEntry.Unfocused += MultiEntry_Unfocused;
+        //        hidingStack.PropertyChanged += HidingStack_PropertyChanged;
 
-                // HACK (REYNZ): Added this for Post button in iOS to works
-                if (Device.RuntimePlatform == Device.iOS)
-                    btnPost.Pressed += BtnPost_Pressed;
-            }
-            catch (Exception ex)
-            {
-                if (ex.Message != "Object reference not set to an instance of an object.")
-                    throw;
-            }
-        }
+        //        // HACK (REYNZ): Added this for Post button in iOS to works
+        //        if (Device.RuntimePlatform == Device.iOS)
+        //            btnPost.Pressed += BtnPost_Pressed;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (ex.Message != "Object reference not set to an instance of an object.")
+        //            throw;
+        //    }
+        //}
 
-        protected override void DetachedPageEvents()
-        {
-            base.DetachedPageEvents();
-            stackCommentGesture.Tapped -= StackCommentGesture_Tapped;
-            deleteCommentOption.Tapped -= DeleteCommentOption_Tapped;
-            editPostStackLayout.Tapped -= EditPostStackLayout_Tapped;
-            multiEntry.Focused -= MultiEntry_Focused;
-            multiEntry.Unfocused -= MultiEntry_Unfocused;
-            hidingStack.PropertyChanged -= HidingStack_PropertyChanged;
+        //protected override void DetachedPageEvents()
+        //{
+        //    base.DetachedPageEvents();
+        //    stackCommentGesture.Tapped -= StackCommentGesture_Tapped;
+        //    deleteCommentOption.Tapped -= DeleteCommentOption_Tapped;
+        //    editPostStackLayout.Tapped -= EditPostStackLayout_Tapped;
+        //    multiEntry.Focused -= MultiEntry_Focused;
+        //    multiEntry.Unfocused -= MultiEntry_Unfocused;
+        //    hidingStack.PropertyChanged -= HidingStack_PropertyChanged;
 
-            if (Device.RuntimePlatform == Device.iOS)
-                btnPost.Pressed -= BtnPost_Pressed;
-        }
+        //    if (Device.RuntimePlatform == Device.iOS)
+        //        btnPost.Pressed -= BtnPost_Pressed;
+        //}
 
-        protected override void SubcribeMessagingCenter()
-        {
-            base.SubcribeMessagingCenter();
-            
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "DeletePostFeedSubs", message =>
-            {
-                try
-                {
-                    if (!viewModel.IsBusy)
-                    {
-                        var currentComment = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.PostFeed>(message.CurrentPost);
-                        var currentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.Contact>(message.CurrentUser);
-                        currentComment.PosterId = message.CurrentUser.Id;
-                        viewModel.DeletePostFeedFromLocal(currentComment, true);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    viewModel.SendErrorToHockeyApp(ex);
-                }
-            });
+        //protected override void SubcribeMessagingCenter()
+        //{
+        //    base.SubcribeMessagingCenter();
 
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "AddUpdatePostSubs", message =>
-            {
-                try
-                {
-                    if (!viewModel.IsBusy)
-                    {
-                        var addedComment = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.PostFeed>(message.CurrentPost);
-                        var currentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.Contact>(message.CurrentUser);
-                        addedComment.PosterId = message.CurrentUser.Id;
+        //    MessagingCenter.Subscribe<PostFeedMessage>(this, "DeletePostFeedSubs", message =>
+        //    {
+        //        try
+        //        {
+        //            if (!viewModel.IsBusy)
+        //            {
+        //                var currentComment = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.PostFeed>(message.CurrentPost);
+        //                var currentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.Contact>(message.CurrentUser);
+        //                currentComment.PosterId = message.CurrentUser.Id;
+        //                viewModel.DeletePostFeedFromLocal(currentComment, true);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            viewModel.SendErrorToHockeyApp(ex);
+        //        }
+        //    });
 
-                        if (addedComment.PostFeedLevel == 1 && viewModel.CurrentPostFeed.PostFeedID == addedComment.PostFeedParentId)
-                        {
-                            addedComment.Poster = currentUser;
-                            addedComment.PosterProfilePhotoFB = addedComment.Poster.FBLink;
+        //    MessagingCenter.Subscribe<PostFeedMessage>(this, "AddUpdatePostSubs", message =>
+        //    {
+        //        try
+        //        {
+        //            if (!viewModel.IsBusy)
+        //            {
+        //                var addedComment = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.PostFeed>(message.CurrentPost);
+        //                var currentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.Contact>(message.CurrentUser);
+        //                addedComment.PosterId = message.CurrentUser.Id;
 
-                            AddCommentToView(addedComment);
-                            UpdateAddComment(addedComment);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    viewModel.SendErrorToHockeyApp(ex);
-                }
-            });
-        }
+        //                if (addedComment.PostFeedLevel == 1 && viewModel.CurrentPostFeed.PostFeedID == addedComment.PostFeedParentId)
+        //                {
+        //                    addedComment.Poster = currentUser;
+        //                    addedComment.PosterProfilePhotoFB = addedComment.Poster.FBLink;
 
-        protected override void UnSubcribeMessagingCenter()
-        {
-            base.UnSubcribeMessagingCenter();
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "DeletePostFeedSubs");
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "AddUpdatePostSubs");
-        }
+        //                    AddCommentToView(addedComment);
+        //                    UpdateAddComment(addedComment);
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            viewModel.SendErrorToHockeyApp(ex);
+        //        }
+        //    });
+        //}
 
-        private void SetupComments()
-        {
-            try
-            {
-                var comments = viewModel.CurrentPostFeed.Comments;
+        //protected override void UnSubcribeMessagingCenter()
+        //{
+        //    base.UnSubcribeMessagingCenter();
+        //    MessagingCenter.Unsubscribe<PostFeedMessage>(this, "DeletePostFeedSubs");
+        //    MessagingCenter.Unsubscribe<PostFeedMessage>(this, "AddUpdatePostSubs");
+        //}
 
-                if (comments != null && comments.Count > 0)
-                {
-                    var commentItemsControl = ScrollViewElement.FindByName<StackLayout>("CommentItems");
-                    commentsIndexValueList = new List<CommentsIndexValue>();
-                    int index = 0;
-                    CommentItemTemplate widget;
+        //private void SetupComments()
+        //{
+        //    try
+        //    {
+        //        var comments = viewModel.CurrentPostFeed.Comments;
 
-                    foreach (var comment in comments)
-                    {
-                        commentsIndexValueList.Add(new CommentsIndexValue { Comment = comment, Index = index , IsLocallySaved = true});
-                        ++index;
+        //        if (comments != null && comments.Count > 0)
+        //        {
+        //            var commentItemsControl = ScrollViewElement.FindByName<StackLayout>("CommentItems");
+        //            commentsIndexValueList = new List<CommentsIndexValue>();
+        //            int index = 0;
+        //            CommentItemTemplate widget;
 
-                        widget = new CommentItemTemplate { BindingContext = comment };
+        //            foreach (var comment in comments)
+        //            {
+        //                commentsIndexValueList.Add(new CommentsIndexValue { Comment = comment, Index = index , IsLocallySaved = true});
+        //                ++index;
 
-                        commentItemsControl.Children.Add(widget);
+        //                widget = new CommentItemTemplate { BindingContext = comment };
 
-                        var supportGesture = widget.FindByName<TapGestureRecognizer>("commentItemSupportGesture");
-                        supportGesture.Command = viewModel.SupportCommand;
-                        supportGesture.CommandParameter = comment;
-                        supportGesture.Tapped += SupportGesture_Tapped;
+        //                commentItemsControl.Children.Add(widget);
 
-                        var moreOptionsGesture = widget.FindByName<TapGestureRecognizer>("moreOptionsSupportGesture");
-                        moreOptionsGesture.Command = viewModel.ShowPostOptionsCommand;
-                        moreOptionsGesture.CommandParameter = comment;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                viewModel.SendErrorToHockeyApp(ex);
-            }
-        }
+        //                var supportGesture = widget.FindByName<TapGestureRecognizer>("commentItemSupportGesture");
+        //                supportGesture.Command = viewModel.SupportCommand;
+        //                supportGesture.CommandParameter = comment;
+        //                supportGesture.Tapped += SupportGesture_Tapped;
 
-        private void MultiEntry_Unfocused(object sender, FocusEventArgs e)
-        {
-            multiEntry.HasFocus = e.IsFocused;
-            mainGrid.RowDefinitions[2].Height = 90;
-        }
+        //                var moreOptionsGesture = widget.FindByName<TapGestureRecognizer>("moreOptionsSupportGesture");
+        //                moreOptionsGesture.Command = viewModel.ShowPostOptionsCommand;
+        //                moreOptionsGesture.CommandParameter = comment;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        viewModel.SendErrorToHockeyApp(ex);
+        //    }
+        //}
 
-        private void MultiEntry_Focused(object sender, FocusEventArgs e)
-        {
-            multiEntry.HasFocus = e.IsFocused;
-            mainGrid.RowDefinitions[2].Height = 140;
-        }
+        //private void MultiEntry_Unfocused(object sender, FocusEventArgs e)
+        //{
+        //    multiEntry.HasFocus = e.IsFocused;
+        //    mainGrid.RowDefinitions[2].Height = 90;
+        //}
 
-        private void HidingStack_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "IsVisible")
-            {
-                if (multiEntry.HasFocus)
-                {
-                    switch (Device.RuntimePlatform)
-                    {
-                        case Device.Android:
-                            multiEntry.Focus();
-                            break;
-                        case Device.iOS:
-                            mainGrid.RowDefinitions[2].Height = 410;
-                            multiEntry.Focus(); // HACK: Forces the multiEntry to receive focus in iOS       
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else
-                {
-                    mainGrid.RowDefinitions[2].Height = 80;
-                }
-            }
-        }
-        
-        private void BtnPost_Pressed(object sender, EventArgs e) => viewModel.WriteComment();
-        
-        private void EditPostStackLayout_Tapped(object sender, EventArgs e) => multiEntry.HasFocus = true;
+        //private void MultiEntry_Focused(object sender, FocusEventArgs e)
+        //{
+        //    multiEntry.HasFocus = e.IsFocused;
+        //    mainGrid.RowDefinitions[2].Height = 140;
+        //}
 
-        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "Comment":
-                    CommentPropertyChanged();
-                    break;
-                case "CurrentPostFeed":
-                    CurrentPostFeedPropertyChanged();
-                    break;
-                case "SelectedComment":
-                    SelectedCommentPropertyChanged();
-                   break;
-                default:
-                    break;
-            }
-        }
+        //private void HidingStack_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        //{
+        //    if (e.PropertyName == "IsVisible")
+        //    {
+        //        if (multiEntry.HasFocus)
+        //        {
+        //            switch (Device.RuntimePlatform)
+        //            {
+        //                case Device.Android:
+        //                    multiEntry.Focus();
+        //                    break;
+        //                case Device.iOS:
+        //                    mainGrid.RowDefinitions[2].Height = 410;
+        //                    multiEntry.Focus(); // HACK: Forces the multiEntry to receive focus in iOS       
+        //                    break;
+        //                default:
+        //                    break;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            mainGrid.RowDefinitions[2].Height = 80;
+        //        }
+        //    }
+        //}
 
-        private void CommentPropertyChanged()
-        {
-            try
-            {
-                if (viewModel.Comment != null)
-                {
-                    if (!viewModel.DoUpdate && !viewModel.IsShowPostOptions)
-                    {
-                        var comment = viewModel.Comment;
-                        AddCommentToView(comment);
-                    }
-                    else if (viewModel.DoUpdate && !viewModel.IsShowPostOptions)
-                    {
-                        var commentItemsControl = ScrollViewElement.FindByName<StackLayout>("CommentItems");
-                        var commentFound = commentsIndexValueList.Where(x => x.Comment.PostFeedID == viewModel.Comment.PostFeedID).FirstOrDefault();
-                        if (commentFound != null)
-                            commentFound.Comment = viewModel.Comment;
+        //private void BtnPost_Pressed(object sender, EventArgs e) => viewModel.WriteComment();
 
-                        commentItemsControl.Children[commentFound.Index].FindByName<Label>("CommentLabel").Text = commentFound.Comment.ContentText;
-                        viewModel.DoUpdate = false;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                if (!(ex.Source == "Xamarin.Forms.Core"))
-                    throw;
-            }
-        }
+        //private void EditPostStackLayout_Tapped(object sender, EventArgs e) => multiEntry.HasFocus = true;
 
-        private void CurrentPostFeedPropertyChanged()
-        {
-            try
-            {
-                if (viewModel.LatestPostUpdatedPostFeedId > 0)
-                {
-                    commentsIndexValueList.ToList().Last().Comment.PostFeedID = viewModel.LatestPostUpdatedPostFeedId;
-                    commentsIndexValueList.ToList().Last().Comment = viewModel.CurrentPostFeed.Comments.Last();
-                    viewModel.LatestPostUpdatedPostFeedId = 0;
+        //private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        //{
+        //    switch (e.PropertyName)
+        //    {
+        //        case "Comment":
+        //            CommentPropertyChanged();
+        //            break;
+        //        case "CurrentPostFeed":
+        //            CurrentPostFeedPropertyChanged();
+        //            break;
+        //        case "SelectedComment":
+        //            SelectedCommentPropertyChanged();
+        //           break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
-                    var commentStack = ScrollViewElement.FindByName<StackLayout>("CommentItems");
+        //private void CommentPropertyChanged()
+        //{
+        //    try
+        //    {
+        //        if (viewModel.Comment != null)
+        //        {
+        //            if (!viewModel.DoUpdate && !viewModel.IsShowPostOptions)
+        //            {
+        //                var comment = viewModel.Comment;
+        //                AddCommentToView(comment);
+        //            }
+        //            else if (viewModel.DoUpdate && !viewModel.IsShowPostOptions)
+        //            {
+        //                var commentItemsControl = ScrollViewElement.FindByName<StackLayout>("CommentItems");
+        //                var commentFound = commentsIndexValueList.Where(x => x.Comment.PostFeedID == viewModel.Comment.PostFeedID).FirstOrDefault();
+        //                if (commentFound != null)
+        //                    commentFound.Comment = viewModel.Comment;
 
-                    var ellipsisContainer = commentStack.Children[commentsIndexValueList.ToList().Last().Index].FindByName<ContentView>("EllipsisContainer");
-                    var ellipsis = ellipsisContainer.FindByName<Label>("Ellipsis");
+        //                commentItemsControl.Children[commentFound.Index].FindByName<Label>("CommentLabel").Text = commentFound.Comment.ContentText;
+        //                viewModel.DoUpdate = false;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (!(ex.Source == "Xamarin.Forms.Core"))
+        //            throw;
+        //    }
+        //}
 
-                    var commentLabel = commentStack.Children[commentsIndexValueList.ToList().Last().Index].FindByName<Label>("CommentLabel");
-                    commentsIndexValueList.ToList().Last().IsLocallySaved = true;
+        //private void CurrentPostFeedPropertyChanged()
+        //{
+        //    try
+        //    {
+        //        if (viewModel.LatestPostUpdatedPostFeedId > 0)
+        //        {
+        //            commentsIndexValueList.ToList().Last().Comment.PostFeedID = viewModel.LatestPostUpdatedPostFeedId;
+        //            commentsIndexValueList.ToList().Last().Comment = viewModel.CurrentPostFeed.Comments.Last();
+        //            viewModel.LatestPostUpdatedPostFeedId = 0;
 
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        var grid = (CommentItemTemplate)ellipsisContainer.Parent;
-                        grid.IsEnabled = true;
-                        grid.Opacity = 1;
-                        ellipsis.IsVisible = true;
-                    });
-                }
+        //            var commentStack = ScrollViewElement.FindByName<StackLayout>("CommentItems");
 
-                var mainPostLikeCount = ScrollViewElement.FindByName<Label>("MainPostLikeCounter");
-                mainPostLikeCount.Text = viewModel.CurrentPostFeed.NoOfSupports.ToString() + " Supports";
-            }
-            catch (Exception ex)
-            {
-                if (!(ex.Source == "Xamarin.Forms.Core"))
-                    throw;
-            }
-        }
+        //            var ellipsisContainer = commentStack.Children[commentsIndexValueList.ToList().Last().Index].FindByName<ContentView>("EllipsisContainer");
+        //            var ellipsis = ellipsisContainer.FindByName<Label>("Ellipsis");
 
-        private void SelectedCommentPropertyChanged()
-        {
-            //chito. if the like is the parent post feed inside the details page, the no of supports doesnt work
-            var commentItemsControl3 = ScrollViewElement.FindByName<StackLayout>("CommentItems");
+        //            var commentLabel = commentStack.Children[commentsIndexValueList.ToList().Last().Index].FindByName<Label>("CommentLabel");
+        //            commentsIndexValueList.ToList().Last().IsLocallySaved = true;
 
-            if (commentsIndexValueList != null)
-            {
-                var commentFound3 = commentsIndexValueList.Where(x => x.Comment.PostFeedID == viewModel.SelectedComment.PostFeedID).FirstOrDefault();
+        //            Device.BeginInvokeOnMainThread(() =>
+        //            {
+        //                var grid = (CommentItemTemplate)ellipsisContainer.Parent;
+        //                grid.IsEnabled = true;
+        //                grid.Opacity = 1;
+        //                ellipsis.IsVisible = true;
+        //            });
+        //        }
 
-                if (commentFound3 != null)
-                {
-                    commentFound3.Comment = viewModel.SelectedComment;
-                    commentItemsControl3.BindingContext = viewModel.SelectedComment;
-                    commentItemsControl3.Children[commentFound3.Index].FindByName<Label>("supportCount").Text = viewModel.SelectedComment.NoOfSupports.ToString() + " Supports";
-                }
-            }
-        }
+        //        var mainPostLikeCount = ScrollViewElement.FindByName<Label>("MainPostLikeCounter");
+        //        mainPostLikeCount.Text = viewModel.CurrentPostFeed.NoOfSupports.ToString() + " Supports";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (!(ex.Source == "Xamarin.Forms.Core"))
+        //            throw;
+        //    }
+        //}
 
-        private void StackCommentGesture_Tapped(object sender, EventArgs e)
-        {
-            // Check first if DoUpdate flag is true. If so set it to false
-            if (viewModel.DoUpdate)
-                viewModel.DoUpdate = false;
+        //private void SelectedCommentPropertyChanged()
+        //{
+        //    //chito. if the like is the parent post feed inside the details page, the no of supports doesnt work
+        //    var commentItemsControl3 = ScrollViewElement.FindByName<StackLayout>("CommentItems");
 
-            multiEntry.MultiText = "";
-            multiEntry.HasFocus = true;
+        //    if (commentsIndexValueList != null)
+        //    {
+        //        var commentFound3 = commentsIndexValueList.Where(x => x.Comment.PostFeedID == viewModel.SelectedComment.PostFeedID).FirstOrDefault();
 
-            if (Device.RuntimePlatform == Device.Android)
-                multiEntry.Focus();
-        }
+        //        if (commentFound3 != null)
+        //        {
+        //            commentFound3.Comment = viewModel.SelectedComment;
+        //            commentItemsControl3.BindingContext = viewModel.SelectedComment;
+        //            commentItemsControl3.Children[commentFound3.Index].FindByName<Label>("supportCount").Text = viewModel.SelectedComment.NoOfSupports.ToString() + " Supports";
+        //        }
+        //    }
+        //}
 
-        private void SupportGesture_Tapped(object sender, EventArgs e)
-        {
-            try
-            {
-                var updateStack = (StackLayout)sender;
-                var labelHeart = updateStack.FindByName<Label>("labelHeart");
-                var currentColor = labelHeart.TextColor.ToString();
+        //private void StackCommentGesture_Tapped(object sender, EventArgs e)
+        //{
+        //    // Check first if DoUpdate flag is true. If so set it to false
+        //    if (viewModel.DoUpdate)
+        //        viewModel.DoUpdate = false;
 
-                updateStack.FindByName<Label>("supportCount").Text = viewModel.SelectedComment.NoOfSupports.ToString() + " Supports";
+        //    multiEntry.MultiText = "";
+        //    multiEntry.HasFocus = true;
 
-                if (currentColor.Contains("0.690196096897125")) // which means green dim
-                {
-                    labelHeart.Text = (string)Application.Current.Resources["fa-heart-o"];
-                    labelHeart.TextColor = Color.FromHex("#c7c7c7");
-                }
-                else
-                {
-                    labelHeart.Text = (string)Application.Current.Resources["fa-heart"];
-                    labelHeart.TextColor = (Color)Application.Current.Resources["GreenColorDim"];
-                }
-            }
-            catch (Exception ex)
-            {
-                viewModel.SendErrorToHockeyApp(ex);
-            }
-        }
+        //    if (Device.RuntimePlatform == Device.Android)
+        //        multiEntry.Focus();
+        //}
 
-        private void DeleteCommentOption_Tapped(object sender, EventArgs e)
-        {
-            try
-            {
-                var commentItemsControl = ScrollViewElement.FindByName<StackLayout>("CommentItems");
-                var commentFound = commentsIndexValueList.Where(x => x.Comment.PostFeedID == viewModel.Comment.PostFeedID).FirstOrDefault();
+        //private void SupportGesture_Tapped(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        var updateStack = (StackLayout)sender;
+        //        var labelHeart = updateStack.FindByName<Label>("labelHeart");
+        //        var currentColor = labelHeart.TextColor.ToString();
 
-                var childrenStack = commentItemsControl.Children;
-                commentItemsControl.Children.Remove(childrenStack[commentFound.Index]);
-                commentsIndexValueList.Remove(commentFound);
-                
-                var mainPostCommentCount = ScrollViewElement.FindByName<Label>("parentCommentCount");
-                mainPostCommentCount.Text = childrenStack.Count + " Comments";
-            }
-            catch (Exception ex)
-            {
-                viewModel.SendErrorToHockeyApp(ex);
-            }
-        }
+        //        updateStack.FindByName<Label>("supportCount").Text = viewModel.SelectedComment.NoOfSupports.ToString() + " Supports";
 
-        private bool ReadIfExistingPost(Entity.PostFeed currentPost)
-        {
-            if (viewModel.ReadPostFeedFromLocal(currentPost) == null)
-                return false;
+        //        if (currentColor.Contains("0.690196096897125")) // which means green dim
+        //        {
+        //            labelHeart.Text = (string)Application.Current.Resources["fa-heart-o"];
+        //            labelHeart.TextColor = Color.FromHex("#c7c7c7");
+        //        }
+        //        else
+        //        {
+        //            labelHeart.Text = (string)Application.Current.Resources["fa-heart"];
+        //            labelHeart.TextColor = (Color)Application.Current.Resources["GreenColorDim"];
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        viewModel.SendErrorToHockeyApp(ex);
+        //    }
+        //}
 
-            return true;
-        }
+        //private void DeleteCommentOption_Tapped(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        var commentItemsControl = ScrollViewElement.FindByName<StackLayout>("CommentItems");
+        //        var commentFound = commentsIndexValueList.Where(x => x.Comment.PostFeedID == viewModel.Comment.PostFeedID).FirstOrDefault();
 
-        private void AddCommentToView(Entity.PostFeed currentComment)
-        {
-            try
-            {
-                var commentItemsControl = ScrollViewElement.FindByName<StackLayout>("CommentItems");
-                commentItemsControl.Children.Add(new CommentItemTemplate { BindingContext = currentComment });
+        //        var childrenStack = commentItemsControl.Children;
+        //        commentItemsControl.Children.Remove(childrenStack[commentFound.Index]);
+        //        commentsIndexValueList.Remove(commentFound);
 
-                var moreOptionsGesture = commentItemsControl.Children[commentItemsControl.Children.Count - 1].FindByName<TapGestureRecognizer>("moreOptionsSupportGesture");
-                moreOptionsGesture.Command = viewModel.ShowPostOptionsCommand;
-                moreOptionsGesture.CommandParameter = currentComment;
+        //        var mainPostCommentCount = ScrollViewElement.FindByName<Label>("parentCommentCount");
+        //        mainPostCommentCount.Text = childrenStack.Count + " Comments";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        viewModel.SendErrorToHockeyApp(ex);
+        //    }
+        //}
 
-                var supportgesture = commentItemsControl.Children[commentItemsControl.Children.Count - 1].FindByName<TapGestureRecognizer>("commentItemSupportGesture");
-                supportgesture.Command = viewModel.SupportCommand;
-                supportgesture.CommandParameter = currentComment;
-                supportgesture.Tapped += SupportGesture_Tapped;
+        //private bool ReadIfExistingPost(Entity.PostFeed currentPost)
+        //{
+        //    if (viewModel.ReadPostFeedFromLocal(currentPost) == null)
+        //        return false;
 
-                if (commentsIndexValueList == null) commentsIndexValueList = new List<CommentsIndexValue>();
-                commentsIndexValueList.Add(new CommentsIndexValue { Comment = currentComment, Index = commentsIndexValueList.Count, IsLocallySaved = false });
-                
-                var ellipsisContainer = commentItemsControl.Children.Last().FindByName<ContentView>("EllipsisContainer");
-                var ellipsisiCon = ellipsisContainer.FindByName<Label>("Ellipsis");
-                ellipsisiCon.IsVisible = false;
+        //    return true;
+        //}
 
-                if (currentComment.IsSelfPosted)
-                {
-                    var grid = (CommentItemTemplate)ellipsisContainer.Parent;
-                    grid.IsEnabled = false;
-                    grid.Opacity = 0.25;
-                }
-            }
-            catch (Exception ex)
-            {
-                viewModel.SendErrorToHockeyApp(ex);
-            }
-        }
+        //private void AddCommentToView(Entity.PostFeed currentComment)
+        //{
+        //    try
+        //    {
+        //        var commentItemsControl = ScrollViewElement.FindByName<StackLayout>("CommentItems");
+        //        commentItemsControl.Children.Add(new CommentItemTemplate { BindingContext = currentComment });
 
-        private void UpdateAddComment(Entity.PostFeed currentPost) => viewModel.SaveCommentToLocal(currentPost);        
+        //        var moreOptionsGesture = commentItemsControl.Children[commentItemsControl.Children.Count - 1].FindByName<TapGestureRecognizer>("moreOptionsSupportGesture");
+        //        moreOptionsGesture.Command = viewModel.ShowPostOptionsCommand;
+        //        moreOptionsGesture.CommandParameter = currentComment;
+
+        //        var supportgesture = commentItemsControl.Children[commentItemsControl.Children.Count - 1].FindByName<TapGestureRecognizer>("commentItemSupportGesture");
+        //        supportgesture.Command = viewModel.SupportCommand;
+        //        supportgesture.CommandParameter = currentComment;
+        //        supportgesture.Tapped += SupportGesture_Tapped;
+
+        //        if (commentsIndexValueList == null) commentsIndexValueList = new List<CommentsIndexValue>();
+        //        commentsIndexValueList.Add(new CommentsIndexValue { Comment = currentComment, Index = commentsIndexValueList.Count, IsLocallySaved = false });
+
+        //        var ellipsisContainer = commentItemsControl.Children.Last().FindByName<ContentView>("EllipsisContainer");
+        //        var ellipsisiCon = ellipsisContainer.FindByName<Label>("Ellipsis");
+        //        ellipsisiCon.IsVisible = false;
+
+        //        if (currentComment.IsSelfPosted)
+        //        {
+        //            var grid = (CommentItemTemplate)ellipsisContainer.Parent;
+        //            grid.IsEnabled = false;
+        //            grid.Opacity = 0.25;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        viewModel.SendErrorToHockeyApp(ex);
+        //    }
+        //}
+
+        //private void UpdateAddComment(Entity.PostFeed currentPost) => viewModel.SaveCommentToLocal(currentPost);        
     }
 }

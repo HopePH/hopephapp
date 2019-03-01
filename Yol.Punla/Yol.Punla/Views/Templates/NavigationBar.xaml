@@ -9,7 +9,10 @@
         HorizontalOptions="FillAndExpand"
         VerticalOptions="FillAndExpand">
         <Grid.Padding>
-            <OnPlatform x:TypeArguments="Thickness" Android="20,0,20,0" iOS="20,13,20,0"/>
+            <OnPlatform
+                x:TypeArguments="Thickness"
+                Android="20,0,20,0"
+                iOS="20,13,20,0" />
         </Grid.Padding>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -27,7 +30,7 @@
             </RowDefinition>
         </Grid.RowDefinitions>
 
-        <ContentView
+        <!--<ContentView
             Grid.Column="0"
             HeightRequest="40"
             HorizontalOptions="Start"
@@ -63,7 +66,7 @@
             <ContentView.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding NavigateBackCommand}" NumberOfTapsRequired="1" />
             </ContentView.GestureRecognizers>
-        </ContentView>
+        </ContentView>-->
 
         <ContentView
             Grid.Column="1"

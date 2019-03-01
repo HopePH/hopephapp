@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<template:AppViewBase
+<local:AppViewBase
     x:Class="Yol.Punla.Views.PostFeedPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -7,9 +7,9 @@
     xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:template="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     x:Name="PostDetailPage"
     Title="Wall"
     prism:ViewModelLocator.AutowireViewModel="True"
@@ -132,7 +132,7 @@
                     <Label
                         HorizontalOptions="StartAndExpand"
                         Text="{localization:Render SharePostText}"
-                        TextColor="#FF4A4A4A"
+                        TextColor="{StaticResource GrayDefault}"
                         VerticalTextAlignment="Center">
                         <Label.Effects>
                             <effects:LabelFontFamilyEffect />
@@ -249,7 +249,7 @@
                                                 Margin="0,3,0,0"
                                                 FontAttributes="Bold"
                                                 Text="{Binding PosterFullName}"
-                                                TextColor="#FF4A4A4A"
+                                                TextColor="{StaticResource GrayDefault}"
                                                 VerticalOptions="Center"
                                                 VerticalTextAlignment="Center">
                                                 <Label.Effects>
@@ -309,7 +309,7 @@
                                     FontSize="12"
                                     LineHeight="2"
                                     Text="{Binding ContentText}"
-                                    TextColor="#FF4A4A4A">
+                                    TextColor="{StaticResource GrayDefault}">
                                     <Label.Effects>
                                         <effects:LabelFontFamilyEffect />
                                     </Label.Effects>
@@ -724,4 +724,4 @@
             </Label>
         </StackLayout>
     </Grid>
-</template:AppViewBase>
+</local:AppViewBase>

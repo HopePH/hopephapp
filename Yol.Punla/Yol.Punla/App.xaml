@@ -38,6 +38,7 @@
             <Color x:Key="ColorGreenLight">#b2c68b</Color>
             <Color x:Key="ColorGreenDimB">#FF417505</Color>
             <Color x:Key="CircleImageBorderGreen">#FF7ED321</Color>
+            <Color x:Key="GrayDefault">#FF4A4A4A</Color>
             <!--#endregion-->
 
             <!--#region  UNIT VALUES-->
