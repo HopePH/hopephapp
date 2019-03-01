@@ -28,7 +28,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--<local:NavigationBar Grid.Row="0" />-->
+        <local:NavigationBar Grid.Row="0" />
 
         <ScrollView
             x:Name="ScrollViewElement"
@@ -515,23 +515,22 @@
                 </ffImage:CachedImage.Transformations>
             </ffImage:CachedImage>
 
-            <customControl:MultilineEntry
+            <Editor
                 x:Name="multiEntry"
                 Grid.Row="2"
                 Grid.Column="1"
-                BottomLineColor="{StaticResource BoxGrayBorderColor}"
+                AutoSize="TextChanges"
                 IsEnabled="{Binding IsWritePostEnabled}"
                 Keyboard="Text"
-                MultiText="{Binding CommentText, Mode=TwoWay}"
-                MyText="{localization:Render CommentPlaceholderText}"
-                PlaceholderEnabled="True">
-                <customControl:MultilineEntry.Margin>
-                    <OnPlatform
-                        x:TypeArguments="Thickness"
-                        Android="0,0,20,0"
-                        iOS="0,10,20,10" />
-                </customControl:MultilineEntry.Margin>
-            </customControl:MultilineEntry>
+                Placeholder="{localization:Render CommentPlaceholderText}"
+                Text="{Binding CommentText, Mode=TwoWay}">
+                <Editor.Effects>
+                    <effects:EntryEffect
+                        LineColor="{StaticResource BoxGrayBorderColor}"
+                        NumberOfLines="4"
+                        Thickness="4" />
+                </Editor.Effects>
+            </Editor>
 
             <StackLayout
                 Grid.Row="3"
