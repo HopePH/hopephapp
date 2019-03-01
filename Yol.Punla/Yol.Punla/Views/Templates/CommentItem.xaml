@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="Yol.Punla.Views.CommentItem"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
+    xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+    xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
+    xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
+    Padding="20,0"
+    RowSpacing="0">
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <!--#region FIRST ROW-->
+    <ffImage:CachedImage
+        Grid.Row="0"
+        Grid.Column="0"
+        Aspect="AspectFit"
+        BackgroundColor="Transparent"
+        HeightRequest="35"
+        Source="{Binding CurrentPostFeed.Poster.PhotoURL}"
+        VerticalOptions="Start">
+        <ffImage:CachedImage.Transformations>
+            <ffImageTransformation:CircleTransformation />
+        </ffImage:CachedImage.Transformations>
+    </ffImage:CachedImage>
+    <Frame
+        Grid.Row="0"
+        Grid.Column="1"
+        BackgroundColor="#FF81B445"
+        CornerRadius="10"
+        HasShadow="False">
+        <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
+            <Label
+                FontSize="15"
+                LineHeight="1.25"
+                Text="{localization:Render LoremIpsumText}"
+                TextColor="White">
+                <Label.Effects>
+                    <effects:LabelFontFamilyEffect />
+                </Label.Effects>
+            </Label>
+        </StackLayout>
+    </Frame>
+    <Label
+        Grid.Row="0"
+        Grid.Column="2"
+        FontSize="10"
+        Text="31 mins"
+        TextColor="#FF9B9B9B"
+        VerticalOptions="Center">
+        <Label.Effects>
+            <effects:LabelFontFamilyEffect />
+        </Label.Effects>
+    </Label>
+    <!--#endregion-->
+    <!--#region SECOND ROW-->
+    <ContentView Grid.Row="1" Grid.Column="1">
+        <StackLayout
+            Padding="10"
+            Orientation="Horizontal"
+            Spacing="20">
+            <StackLayout Orientation="Horizontal" VerticalOptions="Fill">
+                <Label
+                    FontFamily="FontAwesome"
+                    FontSize="15"
+                    Text="{StaticResource fa-comment-alt}"
+                    TextColor="{StaticResource ColorGreenDimB}"
+                    VerticalTextAlignment="Center">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="REGULAR" />
+                    </Label.Effects>
+                    <Label.Behaviors>
+                        <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                    </Label.Behaviors>
+                </Label>
+                <Label
+                    FontFamily="FontAwesome"
+                    FontSize="12"
+                    Text="Reply"
+                    TextColor="{StaticResource ColorGreenDimB}"
+                    VerticalTextAlignment="Center">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                </Label>
+            </StackLayout>
+            <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+                <Label
+                    FontFamily="FontAwesome"
+                    FontSize="15"
+                    TextColor="{StaticResource ColorGreenDimB}"
+                    VerticalTextAlignment="Center">
+                    <Label.Behaviors>
+                        <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                    </Label.Behaviors>
+                    <Label.Triggers>
+                        <DataTrigger
+                            Binding="{Binding CurrentPostFeed.IsSelfSupported}"
+                            TargetType="Label"
+                            Value="True">
+                            <Setter Property="Text" Value="{StaticResource fa-heart}" />
+                            <Setter Property="TextColor" Value="{StaticResource GreenColorDim}" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding CurrentPostFeed.IsSelfSupported}"
+                            TargetType="Label"
+                            Value="False">
+                            <Setter Property="Text" Value="{StaticResource fa-heart-o}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label
+                    FontSize="12"
+                    Text="{localization:Render SupportText}"
+                    TextColor="{StaticResource ColorGreenDimB}"
+                    VerticalTextAlignment="Center">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+
+    </ContentView>
+    <!--#endregion-->
+</Grid>

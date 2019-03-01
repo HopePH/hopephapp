@@ -65,7 +65,6 @@ namespace Yol.Punla.Views
         //        editPostStackLayout.Tapped += EditPostStackLayout_Tapped;
         //        multiEntry.Focused += MultiEntry_Focused;
         //        multiEntry.Unfocused += MultiEntry_Unfocused;
-        //        hidingStack.PropertyChanged += HidingStack_PropertyChanged;
 
         //        // HACK (REYNZ): Added this for Post button in iOS to works
         //        if (Device.RuntimePlatform == Device.iOS)
@@ -86,7 +85,7 @@ namespace Yol.Punla.Views
         //    editPostStackLayout.Tapped -= EditPostStackLayout_Tapped;
         //    multiEntry.Focused -= MultiEntry_Focused;
         //    multiEntry.Unfocused -= MultiEntry_Unfocused;
-        //    hidingStack.PropertyChanged -= HidingStack_PropertyChanged;
+        //    // hidingStack.PropertyChanged -= HidingStack_PropertyChanged;
 
         //    if (Device.RuntimePlatform == Device.iOS)
         //        btnPost.Pressed -= BtnPost_Pressed;
@@ -163,7 +162,7 @@ namespace Yol.Punla.Views
 
         //            foreach (var comment in comments)
         //            {
-        //                commentsIndexValueList.Add(new CommentsIndexValue { Comment = comment, Index = index , IsLocallySaved = true});
+        //                commentsIndexValueList.Add(new CommentsIndexValue { Comment = comment, Index = index, IsLocallySaved = true });
         //                ++index;
 
         //                widget = new CommentItemTemplate { BindingContext = comment };
@@ -185,18 +184,6 @@ namespace Yol.Punla.Views
         //    {
         //        viewModel.SendErrorToHockeyApp(ex);
         //    }
-        //}
-
-        //private void MultiEntry_Unfocused(object sender, FocusEventArgs e)
-        //{
-        //    multiEntry.HasFocus = e.IsFocused;
-        //    mainGrid.RowDefinitions[2].Height = 90;
-        //}
-
-        //private void MultiEntry_Focused(object sender, FocusEventArgs e)
-        //{
-        //    multiEntry.HasFocus = e.IsFocused;
-        //    mainGrid.RowDefinitions[2].Height = 140;
         //}
 
         //private void HidingStack_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -241,7 +228,7 @@ namespace Yol.Punla.Views
         //            break;
         //        case "SelectedComment":
         //            SelectedCommentPropertyChanged();
-        //           break;
+        //            break;
         //        default:
         //            break;
         //    }
