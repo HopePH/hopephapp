@@ -124,6 +124,8 @@
     <BundleResource Include="Resources\MuseoSansBold.otf" />
     <BundleResource Include="Resources\MuseoSansBoldItalic.otf" />
     <BundleResource Include="Resources\MuseoSansCyrl_0.otf" />
+    <BundleResource Include="Resources\FontAwesomeRegular.otf" />
+    <BundleResource Include="Resources\FontAwesomeSolid.otf" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-60%402x.png" />

@@ -80,7 +80,14 @@
                     VerticalOptions="End">
                     <!--  Placeholder={Binding PlaceholderTitle}  -->
                     <Entry.Effects>
-                        <effects:EntryEffect LineColor="#1F000000" Thickness="6" />
+                        <effects:EntryEffect LineColor="#1F000000">
+                            <effects:EntryEffect.Thickness>
+                                <OnPlatform
+                                    x:TypeArguments="x:Int32"
+                                    Android="6"
+                                    iOS="1" />
+                            </effects:EntryEffect.Thickness>
+                        </effects:EntryEffect>
                     </Entry.Effects>
                     <Entry.Style>
                         <OnPlatform
@@ -208,7 +215,7 @@
                                 HorizontalTextAlignment="Center"
                                 MaxLength="1"
                                 Text="{Binding VerificationCodeEntered3}"
-                                VerticalOptions="End">
+                                VerticalOptions="Center">
                                 <Entry.Effects>
                                     <effects:EntryEffect />
                                 </Entry.Effects>

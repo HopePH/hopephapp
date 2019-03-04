@@ -9,10 +9,8 @@ namespace Yol.Punla.Effects
         public int PlaceholderToLineDistance { get; set; } = 0;
         public bool IsApplyToDroid { get; set; } = true;
         public int NumberOfLines { get; set; } = 0;
-
-
-        public EntryEffect() : base("Yol.Punla.Effects.EntryEffect")
-        {
-        }
+        public bool IsBindableAttached { get; set; } = false;
+        
+        public EntryEffect() : base("Yol.Punla.Effects.EntryEffect") { }
     }
 }

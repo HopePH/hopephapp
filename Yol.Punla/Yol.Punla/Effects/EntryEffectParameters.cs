@@ -21,7 +21,8 @@ namespace Yol.Punla.Effects
                 {
                     NumberOfLines = effect.NumberOfLines,
                     PlaceholderToLineDistance = effect.PlaceholderToLineDistance,
-                    Thickness = effect.Thickness
+                    Thickness = effect.Thickness,
+                    IsBindableAttached = true
                 };
 
                 if (view.IsFocused) newEffect.LineColor = Color.FromHex(CONSTANTS.PRIMARYGREEN);

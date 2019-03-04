@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
-    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
     xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
@@ -30,7 +29,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <ContentView
                     Grid.Row="0"
                     Padding="20,10,20,20"
@@ -59,7 +57,6 @@
                         </ffImage:CachedImage.Transformations>
                     </ffImage:CachedImage>
                 </ContentView>
-
                 <StackLayout Grid.Row="1" Spacing="0">
                     <StackLayout.Padding>
                         <OnPlatform
@@ -74,17 +71,27 @@
                                 Android="4"
                                 iOS="6" />
                         </StackLayout.Spacing>
-                        <customControl:MuseoLabel Text="{localization:Render FullNameText}">
+                        <Label Text="{localization:Render FullNameText}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
                             <Label.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource LabelXSmallDark}"
                                     iOS="{StaticResource LabelSmallDark}" />
                             </Label.Style>
-                        </customControl:MuseoLabel>
+                        </Label>
                         <Entry IsEnabled="false" Text="{Binding FullName, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                                <effects:EntryEffect LineColor="#1F000000">
+                                    <effects:EntryEffect.Thickness>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Int32"
+                                            Android="4"
+                                            iOS="1" />
+                                    </effects:EntryEffect.Thickness>
+                                </effects:EntryEffect>
                             </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
@@ -109,7 +116,10 @@
                                 Android="3"
                                 iOS="6" />
                         </StackLayout.Spacing>
-                        <customControl:MuseoLabel Text="{localization:Render EmailText}">
+                        <Label Text="{localization:Render EmailText}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
                             <Label.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
@@ -122,10 +132,17 @@
                                     Android="0,7,0,0"
                                     iOS="0" />
                             </Label.Margin>
-                        </customControl:MuseoLabel>
+                        </Label>
                         <Entry IsEnabled="{Binding EmailEnabled}" Text="{Binding EmailAddress, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000" Thickness="4" />
+                                <effects:EntryEffect LineColor="#1F000000">
+                                    <effects:EntryEffect.Thickness>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Int32"
+                                            Android="4"
+                                            iOS="1" />
+                                    </effects:EntryEffect.Thickness>
+                                </effects:EntryEffect>
                             </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
@@ -150,26 +167,36 @@
                                 Android="0"
                                 iOS="6" />
                         </StackLayout.Spacing>
-                        <customControl:MuseoLabel Text="{localization:Render AliasText}">
-                            <customControl:MuseoLabel.Style>
+                        <Label Text="{localization:Render AliasText}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                            <Label.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource LabelXSmallDark}"
                                     iOS="{StaticResource LabelSmallDark}" />
-                            </customControl:MuseoLabel.Style>
-                            <customControl:MuseoLabel.Margin>
+                            </Label.Style>
+                            <Label.Margin>
                                 <OnPlatform
                                     x:TypeArguments="Thickness"
                                     Android="0,7,0,0"
                                     iOS="0" />
-                            </customControl:MuseoLabel.Margin>
-                        </customControl:MuseoLabel>
+                            </Label.Margin>
+                        </Label>
                         <Entry
                             x:Name="aliasNameEntry"
                             effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference aliasNameEntry}}"
                             Text="{Binding AliasName, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000" Thickness="6" />
+                                <effects:EntryEffect LineColor="#1F000000">
+                                    <effects:EntryEffect.Thickness>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Int32"
+                                            Android="6"
+                                            iOS="1" />
+                                    </effects:EntryEffect.Thickness>
+                                </effects:EntryEffect>
                             </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
@@ -200,27 +227,37 @@
                                 Android="0"
                                 iOS="6" />
                         </StackLayout.Spacing>
-                        <customControl:MuseoLabel Text="{localization:Render MobilePhoneText}">
-                            <customControl:MuseoLabel.Style>
+                        <Label Text="{localization:Render MobilePhoneText}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                            <Label.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource LabelXSmallDark}"
                                     iOS="{StaticResource LabelSmallDark}" />
-                            </customControl:MuseoLabel.Style>
-                            <customControl:MuseoLabel.Margin>
+                            </Label.Style>
+                            <Label.Margin>
                                 <OnPlatform
                                     x:TypeArguments="Thickness"
                                     Android="0,9,0,9"
                                     iOS="0" />
-                            </customControl:MuseoLabel.Margin>
-                        </customControl:MuseoLabel>
+                            </Label.Margin>
+                        </Label>
                         <Entry
                             x:Name="mobilePhoneEntry"
                             effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference mobilePhoneEntry}}"
                             Keyboard="Telephone"
                             Text="{Binding MobilePhoneNo, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000" Thickness="6" />
+                                <effects:EntryEffect LineColor="#1F000000">
+                                    <effects:EntryEffect.Thickness>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Int32"
+                                            Android="6"
+                                            iOS="1" />
+                                    </effects:EntryEffect.Thickness>
+                                </effects:EntryEffect>
                             </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
@@ -256,7 +293,6 @@
                 </StackLayout>
             </Grid>
         </ScrollView>
-
         <!--  AVATAR MODAL  -->
         <ContentView
             Padding="20,180,20,150"
@@ -304,17 +340,21 @@
                         </ContentView.GestureRecognizers>
                     </ContentView>
                 </ContentView>
-                <customControl:MuseoLabel
+                <Label
                     FontAttributes="Bold"
                     HorizontalTextAlignment="Center"
-                    Text="{localization:Render AvatarChoiceText}">
-                    <customControl:MuseoLabel.FontSize>
+                    Text="{localization:Render AvatarChoiceText}"
+                    TextColor="Black">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                    <Label.FontSize>
                         <OnPlatform
                             x:TypeArguments="x:Double"
                             Android="21"
                             iOS="19" />
-                    </customControl:MuseoLabel.FontSize>
-                </customControl:MuseoLabel>
+                    </Label.FontSize>
+                </Label>
                 <flowListView:FlowListView
                     BackgroundColor="{StaticResource ColorGrayTwo}"
                     FlowColumnCount="3"
@@ -339,22 +379,24 @@
                                         <behaviors:DeviceDependentViewSizeBehavior DynamicHeightRequest="55" />
                                     </ffImage:CachedImage.Behaviors>
                                 </ffImage:CachedImage>
-                                <customControl:MuseoLabel
+                                <Label
                                     FontSize="Medium"
                                     HorizontalTextAlignment="Center"
                                     Text="{Binding Name}"
                                     TextColor="Black">
-                                    <customControl:MuseoLabel.Behaviors>
+                                    <Label.Effects>
+                                        <effects:LabelFontFamilyEffect />
+                                    </Label.Effects>
+                                    <Label.Behaviors>
                                         <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="12" />
-                                    </customControl:MuseoLabel.Behaviors>
-                                </customControl:MuseoLabel>
+                                    </Label.Behaviors>
+                                </Label>
                             </StackLayout>
                         </DataTemplate>
                     </flowListView:FlowListView.FlowColumnTemplate>
                 </flowListView:FlowListView>
             </StackLayout>
         </ContentView>
-
         <!--  Busy Indicator  -->
         <ContentView
             AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -370,12 +412,17 @@
                     IsVisible="{Binding IsBusy}"
                     Style="{StaticResource ActivityIndicatorMain}" />
 
-                <customControl:MuseoLabel
+                <Label
                     HorizontalOptions="Center"
                     Opacity="1"
                     Style="{StaticResource LabelSmall}"
                     Text="Please wait..."
-                    VerticalOptions="Center" />
+                    TextColor="White"
+                    VerticalOptions="Center">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                </Label>
             </StackLayout>
         </ContentView>
     </AbsoluteLayout>

@@ -7,10 +7,10 @@ using Prism.Unity;
 using UIKit;
 using Unity;
 using Xamarin.Forms;
+using Yol.Punla.Barrack;
 using Yol.Punla.iOS.CustomRenderers;
 using Yol.Punla.iOS.Services;
 using Yol.Punla.iOS.Utility;
-using Yol.Punla.Mapper;
 using Yol.Punla.Messages;
 using Yol.Punla.Utility;
 using FacebookKit = Facebook.CoreKit;
@@ -30,7 +30,7 @@ namespace Yol.Punla.iOS
             global::Xamarin.Forms.Forms.Init();
             CachedImageRenderer.Init();
             InitFacebookIntegration();
-            IosBackgroundService();
+            //IosBackgroundService();   // TEMP
             InitHockeyApp();
             SaveCurrentAppVersionToCache();
             LoadApplication(new App(new iOSInitializer()));

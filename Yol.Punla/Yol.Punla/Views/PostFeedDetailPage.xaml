@@ -28,7 +28,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <local:NavigationBar Grid.Row="0" />
+        <!--<local:NavigationBar Grid.Row="0" />-->
 
         <ScrollView
             x:Name="ScrollViewElement"
@@ -218,7 +218,11 @@
                             FontSize="10"
                             Text="{StaticResource fa-heart}"
                             TextColor="{StaticResource ColorGreenDimB}"
-                            VerticalTextAlignment="Center" />
+                            VerticalTextAlignment="Center">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="SOLID" />
+                            </Label.Effects>
+                        </Label>
                         <Label
                             x:Name="MainPostLikeCounter"
                             FontSize="10"
@@ -485,7 +489,14 @@
                     Binding="{Binding IsFocused, Source={x:Reference multiEntry}}"
                     TargetType="Grid"
                     Value="True">
-                    <Setter Property="HeightRequest" Value="140" />
+                    <Setter Property="HeightRequest">
+                        <Setter.Value>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="140"
+                                iOS="200" />
+                        </Setter.Value>
+                    </Setter>
                 </DataTrigger>
             </Grid.Triggers>
 
@@ -525,10 +536,20 @@
                 Placeholder="{localization:Render CommentPlaceholderText}"
                 Text="{Binding CommentText, Mode=TwoWay}">
                 <Editor.Effects>
-                    <effects:EntryEffect
-                        LineColor="{StaticResource BoxGrayBorderColor}"
-                        NumberOfLines="4"
-                        Thickness="4" />
+                    <effects:EntryEffect NumberOfLines="4">
+                        <effects:EntryEffect.LineColor>
+                            <OnPlatform
+                                x:TypeArguments="Color"
+                                Android="{StaticResource BoxGrayBorderColor}"
+                                iOS="Red" />
+                        </effects:EntryEffect.LineColor>
+                        <effects:EntryEffect.Thickness>
+                            <OnPlatform
+                                x:TypeArguments="x:Int32"
+                                Android="4"
+                                iOS="10" />
+                        </effects:EntryEffect.Thickness>
+                    </effects:EntryEffect>
                 </Editor.Effects>
             </Editor>
 

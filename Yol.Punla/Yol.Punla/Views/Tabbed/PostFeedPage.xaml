@@ -57,10 +57,15 @@
         <!--#region HEADER (WALL WITH PROFILE PICTURE)-->
         <StackLayout
             Grid.Row="1"
-            Padding="20,10"
             BackgroundColor="Transparent"
             Orientation="Horizontal"
             Spacing="20">
+            <StackLayout.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="20,10"
+                    iOS="20,40,20,20" />
+            </StackLayout.Padding>
             <Label
                 Margin="0,8,0,0"
                 FontSize="23"
@@ -92,10 +97,15 @@
                 </Label.FontSize>
             </Label>
             <ContentView
-                Margin="60,0,0,0"
                 Padding="0"
                 BackgroundColor="Transparent"
                 HorizontalOptions="StartAndExpand">
+                <ContentView.Margin>
+                    <OnPlatform
+                        x:TypeArguments="Thickness"
+                        Android="60,0,0,0"
+                        iOS="50,0,0,0" />
+                </ContentView.Margin>
                 <ffImage:CachedImage
                     HeightRequest="55"
                     HorizontalOptions="FillAndExpand"
@@ -116,14 +126,25 @@
             Margin="10,5,10,0"
             Padding="0"
             BackgroundColor="White"
-            CornerRadius="3"
-            HasShadow="True">
+            CornerRadius="3">
+            <Frame.BorderColor>
+                <OnPlatform
+                    x:TypeArguments="Color"
+                    Android="Transparent"
+                    iOS="#22000000" />
+            </Frame.BorderColor>
+            <Frame.HasShadow>
+                <OnPlatform
+                    x:TypeArguments="x:Boolean"
+                    Android="True"
+                    iOS="False" />
+            </Frame.HasShadow>
             <StackLayout
                 Padding="15,12"
                 BackgroundColor="Transparent"
                 Orientation="Horizontal"
                 Spacing="15">
-                <ffImage:CachedImage Source="testprofile.jpg" WidthRequest="35">
+                <ffImage:CachedImage Source="{Binding CurrentContact.PhotoURL}" WidthRequest="35">
                     <ffImage:CachedImage.Transformations>
                         <ffImageTransformation:CircleTransformation />
                     </ffImage:CachedImage.Transformations>
@@ -181,16 +202,26 @@
             SelectedItem="{Binding CurrentPostFeed}"
             SeparatorVisibility="None"
             VerticalOptions="FillAndExpand">
-            <ListView.Behaviors>
+            <!--  TEMP  -->
+            <!--<ListView.Behaviors>
                 <behaviors:InfiniteScrollBehavior LoadMoreCommand="{Binding Path=BindingContext.LoadMoreCommand, Source={x:Reference PostDetailPage}}" />
-            </ListView.Behaviors>
+            </ListView.Behaviors>-->
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame
-                            x:Name="PostItem"
-                            Padding="0"
-                            HasShadow="True">
+                        <Frame x:Name="PostItem" Padding="0">
+                            <Frame.HasShadow>
+                                <OnPlatform
+                                    x:TypeArguments="x:Boolean"
+                                    Android="True"
+                                    iOS="False" />
+                            </Frame.HasShadow>
+                            <Frame.BorderColor>
+                                <OnPlatform
+                                    x:TypeArguments="Color"
+                                    Android="Transparent"
+                                    iOS="#22000000" />
+                            </Frame.BorderColor>
                             <Frame.Margin>
                                 <OnPlatform
                                     x:TypeArguments="Thickness"

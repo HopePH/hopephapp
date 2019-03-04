@@ -24,19 +24,8 @@ namespace Yol.Punla.iOS.Effects
                 var effect = (EntryEffect)xfControl.Effects.FirstOrDefault(e => e is EntryEffect);
                 if (effect != null)
                 {
-                    xfControl.SizeChanged += (ctrl, ea) =>
-                    {
-                        CALayer border = new CALayer();
-                        float width = 1.0f;
-                        border.BorderColor = effect.LineColor.ToUIColor().CGColor;
-                        border.Frame = new CGRect(x: 0, y: ((float)xfControl.Height - width) + effect.PlaceholderToLineDistance, width: (float)xfControl.Width, height: effect.Thickness);
-                        border.BorderWidth = width;
-
-                        control.Layer.AddSublayer(border);
-                        control.Layer.MasksToBounds = true;
-                        control.BorderStyle = UITextBorderStyle.None;
-                        control.BackgroundColor = xfControl.BackgroundColor.ToUIColor();
-                    };
+                    xfControl.SizeChanged += (ctrl, ea) => SetupEffect(effect);
+                    if (effect.IsBindableAttached) SetupEffect(effect);
                 }
             }
             catch (Exception ex)
@@ -45,6 +34,24 @@ namespace Yol.Punla.iOS.Effects
             }
         }
 
+    
         protected override void OnDetached() { }
+
+        private void SetupEffect(EntryEffect effect)
+        {
+            var control = Control as UITextField;
+            var xfControl = Element as Entry;
+
+            CALayer border = new CALayer();
+            float width = 1.0f;
+            border.BorderColor = effect.LineColor.ToUIColor().CGColor;
+            border.Frame = new CGRect(x: 0, y: ((float)xfControl.Height - width) + effect.PlaceholderToLineDistance, width: (float)xfControl.Width, height: effect.Thickness);
+            border.BorderWidth = width;
+
+            control.Layer.AddSublayer(border);
+            control.Layer.MasksToBounds = true;
+            control.BorderStyle = UITextBorderStyle.None;
+            control.BackgroundColor = xfControl.BackgroundColor.ToUIColor();
+        }
     }
 }
