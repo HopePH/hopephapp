@@ -278,7 +278,10 @@
                                 </Label>
                             </StackLayout>
                             <ContentView.GestureRecognizers>
-                                <TapGestureRecognizer x:Name="stackCommentGesture" NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer
+                                    x:Name="stackCommentGesture"
+                                    NumberOfTapsRequired="1"
+                                    Tapped="StackCommentGesture_Tapped" />
                             </ContentView.GestureRecognizers>
                         </ContentView>
                         <ContentView
@@ -547,7 +550,6 @@
                 Grid.ColumnSpan="2"
                 Margin="10,10,0,0"
                 AutoSize="TextChanges"
-                BackgroundColor="Yellow"
                 IsEnabled="{Binding IsWritePostEnabled}"
                 Keyboard="Text"
                 Placeholder="Type a comments"

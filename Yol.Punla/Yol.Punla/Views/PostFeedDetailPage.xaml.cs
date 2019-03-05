@@ -53,6 +53,19 @@ namespace Yol.Punla.Views
                 textField.HeightRequest = 84;
         }
 
+        private void StackCommentGesture_Tapped(object sender, EventArgs e)
+        {
+            // Check first if DoUpdate flag is true. If so set it to false
+            //if (viewModel.DoUpdate)
+            //    viewModel.DoUpdate = false;
+
+            multiEntry.Text = "";
+            multiEntry.Focus();
+
+            if (Device.RuntimePlatform == Device.Android)
+                multiEntry.Focus();
+        }
+
         //protected override void OnAppearing()
         //{
         //    base.OnAppearing();
