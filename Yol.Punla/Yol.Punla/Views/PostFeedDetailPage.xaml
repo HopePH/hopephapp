@@ -28,7 +28,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--<local:NavigationBar Grid.Row="0" />-->
+        <local:NavigationBar Grid.Row="0" />
 
         <ScrollView
             x:Name="ScrollViewElement"
@@ -344,7 +344,7 @@
                 </StackLayout>-->
 
                 <BoxView Grid.Row="1" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
-                <!--#region TEMP ONLY-->
+                <!--#region TEMP ONLY - AVATAR HORIZONTAL LIST FOR SUPPORTERS-->
                 <ContentView
                     Grid.Row="2"
                     Margin="0,0,0,20"
@@ -461,143 +461,13 @@
                         </StackLayout>
                         <BoxView BackgroundColor="{StaticResource BoxGrayBorderColor}" HeightRequest="1" />
                     </StackLayout>
-                    <StackLayout x:Name="CommentItems">
-                        <!--<local:CommentItem />-->
-                        <Grid Padding="20,0" RowSpacing="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <!--#region FIRST ROW-->
-                            <ffImage:CachedImage
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Aspect="AspectFit"
-                                BackgroundColor="Transparent"
-                                HeightRequest="35"
-                                Source="{Binding CurrentPostFeed.Poster.PhotoURL}"
-                                VerticalOptions="Start">
-                                <ffImage:CachedImage.Transformations>
-                                    <ffImageTransformation:CircleTransformation />
-                                </ffImage:CachedImage.Transformations>
-                            </ffImage:CachedImage>
-                            <Frame
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                BackgroundColor="#FF81B445"
-                                CornerRadius="10"
-                                HasShadow="False">
-                                <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
-                                    <Label
-                                        FontSize="15"
-                                        LineHeight="1.25"
-                                        Text="{localization:Render LoremIpsumText}"
-                                        TextColor="White">
-                                        <Label.Effects>
-                                            <effects:LabelFontFamilyEffect />
-                                        </Label.Effects>
-                                    </Label>
-                                </StackLayout>
-                            </Frame>
-                            <Label
-                                Grid.Row="0"
-                                Grid.Column="2"
-                                FontSize="10"
-                                Text="31 mins"
-                                TextColor="#FF9B9B9B"
-                                VerticalOptions="Center">
-                                <Label.Effects>
-                                    <effects:LabelFontFamilyEffect />
-                                </Label.Effects>
-                            </Label>
-                            <!--#endregion-->
-                            <!--#region SECOND ROW-->
-                            <ContentView Grid.Row="1" Grid.Column="1">
-                                <StackLayout
-                                    Padding="10"
-                                    Orientation="Horizontal"
-                                    Spacing="20">
-                                    <StackLayout Orientation="Horizontal" VerticalOptions="Fill">
-                                        <Label
-                                            FontFamily="FontAwesome"
-                                            FontSize="15"
-                                            Text="{StaticResource fa-comment-alt}"
-                                            TextColor="{StaticResource ColorGreenDimB}"
-                                            VerticalTextAlignment="Center">
-                                            <Label.Effects>
-                                                <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="REGULAR" />
-                                            </Label.Effects>
-                                            <Label.Behaviors>
-                                                <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
-                                            </Label.Behaviors>
-                                        </Label>
-                                        <Label
-                                            FontFamily="FontAwesome"
-                                            FontSize="12"
-                                            Text="Reply"
-                                            TextColor="{StaticResource ColorGreenDimB}"
-                                            VerticalTextAlignment="Center">
-                                            <Label.Effects>
-                                                <effects:LabelFontFamilyEffect />
-                                            </Label.Effects>
-                                        </Label>
-                                    </StackLayout>
-                                    <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
-                                        <Label
-                                            FontFamily="FontAwesome"
-                                            FontSize="15"
-                                            TextColor="{StaticResource ColorGreenDimB}"
-                                            VerticalTextAlignment="Center">
-                                            <Label.Behaviors>
-                                                <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
-                                            </Label.Behaviors>
-                                            <Label.Triggers>
-                                                <DataTrigger
-                                                    Binding="{Binding CurrentPostFeed.IsSelfSupported}"
-                                                    TargetType="Label"
-                                                    Value="True">
-                                                    <Setter Property="Text" Value="{StaticResource fa-heart}" />
-                                                    <Setter Property="TextColor" Value="{StaticResource GreenColorDim}" />
-                                                </DataTrigger>
-                                                <DataTrigger
-                                                    Binding="{Binding CurrentPostFeed.IsSelfSupported}"
-                                                    TargetType="Label"
-                                                    Value="False">
-                                                    <Setter Property="Text" Value="{StaticResource fa-heart-o}" />
-                                                </DataTrigger>
-                                            </Label.Triggers>
-                                        </Label>
-                                        <Label
-                                            FontSize="12"
-                                            Text="{localization:Render SupportText}"
-                                            TextColor="{StaticResource ColorGreenDimB}"
-                                            VerticalTextAlignment="Center">
-                                            <Label.Effects>
-                                                <effects:LabelFontFamilyEffect />
-                                            </Label.Effects>
-                                        </Label>
-                                    </StackLayout>
-                                </StackLayout>
-
-                            </ContentView>
-                            <!--#endregion-->
-                        </Grid>
-                    </StackLayout>
+                    <StackLayout x:Name="CommentItems" HorizontalOptions="FillAndExpand" />
                 </StackLayout>
             </Grid>
         </ScrollView>
 
         <!--  -  POST BUTTON GROUP  -->
-        <Grid
-            Grid.Row="2"
-            BackgroundColor="Transparent"
-            HeightRequest="90"
-            RowSpacing="0">
+        <Grid Grid.Row="2" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5" />
                 <RowDefinition Height="0.5" />
@@ -606,7 +476,7 @@
                         <OnPlatform
                             x:TypeArguments="GridLength"
                             Android="Auto"
-                            iOS="70" />
+                            iOS="Auto" />
                     </RowDefinition.Height>
                 </RowDefinition>
                 <RowDefinition>
@@ -614,7 +484,7 @@
                         <OnPlatform
                             x:TypeArguments="GridLength"
                             Android="1"
-                            iOS="0" />
+                            iOS="1" />
                     </RowDefinition.Height>
                 </RowDefinition>
                 <RowDefinition>
@@ -640,7 +510,20 @@
                             <OnPlatform
                                 x:TypeArguments="x:Double"
                                 Android="140"
-                                iOS="510" />
+                                iOS="500" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <DataTrigger
+                    Binding="{Binding IsFocused, Source={x:Reference multiEntry}}"
+                    TargetType="Grid"
+                    Value="False">
+                    <Setter Property="HeightRequest">
+                        <Setter.Value>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="60"
+                                iOS="70" />
                         </Setter.Value>
                     </Setter>
                 </DataTrigger>
@@ -664,6 +547,7 @@
                 Grid.ColumnSpan="2"
                 Margin="10,10,0,0"
                 AutoSize="TextChanges"
+                BackgroundColor="Yellow"
                 IsEnabled="{Binding IsWritePostEnabled}"
                 Keyboard="Text"
                 Placeholder="Type a comments"

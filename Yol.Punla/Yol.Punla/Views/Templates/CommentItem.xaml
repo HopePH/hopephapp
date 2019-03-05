@@ -9,15 +9,24 @@
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
-    Padding="20,0"
+    Padding="20,0,10,0"
+    ColumnSpacing="10"
     RowSpacing="0">
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="Auto" />
-        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition>
+            <ColumnDefinition.Width>
+                <OnPlatform
+                    x:TypeArguments="GridLength"
+                    Android="50"
+                    iOS="50" />
+            </ColumnDefinition.Width>
+        </ColumnDefinition>
         <ColumnDefinition Width="Auto" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
-        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
     <!--#region FIRST ROW-->
@@ -27,7 +36,7 @@
         Aspect="AspectFit"
         BackgroundColor="Transparent"
         HeightRequest="35"
-        Source="{Binding CurrentPostFeed.Poster.PhotoURL}"
+        Source="{Binding Poster.PhotoURL}"
         VerticalOptions="Start">
         <ffImage:CachedImage.Transformations>
             <ffImageTransformation:CircleTransformation />
@@ -38,33 +47,46 @@
         Grid.Column="1"
         BackgroundColor="#FF81B445"
         CornerRadius="10"
-        HasShadow="False">
-        <StackLayout HorizontalOptions="Fill" VerticalOptions="Fill">
-            <Label
-                FontSize="15"
-                LineHeight="1.25"
-                Text="{localization:Render LoremIpsumText}"
-                TextColor="White">
-                <Label.Effects>
-                    <effects:LabelFontFamilyEffect />
-                </Label.Effects>
-            </Label>
-        </StackLayout>
+        HasShadow="False"
+        HorizontalOptions="Start">
+        <Label
+            FontSize="15"
+            LineHeight="1.25"
+            Text="{Binding ContentText}"
+            TextColor="White">
+            <Label.Effects>
+                <effects:LabelFontFamilyEffect />
+            </Label.Effects>
+        </Label>
     </Frame>
-    <Label
+
+    <ContentView
         Grid.Row="0"
         Grid.Column="2"
-        FontSize="10"
-        Text="31 mins"
-        TextColor="#FF9B9B9B"
-        VerticalOptions="Center">
-        <Label.Effects>
-            <effects:LabelFontFamilyEffect />
-        </Label.Effects>
-    </Label>
+        HorizontalOptions="FillAndExpand">
+        <Label
+            FontSize="10"
+            HorizontalOptions="StartAndExpand"
+            HorizontalTextAlignment="Start"
+            Text="{Binding DatePosted, Converter={StaticResource ToElapsedTime}}"
+            TextColor="#FF9B9B9B"
+            VerticalOptions="Center">
+            <Label.Effects>
+                <effects:LabelFontFamilyEffect />
+            </Label.Effects>
+        </Label>
+    </ContentView>
+    <BoxView
+        Grid.Row="0"
+        Grid.Column="3"
+        BackgroundColor="White"
+        HorizontalOptions="FillAndExpand" />
     <!--#endregion-->
-    <!--#region SECOND ROW-->
-    <ContentView Grid.Row="1" Grid.Column="1">
+    <!--#region SECOND ROW HIDE FOR NOW-->
+    <!--<ContentView
+        Grid.Row="1"
+        Grid.Column="1"
+        IsVisible="False">
         <StackLayout
             Padding="10"
             Orientation="Horizontal"
@@ -105,14 +127,14 @@
                     </Label.Behaviors>
                     <Label.Triggers>
                         <DataTrigger
-                            Binding="{Binding CurrentPostFeed.IsSelfSupported}"
+                            Binding="{Binding IsSelfSupported}"
                             TargetType="Label"
                             Value="True">
                             <Setter Property="Text" Value="{StaticResource fa-heart}" />
                             <Setter Property="TextColor" Value="{StaticResource GreenColorDim}" />
                         </DataTrigger>
                         <DataTrigger
-                            Binding="{Binding CurrentPostFeed.IsSelfSupported}"
+                            Binding="{Binding IsSelfSupported}"
                             TargetType="Label"
                             Value="False">
                             <Setter Property="Text" Value="{StaticResource fa-heart-o}" />
@@ -131,6 +153,6 @@
             </StackLayout>
         </StackLayout>
 
-    </ContentView>
+    </ContentView>-->
     <!--#endregion-->
 </Grid>

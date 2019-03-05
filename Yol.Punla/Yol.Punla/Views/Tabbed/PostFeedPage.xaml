@@ -296,13 +296,7 @@
                                                 </Label.Effects>
                                             </Label>
                                         </StackLayout>
-                                        <ContentView Grid.Column="2">
-                                            <ContentView.WidthRequest>
-                                                <OnPlatform
-                                                    x:TypeArguments="x:Double"
-                                                    Android="60"
-                                                    iOS="60" />
-                                            </ContentView.WidthRequest>
+                                        <ContentView Grid.Column="2" WidthRequest="60">
                                             <ContentView IsVisible="{Binding IsSelfPosted, Mode=TwoWay}">
                                                 <Label
                                                     Margin="0,0,-10,0"

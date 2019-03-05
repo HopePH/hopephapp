@@ -1,8 +1,6 @@
 ﻿using System;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Yol.Punla.AttributeBase;
 
 namespace Yol.Punla.Views
 {

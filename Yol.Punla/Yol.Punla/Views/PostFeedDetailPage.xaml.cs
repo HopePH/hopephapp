@@ -9,6 +9,7 @@ using Yol.Punla.Barrack;
 using Yol.Punla.Messages;
 using Yol.Punla.Views;
 using Yol.Punla.ViewModels;
+using Yol.Punla.Entity;
 
 namespace Yol.Punla.Views
 {
@@ -24,6 +25,11 @@ namespace Yol.Punla.Views
             try
             {
                 InitializeComponent();
+                AppUnityContainer.Instance.Resolve<Prism.Events.IEventAggregator>().GetEvent<UpdateCommentListEventModel>().Subscribe((comment) =>
+                {
+                    CommentItems.Children.Add(new CommentItem { BindingContext = comment });
+                    multiEntry.IsEnabled = true;
+                });
             }
             catch (XamlParseException xp)
             {

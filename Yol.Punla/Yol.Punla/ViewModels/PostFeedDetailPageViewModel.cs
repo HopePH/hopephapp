@@ -3,9 +3,12 @@
 using Acr.UserDialogs;
 using FluentValidation;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using PropertyChanged;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
@@ -14,6 +17,7 @@ using Unity;
 using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
+using Yol.Punla.Entity;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
 using Yol.Punla.Messages;
@@ -33,6 +37,7 @@ namespace Yol.Punla.ViewModels
         private readonly IKeyboardHelper _keyboardHelper;
         private readonly IPostFeedManager _postFeedManager;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
+        private readonly IEventAggregator _eventAggregator;
 
         public ICommand ClosePostOptionsCommand => new DelegateCommand(ClosePostOptions);
         public ICommand ShowPostOptionsCommand => new DelegateCommand<Entity.PostFeed>(ShowPostOptions);
@@ -42,6 +47,7 @@ namespace Yol.Punla.ViewModels
         public ICommand CameraCommand => new DelegateCommand(async () => await TakeCamera());
         public ICommand DeleteCommentCommand => new DelegateCommand(DeleteSelfComment);
         public ICommand EditCommentCommand => new DelegateCommand(EditSelfComment);
+        public ObservableCollection<Views.CommentItem> CommentItems { get; set; } = new ObservableCollection<Views.CommentItem>();
         public Entity.PostFeed CurrentPostFeed { get; set; }
         public Entity.Contact CurrentContact { get; set; }
         public Entity.PostFeed Comment { get; set; }
@@ -62,11 +68,13 @@ namespace Yol.Punla.ViewModels
             IPostFeedManager postFeedManager,
             INavigationService navigationService,
             INavigationStackService navigationStackService,
+            IEventAggregator eventAggregator,
             PostFeedDetailsPageValidator validator) : base(navigationService)
         {
             _postFeedManager = postFeedManager;
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
+            _eventAggregator = eventAggregator;
             _validator = validator;
             _keyboardHelper = AppUnityContainer.InstanceDependencyService.Get<IKeyboardHelper>();
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
@@ -214,7 +222,7 @@ namespace Yol.Punla.ViewModels
                 }
                 else
                 {
-                    Comment = new Entity.PostFeed
+                    Comment = new PostFeed
                     {
                         Title = $"A new post from @{CurrentContact.FirstName} {CurrentContact.LastName}",
                         ContentText = CommentText ?? "",
@@ -239,6 +247,9 @@ namespace Yol.Punla.ViewModels
                 
                 IsWritePostEnabled = false;
                 SendAddEditToBackground(Comment, CurrentContact);   // Updating the UI before sending updated comment to background
+
+                _eventAggregator.GetEvent<UpdateCommentListEventModel>().Publish(Comment);
+
                 _keyboardHelper.HideKeyboard();
                 CommentText = string.Empty;
             }
