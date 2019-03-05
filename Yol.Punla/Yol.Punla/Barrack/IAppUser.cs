@@ -2,7 +2,7 @@
 {
     public interface IAppUser
     {
-        bool IsAuthenticated { get; }
+        bool IsAuthenticated { get;}
         bool SignUpCompleted { get;}
     }
 }

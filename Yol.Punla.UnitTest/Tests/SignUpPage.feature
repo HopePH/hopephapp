@@ -8,7 +8,7 @@ Scenario: Add two numbers
 
 Scenario Outline: Signing up a new user
 	Given I am not authenticated
-		And I am on the page "LoginPage"
+		And I am on the page "LogonPage"
 	When I tap the signup link below
 	Then I am redirected to the page "EmailVerificationPage"
 	When I enter my email address "<emailAdd>" and tap continue button

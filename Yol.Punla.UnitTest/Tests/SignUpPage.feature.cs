@@ -117,7 +117,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 10
  testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 11
-  testRunner.And("I am on the page \"LoginPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I am on the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
  testRunner.When("I tap the signup link below", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 13

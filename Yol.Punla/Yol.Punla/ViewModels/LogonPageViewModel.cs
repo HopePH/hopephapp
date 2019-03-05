@@ -23,6 +23,7 @@ namespace Yol.Punla.ViewModels
         public ICommand GoToSignUpCommand => new DelegateCommand(async () => await Signup());
         public ICommand GoToSigninWithAliasCommand => new DelegateCommand(async () =>  await SigninWithAlias());
         public Contact CurrentContact { get; set; }
+        public bool IsOpen { get; set; }
 
         public LogonPageViewModel(IServiceMapper serviceMapper, 
             IAppUser appUser,

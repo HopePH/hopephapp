@@ -53,13 +53,15 @@ namespace Yol.Punla.UnitTest
         [When(@"I tap the signup link below")]
         public void WhenITapTheSignupLinkBelow()
         {
-            ScenarioContext.Current.Pending();
+            Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().IsOpen = true;
+            Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().GoToSignUpCommand.Execute(null);
         }
 
         [When(@"I enter my email address ""(.*)"" and tap continue button")]
-        public void WhenIEnterMyEmailAddressAndTapContinueButton(string p0)
+        public void WhenIEnterMyEmailAddressAndTapContinueButton(string emailAdd)
         {
-            ScenarioContext.Current.Pending();
+            Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().EmailAddress = emailAdd;
+            Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().IsVerification = true;
         }
 
         [Then(@"the verification boxes appear")]
