@@ -10,14 +10,14 @@ namespace Yol.Punla.Effects
 
         public static void OnFocusStateChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var view = bindable as Entry;
+            var view = bindable as InputView;
             if (view == null) return;
 
-            var effect = (EntryEffect)view.Effects.FirstOrDefault(e => e is EntryEffect);
+            var effect = (InputViewEffect)view.Effects.FirstOrDefault(e => e is InputViewEffect);
             
             if (effect != null)
             {
-                var newEffect = new EntryEffect
+                var newEffect = new InputViewEffect
                 {
                     NumberOfLines = effect.NumberOfLines,
                     PlaceholderToLineDistance = effect.PlaceholderToLineDistance,

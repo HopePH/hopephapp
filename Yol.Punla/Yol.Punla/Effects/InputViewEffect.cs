@@ -2,7 +2,7 @@
 
 namespace Yol.Punla.Effects
 {
-    public class EntryEffect : RoutingEffect
+    public class InputViewEffect : RoutingEffect
     {
         public Color LineColor { get; set; } = Color.Transparent;
         public int Thickness { get; set; }
@@ -11,6 +11,6 @@ namespace Yol.Punla.Effects
         public int NumberOfLines { get; set; } = 0;
         public bool IsBindableAttached { get; set; } = false;
         
-        public EntryEffect() : base("Yol.Punla.Effects.EntryEffect") { }
+        public InputViewEffect() : base("Yol.Punla.Effects.InputViewEffect") { }
     }
 }

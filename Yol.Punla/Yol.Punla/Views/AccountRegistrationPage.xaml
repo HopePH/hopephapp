@@ -84,14 +84,14 @@
                         </Label>
                         <Entry IsEnabled="false" Text="{Binding FullName, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000">
-                                    <effects:EntryEffect.Thickness>
+                                <effects:InputViewEffect LineColor="#1F000000">
+                                    <effects:InputViewEffect.Thickness>
                                         <OnPlatform
                                             x:TypeArguments="x:Int32"
                                             Android="4"
                                             iOS="1" />
-                                    </effects:EntryEffect.Thickness>
-                                </effects:EntryEffect>
+                                    </effects:InputViewEffect.Thickness>
+                                </effects:InputViewEffect>
                             </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
@@ -135,14 +135,14 @@
                         </Label>
                         <Entry IsEnabled="{Binding EmailEnabled}" Text="{Binding EmailAddress, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000">
-                                    <effects:EntryEffect.Thickness>
+                                <effects:InputViewEffect LineColor="#1F000000">
+                                    <effects:InputViewEffect.Thickness>
                                         <OnPlatform
                                             x:TypeArguments="x:Int32"
                                             Android="4"
                                             iOS="1" />
-                                    </effects:EntryEffect.Thickness>
-                                </effects:EntryEffect>
+                                    </effects:InputViewEffect.Thickness>
+                                </effects:InputViewEffect>
                             </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
@@ -189,14 +189,14 @@
                             effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference aliasNameEntry}}"
                             Text="{Binding AliasName, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000">
-                                    <effects:EntryEffect.Thickness>
+                                <effects:InputViewEffect LineColor="#1F000000">
+                                    <effects:InputViewEffect.Thickness>
                                         <OnPlatform
                                             x:TypeArguments="x:Int32"
                                             Android="6"
                                             iOS="1" />
-                                    </effects:EntryEffect.Thickness>
-                                </effects:EntryEffect>
+                                    </effects:InputViewEffect.Thickness>
+                                </effects:InputViewEffect>
                             </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
@@ -250,14 +250,14 @@
                             Keyboard="Telephone"
                             Text="{Binding MobilePhoneNo, Mode=TwoWay}">
                             <Entry.Effects>
-                                <effects:EntryEffect LineColor="#1F000000">
-                                    <effects:EntryEffect.Thickness>
+                                <effects:InputViewEffect LineColor="#1F000000">
+                                    <effects:InputViewEffect.Thickness>
                                         <OnPlatform
                                             x:TypeArguments="x:Int32"
                                             Android="6"
                                             iOS="1" />
-                                    </effects:EntryEffect.Thickness>
-                                </effects:EntryEffect>
+                                    </effects:InputViewEffect.Thickness>
+                                </effects:InputViewEffect>
                             </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform

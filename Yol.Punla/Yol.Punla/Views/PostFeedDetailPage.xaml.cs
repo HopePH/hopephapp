@@ -37,6 +37,16 @@ namespace Yol.Punla.Views
             }
         }
 
+        private void MultiEntry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var textField = sender as Editor;
+
+            if(textField.HeightRequest == 84)
+                textField.HeightRequest = -1;
+            else if (textField.Height > 83)
+                textField.HeightRequest = 84;
+        }
+
         //protected override void OnAppearing()
         //{
         //    base.OnAppearing();

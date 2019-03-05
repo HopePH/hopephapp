@@ -128,10 +128,7 @@
             BackgroundColor="White"
             CornerRadius="3">
             <Frame.BorderColor>
-                <OnPlatform
-                    x:TypeArguments="Color"
-                    Android="Transparent"
-                    iOS="#22000000" />
+                <OnPlatform x:TypeArguments="Color" iOS="#22000000" />
             </Frame.BorderColor>
             <Frame.HasShadow>
                 <OnPlatform
@@ -217,10 +214,7 @@
                                     iOS="False" />
                             </Frame.HasShadow>
                             <Frame.BorderColor>
-                                <OnPlatform
-                                    x:TypeArguments="Color"
-                                    Android="Transparent"
-                                    iOS="#22000000" />
+                                <OnPlatform x:TypeArguments="Color" iOS="#22000000" />
                             </Frame.BorderColor>
                             <Frame.Margin>
                                 <OnPlatform

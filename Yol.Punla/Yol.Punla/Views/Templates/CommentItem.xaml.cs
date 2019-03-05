@@ -6,7 +6,6 @@ using Yol.Punla.AttributeBase;
 
 namespace Yol.Punla.Views
 {
-    [ModuleView]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CommentItem : Grid
 	{

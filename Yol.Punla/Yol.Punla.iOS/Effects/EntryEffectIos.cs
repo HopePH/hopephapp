@@ -7,21 +7,21 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Yol.Punla.Effects;
 
-[assembly: ExportEffect(typeof(Yol.Punla.iOS.Effects.EntryEffectIos), nameof(EntryEffect))]
+[assembly: ExportEffect(typeof(Yol.Punla.iOS.Effects.InputViewEffectIos), nameof(InputViewEffect))]
 namespace Yol.Punla.iOS.Effects
 {
-    public class EntryEffectIos : PlatformEffect
+    public class InputViewEffectIos : PlatformEffect
     {
         protected override void OnAttached()
         {
             try
             {
-                var xfControl = Element as Entry;
+                var xfControl = Element as InputView;
                 if (xfControl == null) return;
-                var control = Control as UITextField;
+                var control = Control as UIView;
                 if (control == null) return;
 
-                var effect = (EntryEffect)xfControl.Effects.FirstOrDefault(e => e is EntryEffect);
+                var effect = (InputViewEffect)xfControl.Effects.FirstOrDefault(e => e is InputViewEffect);
                 if (effect != null)
                 {
                     xfControl.SizeChanged += (ctrl, ea) => SetupEffect(effect);
@@ -37,10 +37,10 @@ namespace Yol.Punla.iOS.Effects
     
         protected override void OnDetached() { }
 
-        private void SetupEffect(EntryEffect effect)
+        private void SetupEffect(InputViewEffect effect)
         {
-            var control = Control as UITextField;
-            var xfControl = Element as Entry;
+            var control = Control as UIView;
+            var xfControl = Element as InputView;
 
             CALayer border = new CALayer();
             float width = 1.0f;
@@ -50,7 +50,17 @@ namespace Yol.Punla.iOS.Effects
 
             control.Layer.AddSublayer(border);
             control.Layer.MasksToBounds = true;
-            control.BorderStyle = UITextBorderStyle.None;
+            if (Control is UITextView)
+            {
+                control.Layer.BorderWidth = 0;
+                control.Layer.BorderColor = Color.Transparent.ToCGColor();
+            }
+            else if(Control is UITextField)
+            {
+                var textField = Control as UITextField;
+                textField.BorderStyle = UITextBorderStyle.None;
+            }
+                
             control.BackgroundColor = xfControl.BackgroundColor.ToUIColor();
         }
     }

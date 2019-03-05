@@ -80,14 +80,14 @@
                     VerticalOptions="End">
                     <!--  Placeholder={Binding PlaceholderTitle}  -->
                     <Entry.Effects>
-                        <effects:EntryEffect LineColor="#1F000000">
-                            <effects:EntryEffect.Thickness>
+                        <effects:InputViewEffect LineColor="#1F000000">
+                            <effects:InputViewEffect.Thickness>
                                 <OnPlatform
                                     x:TypeArguments="x:Int32"
                                     Android="6"
                                     iOS="1" />
-                            </effects:EntryEffect.Thickness>
-                        </effects:EntryEffect>
+                            </effects:InputViewEffect.Thickness>
+                        </effects:InputViewEffect>
                     </Entry.Effects>
                     <Entry.Style>
                         <OnPlatform
@@ -141,7 +141,7 @@
                                 Text="{Binding VerificationCodeEntered1}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
-                                    <effects:EntryEffect />
+                                    <effects:InputViewEffect />
                                 </Entry.Effects>
                             </Entry>
                         </Frame>
@@ -179,7 +179,7 @@
                                 Text="{Binding VerificationCodeEntered2}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
-                                    <effects:EntryEffect />
+                                    <effects:InputViewEffect />
                                 </Entry.Effects>
                             </Entry>
                         </Frame>
@@ -217,7 +217,7 @@
                                 Text="{Binding VerificationCodeEntered3}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
-                                    <effects:EntryEffect />
+                                    <effects:InputViewEffect />
                                 </Entry.Effects>
                             </Entry>
                         </Frame>
@@ -255,7 +255,7 @@
                                 Text="{Binding VerificationCodeEntered4}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
-                                    <effects:EntryEffect />
+                                    <effects:InputViewEffect />
                                 </Entry.Effects>
                             </Entry>
                         </Frame>

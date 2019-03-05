@@ -6,7 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Yol.Punla.Effects;
 
-[assembly: ExportEffect(typeof(Yol.Punla.Droid.Effects.EntryEffectDroid), nameof(EntryEffect))]
+[assembly: ExportEffect(typeof(Yol.Punla.Droid.Effects.EntryEffectDroid), nameof(InputViewEffect))]
 namespace Yol.Punla.Droid.Effects
 {
     public class EntryEffectDroid : PlatformEffect
@@ -17,7 +17,7 @@ namespace Yol.Punla.Droid.Effects
             {
                 var control = Control as EditText;
                 if (control == null) return;
-                var effect = (EntryEffect)Element.Effects.FirstOrDefault(e => e is EntryEffect);
+                var effect = (InputViewEffect)Element.Effects.FirstOrDefault(e => e is InputViewEffect);
 
                 if (effect != null)
                 {
