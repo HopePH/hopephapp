@@ -48,10 +48,10 @@ namespace Yol.Punla.ViewModels
         public ICommand DeleteCommentCommand => new DelegateCommand(DeleteSelfComment);
         public ICommand EditCommentCommand => new DelegateCommand(EditSelfComment);
         public ObservableCollection<Views.CommentItem> CommentItems { get; set; } = new ObservableCollection<Views.CommentItem>();
-        public Entity.PostFeed CurrentPostFeed { get; set; }
-        public Entity.Contact CurrentContact { get; set; }
-        public Entity.PostFeed Comment { get; set; }
-        public Entity.PostFeed SelectedComment { get; set; }
+        public PostFeed CurrentPostFeed { get; set; }
+        public Contact CurrentContact { get; set; }
+        public PostFeed Comment { get; set; }
+        public PostFeed SelectedComment { get; set; }
         public string PostImageUrl { get; set; }
         public string PlaceholderText { get; set; }
         public string CommentText { get; set; }
@@ -85,11 +85,11 @@ namespace Yol.Punla.ViewModels
         {
             if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
             {
-                CurrentPostFeed = (Entity.PostFeed)PassingParameters["SelectedPost"];
+                CurrentPostFeed = (PostFeed)PassingParameters["SelectedPost"];
                 if (!string.IsNullOrEmpty(CurrentPostFeed.ContentURL))
                     HasPostedImage = true;
 
-                CurrentContact = (Entity.Contact)PassingParameters["CurrentUser"];
+                CurrentContact = (Contact)PassingParameters["CurrentUser"];
             }
 
             if (IsInternetConnected)
@@ -111,8 +111,8 @@ namespace Yol.Punla.ViewModels
                     if (!IsBusy)
                     {
                         HasIncomingLike = true;
-                        var currentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.PostFeed>(message.CurrentPost);
-                        var posterUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.Contact>(message.CurrentUser);
+                        var currentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<PostFeed>(message.CurrentPost);
+                        var posterUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contact>(message.CurrentUser);
 
                         SelectedComment = currentPost;
 
@@ -133,7 +133,7 @@ namespace Yol.Punla.ViewModels
                 if (message.HttpStatusCode == HttpStatusCode.OK)
                 {
                     IsWritePostEnabled = true;
-                    var newlyAddedComment = ServiceMapper.Instance.Map<Entity.PostFeed>(message.Result);
+                    var newlyAddedComment = ServiceMapper.Instance.Map<PostFeed>(message.Result);
                     LatestPostUpdatedPostFeedId = newlyAddedComment.PostFeedID;
                     _postFeedManager.SaveNewPostToLocal(newlyAddedComment);
                     CurrentPostFeed.Comments.Add(newlyAddedComment);
@@ -167,7 +167,7 @@ namespace Yol.Punla.ViewModels
             ProcessErrorReportingForHockeyApp(ex, true);
         }
 
-        public void AddDeductOneLikeToThisPostFromLocal(Entity.PostFeed postFeed, Entity.Contact userWhoLiked)
+        public void AddDeductOneLikeToThisPostFromLocal(PostFeed postFeed, Contact userWhoLiked)
         {
             var postToLike = _postFeedManager.GetPostFeed(postFeed.PostFeedID);
 
@@ -185,9 +185,9 @@ namespace Yol.Punla.ViewModels
                 CurrentPostFeed = updatePostFeed;
         }
 
-        public Entity.PostFeed ReadPostFeedFromLocal(Entity.PostFeed newPost) => _postFeedManager.GetPostFeed(newPost.PostFeedID);
+        public Entity.PostFeed ReadPostFeedFromLocal(PostFeed newPost) => _postFeedManager.GetPostFeed(newPost.PostFeedID);
 
-        public void DeletePostFeedFromLocal(Entity.PostFeed newPost, bool getLocalFirst = false)
+        public void DeletePostFeedFromLocal(PostFeed newPost, bool getLocalFirst = false)
         {
             if (getLocalFirst)
             {
@@ -199,7 +199,7 @@ namespace Yol.Punla.ViewModels
             _postFeedManager.DeletePostInLocal(newPost);
         }
 
-        public void SaveCommentToLocal(Entity.PostFeed newComment)
+        public void SaveCommentToLocal(PostFeed newComment)
         {
             _postFeedManager.SaveNewPostToLocal(newComment);
             CurrentPostFeed.Comments.Add(newComment);
@@ -236,7 +236,7 @@ namespace Yol.Punla.ViewModels
                         PosterProfilePhoto = CurrentContact.PhotoURL,
                         DatePosted = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).ToString(Constants.DateTimeFormat),
                         DateModified = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).ToString(Constants.DateTimeFormat),
-                        SupportersIdsList = new System.Collections.Generic.List<int>(),
+                        SupportersIdsList = new List<int>(),
                         NoOfSupports = 0,
                         PostFeedLevel = 1,
                         PostFeedParentId = CurrentPostFeed.PostFeedID,
