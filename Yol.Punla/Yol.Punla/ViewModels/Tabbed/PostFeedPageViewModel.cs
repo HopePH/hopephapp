@@ -177,37 +177,7 @@ namespace Yol.Punla.ViewModels
                 SeePostFeedDetails();
             }
         }
-
-        #region OLD CODE
-        //[Conditional("DEBUG"), Conditional("TRACE")]
-        //private async void GetCommentsAsync()
-        //{
-        //    try
-        //    {
-        //        CreateNewHandledTokenSource("GetCommentsAsync", 20);
-
-        //        var results = await Task.Run(() =>
-        //        {
-        //            Debug.WriteLine("HOPEPH Getting comments");
-        //            return _postFeedManager.GetComments(CurrentPostFeed.PostFeedID, true, CurrentContact.RemoteId);   
-        //        }, TokenHandler.Token);
-
-        //        GetCommentsResult(results, TokenHandler.IsTokenSourceCompleted());
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ProcessErrorReportingForHockeyApp(ex, true);
-        //    }
-        //}
-
-        //[Conditional("FAKE")]
-        //private void GetCommentsAsyncFake()
-        //{
-        //    var result = _postFeedManager.GetComments(CurrentPostFeed.PostFeedID, false, CurrentContact.RemoteId).Result;
-        //    GetCommentsResult(result);
-        //}
-
-        #endregion
+        
         private async Task<IEnumerable<Entity.PostFeed>> GetCommentsAsync()
         {
             try
