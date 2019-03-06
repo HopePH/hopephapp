@@ -130,40 +130,6 @@ namespace Yol.Punla.ViewModels
             await PreparePageBindingsAsync();
         }
 
-        #region OLD CODE
-        //[Conditional("DEBUG"), Conditional("TRACE")]
-        //private async void PreparePageBindingsAsync()
-        //{
-        //    //chito.22/01/2018. we force to delay for how many seconds when adding/editing a new post so we could get the updated info from fetching from the server 
-        //    if (IsForceToGetToRest && SecondsDelay > 0)
-        //        await Task.Delay(TimeSpan.FromSeconds(SecondsDelay));
-
-        //    try
-        //    {
-        //        CreateNewHandledTokenSource("PostFeedPageViewModel.PreparePageBindingsAsync", 20);
-
-        //        var postList = await Task.Run(() =>
-        //        {
-        //            Debug.WriteLine("HOPEPH Getting all post");
-        //            return _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
-        //        }, TokenHandler.Token);
-
-        //        PostsList = new ObservableCollection<Entity.PostFeed>(postList.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
-        //        PreparePageBindingsResult(TokenHandler.IsTokenSourceCompleted());
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ProcessErrorReportingForHockeyApp(ex, true);
-        //    }
-        //}
-
-        //[Conditional("FAKE")]
-        //private void PreparePageBindingsAsyncFake()
-        //{
-        //    PostsList = new ObservableCollection<Entity.PostFeed>(_postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true).Result.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
-        //    PreparePageBindingsResult();
-        //}
-
         #endregion
         private async Task PreparePageBindingsAsync()
         {
@@ -194,8 +160,6 @@ namespace Yol.Punla.ViewModels
 
             IsBusy = false;
         }
-
-        #endregion
         
         #region GET AND ADD COMMENTS
 

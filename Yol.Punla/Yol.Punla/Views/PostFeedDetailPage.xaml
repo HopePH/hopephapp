@@ -28,7 +28,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <local:NavigationBar Grid.Row="0" />
+        <!--<local:NavigationBar Grid.Row="0" />-->
 
         <ScrollView
             x:Name="ScrollViewElement"
@@ -105,9 +105,10 @@
                         Margin="20,0"
                         BackgroundColor="Transparent"
                         FontSize="12"
-                        LineHeight="2"
+                        LineHeight="1.2"
                         Text="{Binding CurrentPostFeed.ContentText}"
-                        TextColor="{StaticResource GrayDefault}">
+                        TextColor="{StaticResource GrayDefault}"
+                        VerticalOptions="CenterAndExpand">
                         <Label.Effects>
                             <effects:LabelFontFamilyEffect />
                         </Label.Effects>
@@ -118,13 +119,13 @@
                         BackgroundColor="Transparent"
                         RowSpacing="0">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="46" />
                         </Grid.RowDefinitions>
                         <ffImage:CachedImage
                             x:Name="PostImage"
                             Grid.Row="0"
-                            Aspect="AspectFill"
+                            Aspect="AspectFit"
                             BackgroundColor="Black"
                             IsVisible="{Binding HasPostedImage}"
                             Source="{Binding CurrentPostFeed.ContentURL}">
@@ -347,7 +348,6 @@
                 </StackLayout>-->
 
                 <BoxView Grid.Row="1" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
-                <!--#region TEMP ONLY - AVATAR HORIZONTAL LIST FOR SUPPORTERS-->
                 <ContentView
                     Grid.Row="2"
                     Margin="0,0,0,20"
@@ -376,7 +376,6 @@
                             Spacing="10" />
                     </StackLayout>
                 </ContentView>
-                <!--#endregion-->
                 <!--  - COMMENT LISTS SECTION  -->
                 <StackLayout
                     x:Name="stackRowElement"
