@@ -643,7 +643,10 @@
                     </ContentView.GestureRecognizers>
                 </ContentView>
                 <StackLayout Grid.Row="1" Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="Edit Current Post">
+                    <Label
+                        HorizontalOptions="StartAndExpand"
+                        Text="Edit Current Post"
+                        TextColor="Black">
                         <Label.Effects>
                             <effects:LabelFontFamilyEffect />
                         </Label.Effects>

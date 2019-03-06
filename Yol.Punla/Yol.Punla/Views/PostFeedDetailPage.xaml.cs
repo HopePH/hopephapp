@@ -85,9 +85,11 @@ namespace Yol.Punla.Views
 
         private void StackCommentGesture_Tapped(object sender, EventArgs e)
         {
+            #region HIDE FOR NOW
             // Check first if DoUpdate flag is true. If so set it to false
             //if (viewModel.DoUpdate)
-            //    viewModel.DoUpdate = false;
+            //    viewModel.DoUpdate = false; 
+            #endregion
 
             multiEntry.Text = "";
             multiEntry.Focus();
@@ -103,6 +105,7 @@ namespace Yol.Punla.Views
             if (BindingContext != null) viewModel = BindingContext as PostFeedDetailPageViewModel;
         }
 
+        #region OLD CODE - TO REVIEW if needed
         //protected override void AttachedPageEvents()
         //{
         //    base.AttachedPageEvents();
@@ -472,6 +475,7 @@ namespace Yol.Punla.Views
         //    }
         //}
 
-        //private void UpdateAddComment(Entity.PostFeed currentPost) => viewModel.SaveCommentToLocal(currentPost);        
+        //private void UpdateAddComment(Entity.PostFeed currentPost) => viewModel.SaveCommentToLocal(currentPost);    
+        #endregion
     }
 }
