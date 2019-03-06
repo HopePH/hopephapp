@@ -326,9 +326,10 @@
                                     Margin="20,0,30,0"
                                     BackgroundColor="Transparent"
                                     FontSize="12"
-                                    LineHeight="2"
+                                    LineHeight="1.2"
                                     Text="{Binding ContentText}"
-                                    TextColor="{StaticResource GrayDefault}">
+                                    TextColor="{StaticResource GrayDefault}"
+                                    VerticalOptions="CenterAndExpand">
                                     <Label.Effects>
                                         <effects:LabelFontFamilyEffect />
                                     </Label.Effects>
@@ -341,11 +342,11 @@
                                     RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="46" />
+                                        <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <ffImage:CachedImage
                                         Grid.Row="0"
-                                        Aspect="AspectFill"
+                                        Aspect="AspectFit"
                                         BackgroundColor="Black"
                                         IsVisible="{Binding HasPostedImage}"
                                         Source="{Binding ContentURL}">

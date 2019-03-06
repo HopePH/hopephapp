@@ -399,6 +399,40 @@ namespace Yol.Punla.FakeData
                         RemoteId = 1004
                     },
                 },
+                new PostFeed
+                {
+                    PostFeedID = 4000,
+                    Title = "Mental Health Mobile Application is now in Google play and Apple Store.",
+                    DatePosted = DateTime.Now.ToString(Barrack.Constants.DateTimeFormat),
+                    ContentText = "A Mental Health mobile application is now developed and launch for Android and iOS to the market. It aims to make people aware of common mental health issues, helps, and trends.",
+                    ContentURL = "https://d255me3ukr1mgj.cloudfront.net/images/article_images/simon1470202347511_aspR_1.574_w982_h624_e.jpg",
+                    Comments = new ObservableCollection<PostFeed>(),
+                    NoOfComments = 0,
+                    NoOfSupports = 0,
+                    SupportersIdsList = new List<int>(),
+                    PosterEmail = "hynrbf@gmail.com",
+                    PosterFirstName = "hyn",
+                    PosterLastName = "rbf",
+                    PosterId = 1000,
+                    PosterProfilePhotoFB = "https://graph.facebook.com/270140636845346/picture?height=220&width=220&migration_overrides=%7Boctober_2012%3Atrue%7D",
+                    Poster = new Contact
+                    {
+                        Id = 1000,
+                        FirstName = "Chito",
+                        LastName = "Salano",
+                        EmailAdd = "hynrbf@gmail.com",
+                        Password = "123456Aa@",
+                        AliasName = "Chito1",
+                        FBLink = "",
+                        FBId = "",
+                        GenderCode = "male",
+                        MobilePhone = "026500987",
+                        PhotoURL = "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo/alfeo.jpg",
+                        Birthdate = "",
+                        UserName = "hynrbf@gmail.com",
+                        RemoteId = 1000
+                    },
+                },
                 #endregion
 
                 #region COMMENTS
@@ -554,6 +588,78 @@ namespace Yol.Punla.FakeData
                     DatePosted = "12-08-2017T12:52:00.000z",
                     ContentText = "Hello.....",
                     PostFeedParentId = 3000,
+                    PostFeedLevel = 1,
+                    Poster = new Contact
+                    {
+                        Id = 1005,
+                        FirstName = "Catherine",
+                        LastName = "Murphy",
+                        EmailAdd = "catherinemurphy@gmail.com",
+                        Password = "123456Aa@",
+                        AliasName = "Cate",
+                        FBLink = "https://graph.facebook.com/168866520312631/picture?height=220&width=220&migration_overrides=%7Boctober_2012%3Atrue%7D",
+                        FBId = "157823074843148",
+                        GenderCode = "female",
+                        MobilePhone = "09477691857",
+                        PhotoURL = "https://mobirise.com/bootstrap-template/profile-template/assets/images/timothy-paul-smith-256424-1200x800.jpg",
+                        Birthdate = "",
+                        RemoteId = 1005
+                    }
+                },
+                new PostFeed
+                {
+                    PostFeedID = 4001,
+                    DatePosted = "12-08-2017T12:52:00.000z",
+                    ContentText = "..how is it already downloadable? I have a friend who has been suffering clinical depression. Maybe she could find some help there.",
+                    PostFeedParentId = 4000,
+                    PostFeedLevel = 1,
+                    Poster = new Contact
+                    {
+                        Id = 1005,
+                        FirstName = "Catherine",
+                        LastName = "Murphy",
+                        EmailAdd = "catherinemurphy@gmail.com",
+                        Password = "123456Aa@",
+                        AliasName = "Cate",
+                        FBLink = "https://graph.facebook.com/168866520312631/picture?height=220&width=220&migration_overrides=%7Boctober_2012%3Atrue%7D",
+                        FBId = "157823074843148",
+                        GenderCode = "female",
+                        MobilePhone = "09477691857",
+                        PhotoURL = "https://mobirise.com/bootstrap-template/profile-template/assets/images/timothy-paul-smith-256424-1200x800.jpg",
+                        Birthdate = "",
+                        RemoteId = 1005
+                    }
+                },
+                new PostFeed
+                {
+                    PostFeedID = 4002,
+                    DatePosted = "12-08-2017T12:52:00.000z",
+                    ContentText = "Amazing.....",
+                    PostFeedParentId = 4000,
+                    PostFeedLevel = 1,
+                    Poster = new Contact
+                    {
+                        Id = 1003,
+                        FirstName = "Worde",
+                        LastName = "Salinas",
+                        EmailAdd = "wordesalinas@gmail.com",
+                        Password = "123456Aa@",
+                        AliasName = "Worde5",
+                        FBLink = "https://graph.facebook.com/168866520312631/picture?height=220&width=220&migration_overrides=%7Boctober_2012%3Atrue%7D",
+                        FBId = "157823074843148",
+                        GenderCode = "male",
+                        MobilePhone = "09477691857",
+                        PhotoURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCdlqi5EjYtoTkgD0LO9X4JFkNSv3g6Jf3dZJB1NIB9r2RlErTqA",
+                        Birthdate = "",
+                        RemoteId = 1003
+                    },
+                },
+                new PostFeed
+                {
+                    PostFeedID = 4003,
+                    DatePosted = "12-08-2017T12:52:00.000z",
+                    ContentText = ".....I already checked the android version up. It's cool..",
+                    PostFeedParentId = 4000,
                     PostFeedLevel = 1,
                     Poster = new Contact
                     {

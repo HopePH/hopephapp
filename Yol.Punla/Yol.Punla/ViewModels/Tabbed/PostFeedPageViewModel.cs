@@ -60,6 +60,7 @@ namespace Yol.Punla.ViewModels
         public ICommand DisplayOwnPostsCommand => new DelegateCommand(RedirectToPostFeedOwn);
         public ICommand LoadMoreCommand => new DelegateCommand(async () => await LoadMorePostListAsync());
         public ObservableCollection<Entity.PostFeed> PostsList { get; set; }
+        public IEnumerable<Entity.PostFeed> CommentList { get; set; } = new List<Entity.PostFeed>();
         public IEnumerable<string> SelectedPostFeedSupportersAvatar { get; set; } = new List<string>();
         public Entity.Contact CurrentContact { get; set; }
         public Entity.PostFeed CurrentPostFeed { get; set; }
@@ -208,8 +209,8 @@ namespace Yol.Punla.ViewModels
             if (ProcessInternetConnection(true))
             {
                 SelectedPostFeedSupportersAvatar = await GetSupportersAvatarsAsync();
-                var comments = await GetCommentsAsync();
-                GetCommentsResult(comments);
+                CommentList = await GetCommentsAsync();
+                SeePostFeedDetails();
             }
         }
 
@@ -271,20 +272,17 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        private async void GetCommentsResult(IEnumerable<Entity.PostFeed> commentList, bool IsSuccess = true)
+        private async void SeePostFeedDetails()
         {
-            if (IsSuccess)
-            {
-                //chito. reset if the navigation parameters has values. this happens because of background thread navigating back from other page
-                if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
-                    PassingParameters = new NavigationParameters();            
-                CurrentPostFeed.Comments = new ObservableCollection<Entity.PostFeed>(commentList);
-                CurrentPostFeed.NoOfComments = CurrentPostFeed.Comments.Count;
-                PassingParameters.Add("CurrentUser", CurrentContact);
-                PassingParameters.Add("SelectedPost", CurrentPostFeed);
-                PassingParameters.Add("SupportersAvatars", SelectedPostFeedSupportersAvatar);
-                await NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
-            }
+            //chito. reset if the navigation parameters has values. this happens because of background thread navigating back from other page
+            if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
+                PassingParameters = new NavigationParameters();            
+            CurrentPostFeed.Comments = new ObservableCollection<Entity.PostFeed>(CommentList);
+            CurrentPostFeed.NoOfComments = CurrentPostFeed.Comments.Count;
+            PassingParameters.Add("CurrentUser", CurrentContact);
+            PassingParameters.Add("SelectedPost", CurrentPostFeed);
+            PassingParameters.Add("SupportersAvatars", SelectedPostFeedSupportersAvatar);
+            await NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
 
             IsBusy = false;
         }
