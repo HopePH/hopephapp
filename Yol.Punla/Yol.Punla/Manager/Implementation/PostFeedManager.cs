@@ -143,6 +143,8 @@ namespace Yol.Punla.Managers
             }
         }
 
+        public Task<IEnumerable<string>> GetSupportersAvatars(int postFeedId) => _postFeedService.GetSupportersAvatars(postFeedId);
+
         public IEnumerable<PostFeed> LikeOrUnlikeSelfPost(int postFeedId, int userWhoLikedId)
         {
             try
@@ -344,5 +346,6 @@ namespace Yol.Punla.Managers
                 }
             }
         }
+
     }
 }

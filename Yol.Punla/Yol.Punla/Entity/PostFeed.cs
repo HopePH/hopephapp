@@ -53,6 +53,7 @@ namespace Yol.Punla.Entity
                 _poster = value;
                 this.AliasName = _poster.AliasName;
                 this.PosterProfilePhotoFB = _poster.FBLink;
+                this.PosterProfilePhotoFB = _poster.PhotoURL;
             }
         }
         

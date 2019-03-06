@@ -60,6 +60,7 @@ namespace Yol.Punla.ViewModels
         public ICommand DisplayOwnPostsCommand => new DelegateCommand(RedirectToPostFeedOwn);
         public ICommand LoadMoreCommand => new DelegateCommand(async () => await LoadMorePostListAsync());
         public ObservableCollection<Entity.PostFeed> PostsList { get; set; }
+        public IEnumerable<string> SelectedPostFeedSupportersAvatar { get; set; } = new List<string>();
         public Entity.Contact CurrentContact { get; set; }
         public Entity.PostFeed CurrentPostFeed { get; set; }
         public bool IsShowPostOptions { get; set; }
@@ -91,10 +92,8 @@ namespace Yol.Punla.ViewModels
 
         public async override void PreparingPageBindingsChild()
         {
-            if (PassingParameters != null && PassingParameters.ContainsKey("CurrentContact"))
-                CurrentContact = (Entity.Contact)PassingParameters["CurrentContact"];
-            else
-                CurrentContact = _contactManager.GetCurrentContactFromLocal();
+            if (PassingParameters != null && PassingParameters.ContainsKey(nameof(CurrentContact))) CurrentContact = (Entity.Contact)PassingParameters[nameof(CurrentContact)];
+            else CurrentContact = _contactManager.GetCurrentContactFromLocal();
 
             IsForceToGetToRest = false;
             var isForceToGetFromRestString = _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetFromRest");
@@ -165,7 +164,23 @@ namespace Yol.Punla.ViewModels
         //}
 
         #endregion
-        private void PreparePageBindingsResult(bool IsSuccess = true)
+        private async Task PreparePageBindingsAsync()
+        {
+            if (IsForceToGetToRest && SecondsDelay > 0) await Task.Delay(TimeSpan.FromSeconds(SecondsDelay));
+
+            try
+            {
+                var postList = await _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
+                PostsList = new ObservableCollection<Entity.PostFeed>(postList.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
+                PreparePageBindingsResult();
+            }
+            catch (Exception ex)
+            {
+                ProcessErrorReportingForHockeyApp(ex, true);
+            }
+        }
+
+        private void PreparePageBindingsResult()
         {
             if (IsInternetConnected)
                 MessagingCenter.Send(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) }, "LogonPostFeedToHub");
@@ -180,27 +195,7 @@ namespace Yol.Punla.ViewModels
         }
 
         #endregion
-
-        private async Task PreparePageBindingsAsync()
-        {
-            if (IsForceToGetToRest && SecondsDelay > 0)
-                await Task.Delay(TimeSpan.FromSeconds(SecondsDelay));
-
-            try
-            {
-                CreateNewHandledTokenSource("PostFeedPageViewModel.PreparePageBindingsAsync", 20);
-
-                var postList = await _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
-
-                PostsList = new ObservableCollection<Entity.PostFeed>(postList.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
-                PreparePageBindingsResult(TokenHandler.IsTokenSourceCompleted());
-            }
-            catch (Exception ex)
-            {
-                ProcessErrorReportingForHockeyApp(ex, true);
-            }
-        }
-
+        
         #region GET AND ADD COMMENTS
 
         private async void RedirectToPostFeedDetails(Entity.PostFeed SelectedPost)
@@ -210,7 +205,12 @@ namespace Yol.Punla.ViewModels
             IsBusy = true;
             CurrentPostFeed = SelectedPost;
 
-            if (ProcessInternetConnection(true)) await GetCommentsAsync();
+            if (ProcessInternetConnection(true))
+            {
+                SelectedPostFeedSupportersAvatar = await GetSupportersAvatarsAsync();
+                var comments = await GetCommentsAsync();
+                GetCommentsResult(comments);
+            }
         }
 
         #region OLD CODE
@@ -243,16 +243,31 @@ namespace Yol.Punla.ViewModels
         //}
 
         #endregion
-        private async Task GetCommentsAsync()
+        private async Task<IEnumerable<Entity.PostFeed>> GetCommentsAsync()
         {
             try
             {
                 var results =  await _postFeedManager.GetComments(CurrentPostFeed.PostFeedID, true, CurrentContact.RemoteId);
-                GetCommentsResult(results);
+                return results;
             }
             catch (Exception ex)
             {
                 ProcessErrorReportingForHockeyApp(ex, true);
+                return null;
+            }
+        }
+
+        private async Task<IEnumerable<string>> GetSupportersAvatarsAsync()
+        {
+            try
+            {
+                var results = await _postFeedManager.GetSupportersAvatars(CurrentPostFeed.PostFeedID);
+                return results;
+            }
+            catch (Exception ex)
+            {
+                ProcessErrorReportingForHockeyApp(ex, true);
+                return null;
             }
         }
 
@@ -262,11 +277,12 @@ namespace Yol.Punla.ViewModels
             {
                 //chito. reset if the navigation parameters has values. this happens because of background thread navigating back from other page
                 if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
-                    PassingParameters = new NavigationParameters();                
-
-                CurrentPostFeed.Comments = new ObservableCollection<Entity.PostFeed>(commentList.Where(p => p.PostFeedParentId == CurrentPostFeed.PostFeedID));
+                    PassingParameters = new NavigationParameters();            
+                CurrentPostFeed.Comments = new ObservableCollection<Entity.PostFeed>(commentList);
+                CurrentPostFeed.NoOfComments = CurrentPostFeed.Comments.Count;
                 PassingParameters.Add("CurrentUser", CurrentContact);
                 PassingParameters.Add("SelectedPost", CurrentPostFeed);
+                PassingParameters.Add("SupportersAvatars", SelectedPostFeedSupportersAvatar);
                 await NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
             }
 

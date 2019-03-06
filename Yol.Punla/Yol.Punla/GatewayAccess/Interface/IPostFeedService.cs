@@ -15,5 +15,6 @@ namespace Yol.Punla.GatewayAccess
         Task<HttpStatusCode> UnSupportPost(int postFeedId, int posterId);
         Task<IEnumerable<Entity.PostFeed>> GetPostFeedNotifications(int posterId);
         Task<int> SavePostToServer(Entity.PostFeed newPost);
+        Task<IEnumerable<string>> GetSupportersAvatars(int postFeedId);
     }
 }

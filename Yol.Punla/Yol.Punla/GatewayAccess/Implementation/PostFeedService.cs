@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
+using System.Collections.ObjectModel;
 
 namespace Yol.Punla.GatewayAccess
 {
@@ -32,8 +33,10 @@ namespace Yol.Punla.GatewayAccess
         public async Task<IEnumerable<Entity.PostFeed>> GetPostFeedComments(int postFeedId, int posterId)
         {
             await Task.Delay(1);
-            var postFeedComments = FakeData.FakePostFeeds.Posts.Where(p => p.PostFeedID == postFeedId && p.PosterId == posterId);
-            return postFeedComments;
+            //var postFeedComments = FakeData.FakePostFeeds.Posts.Where(p => p.PostFeedID == postFeedId && p.PosterId == posterId).FirstOrDefault();
+            //return postFeedComments?.Comments ?? new ObservableCollection<Entity.PostFeed>();
+            var postFeedComments = FakeData.FakePostFeeds.Posts.Where(p => p.PostFeedParentId == postFeedId);
+            return postFeedComments ?? new ObservableCollection<Entity.PostFeed>();
         }
 
         public async Task<HttpStatusCode> DeleteSelfPostFromRemote(int postId)
@@ -72,6 +75,19 @@ namespace Yol.Punla.GatewayAccess
         {
             await Task.Delay(1);
             return 0;
+        }
+
+        public async Task<IEnumerable<string>> GetSupportersAvatars(int postFeedId)
+        {
+            List<string> photoUrls = new List<string>();
+            await Task.Delay(1);
+            var ids = FakeData.FakePostFeeds.Posts.FirstOrDefault(p => p.PostFeedID == postFeedId)?.SupportersIdsList;
+            foreach (var item in ids)
+            {
+                var posterPhotoUrl = FakeData.FakeUsers.Contacts.FirstOrDefault(c => c.RemoteId == item).PhotoURL;
+                photoUrls.Add(posterPhotoUrl);
+            }
+            return photoUrls;
         }
     }
 }

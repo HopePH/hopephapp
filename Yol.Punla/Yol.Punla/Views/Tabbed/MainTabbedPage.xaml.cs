@@ -73,7 +73,7 @@ namespace Yol.Punla.Views
             var tabs = parameters.GetValues<string>("addTab");
 
             foreach (var name in tabs)
-                AddChild(name, parameters);
+                AddChild(name);
         }
 
         private static void OnSelectedTabIndexChanged(BindableObject bindable, object oldValue, object newValue)
@@ -84,12 +84,9 @@ namespace Yol.Punla.Views
             }
         }
 
-        private void AddChild(string name, INavigationParameters parameters)
+        private void AddChild(string name)
         {
             var page = AppUnityContainer.Instance.Resolve<object>(name) as Page;
-            if (ViewModelLocator.GetAutowireViewModel(page) == null) ViewModelLocator.SetAutowireViewModel(page, true);
-            (page as INavigatingAware)?.OnNavigatingTo(parameters);
-            (page?.BindingContext as INavigatingAware)?.OnNavigatingTo(parameters);
             Children.Add(page);
         }
     }

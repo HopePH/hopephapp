@@ -48,6 +48,7 @@ namespace Yol.Punla.ViewModels
         public ICommand DeleteCommentCommand => new DelegateCommand(DeleteSelfComment);
         public ICommand EditCommentCommand => new DelegateCommand(EditSelfComment);
         public ObservableCollection<Views.CommentItem> CommentItems { get; set; } = new ObservableCollection<Views.CommentItem>();
+        public IEnumerable<string> SupportersAvatars = new List<string>();
         public PostFeed CurrentPostFeed { get; set; }
         public Contact CurrentContact { get; set; }
         public PostFeed Comment { get; set; }
@@ -91,6 +92,9 @@ namespace Yol.Punla.ViewModels
 
                 CurrentContact = (Contact)PassingParameters["CurrentUser"];
             }
+
+            if(PassingParameters != null && PassingParameters.ContainsKey(nameof(SupportersAvatars)))
+                SupportersAvatars = PassingParameters[nameof(SupportersAvatars)] as List<string>;
 
             if (IsInternetConnected)
                 MessagingCenter.Send(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) }, "LogonPostFeedToHub");

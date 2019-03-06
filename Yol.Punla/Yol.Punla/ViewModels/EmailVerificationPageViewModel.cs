@@ -69,8 +69,7 @@ namespace Yol.Punla.ViewModels
                 if (EmailAddress == Constants.TESTEMAIL1) emailDuplicate = "";
 #endif
 
-                if (!IsVerification)
-                    _validator = new EmailVerificationPageValidator(VerificationCode, IsVerification, emailDuplicate);
+                if (!IsVerification) _validator = new EmailVerificationPageValidator(VerificationCode, IsVerification, emailDuplicate);
                 else
                 {
                     ConfirmVerificationCode = $"{VerificationCodeEntered1}{VerificationCodeEntered2}{VerificationCodeEntered3}{VerificationCodeEntered4}";
@@ -111,7 +110,7 @@ namespace Yol.Punla.ViewModels
                 {
                     EmailAdd = ComputeEmailIfTest(EmailAddress),
                     UserName = ComputeEmailIfTest(EmailAddress),
-                    GenderCode = "undisclosed",
+                    GenderCode = "Undisclosed",
                     FirstName = "Undisclosed",
                     LastName = "Name"
                 };

@@ -39,7 +39,7 @@ namespace Yol.Punla.ViewModels
         }
 
         public ICommand RetakePhotoCommand => new DelegateCommand(TakePhoto);
-        public ICommand SignupCommand => new DelegateCommand(SignUp);
+        public ICommand SignupCommand => new DelegateCommand(ValidationPriorSignupAsync);
         public ICommand ShowOrHideAvatarSelectionCommand => new DelegateCommand<object>(ShowHideAvatarSelection);
         public ICommand SetAvatarUrlCommand => new DelegateCommand<Avatar>(ChangeAvatar);
         public IEnumerable<Avatar> PredefinedAvatars { get; set; }
@@ -84,7 +84,7 @@ namespace Yol.Punla.ViewModels
 
         #region SIGN UP
 
-        public async void SignUp()
+        public async void ValidationPriorSignupAsync()
         {
             if (ProcessValidationErrors(_validator.Validate(this), true))
             {
@@ -175,7 +175,7 @@ namespace Yol.Punla.ViewModels
                 CurrentContact.UserName = CurrentContact.EmailAdd;
 
                 _contactManager.SaveNewDetails(CurrentContact);
-                PassingParameters.Add("CurrentContact", CurrentContact);
+                PassingParameters.Add(nameof(CurrentContact), CurrentContact);
 
                 string newPage = _keyValueCacheUtility.GetUserDefaultsKeyValue("NewPage");
                 _keyValueCacheUtility.RemoveKeyObject("NewPage");

@@ -370,46 +370,10 @@
                             </Label.FontSize>
                         </Label>
                         <StackLayout
+                            x:Name="SupportersAvatarList"
                             Padding="20,0,0,0"
                             Orientation="Horizontal"
-                            Spacing="10">
-                            <ffImage:CachedImage
-                                Aspect="AspectFit"
-                                BackgroundColor="Transparent"
-                                HeightRequest="50"
-                                Source="{Binding CurrentPostFeed.Poster.PhotoURL}">
-                                <ffImage:CachedImage.Transformations>
-                                    <ffImageTransformation:CircleTransformation />
-                                </ffImage:CachedImage.Transformations>
-                            </ffImage:CachedImage>
-                            <ffImage:CachedImage
-                                Aspect="AspectFit"
-                                BackgroundColor="Transparent"
-                                HeightRequest="50"
-                                Source="{Binding CurrentPostFeed.Poster.PhotoURL}">
-                                <ffImage:CachedImage.Transformations>
-                                    <ffImageTransformation:CircleTransformation />
-                                </ffImage:CachedImage.Transformations>
-                            </ffImage:CachedImage>
-                            <ffImage:CachedImage
-                                Aspect="AspectFit"
-                                BackgroundColor="Transparent"
-                                HeightRequest="50"
-                                Source="{Binding CurrentPostFeed.Poster.PhotoURL}">
-                                <ffImage:CachedImage.Transformations>
-                                    <ffImageTransformation:CircleTransformation />
-                                </ffImage:CachedImage.Transformations>
-                            </ffImage:CachedImage>
-                            <ffImage:CachedImage
-                                Aspect="AspectFit"
-                                BackgroundColor="Transparent"
-                                HeightRequest="50"
-                                Source="{Binding CurrentPostFeed.Poster.PhotoURL}">
-                                <ffImage:CachedImage.Transformations>
-                                    <ffImageTransformation:CircleTransformation />
-                                </ffImage:CachedImage.Transformations>
-                            </ffImage:CachedImage>
-                        </StackLayout>
+                            Spacing="10" />
                     </StackLayout>
                 </ContentView>
                 <!--#endregion-->

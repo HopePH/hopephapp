@@ -25,6 +25,7 @@ namespace Yol.Punla.Views
             try
             {
                 InitializeComponent();
+
                 AppUnityContainer.Instance.Resolve<Prism.Events.IEventAggregator>().GetEvent<UpdateCommentListEventModel>().Subscribe((comment) =>
                 {
                     CommentItems.Children.Add(new CommentItem { BindingContext = comment });
@@ -41,6 +42,35 @@ namespace Yol.Punla.Views
                 if (!(ex.Source == "FFImageLoading.Forms" || ex.Source == "FFImageLoading.Transformations"))
                     throw;
             }
+        }
+
+        private void SetupComments()
+        {
+            foreach (var item in viewModel.CurrentPostFeed.Comments)
+                CommentItems.Children.Add(new CommentItem { BindingContext = item });
+        }
+
+        public void SetupSupporters()
+        {
+            var photoUrls = viewModel.SupportersAvatars;
+            foreach (var item in photoUrls)
+            {
+                SupportersAvatarList.Children.Add(new FFImageLoading.Forms.CachedImage
+                {
+                    Aspect = Aspect.AspectFit,
+                    BackgroundColor = Color.Transparent,
+                    HeightRequest = 50,
+                    Source = item,
+                    Transformations = new List<FFImageLoading.Work.ITransformation> { new FFImageLoading.Transformations.CircleTransformation() }
+                });
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            SetupComments();
+            SetupSupporters();
         }
 
         private void MultiEntry_TextChanged(object sender, TextChangedEventArgs e)
@@ -65,23 +95,13 @@ namespace Yol.Punla.Views
             if (Device.RuntimePlatform == Device.Android)
                 multiEntry.Focus();
         }
+        
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
 
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    SetupComments();
-        //}
-
-        //protected override void OnBindingContextChanged()
-        //{
-        //    base.OnBindingContextChanged();
-
-        //    if (BindingContext != null)
-        //    {
-        //        viewModel = BindingContext as PostFeedDetailPageViewModel;
-        //        viewModel.PropertyChanged += ViewModel_PropertyChanged;
-        //    }
-        //}
+            if (BindingContext != null) viewModel = BindingContext as PostFeedDetailPageViewModel;
+        }
 
         //protected override void AttachedPageEvents()
         //{
