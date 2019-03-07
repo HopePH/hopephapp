@@ -159,8 +159,6 @@ namespace Yol.Punla.Managers
                 var postFeedLikeInLocal = _postFeedRepository.GetPostFeedLikeByContactId(userWhoLikedId, currentPost.PostFeedID);
 
                 var supporterFromLocal = _contactRepository.GetContactByRemoteId(userWhoLikedId);
-                if (supporterFromLocal == null)
-                    supporterFromLocal = new Contact();
 
                 if (postFeedLikeInLocal == null)
                 {
@@ -169,8 +167,8 @@ namespace Yol.Punla.Managers
                         ContactID = userWhoLikedId,
                         PostFeedID = currentPost.PostFeedID,
                         ContactPhotoURL = supporterFromLocal.PhotoURL ?? string.Empty,
-                        FirstName = supporterFromLocal.FirstName,
-                        LastName = supporterFromLocal.LastName
+                        FirstName = supporterFromLocal?.FirstName ?? string.Empty,
+                        LastName = supporterFromLocal?.LastName ?? string.Empty
                     });
                 }
                 else
