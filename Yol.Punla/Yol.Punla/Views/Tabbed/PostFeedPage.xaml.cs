@@ -42,19 +42,6 @@ namespace Yol.Punla.Views
                 viewModel = BindingContext as PostFeedPageViewModel;
         }
 
-        protected override void AttachedPageEvents()
-        {
-            base.AttachedPageEvents();
-            PostsList.ItemSelected += PostsList_ItemSelected;
-        }
-
-        protected override void DetachedPageEvents()
-        {
-            base.DetachedPageEvents();
-            Debug.WriteLine("HOPEPH Unsubscribing to MessengingCenter PostFeedMessage");
-            PostsList.ItemSelected -= PostsList_ItemSelected;
-        }
-
         protected override void SubcribeMessagingCenter()
         {
             //chito. if the current user is not the one who post feed then run this. research locking
@@ -147,11 +134,6 @@ namespace Yol.Punla.Views
                 return false;
 
             return true;
-        }
-
-        private void PostsList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            viewModel.CommentCommand.Execute(e.SelectedItem);
         }
     }
 }

@@ -196,7 +196,7 @@
             IsRefreshing="{Binding IsListRefreshing, Mode=TwoWay}"
             ItemsSource="{Binding PostsList}"
             RefreshCommand="{Binding RefreshListCommand}"
-            SelectedItem="{Binding CurrentPostFeed}"
+            SelectedItem="{Binding CurrentPostFeed, Mode=TwoWay}"
             SeparatorVisibility="None"
             VerticalOptions="FillAndExpand">
             <!--  TEMP  -->

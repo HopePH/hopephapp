@@ -35,7 +35,7 @@ namespace Yol.Punla.GatewayAccess
             await Task.Delay(1);
             //var postFeedComments = FakeData.FakePostFeeds.Posts.Where(p => p.PostFeedID == postFeedId && p.PosterId == posterId).FirstOrDefault();
             //return postFeedComments?.Comments ?? new ObservableCollection<Entity.PostFeed>();
-            var postFeedComments = FakeData.FakePostFeeds.Posts.Where(p => p.PostFeedParentId == postFeedId);
+            var postFeedComments = FakeData.FakePostFeeds.Posts.Where(p => p.PostFeedParentId == postFeedId && postFeedId > 0);
             return postFeedComments ?? new ObservableCollection<Entity.PostFeed>();
         }
 

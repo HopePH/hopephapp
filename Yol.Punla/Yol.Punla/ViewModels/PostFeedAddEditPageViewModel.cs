@@ -189,7 +189,7 @@ namespace Yol.Punla.ViewModels
                 CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(postFeed),
                 CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(contact)
             };
-            MessagingCenter.Send(postFeedMessage, "AddUpdatePostFeedToHub");
+            //MessagingCenter.Send(postFeedMessage, "AddUpdatePostFeedToHub");
 
             // 01-12-2018 12:06pm REYNZ: 
             // added this for FAKE only because navigating to PostFeedPage after editing 
@@ -198,8 +198,8 @@ namespace Yol.Punla.ViewModels
             AddUpdatePostFeedToHubFake();   
         }
 
-        [Conditional("FAKE")]
-        private void AddUpdatePostFeedToHubFake()
+        //[Conditional("FAKE")]
+        private async void AddUpdatePostFeedToHubFake()
         {
             if (ButtonText == AppStrings.PostText)
                 FakeData.FakePostFeeds.AddingNewPostFeedContent(NewPost);
@@ -208,9 +208,9 @@ namespace Yol.Punla.ViewModels
 
             IsBusy = false;
             PassingParameters.Add("IsForceToGetFromRest", true);
-            NavigateBackHelper(PassingParameters);
+            await NavigateBackHelper(PassingParameters);
         }
 
-        private void GoBack() => NavigateBackHelper();
+        private async void GoBack() => await NavigateBackHelper();
     }
 }

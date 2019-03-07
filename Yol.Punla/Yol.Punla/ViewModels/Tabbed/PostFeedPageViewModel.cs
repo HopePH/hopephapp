@@ -37,6 +37,17 @@ namespace Yol.Punla.ViewModels
         private readonly IContactManager _contactManager;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
 
+        private Entity.PostFeed _currentPostFeed;
+        public Entity.PostFeed CurrentPostFeed
+        {
+            get => _currentPostFeed;
+            set
+            {
+                SetProperty(ref _currentPostFeed, value);
+                if (value != null) CommentCommand.Execute(_currentPostFeed);
+            }
+        }
+
         private string _busyComments;
         public string BusyComments
         {
@@ -63,7 +74,6 @@ namespace Yol.Punla.ViewModels
         public IEnumerable<Entity.PostFeed> CommentList { get; set; } = new List<Entity.PostFeed>();
         public IEnumerable<string> SelectedPostFeedSupportersAvatar { get; set; } = new List<string>();
         public Entity.Contact CurrentContact { get; set; }
-        public Entity.PostFeed CurrentPostFeed { get; set; }
         public bool IsShowPostOptions { get; set; }
         public bool IsListRefreshing { get; set; }
         public bool IsForceToGetToRest { get; set; }
@@ -170,11 +180,12 @@ namespace Yol.Punla.ViewModels
             IsBusy = true;
             CurrentPostFeed = SelectedPost;
 
-            if (ProcessInternetConnection(true))
+            if (ProcessInternetConnection(true) && CurrentPostFeed != null)
             {
                 SelectedPostFeedSupportersAvatar = await GetSupportersAvatarsAsync();
                 CommentList = await GetCommentsAsync();
                 SeePostFeedDetails();
+                CurrentPostFeed = null;
             }
         }
         
