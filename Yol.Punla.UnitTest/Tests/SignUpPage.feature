@@ -26,7 +26,7 @@ Scenario Outline: Signing up a new user
 
 Scenario Outline: Signing up a new user but with incorrect verfication code
 	Given I am not authenticated
-		And I am on the page "LoginPage"
+		And I am on the page "LogonPage"
 	When I tap the signup link below
 	Then I am redirected to the page "EmailVerificationPage"
 	When I enter my email address "<emailAdd>" and tap continue button
@@ -35,5 +35,5 @@ Scenario Outline: Signing up a new user but with incorrect verfication code
 	Then I should see an error message "<errorMessage>" in verification page
 
 	Examples: 
-	| code1 | code2 | code3 | code4 | emailAdd         | errorMessage  |
-	| 1     | 2     | 1     | 3     | hynrbf@gmail.com | error message |
+	| code1 | code2 | code3 | code4 | emailAdd         | errorMessage							|
+	| 1     | 2     | 1     | 3     | hynrbf@gmail.com | Please enter a valid verification code |

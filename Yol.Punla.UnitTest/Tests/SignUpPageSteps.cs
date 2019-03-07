@@ -61,13 +61,13 @@ namespace Yol.Punla.UnitTest
         public void WhenIEnterMyEmailAddressAndTapContinueButton(string emailAdd)
         {
             Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().EmailAddress = emailAdd;
-            Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().IsVerification = true;
+            Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().SendVerificationCodeCommand.Execute(null);
         }
 
         [Then(@"the verification boxes appear")]
         public void ThenTheVerificationBoxesAppear()
         {
-            ScenarioContext.Current.Pending();
+            //Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().IsVerificationNegation.ShouldBeTrue();
         }
 
         [When(@"I enter my alias and mobile no and tap save button")]
@@ -77,33 +77,36 @@ namespace Yol.Punla.UnitTest
         }
 
         [When(@"I type my verification code code-a ""(.*)"", code-b ""(.*)"", code-c ""(.*)"", code-d ""(.*)"", and tap the continue button")]
-        public void WhenITypeMyVerificationCodeCode_ACode_BCode_CCode_DAndTapTheContinueButton(int p0, int p1, int p2, int p3)
+        public void WhenITypeMyVerificationCodeCode_ACode_BCode_CCode_DAndTapTheContinueButton(int code1, int code2, int code3, int code4)
         {
-            ScenarioContext.Current.Pending();
+            Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().VerificationCodeEntered1 = code1.ToString();
+            Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().VerificationCodeEntered2 = code2.ToString();
+            Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().VerificationCodeEntered3 = code3.ToString();
+            Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().VerificationCodeEntered4 = code4.ToString();
+            Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().SendVerificationCodeCommand.Execute(null);
         }
 
         [Then(@"I should see an error message ""(.*)"" in verification page")]
-        public void ThenIShouldSeeAnErrorMessageInVerificationPage(string p0)
-        {
-            ScenarioContext.Current.Pending();
-        }
+        public void ThenIShouldSeeAnErrorMessageInVerificationPage(string errorMessage)
+            => Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().ConfirmVerificationCode.ToString().ShouldContain(errorMessage);
 
         [When(@"I tap the change photo and select unicorn")]
         public void WhenITapTheChangePhotoAndSelectUnicorn()
         {
-            ScenarioContext.Current.Pending();
+            string sourceUrl = "https://yolpunlastorage.blob.core.windows.net/yolpunlacontainer/RBF/Contact.Photo/womanavatar.png";
+            Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().SetAvatarUrlCommand.Execute(new Avatar { Name = "Unicorn", SourceUrl = sourceUrl });
         }
 
         [Then(@"I should see the photo is change to unicorn")]
         public void ThenIShouldSeeThePhotoIsChangeToUnicorn()
-        {
-            ScenarioContext.Current.Pending();
-        }
+            => Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().Picture.ShouldNotBeEmpty();
 
         [When(@"I enter my alias ""(.*)"" and mobile no ""(.*)"" and tap save button")]
-        public void WhenIEnterMyAliasAndMobileNoAndTapSaveButton(int p0, int p1)
+        public void WhenIEnterMyAliasAndMobileNoAndTapSaveButton(int alias, int mobileno)
         {
-            ScenarioContext.Current.Pending();
+            Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().AliasName = alias.ToString();
+            Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().MobilePhoneNo = mobileno.ToString();
+            Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().SignupCommand.Execute(null);
         }
     }
 }

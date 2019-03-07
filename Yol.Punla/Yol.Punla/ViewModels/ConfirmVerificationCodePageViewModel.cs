@@ -30,7 +30,7 @@ namespace Yol.Punla.ViewModels
         private readonly INavigationService _navigationService;
         private readonly INavigationStackService _navigationStackService;
         private IValidator _validator;
-        private string emailAddress;
+        public string emailAddress;
 
         public ICommand SendVerificationCodeCommand => new DelegateCommand(async () => await SendVerificationCode());
         public ICommand NavigateBackCommand => new DelegateCommand(async () => await GoBack());

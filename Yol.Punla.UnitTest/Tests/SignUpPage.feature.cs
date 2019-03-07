@@ -170,7 +170,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 28
  testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 29
-  testRunner.And("I am on the page \"LoginPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.And("I am on the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 30
  testRunner.When("I tap the signup link below", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 31
@@ -197,11 +197,11 @@ this.ScenarioInitialize(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code3", "1")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:code4", "3")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:emailAdd", "hynrbf@gmail.com")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMessage", "error message")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMessage", "Please enter a valid verification code")]
         public virtual void SigningUpANewUserButWithIncorrectVerficationCode_1()
         {
 #line 27
-this.SigningUpANewUserButWithIncorrectVerficationCode("1", "2", "1", "3", "hynrbf@gmail.com", "error message", ((string[])(null)));
+this.SigningUpANewUserButWithIncorrectVerficationCode("1", "2", "1", "3", "hynrbf@gmail.com", "Please enter a valid verification code", ((string[])(null)));
 #line hidden
         }
     }
