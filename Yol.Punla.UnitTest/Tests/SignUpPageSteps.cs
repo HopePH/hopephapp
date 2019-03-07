@@ -70,12 +70,6 @@ namespace Yol.Punla.UnitTest
             //Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().IsVerificationNegation.ShouldBeTrue();
         }
 
-        [When(@"I enter my alias and mobile no and tap save button")]
-        public void WhenIEnterMyAliasAndMobileNoAndTapSaveButton()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
         [When(@"I type my verification code code-a ""(.*)"", code-b ""(.*)"", code-c ""(.*)"", code-d ""(.*)"", and tap the continue button")]
         public void WhenITypeMyVerificationCodeCode_ACode_BCode_CCode_DAndTapTheContinueButton(int code1, int code2, int code3, int code4)
         {
