@@ -57,7 +57,7 @@
             <x:String x:Key="fa-info-circle">&#xf05a;</x:String>
             <x:String x:Key="fa-bug">&#xf188;</x:String>
             <x:String x:Key="fa-pencil">&#xf040;</x:String>
-            <x:String x:Key="fa-pen">&#xf304;</x:String>
+            <x:String x:Key="fa-pen">&#xf303;</x:String>
             <x:String x:Key="fa-warning">&#xf071;</x:String>
             <x:String x:Key="fa-navicon">&#xf0c9;</x:String>
             <x:String x:Key="fa-close">&#xf00d;</x:String>

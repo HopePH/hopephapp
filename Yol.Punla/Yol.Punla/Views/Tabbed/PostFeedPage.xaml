@@ -54,6 +54,7 @@
         </ContentView>-->
         <!--#endregion-->
 
+
         <!--#region HEADER (WALL WITH PROFILE PICTURE)-->
         <StackLayout
             Grid.Row="1"
@@ -125,11 +126,9 @@
             Grid.Row="2"
             Margin="10,5,10,0"
             Padding="0"
-            BackgroundColor="White"
+            BackgroundColor="Transparent"
+            BorderColor="#22000000"
             CornerRadius="3">
-            <Frame.BorderColor>
-                <OnPlatform x:TypeArguments="Color" iOS="#22000000" />
-            </Frame.BorderColor>
             <Frame.HasShadow>
                 <OnPlatform
                     x:TypeArguments="x:Boolean"
@@ -138,7 +137,6 @@
             </Frame.HasShadow>
             <StackLayout
                 Padding="15,12"
-                BackgroundColor="Transparent"
                 Orientation="Horizontal"
                 Spacing="15">
                 <ffImage:CachedImage Source="{Binding CurrentContact.PhotoURL}" WidthRequest="35">
@@ -241,7 +239,7 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <!--  USER, DATE POSTED AND OTHER OPTIONS SECTION  -->
-                                <Grid Padding="20,0,30,0">
+                                <Grid Padding="20,0,0,0">
                                     <Grid Grid.Row="0" Padding="0,10,0,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
@@ -250,19 +248,19 @@
                                         </Grid.ColumnDefinitions>
                                         <ffImage:CachedImage
                                             Grid.Column="0"
+                                            Margin="0,0,0,0"
                                             Aspect="AspectFit"
                                             BackgroundColor="Transparent"
                                             HeightRequest="35"
                                             Source="{Binding Poster.PhotoURL}"
                                             WidthRequest="35">
-                                            <!--  Source = "{Binding PosterProfilePhoto}"  -->
                                             <ffImage:CachedImage.Transformations>
                                                 <ffImageTransformation:CircleTransformation />
                                             </ffImage:CachedImage.Transformations>
                                         </ffImage:CachedImage>
                                         <StackLayout
                                             Grid.Column="1"
-                                            BackgroundColor="Transparent"
+                                            Margin="0,0,30,0"
                                             Spacing="3">
                                             <StackLayout.Padding>
                                                 <OnPlatform
@@ -299,9 +297,8 @@
                                         <ContentView Grid.Column="2" WidthRequest="60">
                                             <ContentView IsVisible="{Binding IsSelfPosted, Mode=TwoWay}">
                                                 <Label
-                                                    Margin="0,0,-10,0"
                                                     FontSize="15"
-                                                    HorizontalTextAlignment="End"
+                                                    HorizontalTextAlignment="Center"
                                                     IsVisible="{Binding IsSelfPosted, Mode=TwoWay}"
                                                     Text="{StaticResource fa-ellipsis-h}"
                                                     TextColor="#FF9B9B9B"
@@ -324,7 +321,6 @@
                                 <Label
                                     Grid.Row="1"
                                     Margin="20,0,30,0"
-                                    BackgroundColor="Transparent"
                                     FontSize="12"
                                     LineHeight="1.2"
                                     Text="{Binding ContentText}"
@@ -591,99 +587,6 @@
         </ListView>
         <!--#endregion-->
 
-        <!--  POST OPTIONS MODAL  -->
-        <ContentView
-            Grid.RowSpan="4"
-            BackgroundColor="{StaticResource PopUpBackgroundColor}"
-            IsVisible="{Binding IsShowPostOptions}">
-            <ContentView.Padding>
-                <OnPlatform
-                    x:TypeArguments="Thickness"
-                    Android="40,160,40,320"
-                    iOS="30,160" />
-            </ContentView.Padding>
-            <Grid BackgroundColor="{StaticResource ColorWhite}" VerticalOptions="FillAndExpand">
-                <Grid.Padding>
-                    <OnPlatform
-                        x:TypeArguments="Thickness"
-                        Android="20"
-                        iOS="20" />
-                </Grid.Padding>
-                <Grid.RowSpacing>
-                    <OnPlatform
-                        x:TypeArguments="x:Double"
-                        Android="15"
-                        iOS="10" />
-                </Grid.RowSpacing>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="1" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <ContentView Grid.Row="0">
-                    <Label
-                        BackgroundColor="Transparent"
-                        FontFamily="FontAwesome"
-                        HorizontalOptions="FillAndExpand"
-                        HorizontalTextAlignment="End"
-                        Text="{StaticResource fa-close}"
-                        TextColor="#B2B2B2"
-                        VerticalOptions="FillAndExpand"
-                        VerticalTextAlignment="Center">
-                        <Label.Margin>
-                            <OnPlatform
-                                x:TypeArguments="Thickness"
-                                Android="0,0,0,20"
-                                iOS="0,0,0,30" />
-                        </Label.Margin>
-                    </Label>
-                    <ContentView.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding ClosePostOptionsCommand}" NumberOfTapsRequired="1" />
-                    </ContentView.GestureRecognizers>
-                </ContentView>
-                <StackLayout Grid.Row="1" Orientation="Horizontal">
-                    <Label
-                        HorizontalOptions="StartAndExpand"
-                        Text="Edit Current Post"
-                        TextColor="Black">
-                        <Label.Effects>
-                            <effects:LabelFontFamilyEffect />
-                        </Label.Effects>
-                    </Label>
-                    <Label
-                        HorizontalOptions="End"
-                        Style="{StaticResource IconFont}"
-                        Text="{StaticResource fa-pen}">
-                        <Label.Effects>
-                            <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" />
-                        </Label.Effects>
-                    </Label>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding EditPostCommand}" NumberOfTapsRequired="1" />
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-                <BoxView Grid.Row="2" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
-                <StackLayout Grid.Row="3" Orientation="Horizontal">
-                    <Label HorizontalOptions="StartAndExpand" Text="Delete Current Post">
-                        <Label.Effects>
-                            <effects:LabelFontFamilyEffect />
-                        </Label.Effects>
-                    </Label>
-                    <Label
-                        HorizontalOptions="End"
-                        Style="{StaticResource IconFont}"
-                        Text="{StaticResource fa-trash}">
-                        <Label.Effects>
-                            <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" />
-                        </Label.Effects>
-                    </Label>
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding DeletePostCommand}" NumberOfTapsRequired="1" />
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-            </Grid>
-        </ContentView>
         <!--  BUSY INDICATOR  -->
         <ContentView
             Grid.RowSpan="4"
@@ -746,5 +649,108 @@
                 </Label.FontSize>
             </Label>
         </StackLayout>
+
+        <!--  POST OPTIONS MODAL  -->
+        <ContentView
+            Grid.RowSpan="4"
+            BackgroundColor="{StaticResource PopUpBackgroundColor}"
+            IsVisible="{Binding IsShowPostOptions}">
+            <ContentView.Padding>
+                <OnPlatform
+                    x:TypeArguments="Thickness"
+                    Android="40,160,40,250"
+                    iOS="30,160" />
+            </ContentView.Padding>
+            <Frame
+                Padding="0"
+                CornerRadius="5"
+                HasShadow="False">
+                <Grid BackgroundColor="{StaticResource ColorWhite}" VerticalOptions="FillAndExpand">
+                    <Grid.Padding>
+                        <OnPlatform
+                            x:TypeArguments="Thickness"
+                            Android="20"
+                            iOS="20" />
+                    </Grid.Padding>
+                    <Grid.RowSpacing>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="15"
+                            iOS="10" />
+                    </Grid.RowSpacing>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ContentView Grid.Row="0">
+                        <Label
+                            BackgroundColor="Transparent"
+                            FontFamily="FontAwesome"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="End"
+                            Text="{StaticResource fa-close}"
+                            TextColor="#B2B2B2"
+                            VerticalOptions="FillAndExpand"
+                            VerticalTextAlignment="Center">
+                            <Label.Margin>
+                                <OnPlatform
+                                    x:TypeArguments="Thickness"
+                                    Android="0,0,0,20"
+                                    iOS="0,0,0,30" />
+                            </Label.Margin>
+                        </Label>
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClosePostOptionsCommand}" NumberOfTapsRequired="1" />
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+                    <StackLayout Grid.Row="1" Orientation="Horizontal">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Edit Current Post"
+                            TextColor="Black">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                        </Label>
+                        <Label
+                            FontSize="20"
+                            HorizontalOptions="End"
+                            Style="{StaticResource IconFont}"
+                            Text="{StaticResource fa-pen}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" />
+                            </Label.Effects>
+                        </Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditPostCommand}" NumberOfTapsRequired="1" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <BoxView Grid.Row="2" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
+                    <StackLayout Grid.Row="3" Orientation="Horizontal">
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            Text="Delete Current Post"
+                            TextColor="Black">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                        </Label>
+                        <Label
+                            HorizontalOptions="End"
+                            Style="{StaticResource IconFont}"
+                            Text="{StaticResource fa-trash}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" />
+                            </Label.Effects>
+                        </Label>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DeletePostCommand}" NumberOfTapsRequired="1" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+        </ContentView>
     </Grid>
 </local:AppViewBase>

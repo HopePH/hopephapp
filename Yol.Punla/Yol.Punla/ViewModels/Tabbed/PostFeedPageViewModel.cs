@@ -44,7 +44,7 @@ namespace Yol.Punla.ViewModels
             set
             {
                 SetProperty(ref _currentPostFeed, value);
-                if (value != null) CommentCommand.Execute(_currentPostFeed);
+                if (value != null && !IsShowPostOptions) CommentCommand.Execute(_currentPostFeed);
             }
         }
 
@@ -309,11 +309,15 @@ namespace Yol.Punla.ViewModels
 
         private void ShowPostOptions(Entity.PostFeed currentPostFeed)
         {
-            CurrentPostFeed = currentPostFeed;
             IsShowPostOptions = true;
+            CurrentPostFeed = currentPostFeed;
         }
 
-        private void ClosePostOptions() => IsShowPostOptions = false;
+        private void ClosePostOptions()
+        {
+            IsShowPostOptions = false;
+            CurrentPostFeed = null;
+        }
 
         private async Task RefreshPostListAsync()
         {
@@ -372,6 +376,7 @@ namespace Yol.Punla.ViewModels
 
         private async Task TakeCamera()
         {
+            if (IsShowPostOptions) return;
             //chito. when uploading a photo, compressed it so it becomes only 300KB or lower.
             await UserDialogs.Instance.AlertAsync("Attaching a photo is not supported by this version of the app. Please wait for our next version.", "Not Supported");
         }
