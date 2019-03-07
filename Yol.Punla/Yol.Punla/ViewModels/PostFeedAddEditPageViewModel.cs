@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using FluentValidation;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using PropertyChanged;
 using System;
@@ -30,6 +31,7 @@ namespace Yol.Punla.ViewModels
         private readonly INavigationStackService _navigationStackService;
         private readonly IPostFeedManager _postFeedManager;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
+        private readonly IEventAggregator _eventAggregator;
 
         public ICommand SaveOrEditPostCommand => new DelegateCommand(SaveOrEditPost);
         public ICommand NavigateBackCommand => new DelegateCommand(GoBack);
@@ -45,12 +47,14 @@ namespace Yol.Punla.ViewModels
             INavigationService navigationService,
             INavigationStackService navigationStackService,
             IPostFeedManager postFeedManager,
+            IEventAggregator eventAggregator,
             PostFeedAddEditPageValidators validator) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
             _postFeedManager = postFeedManager;
             _validator = validator;
+            _eventAggregator = eventAggregator;
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
             Title = AppStrings.TitleFeelings;
         }
@@ -71,9 +75,9 @@ namespace Yol.Punla.ViewModels
                 Content = "";
                 ButtonText = AppStrings.PostText;
             }
-
+            
             if (IsInternetConnected)
-                MessagingCenter.Send(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) }, "LogonPostFeedToHub");
+                _eventAggregator.GetEvent<LogonPostFeedToHubEventModel>().Publish(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) });    
             
             IsBusy = false;
         }
@@ -81,28 +85,22 @@ namespace Yol.Punla.ViewModels
         public override void OnAppearing()
         {
             base.OnAppearing();
-            MessagingCenter.Subscribe<HttpResponseMessage<Contract.PostFeedK>>(this, "AddUpdatePostFeedToHubResultCode", message =>
+            _eventAggregator.GetEvent<AddUpdatePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
             {
                 IsBusy = false;
 
                 if (message.HttpStatusCode == HttpStatusCode.OK)
                 {
-                    Device.BeginInvokeOnMainThread(() =>
+                    Device.BeginInvokeOnMainThread(async () =>
                     {
                         _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetFromRest", "true");
                         _keyValueCacheUtility.GetUserDefaultsKeyValue("SecondsDelay", "2");
-                        NavigateBackHelper(PassingParameters);
+                        await NavigateBackHelper(PassingParameters);
                     });
                 }
                 else
                     UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
             });
-        }
-
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            MessagingCenter.Unsubscribe<HttpResponseMessage<Contract.PostFeedK>>(this, "AddUpdatePostFeedToHubResultCode");
         }
 
         private void SaveOrEditPost()
@@ -189,7 +187,7 @@ namespace Yol.Punla.ViewModels
                 CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(postFeed),
                 CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(contact)
             };
-            //MessagingCenter.Send(postFeedMessage, "AddUpdatePostFeedToHub");
+            //_eventAggregator.GetEvent<AddUpdatePostFeedToHubEventModel>().Publish(postFeedMessage);
 
             // 01-12-2018 12:06pm REYNZ: 
             // added this for FAKE only because navigating to PostFeedPage after editing 

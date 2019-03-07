@@ -59,5 +59,10 @@ namespace Yol.Punla.Repository
         {
             
         }
+
+        public IEnumerable<PostFeedLike> GetPostFeedLikesByPostFeedId(int postFeedId)
+        {
+            return null;
+        }
     }
 }

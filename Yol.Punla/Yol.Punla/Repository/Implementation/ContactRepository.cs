@@ -9,7 +9,9 @@ namespace Yol.Punla.Repository
     {
         public ContactRepository(string databasePath, bool storeDateTimeAsTicks = true) : base(databasePath, storeDateTimeAsTicks) { }
 
-        public Contact GetUserProfileFromLocal(string emailAdd) => this.Query<Entity.Contact>(string.Format("select * from Contact order by Id")).FirstOrDefault();
+        public Contact GetUserProfileFromLocal(string emailAdd) => this.Query<Contact>(string.Format("select * from Contact order by Id")).FirstOrDefault();
+
+        public Contact GetContactByRemoteId(int id) => Query<Contact>($"select * from Contact where RemoteId={id}").FirstOrDefault();
 
         public void DeleteTableByType<T>() => base.DeleteAll<T>();
 

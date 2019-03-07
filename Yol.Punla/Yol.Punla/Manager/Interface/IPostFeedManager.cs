@@ -10,6 +10,7 @@ namespace Yol.Punla.Managers
         Task<IEnumerable<Entity.PostFeed>> GetAllPostsWithSpeed(int posterId, int postFeedBaseId, bool isFirstLoad, bool isForcedGetToTheRest = false, bool isForcedGetToLocal = false);
         Task<IEnumerable<Entity.PostFeed>> GetOwnPosts(int posterId = 0);
         Task<IEnumerable<Entity.PostFeed>> GetComments(int postFeedId, bool isForcedGetToTheRest = false, int posterId = 0);
+        IEnumerable<Entity.PostFeedLike> GetPostFeedLike(int postFeedId);
         Task<IEnumerable<string>> GetSupportersAvatars(int postFeedId);
         Task<int> SaveNewPost(Entity.PostFeed newPost);
         Task<HttpStatusCode> DeleteSelfPost(Entity.PostFeed postToDelete);
@@ -19,6 +20,7 @@ namespace Yol.Punla.Managers
         Entity.PostFeed GetPostFeed(int postFeedId);
 
         void SaveNewPostToLocal(Entity.PostFeed newPost);
-        void DeletePostInLocal(Entity.PostFeed PostFeed);        
+        void DeletePostInLocal(Entity.PostFeed PostFeed);
+        void SaveAllPostsToLocal(IEnumerable<Entity.PostFeed> posts);
     }
 }

@@ -24,8 +24,8 @@ namespace Yol.Punla.GatewayAccess
 
         public Task<int> PostReceiver(Contact receiver)
         {
-            //chito. let's assume that the newly inserted contact has an ID of 1000
-            return Task.FromResult<int>(1000);
+            //chito. let's assume that the newly inserted contact has an ID of 1234
+            return Task.FromResult<int>(1234);
         }
 
         public Task<string> PostVerificationCode(string emailAddress)

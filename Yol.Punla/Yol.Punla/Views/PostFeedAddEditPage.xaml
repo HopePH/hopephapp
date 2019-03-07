@@ -27,7 +27,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <template:PostNavigationBar Grid.Row="0" Grid.ColumnSpan="2" />
+        <!--<template:PostNavigationBar Grid.Row="0" Grid.ColumnSpan="2" />-->
 
         <ffImage:CachedImage
             Grid.Row="1"

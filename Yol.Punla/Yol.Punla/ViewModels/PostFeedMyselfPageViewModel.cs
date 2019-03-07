@@ -1,4 +1,5 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using PropertyChanged;
 using System;
@@ -30,6 +31,7 @@ namespace Yol.Punla.ViewModels
         private readonly IContactManager _contactManager;
         private readonly IPostFeedManager _postFeedManager;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
+        private readonly IEventAggregator _eventAggregator;
 
         private string _busyComments;
         public string BusyComments
@@ -55,6 +57,7 @@ namespace Yol.Punla.ViewModels
             INavigationService navigationService, 
             INavigationStackService navigationStackService,
             IContactManager contactManager,
+            IEventAggregator eventAggregator,
             IPostFeedManager postFeedManager) : base(navigationService)
         {
             _navigationService = navigationService;
@@ -62,6 +65,7 @@ namespace Yol.Punla.ViewModels
             _contactManager = contactManager;
             _postFeedManager = postFeedManager;
             _busyComments = AppStrings.LoadingOwnData;
+            _eventAggregator = eventAggregator;
             Title = AppStrings.TitleThoughts;
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
         }
@@ -230,7 +234,7 @@ namespace Yol.Punla.ViewModels
                     CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(CurrentPostFeed),
                     CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact)
                 };
-                MessagingCenter.Send(postFeedMessage, "LikeOrUnlikePostFeedToHub");
+                _eventAggregator.GetEvent<LikeOrUnlikePostFeedToHubEventModel>().Publish(postFeedMessage);
                 var wholeList = _postFeedManager.LikeOrUnlikeSelfPost(CurrentPostFeed.PostFeedID, CurrentContact.RemoteId);
                 var ownPostList = wholeList.Where(x => x.PosterId == CurrentContact.RemoteId);
                 PostsList = new ObservableCollection<Entity.PostFeed>(ownPostList);

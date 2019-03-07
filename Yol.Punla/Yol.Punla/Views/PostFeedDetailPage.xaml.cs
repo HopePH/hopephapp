@@ -15,7 +15,7 @@ namespace Yol.Punla.Views
 {
     [ModuleView]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PostFeedDetailPage : Xamarin.Forms.ContentPage//AppViewBase
+    public partial class PostFeedDetailPage : ContentPage//AppViewBase
     {
         private PostFeedDetailPageViewModel viewModel;
         private List<CommentsIndexValue> commentsIndexValueList = null;

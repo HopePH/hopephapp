@@ -8,13 +8,11 @@ using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Unity;
-using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
 using Yol.Punla.Localized;
@@ -36,6 +34,7 @@ namespace Yol.Punla.ViewModels
         private readonly IPostFeedManager _postFeedManager;
         private readonly IContactManager _contactManager;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
+        private readonly IEventAggregator _eventAggregator;
 
         private Entity.PostFeed _currentPostFeed;
         public Entity.PostFeed CurrentPostFeed
@@ -96,6 +95,7 @@ namespace Yol.Punla.ViewModels
             _postFeedManager = postFeedManager;
             _contactManager = contactManager;
             _busyComments = AppStrings.LoadingData;
+            _eventAggregator = eventAggregator;
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
         }
 
@@ -148,6 +148,7 @@ namespace Yol.Punla.ViewModels
             try
             {
                 var postList = await _postFeedManager.GetAllPostsWithSpeed(CurrentContact.RemoteId, 0, true, IsForceToGetToRest, IsForceToGetToLocal);
+                SavePostsToLocal(postList);
                 PostsList = new ObservableCollection<Entity.PostFeed>(postList.Where(p => p.IsDelete == false && p.PostFeedLevel != 1));
                 PreparePageBindingsResult();
             }
@@ -157,10 +158,15 @@ namespace Yol.Punla.ViewModels
             }
         }
 
+        private void SavePostsToLocal(IEnumerable<Entity.PostFeed> posts)
+        {
+            _postFeedManager.SaveAllPostsToLocal(posts.ToList());
+        }
+
         private void PreparePageBindingsResult()
         {
-            if (IsInternetConnected)
-                MessagingCenter.Send(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) }, "LogonPostFeedToHub");
+            if(IsInternetConnected)
+                _eventAggregator.GetEvent<LogonPostFeedToHubEventModel>().Publish(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) });
 
             if (!AppUnityContainer.Instance.Resolve<Advertisements>().HasShownPullDownInstructionAlready)
             {
@@ -182,7 +188,7 @@ namespace Yol.Punla.ViewModels
 
             if (ProcessInternetConnection(true) && CurrentPostFeed != null)
             {
-                SelectedPostFeedSupportersAvatar = await GetSupportersAvatarsAsync();
+                SelectedPostFeedSupportersAvatar = GetSupportersAvatarsFromLocal();
                 CommentList = await GetCommentsAsync();
                 SeePostFeedDetails();
                 CurrentPostFeed = null;
@@ -217,19 +223,45 @@ namespace Yol.Punla.ViewModels
             }
         }
 
+        private IEnumerable<string> GetSupportersAvatarsFromLocal()
+        {
+            try
+            {
+                var listOfAvatars = new List<string>();
+                var postFeedFromLocal = _postFeedManager.GetPostFeed(CurrentPostFeed.PostFeedID);
+                var postFeedLikes = _postFeedManager.GetPostFeedLike(postFeedFromLocal.PostFeedID).ToList();
+                return postFeedLikes.Select(p => p.ContactPhotoURL);
+            }
+            catch (Exception ex)
+            {
+                ProcessErrorReportingForHockeyApp(ex, true);
+                return null;
+            }
+        }
+
         private async void SeePostFeedDetails()
         {
-            //chito. reset if the navigation parameters has values. this happens because of background thread navigating back from other page
-            if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
-                PassingParameters = new NavigationParameters();            
-            CurrentPostFeed.Comments = new ObservableCollection<Entity.PostFeed>(CommentList);
-            CurrentPostFeed.NoOfComments = CurrentPostFeed.Comments.Count;
-            PassingParameters.Add("CurrentUser", CurrentContact);
-            PassingParameters.Add("SelectedPost", CurrentPostFeed);
-            PassingParameters.Add("SupportersAvatars", SelectedPostFeedSupportersAvatar);
-            await NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
+            try
+            {
+                if (CurrentPostFeed != null)
+                {
+                    //chito. reset if the navigation parameters has values. this happens because of background thread navigating back from other page
+                    if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
+                        PassingParameters = new NavigationParameters();
+                    CurrentPostFeed.Comments = new ObservableCollection<Entity.PostFeed>(CommentList);
+                    CurrentPostFeed.NoOfComments = CurrentPostFeed.Comments.Count;
+                    PassingParameters.Add("CurrentUser", CurrentContact);
+                    PassingParameters.Add("SelectedPost", CurrentPostFeed);
+                    PassingParameters.Add("SupportersAvatars", SelectedPostFeedSupportersAvatar.ToList());
+                    await NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
+                }
 
-            IsBusy = false;
+                IsBusy = false;
+            }
+            catch (Exception e)
+            {
+                var ex = e;
+            }
         }
 
         #endregion
@@ -237,20 +269,14 @@ namespace Yol.Punla.ViewModels
         public override void OnAppearing()
         {
             base.OnAppearing();
-
-            MessagingCenter.Subscribe<HttpResponseMessage<int>>(this, "DeletePostFeedToHubResultCode", message =>
+            
+            _eventAggregator.GetEvent<DeletePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
             {
                 IsBusy = false;
 
                 if (!(message.HttpStatusCode == HttpStatusCode.OK))
                     UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
             });
-        }
-
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            MessagingCenter.Unsubscribe<HttpResponseMessage<int>>(this, "DeletePostFeedToHubResultCode");
         }
 
         public void SavePostFeedToLocal(Entity.PostFeed newPost)
@@ -342,17 +368,18 @@ namespace Yol.Punla.ViewModels
 
         private void SupportPost(Entity.PostFeed SelectedPost)
         {
-            CurrentPostFeed = SelectedPost;
-
-            if (IsInternetConnected && !IsNavigatingToDetailsPage)
+            if (IsInternetConnected)
             {
                 PostFeedMessage postFeedMessage = new PostFeedMessage
                 {
-                    CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(CurrentPostFeed),
+                    CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(SelectedPost),
                     CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact)
                 };
-                MessagingCenter.Send(postFeedMessage, "LikeOrUnlikePostFeedToHub");
-                PostsList = new ObservableCollection<Entity.PostFeed>(_postFeedManager.LikeOrUnlikeSelfPost(CurrentPostFeed.PostFeedID, CurrentContact.RemoteId));
+
+                _eventAggregator.GetEvent<LikeOrUnlikePostFeedToHubEventModel>().Publish(postFeedMessage);
+
+                var result = _postFeedManager.LikeOrUnlikeSelfPost(SelectedPost.PostFeedID, CurrentContact.RemoteId);
+                PostsList = new ObservableCollection<Entity.PostFeed>(result);
             }
         }
 
@@ -369,8 +396,8 @@ namespace Yol.Punla.ViewModels
                 CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(CurrentPostFeed),
                 CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact)
             };
-
-            MessagingCenter.Send(postFeedMessage, "DeletePostFeedToHub");
+            
+            _eventAggregator.GetEvent<DeletePostFeedToHubEventModel>().Publish(postFeedMessage);
             IsDeletePostFeedRequestSentToHub = true;
         }
 

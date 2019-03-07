@@ -149,19 +149,34 @@ namespace Yol.Punla.Managers
         {
             try
             {
+
                 var currentPost = _postFeedRepository.GetPostFeedById(postFeedId);
                 currentPost.IsSelfSupported = !currentPost.IsSelfSupported;
                 currentPost.NoOfSupports = (currentPost.IsSelfSupported) ? currentPost.NoOfSupports + 1 : currentPost.NoOfSupports - 1;
+
                 _postFeedRepository.UpdateItem(currentPost);
 
                 var postFeedLikeInLocal = _postFeedRepository.GetPostFeedLikeByContactId(userWhoLikedId, currentPost.PostFeedID);
 
+                var supporterFromLocal = _contactRepository.GetContactByRemoteId(userWhoLikedId);
+                if (supporterFromLocal == null)
+                    supporterFromLocal = new Contact();
+
                 if (postFeedLikeInLocal == null)
-                    _postFeedRepository.UpdateItem(new PostFeedLike { ContactID = userWhoLikedId, PostFeedID = currentPost.PostFeedID });
+                {
+                    _postFeedRepository.UpdateItem(new PostFeedLike
+                    {
+                        ContactID = userWhoLikedId,
+                        PostFeedID = currentPost.PostFeedID,
+                        ContactPhotoURL = supporterFromLocal.PhotoURL ?? string.Empty,
+                        FirstName = supporterFromLocal.FirstName,
+                        LastName = supporterFromLocal.LastName
+                    });
+                }
                 else
                     _postFeedRepository.DeleteTable(postFeedLikeInLocal);
 
-                _cachedPostFeeds = _postFeedRepository.GetAllPostsFromLocal();
+                _cachedPostFeeds = _postFeedRepository.GetAllPostsFromLocal().Where(p => p.PostFeedLevel < 1);
                 return _cachedPostFeeds;
             }
             catch (SQLite.SQLiteException)
@@ -245,6 +260,8 @@ namespace Yol.Punla.Managers
                 return _updatedPostFeedFromLocal;
             }           
         }
+
+        public IEnumerable<PostFeedLike> GetPostFeedLike(int postFeedId) => _postFeedRepository.GetPostFeedLikesByPostFeedId(postFeedId);
 
         public PostFeed GetPostFeed(int postFeedId) => _postFeedRepository.GetPostFeedById(postFeedId);
 
@@ -347,5 +364,30 @@ namespace Yol.Punla.Managers
             }
         }
 
+        public void SaveAllPostsToLocal(IEnumerable<PostFeed> posts)
+        {
+            // save posts
+            foreach (var post in posts)
+            {
+                _postFeedRepository.UpdateItem(post);
+                // save post feed supports
+                post.SupportersIdsList = post.SupportersIdsList ?? new List<int>();
+                foreach (var supporterId in post.SupportersIdsList)
+                {
+                    var supporter = _contactRepository.GetContactByRemoteId(supporterId);
+                    var support = new PostFeedLike
+                    {
+                        ContactID = supporterId,
+                        PostFeedID = post.PostFeedID,
+                        FirstName = supporter.FirstName,
+                        LastName = supporter.LastName,
+                        AliasName = supporter.AliasName,
+                        ContactPhotoURL = supporter.PhotoURL ?? string.Empty
+                    };
+
+                    _postFeedRepository.UpdateItem(support);
+                }
+            }
+        }
     }
 }

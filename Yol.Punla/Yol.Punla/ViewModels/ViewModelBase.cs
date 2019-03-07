@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using FluentValidation.Results;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
@@ -327,7 +328,7 @@ namespace Yol.Punla.ViewModels
         private void DisplaySideBar()
         {
             AppMasterPageMessage log = new AppMasterPageMessage() { IsOpen = true };
-            MessagingCenter.Send<AppMasterPageMessage>(log, "MasterDetailPageToggleMessage");
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<MasterDetailPageToggleMessageEventModel>().Publish(log);
         }
 
         #endregion

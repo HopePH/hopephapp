@@ -93,11 +93,11 @@ namespace Yol.Punla.ViewModels
                 CurrentContact = (Contact)PassingParameters["CurrentUser"];
             }
 
-            if(PassingParameters != null && PassingParameters.ContainsKey(nameof(SupportersAvatars)))
-                SupportersAvatars = PassingParameters[nameof(SupportersAvatars)] as List<string>;
+            if(PassingParameters != null && PassingParameters.ContainsKey("SupportersAvatars"))
+                SupportersAvatars = PassingParameters["SupportersAvatars"] as List<string>;
 
             if (IsInternetConnected)
-                MessagingCenter.Send(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) }, "LogonPostFeedToHub");
+                _eventAggregator.GetEvent<LogonPostFeedToHubEventModel>().Publish(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) });
 
             IsWritePostEnabled = true;
             IsBusy = false;
@@ -107,8 +107,7 @@ namespace Yol.Punla.ViewModels
         public override void OnAppearing()
         {
             base.OnAppearing();
-
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs", message =>
+            _eventAggregator.GetEvent<LikeOrUnLikeAPostFeedSubsEventModel>().Subscribe((message) =>
             {
                 try
                 {
@@ -129,8 +128,8 @@ namespace Yol.Punla.ViewModels
                     ProcessErrorReportingForHockeyApp(ex);
                 }
             });
-
-            MessagingCenter.Subscribe<HttpResponseMessage<Contract.PostFeedK>>(this, "AddUpdatePostFeedToHubResultCode", message =>
+            
+            _eventAggregator.GetEvent<AddUpdatePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
             {
                 IsBusy = false;
 
@@ -147,8 +146,8 @@ namespace Yol.Punla.ViewModels
                 else
                     UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
             });
-
-            MessagingCenter.Subscribe<HttpResponseMessage<int>>(this, "DeletePostFeedToHubResultCode", message =>
+            
+            _eventAggregator.GetEvent<DeletePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
             {
                 DeletingMessage = "";
                 IsShowPostOptions = false;
@@ -156,14 +155,6 @@ namespace Yol.Punla.ViewModels
                 if (message.HttpStatusCode != HttpStatusCode.OK)
                     UserDialogs.Instance.Alert(AppStrings.DeletingPostNotSuccessful, "Error", "Ok");
             });
-        }
-
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing(); 
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs");
-            MessagingCenter.Unsubscribe<HttpResponseMessage<Contract.PostFeedK>>(this, "AddUpdatePostFeedToHubResultCode");
-            MessagingCenter.Unsubscribe<HttpResponseMessage<int>>(this, "DeletePostFeedToHubResultCode");
         }
 
         public void SendErrorToHockeyApp(Exception ex)
@@ -266,7 +257,7 @@ namespace Yol.Punla.ViewModels
                 CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(postFeed),
                 CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(contact)
             };
-            MessagingCenter.Send(postFeedMessage, "AddUpdatePostFeedToHub");
+            _eventAggregator.GetEvent<AddUpdatePostFeedToHubEventModel>().Publish(postFeedMessage);
 
             //chito. added this for FAKE only because navigating to PostFeedPage after editing a post is called only after subscribing to messaging center coming from Native.
             AddUpdatePostFeedToHubFake();
@@ -299,8 +290,7 @@ namespace Yol.Punla.ViewModels
                     CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(updatedSelectedPost),
                     CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact)
                 };
-
-                MessagingCenter.Send(postFeedMessage, "LikeOrUnlikePostFeedToHub");
+                _eventAggregator.GetEvent<LikeOrUnlikePostFeedToHubEventModel>().Publish(postFeedMessage);
                 SelectedPost.IsSelfSupported = !SelectedPost.IsSelfSupported;
                 var updatePostFeed = _postFeedManager.UpdatePostFeedAndPostFeedLikeToLocal(updatedSelectedPost, CurrentContact);
 
@@ -337,7 +327,7 @@ namespace Yol.Punla.ViewModels
             };
 
             DeletingMessage = AppStrings.DeletingComment;
-            MessagingCenter.Send(postFeedMessage, "DeletePostFeedToHub");
+            _eventAggregator.GetEvent<DeletePostFeedToHubEventModel>().Publish(postFeedMessage);
             DeletePostFeedFromLocal(Comment);
         }
 
