@@ -61,7 +61,24 @@ namespace Yol.Punla.ViewModels
 
         public override void PreparingPageBindings()
         {
-            if(PassingParameters != null && PassingParameters.ContainsKey("CurrentContact"))
+            _eventAggregator.GetEvent<AddUpdatePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
+            {
+                IsBusy = false;
+
+                if (message.HttpStatusCode == HttpStatusCode.OK)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetFromRest", "true");
+                        _keyValueCacheUtility.GetUserDefaultsKeyValue("SecondsDelay", "2");
+                        await NavigateBackHelper(PassingParameters);
+                    });
+                }
+                else
+                    UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
+            });
+
+            if (PassingParameters != null && PassingParameters.ContainsKey("CurrentContact"))
                 CurrentContact = (Contact)PassingParameters["CurrentContact"];
 
             if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
@@ -80,27 +97,6 @@ namespace Yol.Punla.ViewModels
                 _eventAggregator.GetEvent<LogonPostFeedToHubEventModel>().Publish(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) });    
             
             IsBusy = false;
-        }
-
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-            _eventAggregator.GetEvent<AddUpdatePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
-            {
-                IsBusy = false;
-
-                if (message.HttpStatusCode == HttpStatusCode.OK)
-                {
-                    Device.BeginInvokeOnMainThread(async () =>
-                    {
-                        _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetFromRest", "true");
-                        _keyValueCacheUtility.GetUserDefaultsKeyValue("SecondsDelay", "2");
-                        await NavigateBackHelper(PassingParameters);
-                    });
-                }
-                else
-                    UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
-            });
         }
 
         private void SaveOrEditPost()

@@ -115,11 +115,11 @@ namespace Yol.Punla.Utility
         public static async Task<HttpStatusCode> LikeOrUnlikePost(bool isSupport, int postFeedId, int contactId)
         {
             Debug.WriteLine("HOPEPH Supporting a post feed.");
-            var jsonContent = new StringContent("", Encoding.UTF8, "application/json");
-            string endPoint = AbsolutePath + "PostFeed/LikeOrUnLikeAPost?postFeedId={0}&contactId={1}";
+            var jsonContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+            string endPoint = AbsolutePath + $"PostFeed/LikeOrUnLikeAPost?postFeedId={postFeedId}&contactId={contactId}";
 
             HttpClient httpClient = new HttpClient();
-            var result = await httpClient.PostAsync(string.Format(endPoint, postFeedId, contactId), jsonContent);
+            var result = await httpClient.PostAsync(endPoint, jsonContent);
             return result.StatusCode;
         }
 
@@ -137,7 +137,7 @@ namespace Yol.Punla.Utility
         {
             Debug.WriteLine("HOPEPH Posting new post feed.");
             var jsonContent = new StringContent("", Encoding.UTF8, "application/json");
-            string endPoint = string.Format(AbsolutePath + "PostFeed/DeletePostFeed?postFeedId={0}&companyName=Hopeph", postId);
+            string endPoint = AbsolutePath + $"PostFeed/DeletePostFeed?postFeedId={postId}&companyName=Hopeph";
 
             HttpClient httpClient = new HttpClient();
             var result = await httpClient.PostAsync(endPoint, jsonContent);

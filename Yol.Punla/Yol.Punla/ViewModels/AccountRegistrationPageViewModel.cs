@@ -110,62 +110,6 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        #region OLD CODE
-        //[Conditional("DEBUG"), Conditional("TRACE")]
-        //public async void SignUpAsync()
-        //{
-        //    try
-        //    {
-        //        CreateNewHandledTokenSource("SignUpAsync");
-
-        //        var resultId = await Task.Run<int>(() =>
-        //        {
-        //            Debug.WriteLine("HOPEPH Saving details of contact.");
-        //            return _contactManager.SaveDetailsToRemoteDB(CurrentContact);
-        //        }, TokenHandler.Token);
-
-        //        await SignUpResult(resultId, TokenHandler.IsTokenSourceCompleted());
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ProcessErrorReportingForHockeyApp(ex, true);
-        //    }
-        //}
-
-        //[Conditional("FAKE")]
-        //public void SignUpAsyncFake()
-        //{
-        //    var result = _contactManager.SaveDetailsToRemoteDB(CurrentContact).Result;
-        //    SignUpResult(result).Wait();
-        //} 
-
-        //public async Task SignUpResult(int resultId, bool IsSuccess = true)
-        //{
-        //    if (IsSuccess && resultId > 0)
-        //    {
-        //        CurrentContact.Id = resultId;
-        //        CurrentContact.RemoteId = resultId;
-        //        CurrentContact.UserName = CurrentContact.EmailAdd;
-
-        //        _contactManager.SaveNewDetails(CurrentContact);
-        //        PassingParameters.Add("CurrentContact", CurrentContact);
-
-        //        string newPage = _keyValueCacheUtility.GetUserDefaultsKeyValue("NewPage");
-        //        _keyValueCacheUtility.RemoveKeyObject("NewPage");
-
-        //        if (string.IsNullOrEmpty(newPage)) await NavigateToRootPage(nameof(Views.MainTabbedPage) + AddPagesInTab());
-        //        else await ChangeRootAndNavigateToPageHelper(newPage, PassingParameters);
-
-        //        _keyValueCacheUtility.GetUserDefaultsKeyValue("WasLogin", "true");
-        //        _keyValueCacheUtility.GetUserDefaultsKeyValue("WasSignUpCompleted", "true");
-        //        _keyValueCacheUtility.GetUserDefaultsKeyValue("CurrentContactId", resultId.ToString());
-        //    }
-
-        //    IsBusy = false;
-        //}
-
-        #endregion
-
         public async Task SignUpResult(int resultId)
         {
             if (resultId > 0)

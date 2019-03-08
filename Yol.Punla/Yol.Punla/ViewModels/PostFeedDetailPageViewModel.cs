@@ -43,7 +43,7 @@ namespace Yol.Punla.ViewModels
         public ICommand ShowPostOptionsCommand => new DelegateCommand<Entity.PostFeed>(ShowPostOptions);
         public ICommand NavigateBackCommand => new DelegateCommand(GoBack);
         public ICommand WriteCommentCommand => new DelegateCommand(WriteComment);
-        public ICommand SupportCommand => new DelegateCommand<Entity.PostFeed>(SupportPost);
+        public ICommand SupportCommand => new DelegateCommand(SupportPost);
         public ICommand CameraCommand => new DelegateCommand(async () => await TakeCamera());
         public ICommand DeleteCommentCommand => new DelegateCommand(DeleteSelfComment);
         public ICommand EditCommentCommand => new DelegateCommand(EditSelfComment);
@@ -84,29 +84,6 @@ namespace Yol.Punla.ViewModels
 
         public override void PreparingPageBindings()
         {
-            if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
-            {
-                CurrentPostFeed = (PostFeed)PassingParameters["SelectedPost"];
-                if (!string.IsNullOrEmpty(CurrentPostFeed.ContentURL))
-                    HasPostedImage = true;
-
-                CurrentContact = (Contact)PassingParameters["CurrentUser"];
-            }
-
-            if(PassingParameters != null && PassingParameters.ContainsKey("SupportersAvatars"))
-                SupportersAvatars = PassingParameters["SupportersAvatars"] as List<string>;
-
-            if (IsInternetConnected)
-                _eventAggregator.GetEvent<LogonPostFeedToHubEventModel>().Publish(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) });
-
-            IsWritePostEnabled = true;
-            IsBusy = false;
-            DeletingMessage = "";
-        }
-
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
             _eventAggregator.GetEvent<LikeOrUnLikeAPostFeedSubsEventModel>().Subscribe((message) =>
             {
                 try
@@ -128,7 +105,7 @@ namespace Yol.Punla.ViewModels
                     ProcessErrorReportingForHockeyApp(ex);
                 }
             });
-            
+
             _eventAggregator.GetEvent<AddUpdatePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
             {
                 IsBusy = false;
@@ -146,7 +123,7 @@ namespace Yol.Punla.ViewModels
                 else
                     UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
             });
-            
+
             _eventAggregator.GetEvent<DeletePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
             {
                 DeletingMessage = "";
@@ -155,6 +132,25 @@ namespace Yol.Punla.ViewModels
                 if (message.HttpStatusCode != HttpStatusCode.OK)
                     UserDialogs.Instance.Alert(AppStrings.DeletingPostNotSuccessful, "Error", "Ok");
             });
+
+            if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
+            {
+                CurrentPostFeed = (PostFeed)PassingParameters["SelectedPost"];
+                if (!string.IsNullOrEmpty(CurrentPostFeed.ContentURL))
+                    HasPostedImage = true;
+
+                CurrentContact = (Contact)PassingParameters["CurrentUser"];
+            }
+
+            if(PassingParameters != null && PassingParameters.ContainsKey("SupportersAvatars"))
+                SupportersAvatars = PassingParameters["SupportersAvatars"] as List<string>;
+
+            if (IsInternetConnected)
+                _eventAggregator.GetEvent<LogonPostFeedToHubEventModel>().Publish(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) });
+
+            IsWritePostEnabled = true;
+            IsBusy = false;
+            DeletingMessage = "";
         }
 
         public void SendErrorToHockeyApp(Exception ex)
@@ -272,16 +268,16 @@ namespace Yol.Punla.ViewModels
             _postFeedManager.SaveNewPostToLocal(newlyAddedComment);
         }
 
-        private void GoBack()
+        private async void GoBack()
         {
             _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetToLocal", "true");
             _keyboardHelper.HideKeyboard();
-            NavigateBackHelper(PassingParameters);
+            await NavigateBackHelper(PassingParameters);
         }
 
-        private void SupportPost(Entity.PostFeed SelectedPost)
+        private void SupportPost()
         {
-            var updatedSelectedPost = _postFeedManager.GetPostFeed(SelectedPost.PostFeedID);
+            var updatedSelectedPost = _postFeedManager.GetPostFeed(CurrentPostFeed.PostFeedID);
             
             if (ProcessInternetConnection(true))
             {
@@ -291,7 +287,8 @@ namespace Yol.Punla.ViewModels
                     CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact)
                 };
                 _eventAggregator.GetEvent<LikeOrUnlikePostFeedToHubEventModel>().Publish(postFeedMessage);
-                SelectedPost.IsSelfSupported = !SelectedPost.IsSelfSupported;
+                CurrentPostFeed.IsSelfSupported = !CurrentPostFeed.IsSelfSupported;
+                RaisePropertyChanged(nameof(CurrentPostFeed.IsSelfSupported));
                 var updatePostFeed = _postFeedManager.UpdatePostFeedAndPostFeedLikeToLocal(updatedSelectedPost, CurrentContact);
 
                 if (CurrentPostFeed.Equals(updatedSelectedPost))

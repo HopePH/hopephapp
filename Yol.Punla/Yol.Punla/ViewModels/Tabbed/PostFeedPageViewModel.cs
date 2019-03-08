@@ -103,6 +103,14 @@ namespace Yol.Punla.ViewModels
 
         public async override void PreparingPageBindingsChild()
         {
+            _eventAggregator.GetEvent<DeletePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
+            {
+                IsBusy = false;
+
+                if (!(message.HttpStatusCode == HttpStatusCode.OK))
+                    UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
+            });
+
             if (PassingParameters != null && PassingParameters.ContainsKey(nameof(CurrentContact))) CurrentContact = (Entity.Contact)PassingParameters[nameof(CurrentContact)];
             else CurrentContact = _contactManager.GetCurrentContactFromLocal();
 
@@ -158,10 +166,7 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        private void SavePostsToLocal(IEnumerable<Entity.PostFeed> posts)
-        {
-            _postFeedManager.SaveAllPostsToLocal(posts.ToList());
-        }
+        private void SavePostsToLocal(IEnumerable<Entity.PostFeed> posts) => _postFeedManager.SaveAllPostsToLocal(posts.ToList());
 
         private void PreparePageBindingsResult()
         {
@@ -178,7 +183,6 @@ namespace Yol.Punla.ViewModels
         }
         
         #region GET AND ADD COMMENTS
-
         private async void RedirectToPostFeedDetails(Entity.PostFeed SelectedPost)
         {
             IsNavigatingToDetailsPage = true;
@@ -263,21 +267,7 @@ namespace Yol.Punla.ViewModels
                 var ex = e;
             }
         }
-
         #endregion
-
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-            
-            _eventAggregator.GetEvent<DeletePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
-            {
-                IsBusy = false;
-
-                if (!(message.HttpStatusCode == HttpStatusCode.OK))
-                    UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
-            });
-        }
 
         public void SavePostFeedToLocal(Entity.PostFeed newPost)
         {
@@ -290,7 +280,7 @@ namespace Yol.Punla.ViewModels
         {
             var postToDelete = PostsList.Where(p => p.PostFeedID == newPost.PostFeedID).FirstOrDefault();
             _postFeedManager.DeletePostInLocal(postToDelete);
-            var updatedList = _postFeedManager.GetAllPosts(false).Result;
+            var updatedList = _postFeedManager.GetAllPosts().Result;
             PostsList = new ObservableCollection<Entity.PostFeed>(updatedList.Where(p => p.IsDelete == false));
         }
 
@@ -327,7 +317,7 @@ namespace Yol.Punla.ViewModels
             if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
                 PassingParameters = new NavigationParameters();
 
-            PassingParameters.Add("CurrentContact", CurrentContact);
+            PassingParameters.Add(nameof(CurrentContact), CurrentContact);
             PassingParameters.Add("SelectedPost", CurrentPostFeed);
             await NavigateToPageHelper(nameof(ViewNames.PostFeedAddEditPage), PassingParameters);
             IsShowPostOptions = false;

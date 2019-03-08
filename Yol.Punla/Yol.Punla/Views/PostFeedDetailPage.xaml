@@ -303,14 +303,14 @@
                                     </Label.Behaviors>
                                     <Label.Triggers>
                                         <DataTrigger
-                                            Binding="{Binding CurrentPostFeed.IsSelfSupported}"
+                                            Binding="{Binding CurrentPostFeed.IsSelfSupported, Mode=TwoWay}"
                                             TargetType="Label"
                                             Value="True">
                                             <Setter Property="Text" Value="{StaticResource fa-heart}" />
                                             <Setter Property="TextColor" Value="{StaticResource GreenColorDim}" />
                                         </DataTrigger>
                                         <DataTrigger
-                                            Binding="{Binding CurrentPostFeed.IsSelfSupported}"
+                                            Binding="{Binding CurrentPostFeed.IsSelfSupported, Mode=TwoWay}"
                                             TargetType="Label"
                                             Value="False">
                                             <Setter Property="Text" Value="{StaticResource fa-heart-o}" />
@@ -328,10 +328,7 @@
                                 </Label>
                             </StackLayout>
                             <ContentView.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding SupportCommand}"
-                                    CommandParameter="{Binding CurrentPostFeed}"
-                                    NumberOfTapsRequired="1" />
+                                <TapGestureRecognizer Command="{Binding SupportCommand}" NumberOfTapsRequired="1" />
                             </ContentView.GestureRecognizers>
                         </ContentView>
                     </Grid>
