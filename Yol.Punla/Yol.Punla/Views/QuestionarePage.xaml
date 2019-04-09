@@ -75,8 +75,9 @@
         <Grid Grid.Row="1" IsVisible="False">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -85,7 +86,7 @@
             <Label
                 Grid.Row="0"
                 Grid.ColumnSpan="2"
-                Margin="20,0"
+                Margin="20,0,20,100"
                 FontAttributes="Bold"
                 FontSize="35"
                 HorizontalTextAlignment="Center"
@@ -93,29 +94,66 @@
                 TextColor="#FF417505"
                 VerticalTextAlignment="Center" />
 
-            <StackLayout Grid.Row="1" Orientation="Horizontal">
-                <Label
-                    BackgroundColor="White"
-                    FontFamily="FontAwesome"
-                    FontSize="25"
-                    Text="{StaticResource fa-checkbox}"
-                    TextColor="#FF417505"
-                    VerticalOptions="Center">
-                    <Label.Effects>
-                        <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="SOLID" />
-                    </Label.Effects>
-                </Label>
-            </StackLayout>
-
-            <Button
+            <ContentView
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Padding="60,0,60,20">
+                <StackLayout Orientation="Horizontal" Spacing="40">
+                    <Label
+                        BackgroundColor="White"
+                        FontFamily="FontAwesome"
+                        FontSize="25"
+                        Text="{StaticResource fa-checkbox}"
+                        TextColor="#FF417505"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.Effects>
+                            <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="SOLID" />
+                        </Label.Effects>
+                    </Label>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Radio selected"
+                        TextColor="#FF343534"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+            </ContentView>
+            <ContentView
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
-                BackgroundColor="#FF7ED321"
+                Padding="60,0">
+                <StackLayout Orientation="Horizontal" Spacing="40">
+                    <Label
+                        BackgroundColor="White"
+                        FontFamily="FontAwesome"
+                        FontSize="25"
+                        Text="{StaticResource fa-checkbox-uncheced}"
+                        TextColor="#FF6A6A6A"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.Effects>
+                            <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="REGULAR" />
+                        </Label.Effects>
+                    </Label>
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="18"
+                        Text="Radio2 unselected"
+                        TextColor="#FF343534"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+            </ContentView>
+
+            <Button
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#FF417505"
                 HeightRequest="45"
                 HorizontalOptions="CenterAndExpand"
                 Text="NEXT"
                 TextColor="White"
-                VerticalOptions="CenterAndExpand"
+                VerticalOptions="EndAndExpand"
                 WidthRequest="110" />
             <Grid.Triggers>
                 <DataTrigger
