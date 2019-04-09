@@ -29,34 +29,30 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <ContentView
+                <ffImage:CachedImage
                     Grid.Row="0"
-                    Padding="20,10,20,20"
-                    HorizontalOptions="FillAndExpand"
+                    Margin="20,10,20,20"
+                    Aspect="AspectFit"
+                    CacheDuration="7"
                     IsVisible="{Binding HasPicture}"
-                    VerticalOptions="FillAndExpand">
-                    <ffImage:CachedImage
-                        Aspect="AspectFit"
-                        CacheDuration="7"
-                        Source="{Binding Picture}"
-                        VerticalOptions="Center">
-                        <ffImage:CachedImage.HeightRequest>
-                            <OnPlatform
-                                x:TypeArguments="x:Double"
-                                Android="140"
-                                iOS="130" />
-                        </ffImage:CachedImage.HeightRequest>
-                        <ffImage:CachedImage.WidthRequest>
-                            <OnPlatform
-                                x:TypeArguments="x:Double"
-                                Android="140"
-                                iOS="130" />
-                        </ffImage:CachedImage.WidthRequest>
-                        <ffImage:CachedImage.Transformations>
-                            <ffImageTransformation:CircleTransformation />
-                        </ffImage:CachedImage.Transformations>
-                    </ffImage:CachedImage>
-                </ContentView>
+                    Source="{Binding CurrentContact.PhotoURL}"
+                    VerticalOptions="Center">
+                    <ffImage:CachedImage.HeightRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="140"
+                            iOS="130" />
+                    </ffImage:CachedImage.HeightRequest>
+                    <ffImage:CachedImage.WidthRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="140"
+                            iOS="130" />
+                    </ffImage:CachedImage.WidthRequest>
+                    <ffImage:CachedImage.Transformations>
+                        <ffImageTransformation:CircleTransformation />
+                    </ffImage:CachedImage.Transformations>
+                </ffImage:CachedImage>
                 <StackLayout Grid.Row="1" Spacing="0">
                     <StackLayout.Padding>
                         <OnPlatform
@@ -133,7 +129,7 @@
                                     iOS="0" />
                             </Label.Margin>
                         </Label>
-                        <Entry IsEnabled="{Binding EmailEnabled}" Text="{Binding EmailAddress, Mode=TwoWay}">
+                        <Entry IsEnabled="{Binding EmailEnabled}" Text="{Binding CurrentContact.EmailAdd, Mode=TwoWay}">
                             <Entry.Effects>
                                 <effects:InputViewEffect LineColor="#1F000000">
                                     <effects:InputViewEffect.Thickness>
@@ -187,7 +183,7 @@
                         <Entry
                             x:Name="aliasNameEntry"
                             effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference aliasNameEntry}}"
-                            Text="{Binding AliasName, Mode=TwoWay}">
+                            Text="{Binding CurrentContact.AliasName, Mode=TwoWay}">
                             <Entry.Effects>
                                 <effects:InputViewEffect LineColor="#1F000000">
                                     <effects:InputViewEffect.Thickness>
@@ -248,7 +244,7 @@
                             x:Name="mobilePhoneEntry"
                             effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference mobilePhoneEntry}}"
                             Keyboard="Telephone"
-                            Text="{Binding MobilePhoneNo, Mode=TwoWay}">
+                            Text="{Binding CurrentContact.MobilePhoneNo, Mode=TwoWay}">
                             <Entry.Effects>
                                 <effects:InputViewEffect LineColor="#1F000000">
                                     <effects:InputViewEffect.Thickness>

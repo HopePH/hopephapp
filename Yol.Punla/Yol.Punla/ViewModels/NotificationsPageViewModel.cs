@@ -108,7 +108,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -160,7 +160,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -206,7 +206,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
             finally
             {

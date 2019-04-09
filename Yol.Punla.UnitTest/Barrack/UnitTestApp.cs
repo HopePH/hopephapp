@@ -137,7 +137,7 @@ namespace Yol.Punla.UnitTest.Barrack
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex);
+                Container.GetContainer().Resolve<IDependencyService>().Get<ILogger>().Log(ex);
             }
             finally
             {
@@ -187,7 +187,7 @@ namespace Yol.Punla.UnitTest.Barrack
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex);
+                Container.GetContainer().Resolve<IDependencyService>().Get<ILogger>().Log(ex);
             }
         }
 

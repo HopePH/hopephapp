@@ -157,7 +157,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -203,7 +203,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
                 return null;
             }
         }
@@ -217,7 +217,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
                 return null;
             }
         }
@@ -233,7 +233,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
                 return null;
             }
         }
@@ -295,7 +295,7 @@ namespace Yol.Punla.ViewModels
 
         public void SendErrorToHockeyApp(Exception ex)
         {
-            ProcessErrorReportingForHockeyApp(ex, true);
+            ProcessErrorReportingForRaygun(ex);
         }
 
         private async void AddNewPost()
@@ -342,7 +342,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
             finally
             {
@@ -415,7 +415,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
             finally
             {

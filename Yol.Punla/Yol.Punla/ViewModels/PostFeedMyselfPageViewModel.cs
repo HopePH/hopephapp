@@ -94,7 +94,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -146,7 +146,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -178,7 +178,7 @@ namespace Yol.Punla.ViewModels
 
         public void SendErrorToHockeyApp(Exception ex)
         {
-            ProcessErrorReportingForHockeyApp(ex, true);
+            ProcessErrorReportingForRaygun(ex);
         }
 
         public void AddOneLikeToThisPostFromLocal(Entity.PostFeed postFeed, Entity.Contact userWhoLiked)
@@ -208,7 +208,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
             finally
             {

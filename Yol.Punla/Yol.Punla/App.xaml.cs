@@ -175,7 +175,7 @@ namespace Yol.Punla
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex);
+                Container.GetContainer().Resolve<IDependencyService>().Get<ILogger>().Log(ex);
             }
             finally
             {
@@ -191,7 +191,7 @@ namespace Yol.Punla
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex);
+                Container.GetContainer().Resolve<IDependencyService>().Get<ILogger>().Log(ex);
             }
         }
 
@@ -233,16 +233,6 @@ namespace Yol.Punla
                 await CrossNotifications.Current.RequestPermission();
                 await ShowLocalNotifications();
             }
-        }
-
-        private void ProcessErrorReportingForHockeyApp(Exception ex)
-        {
-#if FAKE
-            //chito. do not register to the hockeyapp when unittesting
-#else
-            //chito. HEA this just means Handled Exception, just make it shorter. Also, there's no need to put if this is Android or IOS since they have unique hockeyid per platform        
-            HockeyApp.MetricsManager.TrackEvent(string.Format("HE.{0}", ex.Message ?? ""));
-#endif
         }
 
         private async Task ShowLocalNotifications()

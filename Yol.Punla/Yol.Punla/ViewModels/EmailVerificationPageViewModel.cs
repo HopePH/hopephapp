@@ -89,7 +89,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex);
+                ProcessErrorReportingForRaygun(ex);
             }
             finally
             {

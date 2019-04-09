@@ -102,7 +102,7 @@ namespace Yol.Punla.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    ProcessErrorReportingForHockeyApp(ex);
+                    ProcessErrorReportingForRaygun(ex);
                 }
             });
 
@@ -155,7 +155,7 @@ namespace Yol.Punla.ViewModels
 
         public void SendErrorToHockeyApp(Exception ex)
         {
-            ProcessErrorReportingForHockeyApp(ex, true);
+            ProcessErrorReportingForRaygun(ex);
         }
 
         public void AddDeductOneLikeToThisPostFromLocal(PostFeed postFeed, Contact userWhoLiked)

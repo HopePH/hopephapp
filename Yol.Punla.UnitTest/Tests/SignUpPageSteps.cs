@@ -52,13 +52,13 @@ namespace Yol.Punla.UnitTest
 
         [Then(@"I should see the photo is change to unicorn")]
         public void ThenIShouldSeeThePhotoIsChangeToUnicorn()
-            => Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().Picture.ShouldNotBeEmpty();
+            => Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().CurrentContact.PhotoURL.ShouldNotBeEmpty();
 
         [When(@"I enter my alias ""(.*)"" and mobile no ""(.*)"" and tap save button")]
         public void WhenIEnterMyAliasAndMobileNoAndTapSaveButton(int alias, int mobileno)
         {
-            Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().AliasName = alias.ToString();
-            Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().MobilePhoneNo = mobileno.ToString();
+            Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().CurrentContact.AliasName = alias.ToString();
+            Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().CurrentContact.MobilePhone = mobileno.ToString();
             Main.App.Container.GetContainer().Resolve<AccountRegistrationPageViewModel>().SignupCommand.Execute(null);
         }
     }

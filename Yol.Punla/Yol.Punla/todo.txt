@@ -4,6 +4,9 @@ alfon
 
 rey
 fix the nav page header color
+simplify accountregistrationpage xaml
+change this <!--  AVATAR MODAL  --> to rgpluggins
+change to //change this to like EventValidator : AbstractValidator<Event> in SA
 
 community
 1. finalize look of request page
