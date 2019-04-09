@@ -132,10 +132,11 @@ namespace Yol.Punla
                 AppCrossConnectivity.Init(unityContainer.Resolve<IConnectivity>());
                 AppUnityContainer.Init(unityContainer);
 
-                if (WasSignedUpAndLogon())
-                    await NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
-                else
-                    await NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                //if (WasSignedUpAndLogon())
+                //    await NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                //else
+                    //await NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                    await NavigateToModalRootPage(nameof(DynamicQuestionanirePage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
                 AllowAppPermissions();
             }
