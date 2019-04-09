@@ -27,8 +27,6 @@ namespace Yol.Punla.ViewModels
         public event EventHandler IsActiveChanged;
 
         public ChildViewModelBase(IEventAggregator eventAggregator, 
-            IServiceMapper serviceMapper, 
-            IAppUser appUser, 
             INavigationService navigationService)
             : base(navigationService)
         {

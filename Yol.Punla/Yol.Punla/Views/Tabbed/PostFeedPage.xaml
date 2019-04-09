@@ -12,7 +12,7 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     x:Name="PostDetailPage"
     Title="Wall"
-    prism:ViewModelLocator.AutowireViewModel="True"
+    prism:ViewModelLocator.AutowireViewModel="False"
     BackgroundColor="White"
     Icon="{Binding CurrentIcon}"
     NavigationPage.HasNavigationBar="False">

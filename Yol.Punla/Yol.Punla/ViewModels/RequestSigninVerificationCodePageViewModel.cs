@@ -6,9 +6,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Barrack;
 using Yol.Punla.Managers;
-using Yol.Punla.NavigationHeap;
 using Yol.Punla.ViewModels.Validators;
 
 namespace Yol.Punla.ViewModels
@@ -20,8 +18,6 @@ namespace Yol.Punla.ViewModels
     {
         private const string APPNAME = "HopePH";
         private const string FAKEEMAIL = "Ret45ujhh@gboy.com";
-        private readonly INavigationStackService _navigationStackService;
-        private readonly INavigationService _navigationService;
         private readonly IContactManager _contactManager;
         private IValidator _validator;
 
@@ -29,18 +25,12 @@ namespace Yol.Punla.ViewModels
         public string EmailAddress { get; set; }
         public string VerificationCode { get; set; }
 
-        public RequestSigninVerificationCodePageViewModel(IServiceMapper serviceMapper, 
-            IAppUser appUser, 
-            INavigationStackService navigationStackService,
-            INavigationService navigationService,
+        public RequestSigninVerificationCodePageViewModel(INavigationService navigationService,
             IContactManager contactManager) : base(navigationService)
-        {
-            _navigationService = navigationService;
-            _navigationStackService = navigationStackService;
-            _contactManager = contactManager;
-        }
+            => _contactManager = contactManager;
 
-        public override void PreparingPageBindings() => IsBusy = false;
+        public override void PreparingPageBindings() 
+            => IsBusy = false;
 
         private async Task RequestVerificationCode()
         {
@@ -50,7 +40,7 @@ namespace Yol.Punla.ViewModels
                 EmailAddress = (await _contactManager.CheckIfEmailExists(EmailAddress, APPNAME)) ? EmailAddress : FAKEEMAIL;
                 _validator = new RequestVerificationCodePageEmailValidator(EmailAddress);
 
-                if (ProcessValidationErrors(_validator.Validate(this), true))
+                if (ProcessValidationErrors(_validator.Validate(this)))
                 {
                     VerificationCode = await _contactManager.SendVerificationCode(EmailAddress);
                     PassingParameters.Add("VerificationCode", VerificationCode);

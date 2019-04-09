@@ -83,15 +83,10 @@ namespace Yol.Punla.ViewModels
         public bool IsNavigatingToDetailsPage { get; set; }
 
         public PostFeedPageViewModel(IEventAggregator eventAggregator,
-            IServiceMapper serviceMapper, 
-            IAppUser appUser,
             INavigationService navigationService,
-            INavigationStackService navigationStackService,
             IPostFeedManager postFeedManager,
-            IContactManager contactManager) : base(eventAggregator, serviceMapper, appUser, navigationService)
+            IContactManager contactManager) : base(eventAggregator, navigationService)
         {
-            _navigationService = navigationService;
-            _navigationStackService = navigationStackService;
             _postFeedManager = postFeedManager;
             _contactManager = contactManager;
             _busyComments = AppStrings.LoadingData;
