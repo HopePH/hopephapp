@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Unity;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
 using Yol.Punla.GatewayAccess;
@@ -79,7 +78,6 @@ namespace Yol.Punla.ViewModels
             BusyComments = AppStrings.LoadingNotifications;
             _keyValueCacheUtility.RemoveKeyObject("IsForceToGetToLocal");
             CurrentContact = _contactManager.GetCurrentContactFromLocal();
-            IsShowBackArrow = false;
             Title = "Notifications";
 
             if (IsInternetConnected)
@@ -110,7 +108,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -162,7 +160,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -208,7 +206,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
             finally
             {

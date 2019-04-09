@@ -1,15 +1,14 @@
 ﻿using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Yol.Punla.AttributeBase;
 
 namespace Yol.Punla.Views
 {
-    [ModuleView]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CrisisHotlineListPage : AppViewBase
-    {
-        public CrisisHotlineListPage()
-        {
+    public partial class CommentItem : Grid
+	{
+		public CommentItem ()
+		{
             try
             {
                 InitializeComponent();
@@ -25,5 +24,5 @@ namespace Yol.Punla.Views
                     throw;
             }
         }
-    }
+	}
 }

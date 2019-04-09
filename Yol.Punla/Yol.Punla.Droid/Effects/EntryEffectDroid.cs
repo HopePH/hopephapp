@@ -1,36 +1,40 @@
-﻿using System.Linq;
-using Android.Content.Res;
-using Android.Graphics.Drawables;
-using Android.Text;
+﻿using Android.Graphics.Drawables;
 using Android.Widget;
+using System;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Yol.Punla.Effects;
 
-[assembly: ExportEffect(typeof(Yol.Punla.Droid.Effects.EntryEffectDroid), nameof(EntryEffect))]
+[assembly: ExportEffect(typeof(Yol.Punla.Droid.Effects.EntryEffectDroid), nameof(InputViewEffect))]
 namespace Yol.Punla.Droid.Effects
 {
     public class EntryEffectDroid : PlatformEffect
     {
         protected override void OnAttached()
         {
-            var control = Control as EditText;
-            if (control == null) return;
-            var effect = (EntryEffect)Element.Effects.FirstOrDefault(e => e is EntryEffect);
-
-            if (effect != null)
+            try
             {
-                GradientDrawable gd = new GradientDrawable();
-                gd.SetColor(global::Android.Graphics.Color.Transparent);
-                control.SetBackground(gd);
-                control.SetRawInputType(InputTypes.TextFlagNoSuggestions);
-                control.SetHintTextColor(ColorStateList.ValueOf(global::Android.Graphics.Color.White));
+                var control = Control as EditText;
+                if (control == null) return;
+                var effect = (InputViewEffect)Element.Effects.FirstOrDefault(e => e is InputViewEffect);
+
+                if (effect != null)
+                {
+                    if (effect.NumberOfLines > 0) control.SetMaxLines(effect.NumberOfLines);
+                    control.SetBackgroundColor(Android.Graphics.Color.Transparent);
+                    if (!effect.IsApplyToDroid) return;
+                    control.SetBackgroundResource(Resource.Drawable.bottom_line_entry);
+                    var itemList = (LayerDrawable)control.Background;
+                    GradientDrawable bgShape = (GradientDrawable)itemList.FindDrawableByLayerId(Resource.Id.shape_id);
+                    bgShape.SetStroke(effect.Thickness, effect.LineColor.ToAndroid());
+                }
+            }
+            catch (Exception ex)
+            {
             }
         }
 
-        protected override void OnDetached()
-        {
-
-        }
+        protected override void OnDetached() { }
     }
 }

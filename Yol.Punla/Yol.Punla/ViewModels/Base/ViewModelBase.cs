@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using FluentValidation.Results;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
@@ -15,7 +16,6 @@ using System.Windows.Input;
 using Unity;
 using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Localized;
 using Yol.Punla.Messages;
@@ -34,11 +34,7 @@ namespace Yol.Punla.ViewModels
         private readonly INavigationService _navigationService;
         private const string VALIDATIONERRMSG = "Please correct the following: \r\n\r\n{0}";
         private const string NOINTERNETMSG = "Your internet connection seems to have dropped out. You are now offline mode.";
-        private const string TASKCANCELLEDMSG = "The fetching of data is running slow. Please check the speed of your internet connection then try again.";
-        private const int CANCELTASKINSECS = 10;
         private const string FAKEAPIURI = @"44.665.77.888";
-        private int taskHandlerCount = 0;
-        private bool isForcedToStopTaskHandlerTimer = false;
 
         protected bool IsInternetConnected => AppCrossConnectivity.Instance.IsConnected;
 
@@ -81,7 +77,6 @@ namespace Yol.Punla.ViewModels
         protected TokenHandler TokenHandler { get; set; }
         public StringBuilder PageErrors { get; set; }       
         public string Title { get; set; }
-        public bool IsShowBackArrow { get; set; } = true;
 
         protected ViewModelBase(INavigationService navigationService)
         {
@@ -200,18 +195,6 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        protected void ProcessAnalyticReportingForHockeyApp(string message)
-        {
-            IsBusy = false;
-
-#if FAKE
-            //chito. do not register to the hockeyapp when unittesting
-#else
-            ////chito. AR this just means Analytics Reporting, just make it shorter. Also, there's no need to put if this is Android or IOS since they have unique hockeyid per platform        
-            //HockeyApp.MetricsManager.TrackEvent(string.Format("AR.{0}", message ?? ""));
-#endif
-        }
-
         protected async Task NavigateToPageHelper(string page, INavigationParameters parameters = null, bool? useModalNavigation = null, bool animated = true)
         {
             _navigationStackService.UpdateStackState(CleanedPageName(page));
@@ -220,7 +203,7 @@ namespace Yol.Punla.ViewModels
 
         protected async Task ChangeRootAndNavigateToPageHelper(string page, INavigationParameters parameters = null, bool? useModalNavigation = null, bool animated = true)
         {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{ViewNames.AppMasterPage}/{nameof(ViewNames.NavPage)}/{page}";
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(ViewNames.NavPage)}/{page}";
             _navigationStackService.ResetStackStateTo(CleanedPageName(page));
             await _navigationService.NavigateAsync(rootPage, parameters, useModalNavigation, animated);
         }
@@ -230,6 +213,12 @@ namespace Yol.Punla.ViewModels
             AppUnityContainer.Instance.Resolve<INavigationStackService>().IsDisableNavPagePop = true;
             await _navigationService.GoBackAsync(parameters, useModalNavigation, animated);
             RemoveCurrentPage();
+        }
+
+        protected async Task NavigateBackToRoot()
+        {
+            _navigationStackService.ResetStackStateTo(nameof(ViewNames.LogonPage)); //ct0.temp change this root page soon...
+            await _navigationService.GoBackToRootAsync();
         }
 
         private void RemoveCurrentPage()
@@ -243,8 +232,24 @@ namespace Yol.Punla.ViewModels
             string newPageName = pageName;
             int qIdx = pageName.IndexOf('/');
             if (qIdx >= 0) newPageName = pageName.Substring(qIdx + 1);
+
+            if (newPageName.Contains("?"))
+            {
+                int qMarkIdx = newPageName.IndexOf('?');
+                if (qMarkIdx > 0) newPageName = newPageName.Substring(0, qMarkIdx);
+            }
+
             return newPageName;
         }
+
+        #endregion
+
+        #region "Task Cancelling for future"
+
+        private const string TASKCANCELLEDMSG = "The fetching of data is running slow. Please check the speed of your internet connection then try again.";
+        private const int CANCELTASKINSECS = 10;
+        private int taskHandlerCount = 0;
+        private bool isForcedToStopTaskHandlerTimer = false;
 
         protected CancellationTokenSource CreateNewHandledTokenSource(string taskName, int cancelTaskInSecs = CANCELTASKINSECS)
         {
@@ -304,7 +309,6 @@ namespace Yol.Punla.ViewModels
 
         #endregion
 
-
         #region Extended
 
         public int NoOfNotifications
@@ -328,7 +332,7 @@ namespace Yol.Punla.ViewModels
         private void DisplaySideBar()
         {
             AppMasterPageMessage log = new AppMasterPageMessage() { IsOpen = true };
-            MessagingCenter.Send<AppMasterPageMessage>(log, "MasterDetailPageToggleMessage");
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<MasterDetailPageToggleMessageEventModel>().Publish(log);
         }
 
         #endregion

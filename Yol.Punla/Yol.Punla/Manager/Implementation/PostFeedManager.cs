@@ -143,23 +143,38 @@ namespace Yol.Punla.Managers
             }
         }
 
+        public Task<IEnumerable<string>> GetSupportersAvatars(int postFeedId) => _postFeedService.GetSupportersAvatars(postFeedId);
+
         public IEnumerable<PostFeed> LikeOrUnlikeSelfPost(int postFeedId, int userWhoLikedId)
         {
             try
             {
+
                 var currentPost = _postFeedRepository.GetPostFeedById(postFeedId);
                 currentPost.IsSelfSupported = !currentPost.IsSelfSupported;
                 currentPost.NoOfSupports = (currentPost.IsSelfSupported) ? currentPost.NoOfSupports + 1 : currentPost.NoOfSupports - 1;
+
                 _postFeedRepository.UpdateItem(currentPost);
 
                 var postFeedLikeInLocal = _postFeedRepository.GetPostFeedLikeByContactId(userWhoLikedId, currentPost.PostFeedID);
 
+                var supporterFromLocal = _contactRepository.GetContactByRemoteId(userWhoLikedId);
+
                 if (postFeedLikeInLocal == null)
-                    _postFeedRepository.UpdateItem(new PostFeedLike { ContactID = userWhoLikedId, PostFeedID = currentPost.PostFeedID });
+                {
+                    _postFeedRepository.UpdateItem(new PostFeedLike
+                    {
+                        ContactID = userWhoLikedId,
+                        PostFeedID = currentPost.PostFeedID,
+                        ContactPhotoURL = supporterFromLocal.PhotoURL ?? string.Empty,
+                        FirstName = supporterFromLocal?.FirstName ?? string.Empty,
+                        LastName = supporterFromLocal?.LastName ?? string.Empty
+                    });
+                }
                 else
                     _postFeedRepository.DeleteTable(postFeedLikeInLocal);
 
-                _cachedPostFeeds = _postFeedRepository.GetAllPostsFromLocal();
+                _cachedPostFeeds = _postFeedRepository.GetAllPostsFromLocal().Where(p => p.PostFeedLevel < 1);
                 return _cachedPostFeeds;
             }
             catch (SQLite.SQLiteException)
@@ -244,6 +259,8 @@ namespace Yol.Punla.Managers
             }           
         }
 
+        public IEnumerable<PostFeedLike> GetPostFeedLike(int postFeedId) => _postFeedRepository.GetPostFeedLikesByPostFeedId(postFeedId);
+
         public PostFeed GetPostFeed(int postFeedId) => _postFeedRepository.GetPostFeedById(postFeedId);
 
         public void SavePostFeedsToLocal(IEnumerable<PostFeed> postFeeds, bool tableForceDelete = false)
@@ -260,7 +277,8 @@ namespace Yol.Punla.Managers
 
                 foreach (var item in postFeeds)
                 {
-                    if (item.PosterId == int.Parse(_keyValueCachedUtility.GetUserDefaultsKeyValue("CurrentContactId")))
+                    var currentContactId = _keyValueCachedUtility.GetUserDefaultsKeyValue("CurrentContactId");
+                    if (!string.IsNullOrEmpty(currentContactId) && item.PosterId == int.Parse(currentContactId))
                         item.IsSelfPosted = true;
 
                     if (!string.IsNullOrEmpty(item.ContactsWhoLiked))
@@ -340,6 +358,32 @@ namespace Yol.Punla.Managers
                 }
                 catch (SQLite.SQLiteException)
                 {
+                }
+            }
+        }
+
+        public void SaveAllPostsToLocal(IEnumerable<PostFeed> posts)
+        {
+            // save posts
+            foreach (var post in posts)
+            {
+                _postFeedRepository.UpdateItem(post);
+                // save post feed supports
+                post.SupportersIdsList = post.SupportersIdsList ?? new List<int>();
+                foreach (var supporterId in post.SupportersIdsList)
+                {
+                    var supporter = _contactRepository.GetContactByRemoteId(supporterId);
+                    var support = new PostFeedLike
+                    {
+                        ContactID = supporterId,
+                        PostFeedID = post.PostFeedID,
+                        FirstName = supporter.FirstName,
+                        LastName = supporter.LastName,
+                        AliasName = supporter.AliasName,
+                        ContactPhotoURL = supporter.PhotoURL ?? string.Empty
+                    };
+
+                    _postFeedRepository.UpdateItem(support);
                 }
             }
         }

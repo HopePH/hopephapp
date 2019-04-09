@@ -6,7 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using Yol.Punla.Localized;
 
-[assembly: ResolutionGroupName("Yol.Punla")]
+[assembly: ResolutionGroupName("Yol.Punla.Effects")]
 [assembly: ExportEffect(typeof(Yol.Punla.iOS.Effects.EditorTransparentBottomlineEffectiOS), "EditorTransparentBottomlineEffect")]
 namespace Yol.Punla.iOS.Effects
 {

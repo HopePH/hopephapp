@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using FluentValidation;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using PropertyChanged;
 using System;
@@ -10,7 +11,6 @@ using System.Windows.Input;
 using Unity;
 using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
 using Yol.Punla.Localized;
@@ -31,6 +31,7 @@ namespace Yol.Punla.ViewModels
         private readonly INavigationStackService _navigationStackService;
         private readonly IPostFeedManager _postFeedManager;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
+        private readonly IEventAggregator _eventAggregator;
 
         public ICommand SaveOrEditPostCommand => new DelegateCommand(SaveOrEditPost);
         public ICommand NavigateBackCommand => new DelegateCommand(GoBack);
@@ -46,19 +47,38 @@ namespace Yol.Punla.ViewModels
             INavigationService navigationService,
             INavigationStackService navigationStackService,
             IPostFeedManager postFeedManager,
+            IEventAggregator eventAggregator,
             PostFeedAddEditPageValidators validator) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
             _postFeedManager = postFeedManager;
             _validator = validator;
+            _eventAggregator = eventAggregator;
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
             Title = AppStrings.TitleFeelings;
         }
 
         public override void PreparingPageBindings()
         {
-            if(PassingParameters != null && PassingParameters.ContainsKey("CurrentContact"))
+            _eventAggregator.GetEvent<AddUpdatePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
+            {
+                IsBusy = false;
+
+                if (message.HttpStatusCode == HttpStatusCode.OK)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetFromRest", "true");
+                        _keyValueCacheUtility.GetUserDefaultsKeyValue("SecondsDelay", "2");
+                        await NavigateBackHelper(PassingParameters);
+                    });
+                }
+                else
+                    UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
+            });
+
+            if (PassingParameters != null && PassingParameters.ContainsKey("CurrentContact"))
                 CurrentContact = (Contact)PassingParameters["CurrentContact"];
 
             if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
@@ -72,38 +92,11 @@ namespace Yol.Punla.ViewModels
                 Content = "";
                 ButtonText = AppStrings.PostText;
             }
-
+            
             if (IsInternetConnected)
-                MessagingCenter.Send(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) }, "LogonPostFeedToHub");
+                _eventAggregator.GetEvent<LogonPostFeedToHubEventModel>().Publish(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) });    
             
             IsBusy = false;
-        }
-
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-            MessagingCenter.Subscribe<HttpResponseMessage<Contract.PostFeedK>>(this, "AddUpdatePostFeedToHubResultCode", message =>
-            {
-                IsBusy = false;
-
-                if (message.HttpStatusCode == HttpStatusCode.OK)
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetFromRest", "true");
-                        _keyValueCacheUtility.GetUserDefaultsKeyValue("SecondsDelay", "2");
-                        NavigateBackHelper(PassingParameters);
-                    });
-                }
-                else
-                    UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
-            });
-        }
-
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            MessagingCenter.Unsubscribe<HttpResponseMessage<Contract.PostFeedK>>(this, "AddUpdatePostFeedToHubResultCode");
         }
 
         private void SaveOrEditPost()
@@ -190,7 +183,7 @@ namespace Yol.Punla.ViewModels
                 CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(postFeed),
                 CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(contact)
             };
-            MessagingCenter.Send(postFeedMessage, "AddUpdatePostFeedToHub");
+            //_eventAggregator.GetEvent<AddUpdatePostFeedToHubEventModel>().Publish(postFeedMessage);
 
             // 01-12-2018 12:06pm REYNZ: 
             // added this for FAKE only because navigating to PostFeedPage after editing 
@@ -199,8 +192,8 @@ namespace Yol.Punla.ViewModels
             AddUpdatePostFeedToHubFake();   
         }
 
-        [Conditional("FAKE")]
-        private void AddUpdatePostFeedToHubFake()
+        //[Conditional("FAKE")]
+        private async void AddUpdatePostFeedToHubFake()
         {
             if (ButtonText == AppStrings.PostText)
                 FakeData.FakePostFeeds.AddingNewPostFeedContent(NewPost);
@@ -209,9 +202,9 @@ namespace Yol.Punla.ViewModels
 
             IsBusy = false;
             PassingParameters.Add("IsForceToGetFromRest", true);
-            NavigateBackHelper(PassingParameters);
+            await NavigateBackHelper(PassingParameters);
         }
 
-        private void GoBack() => NavigateBackHelper();
+        private async void GoBack() => await NavigateBackHelper();
     }
 }

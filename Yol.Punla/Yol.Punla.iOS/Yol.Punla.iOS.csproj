@@ -101,6 +101,8 @@
     <Compile Include="CustomRenderers\MultilineEntryRenderer.cs" />
     <Compile Include="CustomRenderers\MuseoLabelRenderer.cs" />
     <Compile Include="Effects\EditorTransparentBottomlineEffectiOS.cs" />
+    <Compile Include="Effects\EntryEffectIos.cs" />
+    <Compile Include="Effects\LabelFontFamilyEffectIos.cs" />
     <Compile Include="Effects\SwitchColorEffectsIOS.cs" />
     <Compile Include="Effects\TransparentBottomBorderSearchBarEffectiOS.cs" />
     <Compile Include="Main.cs" />
@@ -122,6 +124,8 @@
     <BundleResource Include="Resources\MuseoSansBold.otf" />
     <BundleResource Include="Resources\MuseoSansBoldItalic.otf" />
     <BundleResource Include="Resources\MuseoSansCyrl_0.otf" />
+    <BundleResource Include="Resources\FontAwesomeRegular.otf" />
+    <BundleResource Include="Resources\FontAwesomeSolid.otf" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-60%402x.png" />
@@ -385,6 +389,33 @@
   <ItemGroup>
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\headset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\headset%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\headset%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\list%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\list%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\locationcity %402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\locationcity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\locationcity%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

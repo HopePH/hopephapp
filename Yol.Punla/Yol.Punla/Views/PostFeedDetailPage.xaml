@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:AppViewBase
+<ContentPage
     x:Class="Yol.Punla.Views.PostFeedDetailPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
-    xmlns:template="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     x:Name="ThisPage"
-    Title="Post Details Page"
     BackgroundColor="{StaticResource ColorWhite}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -29,13 +28,14 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <template:NavigationBar Grid.Row="0" />
+        <!--<local:NavigationBar Grid.Row="0" />-->
 
         <ScrollView
             x:Name="ScrollViewElement"
             Grid.Row="1"
             Padding="0,0,0,50"
             VerticalOptions="FillAndExpand">
+            <!--  POSTER  -->
             <Grid x:Name="PostBody">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -45,7 +45,7 @@
                 </Grid.RowDefinitions>
                 <Grid
                     Grid.Row="0"
-                    Padding="20,10"
+                    Padding="0,10"
                     BackgroundColor="White"
                     RowSpacing="6"
                     VerticalOptions="FillAndExpand">
@@ -54,11 +54,9 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="1" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="25" />
                     </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0" Padding="0">
+                    <Grid Grid.Row="0" Padding="20,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="*" />
@@ -68,7 +66,7 @@
                             Aspect="AspectFit"
                             BackgroundColor="Transparent"
                             HeightRequest="35"
-                            Source="{Binding CurrentPostFeed.PosterProfilePhoto}">
+                            Source="{Binding CurrentPostFeed.Poster.PhotoURL}">
                             <ffImage:CachedImage.Transformations>
                                 <ffImageTransformation:CircleTransformation />
                             </ffImage:CachedImage.Transformations>
@@ -78,49 +76,56 @@
                             Grid.Column="1"
                             Padding="5,8"
                             Spacing="1">
-                            <customControl:MuseoLabel
+                            <Label
                                 FontAttributes="Bold"
-                                Text="{Binding CurrentPostFeed.AliasName}"
-                                TextColor="Black">
-                                <customControl:MuseoLabel.FontSize>
+                                Text="{Binding CurrentPostFeed.PosterFullName}"
+                                TextColor="{StaticResource GrayDefault}">
+                                <Label.Effects>
+                                    <effects:LabelFontFamilyEffect />
+                                </Label.Effects>
+                                <Label.FontSize>
                                     <OnPlatform
                                         x:TypeArguments="x:Double"
                                         Android="15"
                                         iOS="18" />
-                                </customControl:MuseoLabel.FontSize>
-                            </customControl:MuseoLabel>
-                            <customControl:MuseoLabel
-                                FontSize="11"
-                                Text="{Binding CurrentPostFeed.ContactGender}"
-                                TextColor="Black" />
-                            <customControl:MuseoLabel
+                                </Label.FontSize>
+                            </Label>
+                            <Label
                                 FontSize="12"
                                 Text="{Binding CurrentPostFeed.DatePosted, Converter={StaticResource ToElapsedTime}}"
-                                TextColor="Black" />
+                                TextColor="{StaticResource GrayDefault}">
+                                <Label.Effects>
+                                    <effects:LabelFontFamilyEffect />
+                                </Label.Effects>
+                            </Label>
                         </StackLayout>
                     </Grid>
-
-                    <customControl:MuseoLabel
+                    <Label
                         Grid.Row="1"
+                        Margin="20,0"
                         BackgroundColor="Transparent"
                         FontSize="12"
+                        LineHeight="1.2"
                         Text="{Binding CurrentPostFeed.ContentText}"
-                        TextColor="Black" />
-
+                        TextColor="{StaticResource GrayDefault}"
+                        VerticalOptions="CenterAndExpand">
+                        <Label.Effects>
+                            <effects:LabelFontFamilyEffect />
+                        </Label.Effects>
+                    </Label>
                     <Grid
                         Grid.Row="2"
-                        Padding="0"
+                        Padding="20,0"
                         BackgroundColor="Transparent"
                         RowSpacing="0">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="46" />
                         </Grid.RowDefinitions>
-
                         <ffImage:CachedImage
                             x:Name="PostImage"
                             Grid.Row="0"
-                            Aspect="AspectFill"
+                            Aspect="AspectFit"
                             BackgroundColor="Black"
                             IsVisible="{Binding HasPostedImage}"
                             Source="{Binding CurrentPostFeed.ContentURL}">
@@ -152,26 +157,34 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <customControl:MuseoLabel
+                                <Label
                                     Grid.Row="0"
                                     Grid.Column="0"
                                     FontAttributes="Bold"
                                     FontSize="12"
                                     Text="{Binding CurrentPostFeed.Title}"
-                                    TextColor="Black">
-                                    <customControl:MuseoLabel.LineBreakMode>
+                                    TextColor="{StaticResource GrayDefault}">
+                                    <Label.Effects>
+                                        <effects:LabelFontFamilyEffect />
+                                    </Label.Effects>
+                                    <Label.LineBreakMode>
                                         <OnPlatform
                                             x:TypeArguments="LineBreakMode"
                                             Android="WordWrap"
                                             iOS="TailTruncation" />
-                                    </customControl:MuseoLabel.LineBreakMode>
-                                </customControl:MuseoLabel>
-                                <customControl:MuseoLabel
+                                    </Label.LineBreakMode>
+                                </Label>
+                                <Label
                                     Grid.Row="1"
                                     Grid.Column="0"
                                     FontAttributes="Italic"
                                     FontSize="10"
-                                    Text="{Binding CurrentPostFeed.ReferenceUrl}" />
+                                    Text="{Binding CurrentPostFeed.ReferenceUrl}"
+                                    TextColor="{StaticResource GrayDefault}">
+                                    <Label.Effects>
+                                        <effects:LabelFontFamilyEffect />
+                                    </Label.Effects>
+                                </Label>
                                 <Label
                                     Grid.RowSpan="2"
                                     Grid.Column="1"
@@ -182,125 +195,142 @@
                             </Grid>
                         </ContentView>
                     </Grid>
-
                     <StackLayout
                         Grid.Row="3"
-                        Padding="0,5"
+                        Padding="20,5"
                         Orientation="Horizontal">
-                        <customControl:MuseoLabel
-                            x:Name="MainPostLikeCounter"
-                            FontSize="10"
-                            HorizontalOptions="Start"
-                            Text="{Binding CurrentPostFeed.NoOfSupports, StringFormat='{0} Supports'}"
-                            VerticalTextAlignment="Center" />
                         <Label
-                            FontFamily="FontAwesome"
-                            FontSize="8"
-                            HorizontalOptions="Start"
-                            Text="{StaticResource fa-circle}"
-                            VerticalTextAlignment="Center" />
-                        <customControl:MuseoLabel
+                            BackgroundColor="Blue"
+                            HorizontalOptions="StartAndExpand"
+                            Text="" />
+                        <Label
                             x:Name="parentCommentCount"
                             FontSize="10"
                             HorizontalOptions="Start"
                             Text="{Binding CurrentPostFeed.NoOfComments, StringFormat='{0} Comments', Mode=TwoWay}"
-                            VerticalTextAlignment="Center" />
+                            TextColor="{StaticResource ColorGreenDimB}"
+                            VerticalTextAlignment="Center">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                        </Label>
+                        <Label
+                            Margin="20,0,0,0"
+                            FontSize="10"
+                            Text="{StaticResource fa-heart}"
+                            TextColor="{StaticResource ColorGreenDimB}"
+                            VerticalTextAlignment="Center">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="SOLID" />
+                            </Label.Effects>
+                        </Label>
+                        <Label
+                            x:Name="MainPostLikeCounter"
+                            FontSize="10"
+                            HorizontalOptions="Start"
+                            Text="{Binding CurrentPostFeed.NoOfSupports}"
+                            TextColor="{StaticResource ColorGreenDimB}"
+                            VerticalTextAlignment="Center">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                        </Label>
                     </StackLayout>
-
-                    <BoxView Grid.Row="4" BackgroundColor="#CFD1D4" />
-
+                    <!--  COMMENT AND SUPPORT ACTIONS  -->
                     <Grid
-                        Grid.Row="5"
-                        Padding="20,5,20,0"
-                        BackgroundColor="White">
+                        Grid.Row="4"
+                        Padding="1"
+                        BackgroundColor="#2B9B9B9B"
+                        ColumnSpacing="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-
-                        <StackLayout
+                        <ContentView
                             Grid.Column="0"
-                            HorizontalOptions="CenterAndExpand"
-                            Orientation="Horizontal">
-                            <Label
-                                FontFamily="FontAwesome"
-                                FontSize="15"
-                                VerticalTextAlignment="Center">
-                                <Label.Behaviors>
-                                    <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
-                                </Label.Behaviors>
-                                <Label.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding CurrentPostFeed.IsSelfSupported}"
-                                        TargetType="Label"
-                                        Value="True">
-                                        <Setter Property="Text" Value="{StaticResource fa-heart}" />
-                                        <Setter Property="TextColor" Value="{StaticResource GreenColorDim}" />
-                                    </DataTrigger>
-                                    <DataTrigger
-                                        Binding="{Binding CurrentPostFeed.IsSelfSupported}"
-                                        TargetType="Label"
-                                        Value="False">
-                                        <Setter Property="Text" Value="{StaticResource fa-heart-o}" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
-                            <customControl:MuseoLabel
-                                FontFamily="FontAwesome"
-                                FontSize="12"
-                                Text="{localization:Render SupportText}"
-                                VerticalTextAlignment="Center" />
-                            <StackLayout.GestureRecognizers>
+                            BackgroundColor="White"
+                            HorizontalOptions="FillAndExpand">
+                            <StackLayout
+                                Padding="15,0,0,0"
+                                HorizontalOptions="CenterAndExpand"
+                                Orientation="Horizontal">
+                                <Label
+                                    FontFamily="FontAwesome"
+                                    FontSize="15"
+                                    Text="{StaticResource fa-comment-alt}"
+                                    TextColor="{StaticResource ColorGreenDimB}"
+                                    VerticalTextAlignment="Center">
+                                    <Label.Effects>
+                                        <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="REGULAR" />
+                                    </Label.Effects>
+                                    <Label.Behaviors>
+                                        <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                    </Label.Behaviors>
+                                </Label>
+                                <Label
+                                    FontFamily="FontAwesome"
+                                    FontSize="12"
+                                    Text="{localization:Render CommentText}"
+                                    TextColor="{StaticResource ColorGreenDimB}"
+                                    VerticalTextAlignment="Center">
+                                    <Label.Effects>
+                                        <effects:LabelFontFamilyEffect />
+                                    </Label.Effects>
+                                </Label>
+                            </StackLayout>
+                            <ContentView.GestureRecognizers>
                                 <TapGestureRecognizer
-                                    Command="{Binding SupportCommand}"
-                                    CommandParameter="{Binding CurrentPostFeed}"
-                                    NumberOfTapsRequired="1" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
-
-                        <StackLayout
+                                    x:Name="stackCommentGesture"
+                                    NumberOfTapsRequired="1"
+                                    Tapped="StackCommentGesture_Tapped" />
+                            </ContentView.GestureRecognizers>
+                        </ContentView>
+                        <ContentView
                             Grid.Column="1"
-                            HorizontalOptions="CenterAndExpand"
-                            Orientation="Horizontal">
-                            <Label
-                                FontFamily="FontAwesome"
-                                FontSize="15"
-                                Text="{StaticResource fa-comment-o}"
-                                VerticalTextAlignment="Center">
-                                <Label.Behaviors>
-                                    <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
-                                </Label.Behaviors>
-                            </Label>
-                            <customControl:MuseoLabel
-                                FontFamily="FontAwesome"
-                                FontSize="12"
-                                Text="{localization:Render CommentText}"
-                                VerticalTextAlignment="Center" />
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer x:Name="stackCommentGesture" NumberOfTapsRequired="1" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
-
-                        <StackLayout
-                            Grid.Column="2"
-                            HorizontalOptions="CenterAndExpand"
-                            IsVisible="false"
-                            Orientation="Horizontal">
-                            <Label
-                                FontFamily="FontAwesome"
-                                FontSize="15"
-                                Text="{StaticResource fa-share-alt}"
-                                VerticalTextAlignment="Center" />
-                            <customControl:MuseoLabel
-                                FontFamily="FontAwesome"
-                                FontSize="12"
-                                Text="{localization:Render ShareText}"
-                                VerticalTextAlignment="Center" />
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding}" NumberOfTapsRequired="1" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
+                            BackgroundColor="White"
+                            HorizontalOptions="FillAndExpand">
+                            <StackLayout
+                                Padding="0,0,15,0"
+                                HorizontalOptions="CenterAndExpand"
+                                Orientation="Horizontal">
+                                <Label
+                                    FontFamily="FontAwesome"
+                                    FontSize="15"
+                                    TextColor="{StaticResource ColorGreenDimB}"
+                                    VerticalTextAlignment="Center">
+                                    <Label.Behaviors>
+                                        <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="13" />
+                                    </Label.Behaviors>
+                                    <Label.Triggers>
+                                        <DataTrigger
+                                            Binding="{Binding CurrentPostFeed.IsSelfSupported, Mode=TwoWay}"
+                                            TargetType="Label"
+                                            Value="True">
+                                            <Setter Property="Text" Value="{StaticResource fa-heart}" />
+                                            <Setter Property="TextColor" Value="{StaticResource GreenColorDim}" />
+                                        </DataTrigger>
+                                        <DataTrigger
+                                            Binding="{Binding CurrentPostFeed.IsSelfSupported, Mode=TwoWay}"
+                                            TargetType="Label"
+                                            Value="False">
+                                            <Setter Property="Text" Value="{StaticResource fa-heart-o}" />
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                                <Label
+                                    FontSize="12"
+                                    Text="{localization:Render SupportText}"
+                                    TextColor="{StaticResource ColorGreenDimB}"
+                                    VerticalTextAlignment="Center">
+                                    <Label.Effects>
+                                        <effects:LabelFontFamilyEffect />
+                                    </Label.Effects>
+                                </Label>
+                            </StackLayout>
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SupportCommand}" NumberOfTapsRequired="1" />
+                            </ContentView.GestureRecognizers>
+                        </ContentView>
                     </Grid>
                 </Grid>
 
@@ -315,8 +345,34 @@
                 </StackLayout>-->
 
                 <BoxView Grid.Row="1" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
-                <ContentView Grid.Row="2" BackgroundColor="Transparent" />
-
+                <ContentView
+                    Grid.Row="2"
+                    Margin="0,0,0,20"
+                    BackgroundColor="Transparent">
+                    <StackLayout>
+                        <Label
+                            Margin="20,0,0,0"
+                            FontAttributes="Bold"
+                            HorizontalOptions="StartAndExpand"
+                            Text="Support"
+                            TextColor="{StaticResource GrayDefault}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                            <Label.FontSize>
+                                <OnPlatform
+                                    x:TypeArguments="x:Double"
+                                    Android="15"
+                                    iOS="13" />
+                            </Label.FontSize>
+                        </Label>
+                        <StackLayout
+                            x:Name="SupportersAvatarList"
+                            Padding="20,0,0,0"
+                            Orientation="Horizontal"
+                            Spacing="10" />
+                    </StackLayout>
+                </ContentView>
                 <!--  - COMMENT LISTS SECTION  -->
                 <StackLayout
                     x:Name="stackRowElement"
@@ -329,28 +385,37 @@
                     </StackLayout.Padding>
                     <StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <customControl:MuseoLabel
-                                Margin="10,0,0,0"
+                            <Label
+                                Margin="20,0,0,0"
                                 FontAttributes="Bold"
                                 HorizontalOptions="StartAndExpand"
-                                Text="Comments">
-                                <customControl:MuseoLabel.FontSize>
+                                Text="Comments"
+                                TextColor="{StaticResource GrayDefault}">
+                                <Label.Effects>
+                                    <effects:LabelFontFamilyEffect />
+                                </Label.Effects>
+                                <Label.FontSize>
                                     <OnPlatform
                                         x:TypeArguments="x:Double"
                                         Android="15"
                                         iOS="13" />
-                                </customControl:MuseoLabel.FontSize>
-                            </customControl:MuseoLabel>
+                                </Label.FontSize>
+                            </Label>
                             <StackLayout
                                 HorizontalOptions="End"
-                                IsVisible="false"
+                                IsVisible="False"
                                 Orientation="Horizontal"
                                 Spacing="10">
-                                <customControl:MuseoLabel
+                                <Label
                                     Margin="0,0,10,0"
                                     FontSize="19"
                                     HorizontalOptions="End"
-                                    Text="Sort by Top" />
+                                    Text="Sort by Top"
+                                    TextColor="{StaticResource ColorGreenDimB}">
+                                    <Label.Effects>
+                                        <effects:LabelFontFamilyEffect />
+                                    </Label.Effects>
+                                </Label>
                                 <Label
                                     Margin="0,0,10,0"
                                     Style="{StaticResource IconFont}"
@@ -359,26 +424,73 @@
                         </StackLayout>
                         <BoxView BackgroundColor="{StaticResource BoxGrayBorderColor}" HeightRequest="1" />
                     </StackLayout>
-                    <StackLayout x:Name="CommentItems" />
+                    <StackLayout x:Name="CommentItems" HorizontalOptions="FillAndExpand" />
                 </StackLayout>
             </Grid>
         </ScrollView>
 
         <!--  -  POST BUTTON GROUP  -->
-        <Grid
-            Grid.Row="2"
-            BackgroundColor="White"
-            RowSpacing="0">
+        <Grid Grid.Row="2" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5" />
                 <RowDefinition Height="0.5" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnPlatform
+                            x:TypeArguments="GridLength"
+                            Android="Auto"
+                            iOS="Auto" />
+                    </RowDefinition.Height>
+                </RowDefinition>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnPlatform
+                            x:TypeArguments="GridLength"
+                            Android="1"
+                            iOS="1" />
+                    </RowDefinition.Height>
+                </RowDefinition>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnPlatform
+                            x:TypeArguments="GridLength"
+                            Android="Auto"
+                            iOS="Auto" />
+                    </RowDefinition.Height>
+                </RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Grid.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsFocused, Source={x:Reference multiEntry}}"
+                    TargetType="Grid"
+                    Value="True">
+                    <Setter Property="HeightRequest">
+                        <Setter.Value>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="140"
+                                iOS="500" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+                <DataTrigger
+                    Binding="{Binding IsFocused, Source={x:Reference multiEntry}}"
+                    TargetType="Grid"
+                    Value="False">
+                    <Setter Property="HeightRequest">
+                        <Setter.Value>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="60"
+                                iOS="70" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Grid.Triggers>
 
             <BoxView
                 Grid.Row="0"
@@ -389,50 +501,71 @@
             <BoxView
                 Grid.Row="1"
                 Grid.ColumnSpan="2"
-                BackgroundColor="#66D3D3D3"
+                BackgroundColor="#20000000"
                 HorizontalOptions="FillAndExpand" />
-
-            <ffImage:CachedImage
-                Grid.Row="2"
-                Grid.Column="0"
-                Margin="20,10"
-                Aspect="AspectFit"
-                BackgroundColor="Transparent"
-                HeightRequest="50"
-                Source="{Binding CurrentContact.PhotoURL}"
-                WidthRequest="50">
-                <ffImage:CachedImage.Transformations>
-                    <ffImageTransformation:CircleTransformation />
-                </ffImage:CachedImage.Transformations>
-            </ffImage:CachedImage>
-
-            <customControl:MultilineEntry
+            <Editor
                 x:Name="multiEntry"
                 Grid.Row="2"
-                Grid.Column="1"
-                BottomLineColor="{StaticResource BoxGrayBorderColor}"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="10,10,0,0"
+                AutoSize="TextChanges"
                 IsEnabled="{Binding IsWritePostEnabled}"
                 Keyboard="Text"
-                MultiText="{Binding CommentText, Mode=TwoWay}"
-                MyText="{localization:Render CommentPlaceholderText}"
-                PlaceholderEnabled="True">
-                <customControl:MultilineEntry.Margin>
+                Placeholder="Type a comments"
+                Text="{Binding CommentText, Mode=TwoWay}"
+                TextChanged="MultiEntry_TextChanged">
+                <Editor.FontSize>
                     <OnPlatform
-                        x:TypeArguments="Thickness"
-                        Android="0,0,20,0"
-                        iOS="0,10,20,10" />
-                </customControl:MultilineEntry.Margin>
-            </customControl:MultilineEntry>
+                        x:TypeArguments="x:Double"
+                        Android="13"
+                        iOS="16" />
+                </Editor.FontSize>
+                <Editor.Effects>
+                    <effects:InputViewEffect NumberOfLines="4">
+                        <effects:InputViewEffect.LineColor>
+                            <OnPlatform
+                                x:TypeArguments="Color"
+                                Android="Transparent"
+                                iOS="#CFD1D4" />
+                        </effects:InputViewEffect.LineColor>
+                        <effects:InputViewEffect.Thickness>
+                            <OnPlatform
+                                x:TypeArguments="x:Int32"
+                                Android="4"
+                                iOS="0" />
+                        </effects:InputViewEffect.Thickness>
+                    </effects:InputViewEffect>
+                </Editor.Effects>
+            </Editor>
 
-            <StackLayout
-                x:Name="hidingStack"
+            <BoxView
                 Grid.Row="3"
                 Grid.ColumnSpan="2"
-                Margin="20,0,0,10"
-                IsVisible="{Binding HasFocus, Source={x:Reference multiEntry}, Path=MultilineEntry.HasFocus}"
+                Margin="10,0"
+                BackgroundColor="{StaticResource BoxGrayBorderColor}" />
+            <StackLayout
+                Grid.Row="4"
+                Grid.ColumnSpan="2"
+                Margin="20,5,0,5"
+                BackgroundColor="Transparent"
+                IsVisible="{Binding IsFocused, Source={x:Reference multiEntry}}"
                 Orientation="Horizontal">
-                <ContentView Padding="0,10,10,10" HorizontalOptions="Start">
-                    <Label Style="{StaticResource IconFont}" Text="{StaticResource fa-camera}" />
+                <ContentView Padding="0,0,10,0" HorizontalOptions="Start">
+                    <Label
+                        Style="{StaticResource IconFont}"
+                        Text="{StaticResource fa-camera}"
+                        VerticalTextAlignment="Center">
+                        <Label.FontSize>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="20"
+                                iOS="10" />
+                        </Label.FontSize>
+                        <Label.Effects>
+                            <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" />
+                        </Label.Effects>
+                    </Label>
                     <ContentView.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding CameraCommand}" NumberOfTapsRequired="1" />
                     </ContentView.GestureRecognizers>
@@ -440,15 +573,28 @@
                 <Button
                     x:Name="btnPost"
                     BackgroundColor="{StaticResource GreenColorDim}"
-                    TextColor="White"
                     Command="{Binding WriteCommentCommand}"
                     HorizontalOptions="Start"
                     IsEnabled="{Binding IsWritePostEnabled}"
                     Text="{localization:Render PostText}"
-                    WidthRequest="80" />
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    WidthRequest="80">
+                    <Button.FontSize>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="14"
+                            iOS="16" />
+                    </Button.FontSize>
+                    <Button.HeightRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="37"
+                            iOS="27" />
+                    </Button.HeightRequest>
+                </Button>
             </StackLayout>
         </Grid>
-
         <!--  POST OPTIONS MODAL  -->
         <ContentView
             Grid.RowSpan="3"
@@ -477,7 +623,6 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
                 <ContentView Grid.Row="0">
                     <Label
                         BackgroundColor="Transparent"
@@ -499,9 +644,15 @@
                         <TapGestureRecognizer Command="{Binding ClosePostOptionsCommand}" NumberOfTapsRequired="1" />
                     </ContentView.GestureRecognizers>
                 </ContentView>
-
                 <StackLayout Grid.Row="1" Orientation="Horizontal">
-                    <customControl:MuseoLabel HorizontalOptions="StartAndExpand" Text="Edit Current Post" />
+                    <Label
+                        HorizontalOptions="StartAndExpand"
+                        Text="Edit Current Post"
+                        TextColor="{StaticResource GrayDefault}">
+                        <Label.Effects>
+                            <effects:LabelFontFamilyEffect />
+                        </Label.Effects>
+                    </Label>
                     <Label
                         HorizontalOptions="End"
                         Style="{StaticResource IconFont}"
@@ -513,11 +664,16 @@
                             NumberOfTapsRequired="1" />
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
-
                 <BoxView Grid.Row="2" BackgroundColor="{StaticResource BoxGrayBorderColor}" />
-
                 <StackLayout Grid.Row="3" Orientation="Horizontal">
-                    <customControl:MuseoLabel HorizontalOptions="StartAndExpand" Text="Delete Current Post" />
+                    <Label
+                        HorizontalOptions="StartAndExpand"
+                        Text="Delete Current Post"
+                        TextColor="{StaticResource GrayDefault}">
+                        <Label.Effects>
+                            <effects:LabelFontFamilyEffect />
+                        </Label.Effects>
+                    </Label>
                     <Label
                         HorizontalOptions="End"
                         Style="{StaticResource IconFont}"
@@ -529,14 +685,16 @@
                             NumberOfTapsRequired="1" />
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
-
-                <customControl:MuseoLabel
+                <Label
                     Grid.Row="4"
                     HorizontalOptions="Center"
                     Text="{Binding DeletingMessage}"
-                    TextColor="{StaticResource ColorRed}" />
-
+                    TextColor="{StaticResource ColorRed}">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                </Label>
             </Grid>
         </ContentView>
     </Grid>
-</local:AppViewBase>
+</ContentPage>

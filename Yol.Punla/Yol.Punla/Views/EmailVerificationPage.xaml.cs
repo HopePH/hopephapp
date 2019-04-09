@@ -6,7 +6,7 @@ namespace Yol.Punla.Views
 {
     [ModuleView]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EmailVerificationPage : Xamarin.Forms.ContentPage //AppViewBase
+	public partial class EmailVerificationPage : AppViewBase
     {
 		public EmailVerificationPage ()
 		{

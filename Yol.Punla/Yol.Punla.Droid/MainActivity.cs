@@ -26,6 +26,8 @@ using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 using Yol.Punla.Views;
 using FFImageLoading.Forms.Platform;
+using Prism.Events;
+using Yol.Punla.ViewModels;
 
 namespace Yol.Punla.Droid
 {
@@ -49,9 +51,9 @@ namespace Yol.Punla.Droid
             CachedImageRenderer.Init(true);
             UserDialogs.Init(this);
             GetPackageInfoAndHashKey();
-            BackgroundedMessagingCenter();
             app = new App(new AndroidInitializer());
             LoadApplication(app);
+            BackgroundedMessagingCenter();
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
         }
 
@@ -71,7 +73,6 @@ namespace Yol.Punla.Droid
 
         protected override void OnDestroy()
         { 
-            UnsubscribeToMessagingCenter();
             base.OnDestroy();
         }
 
@@ -102,7 +103,7 @@ namespace Yol.Punla.Droid
 
         private void BackgroundedMessagingCenter()
         {
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "LogonPostFeedToHub", message =>
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<LogonPostFeedToHubEventModel>().Subscribe((message) =>
             {
                 ExtendedDataHolder.Instance.Clear();
                 ExtendedDataHolder.Instance.PutExtra("CurrentUser", JsonConvert.SerializeObject(message.CurrentUser));
@@ -110,8 +111,8 @@ namespace Yol.Punla.Droid
                 var intent = new Intent(this, typeof(PostFeedService));
                 StartService(intent);
             });
-
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "AddUpdatePostFeedToHub", message =>
+            
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<AddUpdatePostFeedToHubEventModel>().Subscribe((message) =>
             {
                 ExtendedDataHolder.Instance.Clear();
                 ExtendedDataHolder.Instance.PutExtra("CurrentUser", JsonConvert.SerializeObject(message.CurrentUser));
@@ -120,8 +121,7 @@ namespace Yol.Punla.Droid
                 var intent = new Intent(this, typeof(PostFeedService));
                 StartService(intent);
             });
-
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "LikeOrUnlikePostFeedToHub", message =>
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<LikeOrUnlikePostFeedToHubEventModel>().Subscribe((message) =>
             {
                 ExtendedDataHolder.Instance.Clear();
                 ExtendedDataHolder.Instance.PutExtra("CurrentUser", JsonConvert.SerializeObject(message.CurrentUser));
@@ -130,8 +130,8 @@ namespace Yol.Punla.Droid
                 var intent = new Intent(this, typeof(PostFeedService));
                 StartService(intent);
             });
-
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "DeletePostFeedToHub", message =>
+            
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<DeletePostFeedToHubEventModel>().Subscribe((message) =>
             {
                 ExtendedDataHolder.Instance.Clear();
                 ExtendedDataHolder.Instance.PutExtra("CurrentUser", JsonConvert.SerializeObject(message.CurrentUser));
@@ -141,15 +141,7 @@ namespace Yol.Punla.Droid
                 StartService(intent);
             });
         }
-
-        private void UnsubscribeToMessagingCenter()
-        {
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "LogonPostFeedToHub");
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "AddUpdatePostFeedToHub");
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "LikeOrUnlikePostFeedToHub");
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "DeletePostFeedToHub");
-        }
-
+        
         private bool IsHitDeviceBackButton()
         {
             var navigationStackService = AppUnityContainer.Instance.Resolve<INavigationStackService>();

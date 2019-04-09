@@ -3,6 +3,7 @@ using Yol.Punla.AttributeBase;
 
 namespace Yol.Punla.ViewModels
 {
+    //change this to like EventValidator : AbstractValidator<Event> in SA
     [DefaultModule]
     public class AccountRegistrationPageValidator : AbstractValidator<AccountRegistrationPageViewModel>
     {
@@ -13,18 +14,18 @@ namespace Yol.Punla.ViewModels
 
         public AccountRegistrationPageValidator()
         {
-            RuleFor(x => x.EmailAddress)
-               .Matches(@"^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}(\.[A-Za-z]{2})?$")
-               .WithMessage(EMAILADDMSG);
+            //RuleFor(x => x.Cu.EmailAddress)
+            //   .Matches(@"^\w+[\w-\.]*\@\w+((-\w+)|(\w*))\.[a-z]{2,3}(\.[A-Za-z]{2})?$")
+            //   .WithMessage(EMAILADDMSG);
 
-            RuleFor(x => x.AliasName)
-              .NotEmpty().WithMessage(ALIASEMPTY);
+            //RuleFor(x => x.AliasName)
+            //  .NotEmpty().WithMessage(ALIASEMPTY);
 
-            RuleFor(x => x.MobilePhoneNo)
-             .NotEmpty().WithMessage(MOBILENOEMPTY);
+            //RuleFor(x => x.MobilePhoneNo)
+            // .NotEmpty().WithMessage(MOBILENOEMPTY);
 
-            RuleFor(x => x.Picture).NotEqual(AppImages.PandaAvatar)
-                .WithMessage(DEFAULTPICCHANGE);
+            //RuleFor(x => x.Picture).NotEqual(AppImages.PandaAvatar)
+            //    .WithMessage(DEFAULTPICCHANGE);
         }
     }
 }

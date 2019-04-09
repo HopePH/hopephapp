@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
@@ -27,6 +28,14 @@
             VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnPlatform
+                            x:TypeArguments="GridLength"
+                            Android="0"
+                            iOS="*" />
+                    </RowDefinition.Height>
+                </RowDefinition>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -39,8 +48,9 @@
                 Source="icon"
                 VerticalOptions="Start"
                 WidthRequest="124" />
+            <BoxView Grid.Row="1" />
             <Button
-                Grid.Row="1"
+                Grid.Row="2"
                 Margin="60,194,60,0"
                 BackgroundColor="#FF7ED321"
                 BorderRadius="4"
@@ -51,39 +61,64 @@
                 Text="{localization:Render LogonWithUserName}"
                 TextColor="White" />
             <ContentView
-                Grid.Row="2"
+                Grid.Row="3"
                 Padding="20,12,20,0"
                 HorizontalOptions="Center"
                 IsVisible="True"
                 VerticalOptions="FillAndExpand">
                 <StackLayout Grid.Row="2" Orientation="Horizontal">
-                    <customControl:MuseoLabel
-                        FontSize="18"
+                    <Label
                         Text="{localization:Render DontHaveAccountYetText}"
                         TextColor="{StaticResource ColorGreenDimB}"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center">
+                        <Label.Effects>
+                            <effects:LabelFontFamilyEffect />
+                        </Label.Effects>
+                        <Label.HorizontalOptions>
+                            <OnPlatform
+                                x:TypeArguments="LayoutOptions"
+                                Android="Fill"
+                                iOS="Start" />
+                        </Label.HorizontalOptions>
+                        <Label.FontSize>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="18"
+                                iOS="16" />
+                        </Label.FontSize>
+                    </Label>
                     <ContentView Padding="0,10">
-                        <customControl:MuseoLabel
-                            FontSize="18"
-                            IsUnderlined="True"
-                            Text="{localization:Render SignUpText}"
-                            TextColor="{StaticResource ColorGreenDimB}" />
+                        <Label Text="{localization:Render SignUpText}" TextColor="{StaticResource ColorGreenDimB}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                            <Label.FontSize>
+                                <OnPlatform
+                                    x:TypeArguments="x:Double"
+                                    Android="18"
+                                    iOS="16" />
+                            </Label.FontSize>
+                        </Label>
                         <ContentView.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding GoToSignUpCommand}" NumberOfTapsRequired="1" />
                         </ContentView.GestureRecognizers>
                     </ContentView>
                 </StackLayout>
             </ContentView>
-            <customControl:MuseoLabel
-                Grid.Row="3"
+            <Label
+                Grid.Row="4"
                 Margin="0,20,0,0"
                 FontSize="18"
                 HorizontalOptions="Center"
                 Text="{localization:Render ForgotPassword}"
                 TextColor="{StaticResource ColorGreenDimB}"
-                VerticalOptions="Start" />
+                VerticalOptions="Start">
+                <Label.Effects>
+                    <effects:LabelFontFamilyEffect />
+                </Label.Effects>
+            </Label>
             <ContentView
-                Grid.RowSpan="3"
+                Grid.RowSpan="4"
                 IsVisible="{Binding IsBusy}"
                 Style="{StaticResource ContentViewForActivityIndicator}">
                 <StackLayout
@@ -94,12 +129,16 @@
                         IsRunning="{Binding IsBusy, Mode=OneWay}"
                         IsVisible="{Binding IsBusy}"
                         Style="{StaticResource ActivityIndicatorMain}" />
-                    <customControl:MuseoLabel
+                    <Label
                         HorizontalOptions="Center"
                         Opacity="1"
                         Style="{StaticResource LabelSmall}"
                         Text="{localization:Render AuthenticatingCredentialsLoadingText}"
-                        VerticalOptions="Center" />
+                        VerticalOptions="Center">
+                        <Label.Effects>
+                            <effects:LabelFontFamilyEffect />
+                        </Label.Effects>
+                    </Label>
                 </StackLayout>
             </ContentView>
         </Grid>

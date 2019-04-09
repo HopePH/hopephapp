@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:AppViewBase
+<template:AppViewBase
     x:Class="Yol.Punla.Views.PostFeedAddEditPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -10,7 +10,6 @@
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:template="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla">
     <Grid
         Padding="0"
@@ -28,7 +27,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <template:PostNavigationBar Grid.Row="0" Grid.ColumnSpan="2" />
+        <!--<template:PostNavigationBar Grid.Row="0" Grid.ColumnSpan="2" />-->
 
         <ffImage:CachedImage
             Grid.Row="1"
@@ -123,4 +122,4 @@
             </StackLayout>
         </ContentView>
     </Grid>
-</local:AppViewBase>
+</template:AppViewBase>

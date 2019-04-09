@@ -2,6 +2,12 @@
 alfon
 1. get test projects from rey
 
+rey
+fix the nav page header color
+simplify accountregistrationpage xaml
+change this <!--  AVATAR MODAL  --> to rgpluggins
+change to //change this to like EventValidator : AbstractValidator<Event> in SA
+
 community
 1. finalize look of request page
 2. the EmailVerificationPage page, also ViewModel logic of this not good

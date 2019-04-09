@@ -3,9 +3,12 @@
 using Acr.UserDialogs;
 using FluentValidation;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using PropertyChanged;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
@@ -13,8 +16,8 @@ using System.Windows.Input;
 using Unity;
 using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
+using Yol.Punla.Entity;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
 using Yol.Punla.Messages;
@@ -34,19 +37,22 @@ namespace Yol.Punla.ViewModels
         private readonly IKeyboardHelper _keyboardHelper;
         private readonly IPostFeedManager _postFeedManager;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
+        private readonly IEventAggregator _eventAggregator;
 
         public ICommand ClosePostOptionsCommand => new DelegateCommand(ClosePostOptions);
         public ICommand ShowPostOptionsCommand => new DelegateCommand<Entity.PostFeed>(ShowPostOptions);
         public ICommand NavigateBackCommand => new DelegateCommand(GoBack);
         public ICommand WriteCommentCommand => new DelegateCommand(WriteComment);
-        public ICommand SupportCommand => new DelegateCommand<Entity.PostFeed>(SupportPost);
+        public ICommand SupportCommand => new DelegateCommand(SupportPost);
         public ICommand CameraCommand => new DelegateCommand(async () => await TakeCamera());
         public ICommand DeleteCommentCommand => new DelegateCommand(DeleteSelfComment);
         public ICommand EditCommentCommand => new DelegateCommand(EditSelfComment);
-        public Entity.PostFeed CurrentPostFeed { get; set; }
-        public Entity.Contact CurrentContact { get; set; }
-        public Entity.PostFeed Comment { get; set; }
-        public Entity.PostFeed SelectedComment { get; set; }
+        public ObservableCollection<Views.CommentItem> CommentItems { get; set; } = new ObservableCollection<Views.CommentItem>();
+        public IEnumerable<string> SupportersAvatars = new List<string>();
+        public PostFeed CurrentPostFeed { get; set; }
+        public Contact CurrentContact { get; set; }
+        public PostFeed Comment { get; set; }
+        public PostFeed SelectedComment { get; set; }
         public string PostImageUrl { get; set; }
         public string PlaceholderText { get; set; }
         public string CommentText { get; set; }
@@ -63,11 +69,13 @@ namespace Yol.Punla.ViewModels
             IPostFeedManager postFeedManager,
             INavigationService navigationService,
             INavigationStackService navigationStackService,
+            IEventAggregator eventAggregator,
             PostFeedDetailsPageValidator validator) : base(navigationService)
         {
             _postFeedManager = postFeedManager;
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
+            _eventAggregator = eventAggregator;
             _validator = validator;
             _keyboardHelper = AppUnityContainer.InstanceDependencyService.Get<IKeyboardHelper>();
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
@@ -76,36 +84,15 @@ namespace Yol.Punla.ViewModels
 
         public override void PreparingPageBindings()
         {
-            if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
-            {
-                CurrentPostFeed = (Entity.PostFeed)PassingParameters["SelectedPost"];
-                if (!string.IsNullOrEmpty(CurrentPostFeed.ContentURL))
-                    HasPostedImage = true;
-
-                CurrentContact = (Entity.Contact)PassingParameters["CurrentUser"];
-            }
-
-            if (IsInternetConnected)
-                MessagingCenter.Send(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) }, "LogonPostFeedToHub");
-
-            IsWritePostEnabled = true;
-            IsBusy = false;
-            DeletingMessage = "";
-        }
-
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs", message =>
+            _eventAggregator.GetEvent<LikeOrUnLikeAPostFeedSubsEventModel>().Subscribe((message) =>
             {
                 try
                 {
                     if (!IsBusy)
                     {
                         HasIncomingLike = true;
-                        var currentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.PostFeed>(message.CurrentPost);
-                        var posterUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Entity.Contact>(message.CurrentUser);
+                        var currentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<PostFeed>(message.CurrentPost);
+                        var posterUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contact>(message.CurrentUser);
 
                         SelectedComment = currentPost;
 
@@ -115,18 +102,18 @@ namespace Yol.Punla.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    ProcessErrorReportingForHockeyApp(ex);
+                    ProcessErrorReportingForRaygun(ex);
                 }
             });
 
-            MessagingCenter.Subscribe<HttpResponseMessage<Contract.PostFeedK>>(this, "AddUpdatePostFeedToHubResultCode", message =>
+            _eventAggregator.GetEvent<AddUpdatePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
             {
                 IsBusy = false;
 
                 if (message.HttpStatusCode == HttpStatusCode.OK)
                 {
                     IsWritePostEnabled = true;
-                    var newlyAddedComment = ServiceMapper.Instance.Map<Entity.PostFeed>(message.Result);
+                    var newlyAddedComment = ServiceMapper.Instance.Map<PostFeed>(message.Result);
                     LatestPostUpdatedPostFeedId = newlyAddedComment.PostFeedID;
                     _postFeedManager.SaveNewPostToLocal(newlyAddedComment);
                     CurrentPostFeed.Comments.Add(newlyAddedComment);
@@ -137,7 +124,7 @@ namespace Yol.Punla.ViewModels
                     UserDialogs.Instance.Alert(AppStrings.LoadingErrorPostFeed, "Error", "Ok");
             });
 
-            MessagingCenter.Subscribe<HttpResponseMessage<int>>(this, "DeletePostFeedToHubResultCode", message =>
+            _eventAggregator.GetEvent<DeletePostFeedToHubResultCodeEventModel>().Subscribe((message) =>
             {
                 DeletingMessage = "";
                 IsShowPostOptions = false;
@@ -145,22 +132,33 @@ namespace Yol.Punla.ViewModels
                 if (message.HttpStatusCode != HttpStatusCode.OK)
                     UserDialogs.Instance.Alert(AppStrings.DeletingPostNotSuccessful, "Error", "Ok");
             });
-        }
 
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing(); 
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs");
-            MessagingCenter.Unsubscribe<HttpResponseMessage<Contract.PostFeedK>>(this, "AddUpdatePostFeedToHubResultCode");
-            MessagingCenter.Unsubscribe<HttpResponseMessage<int>>(this, "DeletePostFeedToHubResultCode");
+            if (PassingParameters != null && PassingParameters.ContainsKey("SelectedPost"))
+            {
+                CurrentPostFeed = (PostFeed)PassingParameters["SelectedPost"];
+                if (!string.IsNullOrEmpty(CurrentPostFeed.ContentURL))
+                    HasPostedImage = true;
+
+                CurrentContact = (Contact)PassingParameters["CurrentUser"];
+            }
+
+            if(PassingParameters != null && PassingParameters.ContainsKey("SupportersAvatars"))
+                SupportersAvatars = PassingParameters["SupportersAvatars"] as List<string>;
+
+            if (IsInternetConnected)
+                _eventAggregator.GetEvent<LogonPostFeedToHubEventModel>().Publish(new PostFeedMessage { CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact) });
+
+            IsWritePostEnabled = true;
+            IsBusy = false;
+            DeletingMessage = "";
         }
 
         public void SendErrorToHockeyApp(Exception ex)
         {
-            ProcessErrorReportingForHockeyApp(ex, true);
+            ProcessErrorReportingForRaygun(ex);
         }
 
-        public void AddDeductOneLikeToThisPostFromLocal(Entity.PostFeed postFeed, Entity.Contact userWhoLiked)
+        public void AddDeductOneLikeToThisPostFromLocal(PostFeed postFeed, Contact userWhoLiked)
         {
             var postToLike = _postFeedManager.GetPostFeed(postFeed.PostFeedID);
 
@@ -178,9 +176,9 @@ namespace Yol.Punla.ViewModels
                 CurrentPostFeed = updatePostFeed;
         }
 
-        public Entity.PostFeed ReadPostFeedFromLocal(Entity.PostFeed newPost) => _postFeedManager.GetPostFeed(newPost.PostFeedID);
+        public Entity.PostFeed ReadPostFeedFromLocal(PostFeed newPost) => _postFeedManager.GetPostFeed(newPost.PostFeedID);
 
-        public void DeletePostFeedFromLocal(Entity.PostFeed newPost, bool getLocalFirst = false)
+        public void DeletePostFeedFromLocal(PostFeed newPost, bool getLocalFirst = false)
         {
             if (getLocalFirst)
             {
@@ -192,7 +190,7 @@ namespace Yol.Punla.ViewModels
             _postFeedManager.DeletePostInLocal(newPost);
         }
 
-        public void SaveCommentToLocal(Entity.PostFeed newComment)
+        public void SaveCommentToLocal(PostFeed newComment)
         {
             _postFeedManager.SaveNewPostToLocal(newComment);
             CurrentPostFeed.Comments.Add(newComment);
@@ -215,7 +213,7 @@ namespace Yol.Punla.ViewModels
                 }
                 else
                 {
-                    Comment = new Entity.PostFeed
+                    Comment = new PostFeed
                     {
                         Title = $"A new post from @{CurrentContact.FirstName} {CurrentContact.LastName}",
                         ContentText = CommentText ?? "",
@@ -229,7 +227,7 @@ namespace Yol.Punla.ViewModels
                         PosterProfilePhoto = CurrentContact.PhotoURL,
                         DatePosted = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).ToString(Constants.DateTimeFormat),
                         DateModified = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc).ToString(Constants.DateTimeFormat),
-                        SupportersIdsList = new System.Collections.Generic.List<int>(),
+                        SupportersIdsList = new List<int>(),
                         NoOfSupports = 0,
                         PostFeedLevel = 1,
                         PostFeedParentId = CurrentPostFeed.PostFeedID,
@@ -240,6 +238,9 @@ namespace Yol.Punla.ViewModels
                 
                 IsWritePostEnabled = false;
                 SendAddEditToBackground(Comment, CurrentContact);   // Updating the UI before sending updated comment to background
+
+                _eventAggregator.GetEvent<UpdateCommentListEventModel>().Publish(Comment);
+
                 _keyboardHelper.HideKeyboard();
                 CommentText = string.Empty;
             }
@@ -252,7 +253,7 @@ namespace Yol.Punla.ViewModels
                 CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(postFeed),
                 CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(contact)
             };
-            MessagingCenter.Send(postFeedMessage, "AddUpdatePostFeedToHub");
+            _eventAggregator.GetEvent<AddUpdatePostFeedToHubEventModel>().Publish(postFeedMessage);
 
             //chito. added this for FAKE only because navigating to PostFeedPage after editing a post is called only after subscribing to messaging center coming from Native.
             AddUpdatePostFeedToHubFake();
@@ -267,16 +268,16 @@ namespace Yol.Punla.ViewModels
             _postFeedManager.SaveNewPostToLocal(newlyAddedComment);
         }
 
-        private void GoBack()
+        private async void GoBack()
         {
             _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetToLocal", "true");
             _keyboardHelper.HideKeyboard();
-            NavigateBackHelper(PassingParameters);
+            await NavigateBackHelper(PassingParameters);
         }
 
-        private void SupportPost(Entity.PostFeed SelectedPost)
+        private void SupportPost()
         {
-            var updatedSelectedPost = _postFeedManager.GetPostFeed(SelectedPost.PostFeedID);
+            var updatedSelectedPost = _postFeedManager.GetPostFeed(CurrentPostFeed.PostFeedID);
             
             if (ProcessInternetConnection(true))
             {
@@ -285,9 +286,9 @@ namespace Yol.Punla.ViewModels
                     CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(updatedSelectedPost),
                     CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact)
                 };
-
-                MessagingCenter.Send(postFeedMessage, "LikeOrUnlikePostFeedToHub");
-                SelectedPost.IsSelfSupported = !SelectedPost.IsSelfSupported;
+                _eventAggregator.GetEvent<LikeOrUnlikePostFeedToHubEventModel>().Publish(postFeedMessage);
+                CurrentPostFeed.IsSelfSupported = !CurrentPostFeed.IsSelfSupported;
+                RaisePropertyChanged(nameof(CurrentPostFeed.IsSelfSupported));
                 var updatePostFeed = _postFeedManager.UpdatePostFeedAndPostFeedLikeToLocal(updatedSelectedPost, CurrentContact);
 
                 if (CurrentPostFeed.Equals(updatedSelectedPost))
@@ -323,7 +324,7 @@ namespace Yol.Punla.ViewModels
             };
 
             DeletingMessage = AppStrings.DeletingComment;
-            MessagingCenter.Send(postFeedMessage, "DeletePostFeedToHub");
+            _eventAggregator.GetEvent<DeletePostFeedToHubEventModel>().Publish(postFeedMessage);
             DeletePostFeedFromLocal(Comment);
         }
 

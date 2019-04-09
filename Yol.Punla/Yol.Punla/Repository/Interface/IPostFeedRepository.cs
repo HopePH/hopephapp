@@ -7,6 +7,7 @@ namespace Yol.Punla.Repository
         IEnumerable<Entity.PostFeed> GetAllPostsFromLocal();
         IEnumerable<Entity.PostFeed> GetCommentsFromLocal(int postFeedId);
         IEnumerable<Entity.PostFeedLike> GetPostFeedLikes();
+        IEnumerable<Entity.PostFeedLike> GetPostFeedLikesByPostFeedId(int postFeedId);
 
         Entity.PostFeedLike GetPostFeedLikeByContactId(int contactId, int postFeedId);
         Entity.PostFeed GetPostFeedById(int postFeedId);

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 // reference : https://developer.xamarin.com/guides/xamarin-forms/application-fundamentals/effects/creating/
-[assembly: ResolutionGroupName("Yol.Punla")]
+[assembly: ResolutionGroupName("Yol.Punla.Effects")]
 [assembly: ExportEffect(typeof(Yol.Punla.Droid.Effects.SliderColorEffectDroid), "SliderColorEffect")]
 namespace Yol.Punla.Droid.Effects
 {

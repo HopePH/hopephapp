@@ -23,9 +23,9 @@ namespace Yol.Punla.GatewayAccess
 
         public async Task<int> PostReceiver(Contact receiver)
         {
-            //chito. let's assume that the newly inserted contact has an ID of 1000
+            //chito. let's assume that the newly inserted contact has an ID of 1234
             await Task.Delay(1);
-            return 1000;
+            return 1234;
         }
 
         public async Task<string> PostVerificationCode(string emailAddress)

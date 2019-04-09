@@ -4,6 +4,7 @@
  **/
 using Microsoft.AspNet.SignalR.Client;
 using Newtonsoft.Json;
+using Prism.Events;
 using System;
 using System.Diagnostics;
 using System.Net;
@@ -14,6 +15,7 @@ using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
 using Yol.Punla.Messages;
+using Unity;
 
 namespace Yol.Punla.Utility
 {
@@ -49,7 +51,7 @@ namespace Yol.Punla.Utility
                         try
                         {
                             if (!message.CurrentPost.IsDelete && message.CurrentUser.EmailAddress.ToLower().Trim() != Iuser.ToLower().Trim())
-                                MessagingCenter.Send(message, "AddUpdatePostSubs");
+                                AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<ViewModels.AddUpdatePostSubsEventModel>().Publish(message);
                         }
                         catch (Exception)
                         {
@@ -66,7 +68,7 @@ namespace Yol.Punla.Utility
                         try
                         {
                             if (message.CurrentPost.IsDelete && message.CurrentUser.EmailAddress.ToLower().Trim() != Iuser.ToLower().Trim())
-                                MessagingCenter.Send(message, "DeletePostFeedSubs");
+                                AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<ViewModels.DeletePostFeedSubsEventModel>().Publish(message);
                         }
                         catch (Exception)
                         {
@@ -83,7 +85,7 @@ namespace Yol.Punla.Utility
                         try
                         {
                             if (!message.CurrentPost.IsDelete && message.CurrentUser.EmailAddress.ToLower().Trim() != Iuser.ToLower().Trim())
-                                MessagingCenter.Send(message, "LikeOrUnLikeAPostFeedSubs");
+                                AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<ViewModels.LikeOrUnlikePostFeedToHubEventModel>().Publish(message);
                         }
                         catch (Exception)
                         {
@@ -113,11 +115,11 @@ namespace Yol.Punla.Utility
         public static async Task<HttpStatusCode> LikeOrUnlikePost(bool isSupport, int postFeedId, int contactId)
         {
             Debug.WriteLine("HOPEPH Supporting a post feed.");
-            var jsonContent = new StringContent("", Encoding.UTF8, "application/json");
-            string endPoint = AbsolutePath + "PostFeed/LikeOrUnLikeAPost?postFeedId={0}&contactId={1}";
+            var jsonContent = new StringContent(string.Empty, Encoding.UTF8, "application/json");
+            string endPoint = AbsolutePath + $"PostFeed/LikeOrUnLikeAPost?postFeedId={postFeedId}&contactId={contactId}";
 
             HttpClient httpClient = new HttpClient();
-            var result = await httpClient.PostAsync(string.Format(endPoint, postFeedId, contactId), jsonContent);
+            var result = await httpClient.PostAsync(endPoint, jsonContent);
             return result.StatusCode;
         }
 
@@ -128,19 +130,19 @@ namespace Yol.Punla.Utility
             var postingEndPoint = AbsolutePath + "PostFeed/AddNewPostFeed";
 
             var result = await PostRemoteAsync<Contract.PostFeedK>(postingEndPoint, jsonContent);
-            MessagingCenter.Send<HttpResponseMessage<Contract.PostFeedK>>(result, "AddUpdatePostFeedToHubResultCode");
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<ViewModels.AddUpdatePostFeedToHubResultCodeEventModel>().Publish(result);
         }
 
         public static async Task DeleteSelfPostToRemote(int postId)
         {
             Debug.WriteLine("HOPEPH Posting new post feed.");
             var jsonContent = new StringContent("", Encoding.UTF8, "application/json");
-            string endPoint = string.Format(AbsolutePath + "PostFeed/DeletePostFeed?postFeedId={0}&companyName=Hopeph", postId);
+            string endPoint = AbsolutePath + $"PostFeed/DeletePostFeed?postFeedId={postId}&companyName=Hopeph";
 
             HttpClient httpClient = new HttpClient();
             var result = await httpClient.PostAsync(endPoint, jsonContent);
             var resultCode = result.StatusCode;
-            MessagingCenter.Send<HttpResponseMessage<int>>(new HttpResponseMessage<int> { HttpStatusCode = resultCode }, "DeletePostFeedToHubResultCode");    
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<ViewModels.DeletePostFeedToHubResultCodeEventModel>().Publish(new HttpResponseMessage<int> { HttpStatusCode = resultCode });
         }
 
         private static async Task<HttpResponseMessage<T>> PostRemoteAsync<T>(string endPoint, HttpContent httpContent)

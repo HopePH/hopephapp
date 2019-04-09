@@ -1,5 +1,4 @@
-﻿using Acr.UserDialogs;
-using FluentValidation;
+﻿using FluentValidation;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -10,12 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Unity;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Utility;
-using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.NavigationHeap;
 using Yol.Punla.ViewModels.Validators;
 using Yol.Punla.Views;
 
@@ -28,29 +24,38 @@ namespace Yol.Punla.ViewModels
     {
         private readonly IContactManager _userManager;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
-        private readonly INavigationService _navigationService;
-        private readonly INavigationStackService _navigationStackService;
         private IValidator _validator;
-        private string emailAddress;
+        public string emailAddress;
 
         public ICommand SendVerificationCodeCommand => new DelegateCommand(async () => await SendVerificationCode());
-        public ICommand NavigateBackCommand => new DelegateCommand(async () => await GoBack());
         public string VerificationCodeEntered1 { get; set; }
         public string VerificationCodeEntered2 { get; set; }
         public string VerificationCodeEntered3 { get; set; }
         public string VerificationCodeEntered4 { get; set; }
-        public string VerificationCodeEntered { get; set; }
+        public string VerificationCodeEntered
+        {
+            get
+            {
+                try
+                {
+                    string v1 = VerificationCodeEntered1 ?? "";
+                    string v2 = VerificationCodeEntered2 ?? "";
+                    string v3 = VerificationCodeEntered3 ?? "";
+                    string v4 = VerificationCodeEntered4 ?? "";
+                    return v1 + v2 + v3 + v4;
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+        }
         public string VerificationCode { get; set; }
         public bool IsLogonIncorrectMessageDisplayed { get; set; }
 
-        public ConfirmVerificationCodePageViewModel(IServiceMapper serviceMapper, 
-            IAppUser appUser,
-            INavigationService navigationService,
-            INavigationStackService navigationStackService,
+        public ConfirmVerificationCodePageViewModel(INavigationService navigationService,
             IContactManager userManager) : base(navigationService)
-        {
-            _navigationService = navigationService;
-            _navigationStackService = navigationStackService;            
+        {        
             _userManager = userManager;
             _keyValueCacheUtility = AppUnityContainer.Instance.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>();
         }
@@ -68,24 +73,27 @@ namespace Yol.Punla.ViewModels
 
         private async Task SendVerificationCode()
         {
-            if (VerificationCode.HasValue())
+            try
             {
-                VerificationCodeEntered = VerificationCodeEntered1 + VerificationCodeEntered2 + VerificationCodeEntered3 + VerificationCodeEntered4;
-                _validator = new VerificationCodeValidator(VerificationCodeEntered);
-
-                if (ProcessValidationErrors(_validator.Validate(this), true))
+                if (VerificationCode.HasValue())
                 {
-                    try
+                    _validator = new VerificationCodeValidator(VerificationCodeEntered);
+
+                    if (ProcessValidationErrors(_validator.Validate(this)))
                     {
                         IsBusy = true;
-                        var clientFromRemote =  await _userManager.GetContact(emailAddress, true);
+                        var clientFromRemote = await _userManager.GetContact(emailAddress, true);
                         if (clientFromRemote != null) await NavigateSuccess(clientFromRemote);
                     }
-                    catch (Exception ex)
-                    {
-                        ProcessErrorReportingForHockeyApp(ex);
-                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                ProcessErrorReportingForRaygun(ex);
+            }
+            finally
+            {
+                IsBusy = false;
             }
         }
 
@@ -96,11 +104,8 @@ namespace Yol.Punla.ViewModels
                 string newPage = _keyValueCacheUtility.GetUserDefaultsKeyValue("NewPage");
                 _keyValueCacheUtility.RemoveKeyObject("NewPage");
                 _userManager.SaveNewDetails(clientFromRemote);
-                _keyValueCacheUtility.GetUserDefaultsKeyValue("Username", clientFromRemote.UserName);
-                _keyValueCacheUtility.GetUserDefaultsKeyValue("Password", clientFromRemote.Password);
-                _keyValueCacheUtility.GetUserDefaultsKeyValue("WasLogin", "true");
-                _keyValueCacheUtility.GetUserDefaultsKeyValue("WasSignUpCompleted", "true");
-                _keyValueCacheUtility.GetUserDefaultsKeyValue("CurrentContactId", clientFromRemote.RemoteId.ToString());
+                RemoveCacheKeys();
+                AddCacheKeys(clientFromRemote);
 
                 if (string.IsNullOrEmpty(newPage))
                     await ChangeRootAndNavigateToPageHelper(nameof(MainTabbedPage) + AddPagesInTab());
@@ -120,34 +125,22 @@ namespace Yol.Punla.ViewModels
             return path;
         }
 
-        private async Task GetLogonDetailsFromRemoteDBWrongResult(bool isSuccess = true)
+        private void RemoveCacheKeys()
         {
-            if (isSuccess)
-            {
-                IsLogonIncorrectMessageDisplayed = await UserDialogs.Instance.ConfirmAsync(AppStrings.LogonIncorrect);
-                _keyValueCacheUtility.RemoveKeyObject("WasLogin");
-                await ChangeRootAndNavigateToPageHelper(nameof(ViewNames.SignUpPage));
-            }
-
-            IsBusy = false;
+            _keyValueCacheUtility.RemoveKeyObject("Username");
+            _keyValueCacheUtility.RemoveKeyObject("Password");
+            _keyValueCacheUtility.RemoveKeyObject("WasLogin");
+            _keyValueCacheUtility.RemoveKeyObject("WasSignUpCompleted");
+            _keyValueCacheUtility.RemoveKeyObject("CurrentContactId");
         }
 
-        private string ComputeEmailIfTest(string email)
+        private void AddCacheKeys(Entity.Contact clientFromRemote)
         {
-            if (!string.IsNullOrEmpty(email))
-                if (email.ToLower().Trim() == Constants.TESTEMAIL1)
-                {
-                    Guid id = Guid.NewGuid();
-                    string newId = id.ToString();
-
-                    string[] splitTwo = email.Split('@');
-                    string newEmail = splitTwo[0] + newId + "@" + splitTwo[1];
-                    return newEmail;
-                }
-
-            return email;
+            _keyValueCacheUtility.GetUserDefaultsKeyValue("Username", clientFromRemote.UserName);
+            _keyValueCacheUtility.GetUserDefaultsKeyValue("Password", clientFromRemote.Password);
+            _keyValueCacheUtility.GetUserDefaultsKeyValue("WasLogin", "true");
+            _keyValueCacheUtility.GetUserDefaultsKeyValue("WasSignUpCompleted", "true");
+            _keyValueCacheUtility.GetUserDefaultsKeyValue("CurrentContactId", clientFromRemote.RemoteId.ToString());
         }
-        
-        private async Task GoBack() => await NavigateBackHelper();
     }
 }
