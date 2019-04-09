@@ -10,13 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Unity;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
 using Yol.Punla.GatewayAccess;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
 
@@ -61,7 +59,7 @@ namespace Yol.Punla.ViewModels
             IContactManager contactManager,
             IPostFeedManager postFeedManager,
             INavigationService navigationService,
-            INavigationStackService navigationStackService) : base(serviceMapper, appUser)
+            INavigationStackService navigationStackService) : base(navigationService)
         {
             _contactManager = contactManager;
             _postFeedManager = postFeedManager;
@@ -80,7 +78,6 @@ namespace Yol.Punla.ViewModels
             BusyComments = AppStrings.LoadingNotifications;
             _keyValueCacheUtility.RemoveKeyObject("IsForceToGetToLocal");
             CurrentContact = _contactManager.GetCurrentContactFromLocal();
-            IsShowBackArrow = false;
             Title = "Notifications";
 
             if (IsInternetConnected)
@@ -111,7 +108,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -163,7 +160,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -184,7 +181,7 @@ namespace Yol.Punla.ViewModels
                 SelectedPost.Comments = new ObservableCollection<Entity.PostFeed>(commentList.Where(p => p.PostFeedParentId == SelectedPost.PostFeedID));
                 PassingParameters.Add("CurrentUser", CurrentContact);
                 PassingParameters.Add("SelectedPost", SelectedPost);
-                NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), _navigationStackService, _navigationService, PassingParameters);
+                NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
             }
 
             IsBusy = false;
@@ -209,7 +206,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
             finally
             {

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Prism.Events;
+using System;
 using System.Diagnostics;
 using Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
-using Yol.Punla.Mapper;
 using Yol.Punla.Messages;
 using Yol.Punla.ViewModels;
 
@@ -43,25 +43,12 @@ namespace Yol.Punla.Views
                 viewModel = BindingContext as PostFeedPageViewModel;
         }
 
-        protected override void AttachedPageEvents()
-        {
-            base.AttachedPageEvents();
-            PostsList.ItemSelected += PostsList_ItemSelected;
-        }
-
-        protected override void DetachedPageEvents()
-        {
-            base.DetachedPageEvents();
-            Debug.WriteLine("HOPEPH Unsubscribing to MessengingCenter PostFeedMessage");
-            PostsList.ItemSelected -= PostsList_ItemSelected;
-        }
-
         protected override void SubcribeMessagingCenter()
         {
             //chito. if the current user is not the one who post feed then run this. research locking
             //the messenger subscribe works best onappearing method as constructor is never always called in prism scenario
             base.SubcribeMessagingCenter();            
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "AddUpdatePostSubs", message =>
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<AddUpdatePostSubsEventModel>().Subscribe((message) =>
             {
                 try
                 {
@@ -80,8 +67,8 @@ namespace Yol.Punla.Views
                     viewModel.SendErrorToHockeyApp(ex);
                 }
             });
-
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "DeletePostFeedSubs", message =>
+            
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<DeletePostFeedSubsEventModel>().Subscribe((message) =>
             {
                 try
                 {
@@ -100,8 +87,8 @@ namespace Yol.Punla.Views
                     viewModel.SendErrorToHockeyApp(ex);
                 }
             });
-
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs", message =>
+            
+            AppUnityContainer.Instance.Resolve<LikeOrUnLikeAPostFeedSubsEventModel>().Subscribe((message) =>
             {
                 try
                 {
@@ -119,14 +106,6 @@ namespace Yol.Punla.Views
                     viewModel.SendErrorToHockeyApp(ex);
                 }
             });
-        }
-
-        protected override void UnSubcribeMessagingCenter()
-        {
-            base.UnSubcribeMessagingCenter();
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "AddUpdatePostSubs");
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "DeletePostFeedSubs");
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs");
         }
 
         private void UpdateAddPost(Entity.Contact posterContact, Entity.PostFeed currentPost)
@@ -148,11 +127,6 @@ namespace Yol.Punla.Views
                 return false;
 
             return true;
-        }
-
-        private void PostsList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            viewModel.CommentCommand.Execute(e.SelectedItem);
         }
     }
 }

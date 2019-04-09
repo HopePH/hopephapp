@@ -22,6 +22,18 @@ namespace Yol.Punla.GatewayAccess
         public Task<IEnumerable<PostFeed>> GetPostFeedsWithSpeed(int posterId, int postFeedBaseId, bool isFirstLoad)
             => Task.FromResult(FakeData.FakePostFeeds.Posts);
 
+        public Task<IEnumerable<string>> GetSupportersAvatars(int postFeedId)
+        {
+            List<string> photoUrls = new List<string>();
+            var ids = FakeData.FakePostFeeds.Posts.FirstOrDefault(p => p.PostFeedID == postFeedId)?.SupportersIdsList;
+            foreach (var item in ids)
+            {
+                var posterPhotoUrl = FakeData.FakeUsers.Contacts.FirstOrDefault(c => c.RemoteId == item).PhotoURL;
+                photoUrls.Add(posterPhotoUrl);
+            }
+            return Task.FromResult<IEnumerable<string>>(photoUrls);
+        }
+
         public Task<IEnumerable<PostFeed>> GetTopPostFeeds(int posterId) => Task.FromResult(FakeData.FakePostFeeds.Posts);
 
         public Task<int> SavePostToServer(PostFeed newPost) => Task.FromResult(0);

@@ -60,9 +60,7 @@ namespace Yol.Punla.Managers
         }
 
         public Task<string> SendVerificationCode(string emailAddress)
-        {
-            return _userService.PostVerificationCode(emailAddress);
-        }
+            => _userService.PostVerificationCode(emailAddress);
 
         public async Task<bool> CheckIfEmailExists(string emailAddress, string companyName)
         {

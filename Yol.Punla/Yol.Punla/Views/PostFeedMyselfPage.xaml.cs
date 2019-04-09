@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Prism.Events;
+using System;
 using Unity;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Yol.Punla.AttributeBase;
 using Yol.Punla.Barrack;
-using Yol.Punla.Mapper;
 using Yol.Punla.Messages;
 using Yol.Punla.ViewModels;
 
@@ -72,7 +72,8 @@ namespace Yol.Punla.Views
 
         protected override void SubcribeMessagingCenter()
         {   
-            MessagingCenter.Subscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs", message =>
+            //MessagingCenter.Subscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs", message =>
+            AppUnityContainer.Instance.Resolve<IEventAggregator>().GetEvent<LikeOrUnLikeAPostFeedSubsEventModel>().Subscribe((message) =>
             {
                 try
                 {
@@ -95,7 +96,7 @@ namespace Yol.Punla.Views
         protected override void UnSubcribeMessagingCenter()
         {
             base.UnSubcribeMessagingCenter();
-            MessagingCenter.Unsubscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs");
+            //MessagingCenter.Unsubscribe<PostFeedMessage>(this, "LikeOrUnLikeAPostFeedSubs");
         }
 
         private bool ReadIfExistingPost(Entity.PostFeed currentPost)

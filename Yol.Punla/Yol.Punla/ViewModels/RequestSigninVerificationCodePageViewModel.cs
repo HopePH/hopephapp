@@ -6,10 +6,7 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
-using Yol.Punla.NavigationHeap;
 using Yol.Punla.ViewModels.Validators;
 
 namespace Yol.Punla.ViewModels
@@ -21,30 +18,19 @@ namespace Yol.Punla.ViewModels
     {
         private const string APPNAME = "HopePH";
         private const string FAKEEMAIL = "Ret45ujhh@gboy.com";
-        private readonly INavigationStackService _navigationStackService;
-        private readonly INavigationService _navigationService;
         private readonly IContactManager _contactManager;
         private IValidator _validator;
 
         public ICommand RequestVerificationCodeCommand => new DelegateCommand(async() => await RequestVerificationCode());
-        public ICommand NavigateBackCommand => new DelegateCommand(GoBack);
         public string EmailAddress { get; set; }
         public string VerificationCode { get; set; }
 
-        public RequestSigninVerificationCodePageViewModel(IServiceMapper serviceMapper, 
-            IAppUser appUser, 
-            INavigationStackService navigationStackService,
-            INavigationService navigationService,
-            IContactManager contactManager) : base(serviceMapper, appUser)
-        {
-            _navigationService = navigationService;
-            _navigationStackService = navigationStackService;
-            _contactManager = contactManager;
-        }
+        public RequestSigninVerificationCodePageViewModel(INavigationService navigationService,
+            IContactManager contactManager) : base(navigationService)
+            => _contactManager = contactManager;
 
-        public override void PreparingPageBindings() => IsBusy = false;
-
-        private void GoBack() => NavigateBackHelper(_navigationStackService, _navigationService);
+        public override void PreparingPageBindings() 
+            => IsBusy = false;
 
         private async Task RequestVerificationCode()
         {
@@ -54,19 +40,19 @@ namespace Yol.Punla.ViewModels
                 EmailAddress = (await _contactManager.CheckIfEmailExists(EmailAddress, APPNAME)) ? EmailAddress : FAKEEMAIL;
                 _validator = new RequestVerificationCodePageEmailValidator(EmailAddress);
 
-                if (ProcessValidationErrors(_validator.Validate(this), true))
+                if (ProcessValidationErrors(_validator.Validate(this)))
                 {
                     VerificationCode = await _contactManager.SendVerificationCode(EmailAddress);
                     PassingParameters.Add("VerificationCode", VerificationCode);
                     PassingParameters.Add("EmailAddress", EmailAddress);
-                    NavigateToPageHelper(nameof(ViewNames.ConfirmVerificationCodePage), _navigationStackService, _navigationService, PassingParameters);
+                    await NavigateToPageHelper(nameof(ViewNames.ConfirmVerificationCodePage), PassingParameters);
                 }
                 else
                     EmailAddress = String.Empty;
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
     }

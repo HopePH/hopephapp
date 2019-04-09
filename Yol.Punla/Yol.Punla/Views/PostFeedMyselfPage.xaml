@@ -12,7 +12,7 @@
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
-    xmlns:template="clr-namespace:Yol.Punla.Templates;assembly=Yol.Punla"
+    xmlns:template="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     x:Name="PostDetailPage"
     prism:ViewModelLocator.AutowireViewModel="True">
     <Grid

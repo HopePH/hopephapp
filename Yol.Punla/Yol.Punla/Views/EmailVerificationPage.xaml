@@ -3,20 +3,25 @@
     x:Class="Yol.Punla.Views.EmailVerificationPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
     xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    Title="Home Page"
-    prism:ViewModelLocator.AutowireViewModel="True">
+    Title="Email Verification Page"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="White">
     <Grid
+        BackgroundColor="Transparent"
         HorizontalOptions="FillAndExpand"
         RowSpacing="0"
         VerticalOptions="FillAndExpand">
-        <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView
+            BackgroundColor="Transparent"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
             <Grid
                 Padding="40,20,40,20"
+                BackgroundColor="Transparent"
                 HorizontalOptions="FillAndExpand"
                 RowSpacing="0"
                 VerticalOptions="FillAndExpand">
@@ -36,32 +41,54 @@
                     Source="icon"
                     VerticalOptions="Start"
                     WidthRequest="96" />
-                <customControl:MuseoLabel
+                <Label
                     Grid.Row="1"
                     Margin="0,46,0,0"
+                    FontAttributes="Bold"
                     HorizontalOptions="Center"
                     Style="{StaticResource LabelLargeGreen}"
                     Text="{Binding TitleMessage}"
-                    VerticalOptions="Start" />
-                <customControl:MuseoLabel
+                    VerticalOptions="Start">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                </Label>
+                <Label
                     Grid.Row="2"
                     Margin="0,20,0,0"
                     Text="{Binding TitleContent}"
                     VerticalOptions="End">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
                     <Label.Style>
                         <OnPlatform
                             x:TypeArguments="Style"
                             Android="{StaticResource LabelXSmallDark}"
                             iOS="{StaticResource LabelSmallDark}" />
                     </Label.Style>
-                </customControl:MuseoLabel>
-                <customControl:CustomEntry
+                </Label>
+                <Entry
+                    x:Name="emailEntry"
                     Grid.Row="3"
-                    BottomLineColor="Gray"
+                    effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference emailEntry}}"
                     IsVisible="{Binding IsVerificationNegation}"
-                    Placeholder="{Binding PlaceholderTitle}"
+                    Keyboard="Email"
+                    Placeholder="sample@hopeph.com"
+                    PlaceholderColor="#61000000"
                     Text="{Binding EmailAddress}"
                     VerticalOptions="End">
+                    <!--  Placeholder={Binding PlaceholderTitle}  -->
+                    <Entry.Effects>
+                        <effects:InputViewEffect LineColor="#1F000000">
+                            <effects:InputViewEffect.Thickness>
+                                <OnPlatform
+                                    x:TypeArguments="x:Int32"
+                                    Android="6"
+                                    iOS="1" />
+                            </effects:InputViewEffect.Thickness>
+                        </effects:InputViewEffect>
+                    </Entry.Effects>
                     <Entry.Style>
                         <OnPlatform
                             x:TypeArguments="Style"
@@ -74,7 +101,7 @@
                             Android="0,76,0,0"
                             iOS="0,76,0,0" />
                     </Entry.Margin>
-                </customControl:CustomEntry>
+                </Entry>
                 <StackLayout
                     Grid.Row="3"
                     Margin="0,46,0,0"
@@ -83,109 +110,152 @@
                     Orientation="Horizontal"
                     VerticalOptions="Start">
                     <Frame
-                        Padding="1"
+                        Padding="3"
                         BackgroundColor="#FF979797"
                         CornerRadius="4"
                         HasShadow="False"
                         HorizontalOptions="FillAndExpand"
                         OutlineColor="#FF979797"
                         WidthRequest="68">
+                        <Frame.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Text.Length, Source={x:Reference code1Entry}}"
+                                TargetType="Frame"
+                                Value="1">
+                                <Setter Property="BackgroundColor" Value="{StaticResource ColorGreenDimB}" />
+                            </DataTrigger>
+                        </Frame.Triggers>
                         <Frame
                             Padding="4"
-                            BackgroundColor="White"
-                            CornerRadius="5"
+                            CornerRadius="2"
                             HasShadow="False"
                             HeightRequest="68"
                             HorizontalOptions="FillAndExpand"
                             OutlineColor="#FF979797">
                             <Entry
+                                x:Name="code1Entry"
                                 FontSize="40"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                MaxLength="1"
                                 Text="{Binding VerificationCodeEntered1}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
-                                    <effects:EntryEffect />
+                                    <effects:InputViewEffect />
                                 </Entry.Effects>
                             </Entry>
                         </Frame>
                     </Frame>
                     <Frame
-                        Padding="1"
+                        Padding="3"
                         BackgroundColor="#FF979797"
                         CornerRadius="4"
                         HasShadow="False"
                         HorizontalOptions="FillAndExpand"
                         OutlineColor="#FF979797"
                         WidthRequest="68">
+                        <Frame.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Text.Length, Source={x:Reference code2Entry}}"
+                                TargetType="Frame"
+                                Value="1">
+                                <Setter Property="BackgroundColor" Value="{StaticResource ColorGreenDimB}" />
+                            </DataTrigger>
+                        </Frame.Triggers>
                         <Frame
                             Padding="4"
                             BackgroundColor="White"
-                            CornerRadius="5"
+                            CornerRadius="2"
                             HasShadow="False"
                             HeightRequest="68"
                             HorizontalOptions="FillAndExpand"
                             OutlineColor="#FF979797">
                             <Entry
+                                x:Name="code2Entry"
                                 FontSize="40"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                MaxLength="1"
                                 Text="{Binding VerificationCodeEntered2}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
-                                    <effects:EntryEffect />
+                                    <effects:InputViewEffect />
                                 </Entry.Effects>
                             </Entry>
                         </Frame>
                     </Frame>
                     <Frame
-                        Padding="1"
+                        Padding="3"
                         BackgroundColor="#FF979797"
                         CornerRadius="4"
                         HasShadow="False"
                         HorizontalOptions="FillAndExpand"
                         OutlineColor="#FF979797"
                         WidthRequest="68">
+                        <Frame.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Text.Length, Source={x:Reference code3Entry}}"
+                                TargetType="Frame"
+                                Value="1">
+                                <Setter Property="BackgroundColor" Value="{StaticResource ColorGreenDimB}" />
+                            </DataTrigger>
+                        </Frame.Triggers>
                         <Frame
                             Padding="4"
                             BackgroundColor="White"
-                            CornerRadius="5"
+                            CornerRadius="2"
                             HasShadow="False"
                             HeightRequest="68"
                             HorizontalOptions="FillAndExpand"
                             OutlineColor="#FF979797">
                             <Entry
+                                x:Name="code3Entry"
                                 FontSize="40"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                MaxLength="1"
                                 Text="{Binding VerificationCodeEntered3}"
-                                VerticalOptions="End">
+                                VerticalOptions="Center">
                                 <Entry.Effects>
-                                    <effects:EntryEffect />
+                                    <effects:InputViewEffect />
                                 </Entry.Effects>
                             </Entry>
                         </Frame>
                     </Frame>
                     <Frame
-                        Padding="1"
+                        Padding="3"
                         BackgroundColor="#FF979797"
                         CornerRadius="4"
                         HasShadow="False"
                         HorizontalOptions="FillAndExpand"
                         OutlineColor="#FF979797"
                         WidthRequest="68">
+                        <Frame.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Text.Length, Source={x:Reference code4Entry}}"
+                                TargetType="Frame"
+                                Value="1">
+                                <Setter Property="BackgroundColor" Value="{StaticResource ColorGreenDimB}" />
+                            </DataTrigger>
+                        </Frame.Triggers>
                         <Frame
                             Padding="4"
                             BackgroundColor="White"
-                            CornerRadius="5"
+                            CornerRadius="2"
                             HasShadow="False"
                             HeightRequest="68"
                             HorizontalOptions="FillAndExpand"
                             OutlineColor="#FF979797">
                             <Entry
+                                x:Name="code4Entry"
                                 FontSize="40"
-                                HorizontalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Center"
+                                MaxLength="1"
                                 Text="{Binding VerificationCodeEntered4}"
                                 VerticalOptions="Center">
                                 <Entry.Effects>
-                                    <effects:EntryEffect />
+                                    <effects:InputViewEffect />
                                 </Entry.Effects>
                             </Entry>
                         </Frame>
@@ -193,13 +263,41 @@
                 </StackLayout>
                 <Button
                     Grid.Row="4"
-                    Margin="0,0,0,18"
+                    Margin="0,20,0,18"
                     Command="{Binding SendVerificationCodeCommand}"
                     FontAttributes="Bold"
                     HorizontalOptions="FillAndExpand"
                     Style="{StaticResource ButtonGreenSlim}"
                     Text="Continue"
-                    VerticalOptions="End" />
+                    VerticalOptions="End">
+                    <Button.Triggers>
+                        <DataTrigger
+                            Binding="{Binding EmailAddress}"
+                            TargetType="Button"
+                            Value="">
+                            <Setter Property="BackgroundColor" Value="#FF9B9B9B" />
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding IsVerification}"
+                            TargetType="Button"
+                            Value="true">
+                            <Setter Property="BackgroundColor" Value="#FF9B9B9B" />
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                        <MultiTrigger TargetType="Button">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding IsVerification}" Value="True" />
+                                <BindingCondition Binding="{Binding Text.Length, Source={x:Reference code1Entry}}" Value="1" />
+                                <BindingCondition Binding="{Binding Text.Length, Source={x:Reference code2Entry}}" Value="1" />
+                                <BindingCondition Binding="{Binding Text.Length, Source={x:Reference code3Entry}}" Value="1" />
+                                <BindingCondition Binding="{Binding Text.Length, Source={x:Reference code4Entry}}" Value="1" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="BackgroundColor" Value="{StaticResource GreenColorDim}" />
+                            <Setter Property="IsEnabled" Value="True" />
+                        </MultiTrigger>
+                    </Button.Triggers>
+                </Button>
             </Grid>
         </ScrollView>
         <!--  Busy Indicator  -->
@@ -212,12 +310,16 @@
                     IsRunning="{Binding IsBusy, Mode=OneWay}"
                     IsVisible="{Binding IsBusy}"
                     Style="{StaticResource ActivityIndicatorMain}" />
-                <customControl:MuseoLabel
+                <Label
                     HorizontalOptions="Center"
                     Opacity="1"
                     Style="{StaticResource LabelSmall}"
                     Text="Please wait..."
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                </Label>
             </StackLayout>
         </ContentView>
     </Grid>

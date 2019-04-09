@@ -1,13 +1,12 @@
 ﻿using Acr.UserDialogs;
 using Prism.Commands;
+using Prism.Navigation;
 using PropertyChanged;
 using System;
 using System.Windows.Input;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Localized;
-using Yol.Punla.Mapper;
 using Yol.Punla.Utility;
 
 namespace Yol.Punla.ViewModels
@@ -25,8 +24,7 @@ namespace Yol.Punla.ViewModels
         public ICommand TermsAndConditionsCommand => new DelegateCommand(ShowUnavailablePopUp);
         public IDisposable DialogResult { get; set; }
 
-        public SettingsPageViewModel(IServiceMapper serviceMapper, 
-            IAppUser appUser) : base(serviceMapper, appUser)
+        public SettingsPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
             Title = "Settings";
@@ -34,7 +32,6 @@ namespace Yol.Punla.ViewModels
 
         public override void PreparingPageBindings()
         {
-            IsShowBackArrow = false;
             IsBusy = false;
         }
 

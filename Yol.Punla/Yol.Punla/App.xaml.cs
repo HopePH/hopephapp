@@ -16,7 +16,6 @@ using Unity;
 using Unity.Injection;
 using Unity.Lifetime;
 using Xamarin.Forms;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.GatewayAccess;
 using Yol.Punla.Managers;
@@ -106,13 +105,20 @@ namespace Yol.Punla
 
         public void ConfigureDatabaseInitilization()
         {
-            Debug.WriteLine("HOPEPH Create the table here once only.");
-            var unityContainer = Container.GetContainer();
-            var mockRepository = unityContainer.Resolve<IMockRepository>();
-            mockRepository.CreateTablesOnce();
+            try
+            {
+                Debug.WriteLine("HOPEPH Create the table here once only.");
+                var unityContainer = Container.GetContainer();
+                var mockRepository = unityContainer.Resolve<IMockRepository>();
+                mockRepository.CreateTablesOnce();
+            }
+            catch (Exception ex)
+            {
+                Container.GetContainer().Resolve<IDependencyService>().Get<ILogger>().Log(ex);
+            }
         }
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
             try
             {
@@ -123,13 +129,13 @@ namespace Yol.Punla
 
                 var unityContainer = Container.GetContainer();
                 unityContainer.RegisterInstance<INavigationService>(NavigationService, new ContainerControlledLifetimeManager());
-                AppUnityContainer.Init(unityContainer);
                 AppCrossConnectivity.Init(unityContainer.Resolve<IConnectivity>());
+                AppUnityContainer.Init(unityContainer);
 
                 if (WasSignedUpAndLogon())
-                    NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                    await NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
                 else
-                    NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                    await NavigateToRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
                 AllowAppPermissions();
             }
@@ -169,7 +175,7 @@ namespace Yol.Punla
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex);
+                Container.GetContainer().Resolve<IDependencyService>().Get<ILogger>().Log(ex);
             }
             finally
             {
@@ -185,22 +191,15 @@ namespace Yol.Punla
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex);
+                Container.GetContainer().Resolve<IDependencyService>().Get<ILogger>().Log(ex);
             }
         }
 
-        private void NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
+        private async Task NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
         {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavigationPage)}/{page}";
+            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavPage)}/{page}";
             navigationStackService.UpdateStackState(page);
-            navigationService.NavigateAsync(rootPage);
-        }
-
-        private void NavigateToModalRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
-        {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{page}";
-            navigationStackService.UpdateStackState(page);
-            navigationService.NavigateAsync(rootPage);
+            await navigationService.NavigateAsync(rootPage);
         }
 
         private void ManualTypeRegistration(IContainerRegistry containerRegistry)
@@ -219,6 +218,7 @@ namespace Yol.Punla
             unityContainer.RegisterType<IContactRepository, ContactRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
             unityContainer.RegisterType<ILocalTableTrackingRepository, LocalTableTrackingRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
             unityContainer.RegisterType<IPostFeedRepository, PostFeedRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
+            unityContainer.RegisterInstance<IUserDialogs>(UserDialogs.Instance, new ContainerControlledLifetimeManager());
             unityContainer.RegisterInstance<IConnectivity>(CrossConnectivity.Current, new ContainerControlledLifetimeManager());
             containerRegistry.RegisterForNavigation<NavigationPage>();
         }
@@ -233,23 +233,6 @@ namespace Yol.Punla
                 await CrossNotifications.Current.RequestPermission();
                 await ShowLocalNotifications();
             }
-        }
-
-        private void ProcessErrorReportingForHockeyApp(Exception ex)
-        {
-#if FAKE
-            //chito. do not register to the hockeyapp when unittesting
-#else
-            //chito. HEA this just means Handled Exception, just make it shorter. Also, there's no need to put if this is Android or IOS since they have unique hockeyid per platform        
-            HockeyApp.MetricsManager.TrackEvent(string.Format("HE.{0}", ex.Message ?? ""));
-#endif
-        }
-
-        private bool WasWelcomeInstructionsLoaded()
-        {
-            var _keyValueCacheUtility = Container.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>();
-            var cachedValue = _keyValueCacheUtility.GetUserDefaultsKeyValue("WasWelcomeInstructionLoaded");
-            return string.IsNullOrEmpty(cachedValue) ? false : bool.Parse(cachedValue);
         }
 
         private async Task ShowLocalNotifications()
@@ -336,7 +319,8 @@ namespace Yol.Punla
         {
             string path = "";
             var children = new List<string>();
-            children.Add("addTab=WikiPage");
+            //children.Add("addTab=WikiPage");
+            children.Add("addTab=PostFeedPage");
             path += "?" + string.Join("&", children);
             return path;
         }

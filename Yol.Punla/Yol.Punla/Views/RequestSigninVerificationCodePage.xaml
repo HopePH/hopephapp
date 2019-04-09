@@ -81,9 +81,9 @@
                     FontAttributes="Bold"
                     FontSize="14"
                     HorizontalOptions="Center"
-                    VerticalOptions="End"
                     Text="Next"
-                    TextColor="White" />
+                    TextColor="White"
+                    VerticalOptions="End" />
             </Grid>
         </ScrollView>
         <!--  Busy Indicator  -->

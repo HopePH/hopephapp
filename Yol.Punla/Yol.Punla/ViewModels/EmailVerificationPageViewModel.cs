@@ -6,12 +6,9 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
-using Yol.Punla.NavigationHeap;
 using Yol.Punla.ViewModels.Validators;
 
 namespace Yol.Punla.ViewModels
@@ -22,41 +19,51 @@ namespace Yol.Punla.ViewModels
     public class EmailVerificationPageViewModel : ViewModelBase
     {
         private readonly IContactManager _contactManager;
-        private readonly INavigationStackService _navigationStackService;
-        private readonly INavigationService _navigationService;
         private IValidator _validator;
 
         public ICommand SendVerificationCodeCommand => new DelegateCommand(async () => await SendVerificationCode());
         public string VerificationCode { get; set; }
-        public string EmailAddress { get; set; }
+        public string EmailAddress { get; set; } = string.Empty;
         public string VerificationCodeEntered1 { get; set; }
         public string VerificationCodeEntered2 { get; set; }
         public string VerificationCodeEntered3 { get; set; }
         public string VerificationCodeEntered4 { get; set; }
-        public string ConfirmVerificationCode { get; set; }
+        public string ConfirmVerificationCode
+        {
+            get
+            {
+                try
+                {
+                    string v1 = VerificationCodeEntered1 ?? "";
+                    string v2 = VerificationCodeEntered2 ?? "";
+                    string v3 = VerificationCodeEntered3 ?? "";
+                    string v4 = VerificationCodeEntered4 ?? "";
+                    return v1 + v2 + v3 + v4;
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+        }
         public bool IsVerification { get; set; }
-        public bool IsVerificationNegation { get; set; }
+        public bool IsVerificationNegation
+        {
+            get => !IsVerification;
+        }
         public string TitleMessage { get; set; }
         public string TitleContent { get; set; }
         public string PlaceholderTitle { get; set; }
 
-        public EmailVerificationPageViewModel(IServiceMapper serviceMapper, 
-            IAppUser appUser, 
-            INavigationStackService navigationStackService, 
-            INavigationService navigationService,
-            IContactManager contactManager) : base(serviceMapper, appUser)
-        {
-            _navigationService = navigationService;
-            _navigationStackService = navigationStackService;
-            _contactManager = contactManager;
-        }
+        public EmailVerificationPageViewModel(INavigationService navigationService,
+            IContactManager contactManager) : base(navigationService)
+            => _contactManager = contactManager;
 
         public override void PreparingPageBindings()
         {
             TitleMessage = AppStrings.VerificationEmailTitle;
             TitleContent = AppStrings.VerificationEmailMsg;
             PlaceholderTitle = AppStrings.VerificationEmailPlaceholder;
-            IsVerificationNegation = !IsVerification;
             IsBusy = false;
         }
 
@@ -65,19 +72,24 @@ namespace Yol.Punla.ViewModels
             try
             {
                 IsBusy = true;
-                string emailDuplicate = (await _contactManager.CheckIfEmailExists(EmailAddress, "HopePH")) ? EmailAddress : "Ret45ujhh@gboy.com";
+                string emailDuplicate = (await _contactManager.CheckIfEmailExists(EmailAddress, "HopePH")) ? EmailAddress 
+                    : "Ret45ujhh@gboy.com";
+
+#if (FAKE || DEBUG)
+                if (EmailAddress == Constants.TESTEMAIL1) emailDuplicate = "";
+#endif
 
                 if (!IsVerification)
                     _validator = new EmailVerificationPageValidator(VerificationCode, IsVerification, emailDuplicate);
                 else
-                    _validator = new EmailVerificationPageValidator(VerificationCode, IsVerification, emailDuplicate);
-
-                if (ProcessValidationErrors(_validator.Validate(this), true))                  
+                    _validator = new EmailVerificationPageValidator(ConfirmVerificationCode, IsVerification, emailDuplicate);
+                    
+                if (ProcessValidationErrors(_validator.Validate(this)))                  
                     await PrepareNavigationToRegistrationPage(IsVerification);
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex);
+                ProcessErrorReportingForRaygun(ex);
             }
             finally
             {
@@ -91,7 +103,6 @@ namespace Yol.Punla.ViewModels
             {
                 VerificationCode = await _contactManager.SendVerificationCode(EmailAddress);
                 IsVerification = (string.IsNullOrEmpty(VerificationCode)) ? false : true;
-                IsVerificationNegation = !IsVerification;
 
                 if (IsVerification)
                 {
@@ -106,13 +117,13 @@ namespace Yol.Punla.ViewModels
                 {
                     EmailAdd = ComputeEmailIfTest(EmailAddress),
                     UserName = ComputeEmailIfTest(EmailAddress),
-                    GenderCode = "undisclosed",
+                    GenderCode = "Undisclosed",
                     FirstName = "Undisclosed",
                     LastName = "Name"
                 };
 
                 PassingParameters.Add("CurrentContact", contact);
-                NavigateToPageHelper(nameof(ViewNames.AccountRegistrationPage), _navigationStackService, _navigationService, PassingParameters);
+                await NavigateToPageHelper(nameof(ViewNames.AccountRegistrationPage), PassingParameters);
             }
         }
 

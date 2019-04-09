@@ -2,9 +2,7 @@
 using Prism.Events;
 using Prism.Navigation;
 using System;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
-using Yol.Punla.Mapper;
 
 namespace Yol.Punla.ViewModels
 {
@@ -29,10 +27,8 @@ namespace Yol.Punla.ViewModels
         public event EventHandler IsActiveChanged;
 
         public ChildViewModelBase(IEventAggregator eventAggregator, 
-            IServiceMapper serviceMapper, 
-            IAppUser appUser, 
             INavigationService navigationService)
-            : base(serviceMapper, appUser)
+            : base(navigationService)
         {
             _ea = eventAggregator;
             _ea.GetEvent<InitializeTabbedChildrenEvent>().Subscribe(OnInitializationEventFired);
@@ -46,7 +42,7 @@ namespace Yol.Punla.ViewModels
             Message = $"{Title} Initialized by Event: {message}";
         }
 
-        public override void OnNavigatingTo(NavigationParameters parameters)
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
             System.Diagnostics.Debug.WriteLine($"{Title} is executing OnNavigatingTo");
             var message = parameters.GetValue<string>("message");

@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Yol.Punla.AttributeBase;
+using Yol.Punla.Barrack;
 using Yol.Punla.Entity;
-using Yol.Punla.Mapper;
 
 namespace Yol.Punla.GatewayAccess
 {

@@ -30,5 +30,7 @@ namespace Yol.Punla.Repository
         public void UpdateItem<T>(T item) { }
 
         public void DeleteTableByType<T>() { }
+
+        public Contact GetContactByRemoteId(int id) => FakeData.FakeUsers.Contacts.FirstOrDefault(c => c.RemoteId == id);
     }
 }

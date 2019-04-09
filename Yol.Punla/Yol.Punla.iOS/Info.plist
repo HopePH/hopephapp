@@ -40,6 +40,8 @@
 		<string>MuseoSansBold.otf</string>
 		<string>MuseoSansBoldItalic.otf</string>
 		<string>MuseoSans-300Italic.otf</string>
+    <string>FontAwesomeSolid.otf</string>
+		<string>FontAwesomeRegular.otf</string>
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Media.xcassets/AppIcons.appiconset</string>

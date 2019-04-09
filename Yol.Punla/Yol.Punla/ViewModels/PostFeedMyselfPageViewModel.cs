@@ -1,4 +1,5 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using PropertyChanged;
 using System;
@@ -11,11 +12,9 @@ using System.Windows.Input;
 using Unity;
 using Xamarin.Forms;
 using Yol.Punla.AttributeBase;
-using Yol.Punla.Authentication;
 using Yol.Punla.Barrack;
 using Yol.Punla.Localized;
 using Yol.Punla.Managers;
-using Yol.Punla.Mapper;
 using Yol.Punla.Messages;
 using Yol.Punla.NavigationHeap;
 using Yol.Punla.Utility;
@@ -32,6 +31,7 @@ namespace Yol.Punla.ViewModels
         private readonly IContactManager _contactManager;
         private readonly IPostFeedManager _postFeedManager;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
+        private readonly IEventAggregator _eventAggregator;
 
         private string _busyComments;
         public string BusyComments
@@ -57,13 +57,15 @@ namespace Yol.Punla.ViewModels
             INavigationService navigationService, 
             INavigationStackService navigationStackService,
             IContactManager contactManager,
-            IPostFeedManager postFeedManager) : base(serviceMapper, appUser)
+            IEventAggregator eventAggregator,
+            IPostFeedManager postFeedManager) : base(navigationService)
         {
             _navigationService = navigationService;
             _navigationStackService = navigationStackService;
             _contactManager = contactManager;
             _postFeedManager = postFeedManager;
             _busyComments = AppStrings.LoadingOwnData;
+            _eventAggregator = eventAggregator;
             Title = AppStrings.TitleThoughts;
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
         }
@@ -92,7 +94,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -144,7 +146,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
         }
 
@@ -166,7 +168,7 @@ namespace Yol.Punla.ViewModels
                 CurrentPostFeed.Comments = new ObservableCollection<Entity.PostFeed>(commentList.Where(p => p.PostFeedParentId == CurrentPostFeed.PostFeedID));
                 PassingParameters.Add("CurrentUser", CurrentContact);
                 PassingParameters.Add("SelectedPost", CurrentPostFeed);
-                NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), _navigationStackService, _navigationService, PassingParameters);
+                NavigateToPageHelper(nameof(ViewNames.PostFeedDetailPage), PassingParameters);
             }
 
             IsBusy = false;
@@ -176,7 +178,7 @@ namespace Yol.Punla.ViewModels
 
         public void SendErrorToHockeyApp(Exception ex)
         {
-            ProcessErrorReportingForHockeyApp(ex, true);
+            ProcessErrorReportingForRaygun(ex);
         }
 
         public void AddOneLikeToThisPostFromLocal(Entity.PostFeed postFeed, Entity.Contact userWhoLiked)
@@ -206,7 +208,7 @@ namespace Yol.Punla.ViewModels
             }
             catch (Exception ex)
             {
-                ProcessErrorReportingForHockeyApp(ex, true);
+                ProcessErrorReportingForRaygun(ex);
             }
             finally
             {
@@ -218,7 +220,7 @@ namespace Yol.Punla.ViewModels
         private void GoBack()
         {
             _keyValueCacheUtility.GetUserDefaultsKeyValue("IsForceToGetToLocal", "true");
-            NavigateBackHelper(_navigationStackService, _navigationService);
+            NavigateBackHelper();
         }
 
         private void SupportPost(Entity.PostFeed SelectedPost)
@@ -232,7 +234,7 @@ namespace Yol.Punla.ViewModels
                     CurrentPost = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.PostFeedK>(CurrentPostFeed),
                     CurrentUser = AppUnityContainer.Instance.Resolve<IServiceMapper>().Instance.Map<Contract.ContactK>(CurrentContact)
                 };
-                MessagingCenter.Send(postFeedMessage, "LikeOrUnlikePostFeedToHub");
+                _eventAggregator.GetEvent<LikeOrUnlikePostFeedToHubEventModel>().Publish(postFeedMessage);
                 var wholeList = _postFeedManager.LikeOrUnlikeSelfPost(CurrentPostFeed.PostFeedID, CurrentContact.RemoteId);
                 var ownPostList = wholeList.Where(x => x.PosterId == CurrentContact.RemoteId);
                 PostsList = new ObservableCollection<Entity.PostFeed>(ownPostList);

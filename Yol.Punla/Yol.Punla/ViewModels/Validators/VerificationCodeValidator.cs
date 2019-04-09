@@ -12,7 +12,7 @@ namespace Yol.Punla.ViewModels.Validators
         public VerificationCodeValidator(string verificationCodeEntered)
         {
             RuleFor(x => x.VerificationCode)
-                   .Equal(verificationCodeEntered)
+                   .Equal(x => x.VerificationCodeEntered)
                    .WithMessage(CODEEQUALMSG);
         }
     }

@@ -21,10 +21,10 @@ namespace Yol.Punla.ViewModels.Validators
                     .WithMessage(EMAILADDMSG)
                     .NotEqual(emailDuplicate)
                     .WithMessage(DUPEMAIL);
-            else
-                RuleFor(x => x.ConfirmVerificationCode)
-                   .Equal(verificationCode)
-                   .WithMessage(CODEEQUALMSG);
+            //else
+            //    RuleFor(x => x.ConfirmVerificationCode)
+            //       .Equal(verificationCode)
+            //       .WithMessage(CODEEQUALMSG);
         }
     }
 }

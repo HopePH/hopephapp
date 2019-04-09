@@ -1,6 +1,12 @@
 ﻿to do
 alfon
-1. wilbert to send the logon background
+1. get test projects from rey
+
+rey
+fix the nav page header color
+simplify accountregistrationpage xaml
+change this <!--  AVATAR MODAL  --> to rgpluggins
+change to //change this to like EventValidator : AbstractValidator<Event> in SA
 
 community
 1. finalize look of request page
@@ -8,6 +14,4 @@ community
 
 
 ==IMPT===
-1. Designing XAML
-  >change AppViewBase to this Xamarin.Forms.ContentPage 
-  >local:AppViewBase
+1. 

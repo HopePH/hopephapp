@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:behaviors="clr-namespace:Yol.Punla.Behaviors;assembly=Yol.Punla"
-    xmlns:customControl="clr-namespace:Yol.Punla.CustomControls;assembly=Yol.Punla"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
     xmlns:ffImage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:ffImageTransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
     xmlns:flowListView="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
@@ -14,7 +14,6 @@
     Title="Account Registration Page"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="White">
-
     <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <ScrollView
             AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -30,40 +29,31 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
-                <ContentView
+                <ffImage:CachedImage
                     Grid.Row="0"
-                    Padding="20,0,20,20"
-                    HorizontalOptions="FillAndExpand"
+                    Margin="20,10,20,20"
+                    Aspect="AspectFit"
+                    CacheDuration="7"
                     IsVisible="{Binding HasPicture}"
-                    VerticalOptions="FillAndExpand">
-                    <ffImage:CachedImage
-                        Aspect="AspectFit"
-                        CacheDuration="7"
-                        Source="{Binding Picture}"
-                        VerticalOptions="End">
-                        <ffImage:CachedImage.HeightRequest>
-                            <OnPlatform
-                                x:TypeArguments="x:Double"
-                                Android="180"
-                                iOS="130" />
-                        </ffImage:CachedImage.HeightRequest>
-                        <ffImage:CachedImage.WidthRequest>
-                            <OnPlatform
-                                x:TypeArguments="x:Double"
-                                Android="180"
-                                iOS="130" />
-                        </ffImage:CachedImage.WidthRequest>
-                        <ffImage:CachedImage.Transformations>
-                            <ffImageTransformation:CircleTransformation />
-                        </ffImage:CachedImage.Transformations>
-                    </ffImage:CachedImage>
-                </ContentView>
-
-                <StackLayout
-                    Grid.Row="1"
-                    Padding="0"
-                    Spacing="0">
+                    Source="{Binding CurrentContact.PhotoURL}"
+                    VerticalOptions="Center">
+                    <ffImage:CachedImage.HeightRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="140"
+                            iOS="130" />
+                    </ffImage:CachedImage.HeightRequest>
+                    <ffImage:CachedImage.WidthRequest>
+                        <OnPlatform
+                            x:TypeArguments="x:Double"
+                            Android="140"
+                            iOS="130" />
+                    </ffImage:CachedImage.WidthRequest>
+                    <ffImage:CachedImage.Transformations>
+                        <ffImageTransformation:CircleTransformation />
+                    </ffImage:CachedImage.Transformations>
+                </ffImage:CachedImage>
+                <StackLayout Grid.Row="1" Spacing="0">
                     <StackLayout.Padding>
                         <OnPlatform
                             x:TypeArguments="Thickness"
@@ -77,25 +67,35 @@
                                 Android="4"
                                 iOS="6" />
                         </StackLayout.Spacing>
-                        <customControl:MuseoLabel Text="{localization:Render FullNameText}">
+                        <Label Text="{localization:Render FullNameText}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
                             <Label.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource LabelXSmallDark}"
                                     iOS="{StaticResource LabelSmallDark}" />
                             </Label.Style>
-                        </customControl:MuseoLabel>
-                        <customControl:CustomEntry
-                            BottomLineColor="Gray"
-                            IsEnabled="false"
-                            Text="{Binding FullName, Mode=TwoWay}">
+                        </Label>
+                        <Entry IsEnabled="false" Text="{Binding FullName, Mode=TwoWay}">
+                            <Entry.Effects>
+                                <effects:InputViewEffect LineColor="#1F000000">
+                                    <effects:InputViewEffect.Thickness>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Int32"
+                                            Android="4"
+                                            iOS="1" />
+                                    </effects:InputViewEffect.Thickness>
+                                </effects:InputViewEffect>
+                            </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource EntrySmallDark}"
                                     iOS="{StaticResource EntryDefaultDark}" />
                             </Entry.Style>
-                        </customControl:CustomEntry>
+                        </Entry>
                     </StackLayout>
                     <BoxView WidthRequest="18">
                         <BoxView.HeightRequest>
@@ -112,7 +112,10 @@
                                 Android="3"
                                 iOS="6" />
                         </StackLayout.Spacing>
-                        <customControl:MuseoLabel Text="{localization:Render EmailText}">
+                        <Label Text="{localization:Render EmailText}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
                             <Label.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
@@ -125,65 +128,25 @@
                                     Android="0,7,0,0"
                                     iOS="0" />
                             </Label.Margin>
-                        </customControl:MuseoLabel>
-                        <customControl:CustomEntry
-                            BottomLineColor="Gray"
-                            IsEnabled="{Binding EmailEnabled}"
-                            Text="{Binding EmailAddress, Mode=TwoWay}">
+                        </Label>
+                        <Entry IsEnabled="{Binding EmailEnabled}" Text="{Binding CurrentContact.EmailAdd, Mode=TwoWay}">
+                            <Entry.Effects>
+                                <effects:InputViewEffect LineColor="#1F000000">
+                                    <effects:InputViewEffect.Thickness>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Int32"
+                                            Android="4"
+                                            iOS="1" />
+                                    </effects:InputViewEffect.Thickness>
+                                </effects:InputViewEffect>
+                            </Entry.Effects>
                             <Entry.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource EntrySmallDark}"
                                     iOS="{StaticResource EntryDefaultDark}" />
                             </Entry.Style>
-                        </customControl:CustomEntry>
-                    </StackLayout>
-                    <BoxView WidthRequest="18">
-                        <BoxView.HeightRequest>
-                            <OnPlatform
-                                x:TypeArguments="x:Double"
-                                Android="3"
-                                iOS="18" />
-                        </BoxView.HeightRequest>
-                    </BoxView>
-                    <StackLayout
-                        Padding="0"
-                        Spacing="6"
-                        VerticalOptions="StartAndExpand">
-                        <StackLayout.Spacing>
-                            <OnPlatform
-                                x:TypeArguments="x:Double"
-                                Android="0"
-                                iOS="6" />
-                        </StackLayout.Spacing>
-                        <customControl:MuseoLabel Text="{localization:Render AliasText}">
-                            <customControl:MuseoLabel.Style>
-                                <OnPlatform
-                                    x:TypeArguments="Style"
-                                    Android="{StaticResource LabelXSmallDark}"
-                                    iOS="{StaticResource LabelSmallDark}" />
-                            </customControl:MuseoLabel.Style>
-                            <customControl:MuseoLabel.Margin>
-                                <OnPlatform
-                                    x:TypeArguments="Thickness"
-                                    Android="0,7,0,0"
-                                    iOS="0" />
-                            </customControl:MuseoLabel.Margin>
-                        </customControl:MuseoLabel>
-                        <customControl:CustomEntry BottomLineColor="Gray" Text="{Binding AliasName, Mode=TwoWay}">
-                            <customControl:CustomEntry.Style>
-                                <OnPlatform
-                                    x:TypeArguments="Style"
-                                    Android="{StaticResource EntrySmallDark}"
-                                    iOS="{StaticResource EntryDefaultDark}" />
-                            </customControl:CustomEntry.Style>
-                            <customControl:CustomEntry.Margin>
-                                <OnPlatform
-                                    x:TypeArguments="Thickness"
-                                    Android="0,-5,0,0"
-                                    iOS="0" />
-                            </customControl:CustomEntry.Margin>
-                        </customControl:CustomEntry>
+                        </Entry>
                     </StackLayout>
                     <BoxView WidthRequest="18">
                         <BoxView.HeightRequest>
@@ -200,40 +163,113 @@
                                 Android="0"
                                 iOS="6" />
                         </StackLayout.Spacing>
-                        <customControl:MuseoLabel Text="{localization:Render MobilePhoneText}">
-                            <customControl:MuseoLabel.Style>
+                        <Label Text="{localization:Render AliasText}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                            <Label.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource LabelXSmallDark}"
                                     iOS="{StaticResource LabelSmallDark}" />
-                            </customControl:MuseoLabel.Style>
-                            <customControl:MuseoLabel.Margin>
+                            </Label.Style>
+                            <Label.Margin>
                                 <OnPlatform
                                     x:TypeArguments="Thickness"
-                                    Android="0,9,0,9"
+                                    Android="0,7,0,0"
                                     iOS="0" />
-                            </customControl:MuseoLabel.Margin>
-                        </customControl:MuseoLabel>
-                        <customControl:CustomEntry
-                            BottomLineColor="Gray"
-                            Keyboard="Telephone"
-                            Text="{Binding MobilePhoneNo, Mode=TwoWay}">
-                            <customControl:CustomEntry.Style>
+                            </Label.Margin>
+                        </Label>
+                        <Entry
+                            x:Name="aliasNameEntry"
+                            effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference aliasNameEntry}}"
+                            Text="{Binding CurrentContact.AliasName, Mode=TwoWay}">
+                            <Entry.Effects>
+                                <effects:InputViewEffect LineColor="#1F000000">
+                                    <effects:InputViewEffect.Thickness>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Int32"
+                                            Android="6"
+                                            iOS="1" />
+                                    </effects:InputViewEffect.Thickness>
+                                </effects:InputViewEffect>
+                            </Entry.Effects>
+                            <Entry.Style>
                                 <OnPlatform
                                     x:TypeArguments="Style"
                                     Android="{StaticResource EntrySmallDark}"
                                     iOS="{StaticResource EntryDefaultDark}" />
-                            </customControl:CustomEntry.Style>
-                            <customControl:CustomEntry.Margin>
+                            </Entry.Style>
+                            <Entry.Margin>
+                                <OnPlatform
+                                    x:TypeArguments="Thickness"
+                                    Android="0,-5,0,0"
+                                    iOS="0" />
+                            </Entry.Margin>
+                        </Entry>
+                    </StackLayout>
+                    <BoxView WidthRequest="18">
+                        <BoxView.HeightRequest>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="3"
+                                iOS="18" />
+                        </BoxView.HeightRequest>
+                    </BoxView>
+                    <StackLayout Padding="0" VerticalOptions="StartAndExpand">
+                        <StackLayout.Spacing>
+                            <OnPlatform
+                                x:TypeArguments="x:Double"
+                                Android="0"
+                                iOS="6" />
+                        </StackLayout.Spacing>
+                        <Label Text="{localization:Render MobilePhoneText}">
+                            <Label.Effects>
+                                <effects:LabelFontFamilyEffect />
+                            </Label.Effects>
+                            <Label.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource LabelXSmallDark}"
+                                    iOS="{StaticResource LabelSmallDark}" />
+                            </Label.Style>
+                            <Label.Margin>
+                                <OnPlatform
+                                    x:TypeArguments="Thickness"
+                                    Android="0,9,0,9"
+                                    iOS="0" />
+                            </Label.Margin>
+                        </Label>
+                        <Entry
+                            x:Name="mobilePhoneEntry"
+                            effects:EntryEffectParameters.IsFocused="{Binding IsFocused, Source={x:Reference mobilePhoneEntry}}"
+                            Keyboard="Telephone"
+                            Text="{Binding CurrentContact.MobilePhoneNo, Mode=TwoWay}">
+                            <Entry.Effects>
+                                <effects:InputViewEffect LineColor="#1F000000">
+                                    <effects:InputViewEffect.Thickness>
+                                        <OnPlatform
+                                            x:TypeArguments="x:Int32"
+                                            Android="6"
+                                            iOS="1" />
+                                    </effects:InputViewEffect.Thickness>
+                                </effects:InputViewEffect>
+                            </Entry.Effects>
+                            <Entry.Style>
+                                <OnPlatform
+                                    x:TypeArguments="Style"
+                                    Android="{StaticResource EntrySmallDark}"
+                                    iOS="{StaticResource EntryDefaultDark}" />
+                            </Entry.Style>
+                            <Entry.Margin>
                                 <OnPlatform
                                     x:TypeArguments="Thickness"
                                     Android="0,-15,0,0"
                                     iOS="0" />
-                            </customControl:CustomEntry.Margin>
-                        </customControl:CustomEntry>
+                            </Entry.Margin>
+                        </Entry>
                     </StackLayout>
                 </StackLayout>
-
                 <StackLayout
                     Grid.Row="2"
                     Padding="20,0,20,20"
@@ -253,7 +289,6 @@
                 </StackLayout>
             </Grid>
         </ScrollView>
-
         <!--  AVATAR MODAL  -->
         <ContentView
             Padding="20,180,20,150"
@@ -301,17 +336,21 @@
                         </ContentView.GestureRecognizers>
                     </ContentView>
                 </ContentView>
-                <customControl:MuseoLabel
+                <Label
                     FontAttributes="Bold"
                     HorizontalTextAlignment="Center"
-                    Text="{localization:Render AvatarChoiceText}">
-                    <customControl:MuseoLabel.FontSize>
+                    Text="{localization:Render AvatarChoiceText}"
+                    TextColor="Black">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                    <Label.FontSize>
                         <OnPlatform
                             x:TypeArguments="x:Double"
                             Android="21"
                             iOS="19" />
-                    </customControl:MuseoLabel.FontSize>
-                </customControl:MuseoLabel>
+                    </Label.FontSize>
+                </Label>
                 <flowListView:FlowListView
                     BackgroundColor="{StaticResource ColorGrayTwo}"
                     FlowColumnCount="3"
@@ -336,22 +375,24 @@
                                         <behaviors:DeviceDependentViewSizeBehavior DynamicHeightRequest="55" />
                                     </ffImage:CachedImage.Behaviors>
                                 </ffImage:CachedImage>
-                                <customControl:MuseoLabel
+                                <Label
                                     FontSize="Medium"
                                     HorizontalTextAlignment="Center"
                                     Text="{Binding Name}"
                                     TextColor="Black">
-                                    <customControl:MuseoLabel.Behaviors>
+                                    <Label.Effects>
+                                        <effects:LabelFontFamilyEffect />
+                                    </Label.Effects>
+                                    <Label.Behaviors>
                                         <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="12" />
-                                    </customControl:MuseoLabel.Behaviors>
-                                </customControl:MuseoLabel>
+                                    </Label.Behaviors>
+                                </Label>
                             </StackLayout>
                         </DataTemplate>
                     </flowListView:FlowListView.FlowColumnTemplate>
                 </flowListView:FlowListView>
             </StackLayout>
         </ContentView>
-
         <!--  Busy Indicator  -->
         <ContentView
             AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -367,12 +408,17 @@
                     IsVisible="{Binding IsBusy}"
                     Style="{StaticResource ActivityIndicatorMain}" />
 
-                <customControl:MuseoLabel
+                <Label
                     HorizontalOptions="Center"
                     Opacity="1"
                     Style="{StaticResource LabelSmall}"
                     Text="Please wait..."
-                    VerticalOptions="Center" />
+                    TextColor="White"
+                    VerticalOptions="Center">
+                    <Label.Effects>
+                        <effects:LabelFontFamilyEffect />
+                    </Label.Effects>
+                </Label>
             </StackLayout>
         </ContentView>
     </AbsoluteLayout>
