@@ -87,6 +87,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppStrings.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\DynamicQuestionanirePage.xaml.cs">
+      <DependentUpon>DynamicQuestionanirePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -97,7 +100,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\QuestionarePage.xaml">
+    <EmbeddedResource Update="Views\DynamicQuestionanirePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Templates\CommentItem.xaml">

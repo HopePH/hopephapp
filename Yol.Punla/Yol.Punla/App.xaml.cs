@@ -128,7 +128,7 @@ namespace Yol.Punla
                 ConfigureDatabaseInitilization();
 
                 var unityContainer = Container.GetContainer();
-                unityContainer.RegisterInstance<INavigationService>(NavigationService, new ContainerControlledLifetimeManager());               
+                unityContainer.RegisterInstance<INavigationService>(NavigationService, new ContainerControlledLifetimeManager());
                 AppCrossConnectivity.Init(unityContainer.Resolve<IConnectivity>());
                 AppUnityContainer.Init(unityContainer);
 

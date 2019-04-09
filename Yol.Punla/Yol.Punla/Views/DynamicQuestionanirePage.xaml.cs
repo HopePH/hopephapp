@@ -7,9 +7,9 @@ namespace Yol.Punla.Views
 {
     [ModuleView]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class QuestionarePage : ContentPage
+    public partial class DynamicQuestionanirePage : ContentPage
     {
-        public QuestionarePage()
+        public DynamicQuestionanirePage()
         {
             try
             {
@@ -25,6 +25,15 @@ namespace Yol.Punla.Views
                 if (!(ex.Source == "FFImageLoading.Forms" || ex.Source == "FFImageLoading.Transformations"))
                     throw;
             }
+        }
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            try
+            {
+                ((ListView)sender).SelectedItem = null;
+            }
+            catch { }
         }
     }
 }
