@@ -26,7 +26,6 @@ namespace Yol.Punla.ViewModels
         private IValidator _validator;
 
         public ICommand RequestVerificationCodeCommand => new DelegateCommand(async() => await RequestVerificationCode());
-        public ICommand NavigateBackCommand => new DelegateCommand(async ()=> await GoBack());
         public string EmailAddress { get; set; }
         public string VerificationCode { get; set; }
 
@@ -42,8 +41,6 @@ namespace Yol.Punla.ViewModels
         }
 
         public override void PreparingPageBindings() => IsBusy = false;
-
-        private async Task GoBack() => await NavigateBackHelper();
 
         private async Task RequestVerificationCode()
         {

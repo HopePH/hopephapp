@@ -78,7 +78,6 @@ namespace Yol.Punla.ViewModels
             BusyComments = AppStrings.LoadingNotifications;
             _keyValueCacheUtility.RemoveKeyObject("IsForceToGetToLocal");
             CurrentContact = _contactManager.GetCurrentContactFromLocal();
-            IsShowBackArrow = false;
             Title = "Notifications";
 
             if (IsInternetConnected)

@@ -38,8 +38,10 @@ namespace Yol.Punla.ViewModels
 
         public override void PreparingPageBindings() => IsBusy = false;
 
-        private async Task Signup() => await NavigateToPageHelper(nameof(ViewNames.EmailVerificationPage), PassingParameters);
+        private async Task Signup() 
+            => await NavigateToPageHelper(nameof(ViewNames.EmailVerificationPage), PassingParameters);
 
-        private async Task SigninWithAlias() => await NavigateToPageHelper(nameof(ViewNames.RequestSigninVerificationCodePage), PassingParameters);
+        private async Task SigninWithAlias()
+            => await NavigateToPageHelper(nameof(ViewNames.RequestSigninVerificationCodePage), PassingParameters);
     }
 }

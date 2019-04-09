@@ -32,7 +32,6 @@ namespace Yol.Punla.ViewModels
 
         public override void PreparingPageBindings()
         {
-            IsShowBackArrow = false;
             IsBusy = false;
         }
 
