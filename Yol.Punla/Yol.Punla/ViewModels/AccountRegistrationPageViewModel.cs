@@ -4,7 +4,6 @@ using Prism.Navigation;
 using PropertyChanged;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -54,16 +53,12 @@ namespace Yol.Punla.ViewModels
 
         public IEnumerable<Image> Avatars { get; set; }
 
-        public AccountRegistrationPageViewModel(IServiceMapper serviceMapper, 
-            IAppUser appUser,
-            INavigationService navigationService,
-            INavigationStackService navigationStackService,
+        public AccountRegistrationPageViewModel(INavigationService navigationService,
             IContactManager contactManager,
             AccountRegistrationPageValidator validator) : base(navigationService)
         {
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
             _navigationService = navigationService;
-            _navigationStackService = navigationStackService;
             _contactManager = contactManager;
             _validator = validator;
         }

@@ -110,14 +110,6 @@ this.ScenarioInitialize(scenarioInfo);
                         "\", and tap the continue button", code1, code2, code3, code4), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
  testRunner.Then("I am redirected to the page \"AccountRegistrationPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 12
- testRunner.When("I tap the change photo and select unicorn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 13
- testRunner.Then("I should see the photo is change to unicorn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 14
- testRunner.When(string.Format("I enter my alias \"{0}\" and mobile no \"{1}\" and tap save button", alias, mobileno), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
- testRunner.Then("I am redirected to the page \"MainTabbedPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

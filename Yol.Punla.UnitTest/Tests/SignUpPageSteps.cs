@@ -27,7 +27,7 @@ namespace Yol.Punla.UnitTest
 
         [Then(@"the verification boxes appear")]
         public void ThenTheVerificationBoxesAppear()
-            => Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().IsVerificationNegation.ShouldBeTrue();
+            => Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().IsVerification.ShouldBeTrue();
 
         [When(@"I type my verification code code-a ""(.*)"", code-b ""(.*)"", code-c ""(.*)"", code-d ""(.*)"", and tap the continue button")]
         public void WhenITypeMyVerificationCodeCode_ACode_BCode_CCode_DAndTapTheContinueButton(int code1, int code2, int code3, int code4)

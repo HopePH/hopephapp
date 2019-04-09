@@ -9,10 +9,10 @@ Scenario Outline: Signing up a new user
 	Then the verification boxes appear
 	When I type my verification code code-a "<code1>", code-b "<code2>", code-c "<code3>", code-d "<code4>", and tap the continue button
 	Then I am redirected to the page "AccountRegistrationPage"
-	When I tap the change photo and select unicorn
-	Then I should see the photo is change to unicorn
-	When I enter my alias "<alias>" and mobile no "<mobileno>" and tap save button
-	Then I am redirected to the page "MainTabbedPage"
+	#When I tap the change photo and select unicorn
+	#Then I should see the photo is change to unicorn
+	#When I enter my alias "<alias>" and mobile no "<mobileno>" and tap save button
+	#Then I am redirected to the page "MainTabbedPage"
 
 	Examples: 
 	| code1 | code2 | code3 | code4 | emailAdd         | alias | mobileno   |
