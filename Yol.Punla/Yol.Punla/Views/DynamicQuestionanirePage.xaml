@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Yol.Punla.Views.DynamicQuestionanirePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:Yol.Punla.Effects;assembly=Yol.Punla"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Padding="0,20,0,30"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout
+            Grid.Row="0"
+            HorizontalOptions="End"
+            Orientation="Horizontal">
+            <Label
+                FontSize="15"
+                Text="Yes or No Question?"
+                VerticalTextAlignment="Center" />
+            <Switch
+                x:Name="switch"
+                HorizontalOptions="End"
+                IsToggled="{Binding IsQuestionTypeYesOrNo}" />
+        </StackLayout>
+        <Grid
+            Grid.Row="1"
+            ColumnSpacing="20"
+            IsVisible="{Binding IsQuestionTypeYesOrNo}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                FontAttributes="Bold"
+                FontSize="35"
+                HorizontalTextAlignment="Center"
+                Text="Question in Yes/No ?"
+                TextColor="#FF417505"
+                VerticalTextAlignment="Center" />
+            <ContentView
+                Grid.Row="1"
+                Grid.Column="0"
+                Padding="20"
+                VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="40"
+                    HorizontalTextAlignment="End"
+                    Text="YES"
+                    TextColor="#FFACA1A1"
+                    VerticalTextAlignment="Center">
+                    <Label.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsYesSelected}"
+                            TargetType="Label"
+                            Value="True">
+                            <Setter Property="TextColor" Value="#FF417505" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding SelectYesOrNoCommand}"
+                        CommandParameter="YES"
+                        NumberOfTapsRequired="1" />
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <ContentView
+                Grid.Row="1"
+                Grid.Column="1"
+                Padding="20"
+                VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="40"
+                    HorizontalTextAlignment="Start"
+                    Text="NO"
+                    TextColor="#FFACA1A1"
+                    VerticalTextAlignment="Center">
+                    <Label.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsNoSelected}"
+                            TargetType="Label"
+                            Value="True">
+                            <Setter Property="TextColor" Value="#FF417505" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding SelectYesOrNoCommand}"
+                        CommandParameter="NO"
+                        NumberOfTapsRequired="1" />
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <Button
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#FF7ED321"
+                HeightRequest="45"
+                HorizontalOptions="CenterAndExpand"
+                IsEnabled="{Binding HasSelectedYesOrNo}"
+                Text="NEXT"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                WidthRequest="110" />
+        </Grid>
+        <Grid Grid.Row="1" IsVisible="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Margin="20,0,20,100"
+                FontAttributes="Bold"
+                FontSize="35"
+                HorizontalTextAlignment="Center"
+                Text="Question in check boxes?"
+                TextColor="#FF417505"
+                VerticalTextAlignment="Center" />
+
+            <ListView
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                ItemSelected="ListView_ItemSelected"
+                ItemsSource="{Binding Choices}"
+                SelectedItem="{Binding ItemSelected}"
+                SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView Padding="60,0,60,0">
+                                <StackLayout Orientation="Horizontal" Spacing="40">
+                                    <Label
+                                        BackgroundColor="White"
+                                        FontFamily="FontAwesome"
+                                        FontSize="25"
+                                        Text="{StaticResource fa-checkbox-uncheced}"
+                                        TextColor="#FF6A6A6A"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center">
+                                        <Label.Effects>
+                                            <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="REGULAR" />
+                                        </Label.Effects>
+                                        <Label.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding IsSelected}"
+                                                TargetType="Label"
+                                                Value="True">
+                                                <Setter Property="IsVisible" Value="False" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <Label
+                                        BackgroundColor="White"
+                                        FontFamily="FontAwesome"
+                                        FontSize="25"
+                                        IsVisible="{Binding IsSelected}"
+                                        Text="{StaticResource fa-checkbox}"
+                                        TextColor="#FF417505"
+                                        VerticalOptions="Center"
+                                        VerticalTextAlignment="Center">
+                                        <Label.Effects>
+                                            <effects:LabelFontFamilyEffect FontFamily="FONTAWESOME" FontIconType="SOLID" />
+                                        </Label.Effects>
+                                    </Label>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        FontSize="18"
+                                        Text="{Binding Text}"
+                                        TextColor="#FF343534"
+                                        VerticalTextAlignment="Center" />
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <BoxView Grid.Row="2" Grid.ColumnSpan="2" />
+
+            <Button
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#FF417505"
+                HeightRequest="45"
+                HorizontalOptions="CenterAndExpand"
+                IsEnabled="{Binding HasSelection}"
+                Text="NEXT"
+                TextColor="White"
+                VerticalOptions="EndAndExpand"
+                WidthRequest="110" />
+            <Grid.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsQuestionTypeYesOrNo}"
+                    TargetType="Grid"
+                    Value="False">
+                    <Setter Property="IsVisible" Value="True" />
+                </DataTrigger>
+            </Grid.Triggers>
+        </Grid>
+    </Grid>
+</ContentPage>
