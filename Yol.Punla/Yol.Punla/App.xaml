@@ -90,6 +90,8 @@
             <x:String x:Key="fa-arrow-left">&#xf060;</x:String>
             <x:String x:Key="fa-locked">&#xf023;</x:String>
             <x:String x:Key="fa-bell">&#xf0f3;</x:String>
+            <x:String x:Key="fa-checkbox">&#xf14a;</x:String>
+            <x:String x:Key="fa-checkbox-uncheced">&#xf0c8;</x:String>
             <!--#endregion-->
 
             <!--#region STYLES-->
