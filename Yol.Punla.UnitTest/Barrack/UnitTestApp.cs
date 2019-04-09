@@ -162,7 +162,7 @@ namespace Yol.Punla.UnitTest.Barrack
                 if (WasSignedUpAndLogon())
                     await NavigateToRootPage(nameof(MainTabbedPage) + AddPagesInTab(), unityContainer.Resolve<INavigationStackService>(), NavigationService);
                 else
-                    await NavigateToModalRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
+                    await NavigateToRootPage(nameof(LogonPage), unityContainer.Resolve<INavigationStackService>(), NavigationService);
 
                 AllowAppPermissions();
             }
@@ -194,13 +194,6 @@ namespace Yol.Punla.UnitTest.Barrack
         private async Task NavigateToRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
         {
             var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{nameof(NavPage)}/{page}";
-            navigationStackService.UpdateStackState(page);
-            await navigationService.NavigateAsync(rootPage);
-        }
-
-        private async Task NavigateToModalRootPage(string page, INavigationStackService navigationStackService, INavigationService navigationService)
-        {
-            var rootPage = AppSettingsProvider.Instance.GetValue("AppRootURI") + $"{page}";
             navigationStackService.UpdateStackState(page);
             await navigationService.NavigateAsync(rootPage);
         }

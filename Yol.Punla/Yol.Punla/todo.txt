@@ -2,6 +2,9 @@
 alfon
 1. get test projects from rey
 
+rey
+fix the nav page header color
+
 community
 1. finalize look of request page
 2. the EmailVerificationPage page, also ViewModel logic of this not good

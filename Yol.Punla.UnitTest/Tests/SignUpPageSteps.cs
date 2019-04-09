@@ -1,14 +1,8 @@
-﻿using System;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
 using Prism.Unity;
 using Should;
-using System.Linq;
 using Unity;
-using Yol.Punla.Barrack;
-using Yol.Punla.FakeEntries;
 using Yol.Punla.UnitTest.Barrack;
-using Yol.Punla.UnitTest.Mocks;
-using Yol.Punla.Utility;
 using Yol.Punla.ViewModels;
 
 namespace Yol.Punla.UnitTest
@@ -22,10 +16,7 @@ namespace Yol.Punla.UnitTest
 
         [When(@"I tap the signup link below")]
         public void WhenITapTheSignupLinkBelow()
-        {
-            Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().IsOpen = true;
-            Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().GoToSignUpCommand.Execute(null);
-        }
+            => Main.App.Container.GetContainer().Resolve<LogonPageViewModel>().GoToSignUpCommand.Execute(null);
 
         [When(@"I enter my email address ""(.*)"" and tap continue button")]
         public void WhenIEnterMyEmailAddressAndTapContinueButton(string emailAdd)
@@ -36,9 +27,7 @@ namespace Yol.Punla.UnitTest
 
         [Then(@"the verification boxes appear")]
         public void ThenTheVerificationBoxesAppear()
-        {
-            //Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().IsVerificationNegation.ShouldBeTrue();
-        }
+            => Main.App.Container.GetContainer().Resolve<EmailVerificationPageViewModel>().IsVerificationNegation.ShouldBeTrue();
 
         [When(@"I type my verification code code-a ""(.*)"", code-b ""(.*)"", code-c ""(.*)"", code-d ""(.*)"", and tap the continue button")]
         public void WhenITypeMyVerificationCodeCode_ACode_BCode_CCode_DAndTapTheContinueButton(int code1, int code2, int code3, int code4)
