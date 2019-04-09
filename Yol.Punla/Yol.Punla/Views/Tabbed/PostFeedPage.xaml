@@ -335,6 +335,7 @@
                                     Grid.Row="2"
                                     Padding="20,0,20,0"
                                     BackgroundColor="Transparent"
+                                    IsVisible="False"
                                     RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />

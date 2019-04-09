@@ -83,10 +83,7 @@
         HorizontalOptions="FillAndExpand" />
     <!--#endregion-->
     <!--#region SECOND ROW HIDE FOR NOW-->
-    <!--<ContentView
-        Grid.Row="1"
-        Grid.Column="1"
-        IsVisible="False">
+    <ContentView Grid.Row="1" Grid.Column="1">
         <StackLayout
             Padding="10"
             Orientation="Horizontal"
@@ -153,6 +150,6 @@
             </StackLayout>
         </StackLayout>
 
-    </ContentView>-->
+    </ContentView>
     <!--#endregion-->
 </Grid>
