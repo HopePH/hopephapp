@@ -87,57 +87,36 @@ namespace Yol.Punla.UnitTest.Tests
             testRunner.CollectScenarioErrors();
         }
         
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Add two numbers")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "SignUpPage")]
-        public virtual void AddTwoNumbers()
+        public virtual void SigningUpANewUser(string code1, string code2, string code3, string code4, string emailAdd, string alias, string mobileno, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up a new user", null, exampleTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 4
- testRunner.Given("I have entered 50 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 5
- testRunner.And("I have entered 70 into the calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 6
- testRunner.When("I press add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 7
- testRunner.Then("the result should be 120 on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        public virtual void SigningUpANewUser(string code1, string code2, string code3, string code4, string emailAdd, string alias, string mobileno, string[] exampleTags)
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up a new user", null, exampleTags);
-#line 9
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 10
  testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 11
+#line 5
   testRunner.And("I am on the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 12
+#line 6
  testRunner.When("I tap the signup link below", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 13
+#line 7
  testRunner.Then("I am redirected to the page \"EmailVerificationPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 14
+#line 8
  testRunner.When(string.Format("I enter my email address \"{0}\" and tap continue button", emailAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 15
+#line 9
  testRunner.Then("the verification boxes appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 16
+#line 10
  testRunner.When(string.Format("I type my verification code code-a \"{0}\", code-b \"{1}\", code-c \"{2}\", code-d \"{3}" +
                         "\", and tap the continue button", code1, code2, code3, code4), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
+#line 11
  testRunner.Then("I am redirected to the page \"AccountRegistrationPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 18
+#line 12
  testRunner.When("I tap the change photo and select unicorn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 19
+#line 13
  testRunner.Then("I should see the photo is change to unicorn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 20
+#line 14
  testRunner.When(string.Format("I enter my alias \"{0}\" and mobile no \"{1}\" and tap save button", alias, mobileno), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 21
+#line 15
  testRunner.Then("I am redirected to the page \"MainTabbedPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -156,7 +135,7 @@ this.ScenarioInitialize(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:mobileno", "1212121221")]
         public virtual void SigningUpANewUser_1()
         {
-#line 9
+#line 3
 this.SigningUpANewUser("1", "1", "1", "1", "hynrbf@gmail.com", "0000", "1212121221", ((string[])(null)));
 #line hidden
         }
@@ -164,25 +143,25 @@ this.SigningUpANewUser("1", "1", "1", "1", "hynrbf@gmail.com", "0000", "12121212
         public virtual void SigningUpANewUserButWithIncorrectVerficationCode(string code1, string code2, string code3, string code4, string emailAdd, string errorMessage, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Signing up a new user but with incorrect verfication code", null, exampleTags);
-#line 27
+#line 21
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 28
+#line 22
  testRunner.Given("I am not authenticated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 29
+#line 23
   testRunner.And("I am on the page \"LogonPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
+#line 24
  testRunner.When("I tap the signup link below", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 31
+#line 25
  testRunner.Then("I am redirected to the page \"EmailVerificationPage\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 32
+#line 26
  testRunner.When(string.Format("I enter my email address \"{0}\" and tap continue button", emailAdd), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 33
+#line 27
  testRunner.Then("the verification boxes appear", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 34
+#line 28
  testRunner.When(string.Format("I type my verification code code-a \"{0}\", code-b \"{1}\", code-c \"{2}\", code-d \"{3}" +
                         "\", and tap the continue button", code1, code2, code3, code4), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 35
+#line 29
  testRunner.Then(string.Format("I should see an error message \"{0}\" in verification page", errorMessage), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -200,7 +179,7 @@ this.ScenarioInitialize(scenarioInfo);
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("Parameter:errorMessage", "Please enter a valid verification code")]
         public virtual void SigningUpANewUserButWithIncorrectVerficationCode_1()
         {
-#line 27
+#line 21
 this.SigningUpANewUserButWithIncorrectVerficationCode("1", "2", "1", "3", "hynrbf@gmail.com", "Please enter a valid verification code", ((string[])(null)));
 #line hidden
         }
@@ -208,3 +187,4 @@ this.SigningUpANewUserButWithIncorrectVerficationCode("1", "2", "1", "3", "hynrb
 }
 #pragma warning restore
 #endregion
+

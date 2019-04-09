@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using Plugin.Notifications;
 using Prism.Ioc;
@@ -119,6 +120,7 @@ namespace Yol.Punla.UnitTest.Barrack
         {
             try
             {
+                AppCrossConnectivity.Init(CrossConnectivity.Current);
                 UserDialogs.Instance.ShowLoading("Reconnecting, please wait...");
 
                 if (AppCrossConnectivity.Instance.IsConnected)
@@ -262,13 +264,6 @@ namespace Yol.Punla.UnitTest.Barrack
             //chito. HEA this just means Handled Exception, just make it shorter. Also, there's no need to put if this is Android or IOS since they have unique hockeyid per platform        
             HockeyApp.MetricsManager.TrackEvent(string.Format("HE.{0}", ex.Message ?? ""));
 #endif
-        }
-
-        private bool WasWelcomeInstructionsLoaded()
-        {
-            var _keyValueCacheUtility = Container.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>();
-            var cachedValue = _keyValueCacheUtility.GetUserDefaultsKeyValue("WasWelcomeInstructionLoaded");
-            return string.IsNullOrEmpty(cachedValue) ? false : bool.Parse(cachedValue);
         }
 
         private async Task ShowLocalNotifications()

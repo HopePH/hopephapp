@@ -20,36 +20,6 @@ namespace Yol.Punla.UnitTest
         {
         }
 
-        [Given(@"I have entered (.*) into the calculator")]
-        public void GivenIHaveEnteredIntoTheCalculator(int p0)
-        {
-           
-        }
-        
-        [When(@"I press add")]
-        public void WhenIPressAdd()
-        {
-            
-        }
-        
-        [Then(@"the result should be (.*) on the screen")]
-        public void ThenTheResultShouldBeOnTheScreen(int p0)
-        {
-           
-        }
-
-        [Given(@"I am just testing yet")]
-        public void GivenIAmJustTestingYet()
-        {
-           
-        }
-
-        [Then(@"I am good in testing")]
-        public void ThenIAmGoodInTesting()
-        {
-           
-        }
-
         [When(@"I tap the signup link below")]
         public void WhenITapTheSignupLinkBelow()
         {

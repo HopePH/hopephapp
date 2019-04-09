@@ -252,13 +252,6 @@ namespace Yol.Punla
 #endif
         }
 
-        private bool WasWelcomeInstructionsLoaded()
-        {
-            var _keyValueCacheUtility = Container.Resolve<IDependencyService>().Get<IKeyValueCacheUtility>();
-            var cachedValue = _keyValueCacheUtility.GetUserDefaultsKeyValue("WasWelcomeInstructionLoaded");
-            return string.IsNullOrEmpty(cachedValue) ? false : bool.Parse(cachedValue);
-        }
-
         private async Task ShowLocalNotifications()
         {
             CurrentContact = Container.GetContainer().Resolve<IContactManager>().GetCurrentContactFromLocal();
