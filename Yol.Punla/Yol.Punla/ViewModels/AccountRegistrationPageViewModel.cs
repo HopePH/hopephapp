@@ -142,10 +142,6 @@ namespace Yol.Punla.ViewModels
             string path = "";
             var children = new List<string>();
             children.Add("addTab=PostFeedPage");
-            #region TEMP ONLY
-            children.Add("addTab=TestPage");
-            children.Add("addTab=TestPage2");
-            #endregion
             path += "?" + string.Join("&", children);
             return path;
         }

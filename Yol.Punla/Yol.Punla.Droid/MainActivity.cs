@@ -44,7 +44,7 @@ namespace Yol.Punla.Droid
         protected override void OnCreate(Bundle bundle)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
-            ToolbarResource = Resource.Layout.Toolbar;
+            ToolbarResource = Resource.Layout.toolbar;
             base.OnCreate(bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             InitCrashProviders();

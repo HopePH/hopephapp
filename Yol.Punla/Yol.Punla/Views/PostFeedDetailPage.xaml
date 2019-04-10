@@ -11,7 +11,16 @@
     xmlns:local="clr-namespace:Yol.Punla.Views;assembly=Yol.Punla"
     xmlns:localization="clr-namespace:Yol.Punla.Localized;assembly=Yol.Punla"
     x:Name="ThisPage"
-    BackgroundColor="{StaticResource ColorWhite}">
+    BackgroundColor="{StaticResource ColorWhite}"
+    NavigationPage.HasBackButton="True">
+    <NavigationPage.TitleView>
+        <customControl:MuseoLabel
+            FontAttributes="Bold"
+            HorizontalOptions="Start"
+            Style="{StaticResource LabelDefault}"
+            Text="Your Comments"
+            TextColor="#417505" />
+    </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="BoxGrayBorderColor">#CFD1D4</Color>

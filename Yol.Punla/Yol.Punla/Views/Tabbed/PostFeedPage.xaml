@@ -14,8 +14,7 @@
     Title="Wall"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="White"
-    Icon="{Binding CurrentIcon}"
-    NavigationPage.HasNavigationBar="False">
+    Icon="{Binding CurrentIcon}">
     <Grid
         Padding="0"
         RowSpacing="0"
