@@ -7,6 +7,8 @@ using Prism.Ioc;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Unity;
+using Rg.Plugins.Popup.Contracts;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -220,6 +222,7 @@ namespace Yol.Punla
             unityContainer.RegisterType<IPostFeedRepository, PostFeedRepository>(new ContainerControlledLifetimeManager(), new InjectionConstructor(dbPath, true));
             unityContainer.RegisterInstance<IUserDialogs>(UserDialogs.Instance, new ContainerControlledLifetimeManager());
             unityContainer.RegisterInstance<IConnectivity>(CrossConnectivity.Current, new ContainerControlledLifetimeManager());
+            unityContainer.RegisterInstance<IPopupNavigation>(PopupNavigation.Instance, new ContainerControlledLifetimeManager());
             containerRegistry.RegisterForNavigation<NavigationPage>();
         }
 

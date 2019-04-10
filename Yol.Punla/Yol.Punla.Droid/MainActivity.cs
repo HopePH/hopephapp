@@ -46,6 +46,7 @@ namespace Yol.Punla.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.toolbar;
             base.OnCreate(bundle);
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             InitCrashProviders();
             CachedImageRenderer.Init(true);

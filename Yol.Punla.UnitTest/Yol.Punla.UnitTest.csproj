@@ -126,6 +126,9 @@
     <Reference Include="Prism.Unity.Forms, Version=7.1.0.431, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Unity.Forms.7.1.0.431\lib\netstandard2.0\Prism.Unity.Forms.dll</HintPath>
     </Reference>
+    <Reference Include="Rg.Plugins.Popup, Version=1.1.5.188, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rg.Plugins.Popup.1.1.5.188\lib\netstandard1.0\Rg.Plugins.Popup.dll</HintPath>
+    </Reference>
     <Reference Include="Should, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
     </Reference>

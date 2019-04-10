@@ -2,7 +2,7 @@
 
 namespace Yol.Punla.Entity
 {
-    public class Contact
+    public class Contact 
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

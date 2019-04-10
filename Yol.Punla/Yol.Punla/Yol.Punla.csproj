@@ -63,6 +63,7 @@
     <PackageReference Include="Prism.Core" Version="7.1.0.431" />
     <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.6.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
     <PackageReference Include="Splat" Version="6.1.7" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="SQLitePCL.raw" Version="0.9.3" />
@@ -101,6 +102,9 @@
       <LastGenOutput>AppStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\DynamicQuestionanirePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Popups\AvatarPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Templates\CommentItem.xaml">

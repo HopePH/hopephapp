@@ -275,7 +275,7 @@
                     Padding="20,0,20,20"
                     Spacing="12">
                     <Button
-                        Command="{Binding RetakePhotoCommand}"
+                        Command="{Binding ShowAvatarSelectionCommand}"
                         FontAttributes="Bold"
                         HorizontalOptions="FillAndExpand"
                         Style="{StaticResource ButtonGreenSlim}"
@@ -289,110 +289,6 @@
                 </StackLayout>
             </Grid>
         </ScrollView>
-        <!--  AVATAR MODAL  -->
-        <ContentView
-            Padding="20,180,20,150"
-            AbsoluteLayout.LayoutBounds="0,0,1,1"
-            AbsoluteLayout.LayoutFlags="All"
-            BackgroundColor="#BF000000"
-            IsVisible="{Binding IsAvatarModalVisible}">
-            <ContentView.Behaviors>
-                <behaviors:DeviceDependentViewBoxBehavior DynamicPadding="20,150" />
-            </ContentView.Behaviors>
-            <StackLayout
-                Padding="20"
-                BackgroundColor="{StaticResource ColorGrayTwo}"
-                Spacing="10">
-                <ContentView>
-                    <ContentView
-                        HeightRequest="40"
-                        HorizontalOptions="EndAndExpand"
-                        WidthRequest="100">
-                        <ContentView.Behaviors>
-                            <behaviors:DeviceDependentViewSizeBehavior DynamicHeightRequest="70" />
-                        </ContentView.Behaviors>
-                        <Label
-                            Margin="0,0,20,0"
-                            BackgroundColor="Transparent"
-                            FontFamily="FontAwesome"
-                            HorizontalOptions="FillAndExpand"
-                            HorizontalTextAlignment="End"
-                            Text="{StaticResource fa-close}"
-                            TextColor="#B2B2B2"
-                            VerticalOptions="FillAndExpand"
-                            VerticalTextAlignment="Center">
-                            <Label.FontSize>
-                                <OnPlatform
-                                    x:TypeArguments="x:Double"
-                                    Android="20"
-                                    iOS="18" />
-                            </Label.FontSize>
-                        </Label>
-                        <ContentView.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding ShowOrHideAvatarSelectionCommand}"
-                                CommandParameter="false"
-                                NumberOfTapsRequired="1" />
-                        </ContentView.GestureRecognizers>
-                    </ContentView>
-                </ContentView>
-                <Label
-                    FontAttributes="Bold"
-                    HorizontalTextAlignment="Center"
-                    Text="{localization:Render AvatarChoiceText}"
-                    TextColor="Black">
-                    <Label.Effects>
-                        <effects:LabelFontFamilyEffect />
-                    </Label.Effects>
-                    <Label.FontSize>
-                        <OnPlatform
-                            x:TypeArguments="x:Double"
-                            Android="21"
-                            iOS="19" />
-                    </Label.FontSize>
-                </Label>
-                <flowListView:FlowListView
-                    BackgroundColor="{StaticResource ColorGrayTwo}"
-                    FlowColumnCount="3"
-                    FlowIsLoadingInfinite="False"
-                    FlowIsLoadingInfiniteEnabled="False"
-                    FlowItemTappedCommand="{Binding SetAvatarUrlCommand}"
-                    FlowItemsSource="{Binding PredefinedAvatars}"
-                    HasUnevenRows="true"
-                    HorizontalOptions="FillAndExpand">
-                    <flowListView:FlowListView.FlowColumnTemplate>
-                        <DataTemplate>
-                            <StackLayout Padding="10,5,10,5" HorizontalOptions="Center">
-                                <ffImage:CachedImage
-                                    Aspect="AspectFit"
-                                    BackgroundColor="Transparent"
-                                    HeightRequest="75"
-                                    Source="{Binding SourceUrl}">
-                                    <ffImage:CachedImage.Transformations>
-                                        <ffImageTransformation:CircleTransformation />
-                                    </ffImage:CachedImage.Transformations>
-                                    <ffImage:CachedImage.Behaviors>
-                                        <behaviors:DeviceDependentViewSizeBehavior DynamicHeightRequest="55" />
-                                    </ffImage:CachedImage.Behaviors>
-                                </ffImage:CachedImage>
-                                <Label
-                                    FontSize="Medium"
-                                    HorizontalTextAlignment="Center"
-                                    Text="{Binding Name}"
-                                    TextColor="Black">
-                                    <Label.Effects>
-                                        <effects:LabelFontFamilyEffect />
-                                    </Label.Effects>
-                                    <Label.Behaviors>
-                                        <behaviors:DeviceDependentFontSizeBehavior DynamicFontSize="12" />
-                                    </Label.Behaviors>
-                                </Label>
-                            </StackLayout>
-                        </DataTemplate>
-                    </flowListView:FlowListView.FlowColumnTemplate>
-                </flowListView:FlowListView>
-            </StackLayout>
-        </ContentView>
         <!--  Busy Indicator  -->
         <ContentView
             AbsoluteLayout.LayoutBounds="0,0,1,1"

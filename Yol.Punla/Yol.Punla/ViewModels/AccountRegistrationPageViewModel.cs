@@ -2,6 +2,7 @@
 using Prism.Commands;
 using Prism.Navigation;
 using PropertyChanged;
+using Rg.Plugins.Popup.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,6 +25,7 @@ namespace Yol.Punla.ViewModels
         private readonly IValidator _validator;
         private readonly IKeyValueCacheUtility _keyValueCacheUtility;
         private readonly IContactManager _contactManager;
+        private readonly IPopupNavigation _popUpNavigation;
 
         public string FullName
         {
@@ -34,25 +36,25 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        public ICommand RetakePhotoCommand => new DelegateCommand(TakePhoto);
         public ICommand SignupCommand => new DelegateCommand(async () => await SignUpAsync());
-        public ICommand ShowOrHideAvatarSelectionCommand => new DelegateCommand<object>(ShowHideAvatarSelection);
+
+        public ICommand ShowAvatarSelectionCommand => new DelegateCommand(async () => await OpenAvatarPopup());
         public ICommand SetAvatarUrlCommand => new DelegateCommand<Avatar>(ChangeAvatar);
         public IEnumerable<Avatar> PredefinedAvatars { get; set; }
         public Entity.Contact CurrentContact { get; set; } = new Entity.Contact();
         public bool HasPicture { get; set; }       
         public bool EmailEnabled { get; set; }
-        public bool IsAvatarModalVisible { get; set; }
-
         public IEnumerable<Image> Avatars { get; set; }
 
         public AccountRegistrationPageViewModel(INavigationService navigationService,
             IContactManager contactManager,
+            IPopupNavigation popupNavigation,
             AccountRegistrationPageValidator validator) : base(navigationService)
         {
             _keyValueCacheUtility = AppUnityContainer.InstanceDependencyService.Get<IKeyValueCacheUtility>();
             _contactManager = contactManager;
             _validator = validator;
+            _popUpNavigation = popupNavigation;
         }
         
         public override void PreparingPageBindings()
@@ -118,18 +120,25 @@ namespace Yol.Punla.ViewModels
             }
         }
 
-        private void TakePhoto() 
-            => IsAvatarModalVisible = true;
-
-        private void ShowHideAvatarSelection(object isVisible) 
-            => IsAvatarModalVisible = bool.Parse(isVisible.ToString());
-
         private void ChangeAvatar(Avatar avatar)
         {
             try
             {
                 CurrentContact.PhotoURL = avatar.SourceUrl;
-                ShowHideAvatarSelection(false);
+                RaisePropertyChanged(nameof(CurrentContact));
+            }
+            catch (Exception ex)
+            {
+                ProcessErrorReportingForRaygun(ex);
+            }
+        }
+
+        private async Task OpenAvatarPopup()
+        {
+            try
+            {
+                var popup = new Views.AvatarPopup(this);
+                await _popUpNavigation.PushAsync(popup);
             }
             catch (Exception ex)
             {
