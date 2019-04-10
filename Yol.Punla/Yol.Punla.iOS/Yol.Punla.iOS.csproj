@@ -107,6 +107,7 @@
     <Compile Include="Effects\TransparentBottomBorderSearchBarEffectiOS.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\NavPageRenderer.cs" />
     <Compile Include="Services\DeviceScreenSizeService.cs" />
     <Compile Include="Services\PostFeedService.cs" />
     <Compile Include="Utility\HelperUtilityiOS.cs" />

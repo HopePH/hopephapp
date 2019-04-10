@@ -7,6 +7,7 @@ using Prism.Unity;
 using UIKit;
 using Unity;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 using Yol.Punla.Barrack;
 using Yol.Punla.iOS.CustomRenderers;
 using Yol.Punla.iOS.Services;
@@ -36,6 +37,7 @@ namespace Yol.Punla.iOS
             LoadApplication(new App(new iOSInitializer()));
             UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.LightContent, true);
             app.StatusBarStyle = UIStatusBarStyle.LightContent;
+            UITabBar.Appearance.TintColor = Color.FromHex("FF417505").ToUIColor();
             return base.FinishedLaunching(app, options);
         }
 

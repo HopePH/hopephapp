@@ -19,7 +19,11 @@
             HorizontalOptions="Start"
             Style="{StaticResource LabelDefault}"
             Text="Your Comments"
-            TextColor="#417505" />
+            TextColor="#417505">
+            <customControl:MuseoLabel.VerticalTextAlignment>
+                <OnPlatform x:TypeArguments="TextAlignment" iOS="Center" />
+            </customControl:MuseoLabel.VerticalTextAlignment>
+        </customControl:MuseoLabel>
     </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>

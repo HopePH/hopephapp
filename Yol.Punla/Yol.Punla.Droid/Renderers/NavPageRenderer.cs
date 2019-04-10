@@ -7,8 +7,9 @@ using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.Android.AppCompat;
 using Yol.Punla.Barrack;
 using Yol.Punla.Utility;
+using Yol.Punla.Views;
 
-[assembly: ExportRenderer(typeof(NavigationPage), typeof(SAEventApp.Droid.Renderers.NavPageRenderer))]
+[assembly: ExportRenderer(typeof(NavPage), typeof(SAEventApp.Droid.Renderers.NavPageRenderer))]
 namespace SAEventApp.Droid.Renderers
 {
     public class NavPageRenderer : NavigationPageRenderer
